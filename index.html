@@ -1,18 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Stephen Hannah: R Output Hub</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stephen's Macro, Finance & Fantasy Hub</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <nav>
-    <a href="macro/index.html">Macro</a>
-    <a href="finance/index.html">Finance</a>
-    <a href="fantasy/index.html">Fantasy</a>
-  </nav>
+  <header>
+    <h1>Stephen's Macro, Finance & Fantasy Hub</h1>
+    <nav>
+      <ul class="nav-tabs">
+        <li><a href="#macro" class="tab-link active">Macro</a></li>
+        <li><a href="#finance" class="tab-link">Finance</a></li>
+        <li><a href="#fantasy" class="tab-link">Fantasy</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <h1>Welcome to Stephen Hannah's R Output Site</h1>
-  <p>Select a topic above to view recent analyses and visualizations.</p>
+  <main>
+    <section id="macro" class="tab-content active">
+      <h2>Macro</h2>
+      <ul>
+        <li><a href="macro/gdp-trend.html">GDP Trend Update</a></li>
+        <li><a href="macro/debt-cycles.html">Debt Cycles Explainer</a></li>
+      </ul>
+    </section>
+
+    <section id="finance" class="tab-content">
+      <h2>Finance</h2>
+      <ul>
+        <li><a href="finance/shadow-banking.html">Shadow Banking Risks</a></li>
+        <li><a href="finance/us-yield-curve.html">US Yield Curve Explained</a></li>
+      </ul>
+    </section>
+
+    <section id="fantasy" class="tab-content">
+      <h2>Fantasy</h2>
+      <ul>
+        <li><a href="fantasy/gw12-optimal-picks.html">GW12 Optimal Picks</a></li>
+        <li><a href="fantasy/transfer-strategy.html">Transfer Strategy Guide</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Stephen Hannah</p>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-link');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', e => {
+        e.preventDefault();
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+
+        tab.classList.add('active');
+        const section = document.querySelector(tab.getAttribute('href'));
+        section.classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
+
