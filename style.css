@@ -1,4 +1,4 @@
-//* style.css - Dark theme with Bloomberg-style minimalism */
+/* style.css - Dark theme with Bloomberg-style minimalism */
 
 body {
   margin: 0;
@@ -17,25 +17,36 @@ header {
 
 h1 {
   margin: 0;
-  font-size: 1.75rem;
+  font-size: 2rem;
   color: #ff6f00;
 }
 
+/* Navigation bar */
 nav ul.nav-tabs {
   list-style: none;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 0;
-  margin-top: 1rem;
+  margin: 1rem 0 2rem 0;
   gap: 1rem;
+  background-color: #1e1e1e;
+}
+
+.nav-tabs li {
+  display: flex;
+  align-items: center;
 }
 
 .nav-tabs li a {
   text-decoration: none;
-  color: #8ab4f8; /* blue */
+  color: #ff6f00;
   padding: 0.5rem 1rem;
   border-radius: 5px;
-  transition: background-color 0.3s;
+  font-weight: bold;
+  background-color: #1e1e1e;
+  transition: background-color 0.3s, color 0.3s;
+  display: inline-block;
 }
 
 .nav-tabs li a.active,
@@ -48,12 +59,12 @@ main {
   max-width: 800px;
   margin: 2rem auto;
   padding: 1rem;
+  background-color: #121212;
 }
 
 .tab-content {
   display: none;
 }
-
 .tab-content.active {
   display: block;
 }
@@ -68,17 +79,14 @@ ul {
   list-style: none;
   padding: 0;
 }
-
 ul li {
   margin: 0.75rem 0;
 }
-
 ul li a {
   color: #ffffff;
   text-decoration: none;
   border-bottom: 1px dotted #555;
 }
-
 ul li a:hover {
   color: #00c853;
   border-bottom: 1px solid #00c853;
@@ -93,34 +101,8 @@ footer {
   color: #aaa;
 }
 
-/* Enhance code folding toggle */
+/* Code folding toggles */
 .code-fold > summary,
 .cell > details > summary,
 .quarto-figure > details > summary {
-  color: #ff6f00;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 4px;
-}
-
-/* Style code block background */
-pre.sourceCode, pre code {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border-radius: 6px;
-  padding: 1rem;
-  overflow-x: auto;
-}
-
-/* Home link styling */
-a[href="/index.html"] {
-  display: inline-block;
-  margin-bottom: 1rem;
-  color: #8ab4f8;
-  text-decoration: none;
-  font-weight: bold;
-}
-a[href="/index.html"]:hover {
-  color: #00c853;
-  text-decoration: underline;
-}
+  color
