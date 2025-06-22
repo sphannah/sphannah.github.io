@@ -93,3 +93,34 @@ footer {
   font-size: 0.9rem;
   color: #aaa;
 }
+
+/* Improve visibility of code fold toggle */
+.quarto-figure > details > summary,
+.cell > details > summary,
+.code-fold > summary {
+  color: #ff6f00; /* bright orange */
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* Style code block background */
+pre.sourceCode, pre code {
+  background-color: #ffffff !important; /* white background */
+  color: #000000 !important;            /* black text */
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+a[href="/index.html"] {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #8ab4f8;
+  text-decoration: none;
+  font-weight: bold;
+}
+a[href="/index.html"]:hover {
+  color: #00c853;
+  text-decoration: underline;
+}
