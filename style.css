@@ -63,15 +63,21 @@ main {
 }
 
 main a {
-  color: #ffffff;
+  color: #ffffff; /* white */
   text-decoration: none;
-  border-bottom: 1px dotted #555;
-}
-main a:hover {
-  color: #00c853;
-  border-bottom: 1px solid #00c853;
+  font-weight: bold;
 }
 
+main a:hover {
+  color: #00c853; /* green hover */
+  text-decoration: underline;
+}
+/* Optional: layout tweak for Back to Home */
+a[href$="index.html"] {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
 .tab-content {
   display: none;
 }
