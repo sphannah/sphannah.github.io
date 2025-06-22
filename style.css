@@ -45,7 +45,7 @@ nav ul.nav-tabs {
   padding: 0.5rem 1rem;
   font-weight: bold;
   background-color: transparent;
-  border-radius: 5px;
+  border-radius: 1px;
   display: inline-block;
   transition: all 0.3s;
 }
