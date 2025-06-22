@@ -3,81 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dazed & Confused</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>About</title>
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <header>
-    <h1>Dazed & Confused</h1>
-    <nav>
+  <header><h1>About</h1></header>
+  
+<nav>
   <ul class="nav-tabs">
-    <li><a href="#about">About</a></li>
-    <li><a href="#macro">Macro</a></li>
-    <li><a href="#finance">Finance</a></li>
-    <li><a href="#fpl">FPL</a></li>
+    <li><a href="/index.html">About</a></li>
+    <li><a href="/macro/index.html">Macro</a></li>
+    <li><a href="/finance/index.html">Finance</a></li>
+    <li><a href="/fpl/index.html">FPL</a></li>
   </ul>
 </nav>
-  </header>
 
   <main>
-   <section id="about" class="tab-content active">
-  <h2>About</h2>
-  <p>Stephen Hannah is an economist with interests in macroeconomics, financial policy, and data-driven decision-making. 
-     This site shares teaching materials, model walkthroughs, and football analytics.</p>
-  <p>
-    <a href="https://www.linkedin.com/in/stephen-hannah-96628524" target="_blank">LinkedIn</a> |
-    <a href="https://x.com/sp_hannah1953" target="_blank">X</a> |
-    <a href="https://bsky.app/profile/sph53.bsky.social" target="_blank">Bluesky</a>
-  </p>
-  </section>
-    <section id="macro" class="tab-content active">
-      <h2>Macro</h2>
-	   <p>This section explores macroeconomic trends, policy simulations, and model-based forecasting.</p>
-      <ul>
-        <li><a href="macro/gdp_noise_signal.html">US GDP Noise vs Signal Jun 2025</a></li>
-        <li><a href="macro/debt-cycles.html">Debt Cycles Explainer</a></li>
-      </ul>
-    </section>
-
-    <section id="finance" class="tab-content">
-      <h2>Finance</h2>
-	   <p>This section explores macroeconomic trends, policy simulations, and model-based forecasting.</p>
-      <ul>
-        <li><a href="finance/shadow-banking.html">Shadow Banking Risks</a></li>
-        <li><a href="finance/us-yield-curve.html">US Yield Curve Explained</a></li>
-      </ul>
-    </section>
-
-    <section id="FPL" class="tab-content">
-      <h2>FPL</h2>
-	   <p>This section explores macroeconomic trends, policy simulations, and model-based forecasting.</p>
-      <ul>
-        <li><a href="FPL/gw12-optimal-picks.html">GW12 Optimal Picks</a></li>
-        <li><a href="FPL/transfer-strategy.html">Transfer Strategy Guide</a></li>
-      </ul>
-    </section>
+    <p>Stephen Hannah is a researcher and educator with interests in macroeconomics, finance, and data science. Connect on social media: <a href="https://linkedin.com" target="_blank">LinkedIn</a>, <a href="https://x.com" target="_blank">X</a>, <a href="https://bsky.app" target="_blank">BlueSky</a>.</p>
+    <ul>
+      
+    </ul>
   </main>
-
-  <footer>
-    <p>&copy; 2025 Stephen Hannah</p>
-  </footer>
-
-  <script>
-    const tabs = document.querySelectorAll('.tab-link');
-    const contents = document.querySelectorAll('.tab-content');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', e => {
-        e.preventDefault();
-        tabs.forEach(t => t.classList.remove('active'));
-        contents.forEach(c => c.classList.remove('active'));
-
-        tab.classList.add('active');
-        const section = document.querySelector(tab.getAttribute('href'));
-        section.classList.add('active');
-      });
-    });
-  </script>
+  <footer>© 2025 Stephen Hannah</footer>
 </body>
 </html>
-
