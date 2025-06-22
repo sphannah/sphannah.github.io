@@ -47,7 +47,6 @@ nav ul.nav-tabs {
   background-color: transparent;
   border-radius: 1px;
   display: inline-block;
-  transition: all 0.3s;
 }
 
 .nav-tabs li a.active,
