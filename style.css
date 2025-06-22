@@ -62,6 +62,16 @@ main {
   background-color: #121212;
 }
 
+main a {
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px dotted #555;
+}
+main a:hover {
+  color: #00c853;
+  border-bottom: 1px solid #00c853;
+}
+
 .tab-content {
   display: none;
 }
