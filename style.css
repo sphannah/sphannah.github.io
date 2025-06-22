@@ -1,3 +1,4 @@
+
 /* style.css - Dark theme with Bloomberg-style minimalism */
 
 body {
@@ -42,11 +43,11 @@ nav ul.nav-tabs {
   text-decoration: none;
   color: #ff6f00;
   padding: 0.5rem 1rem;
-  border-radius: 5px;
   font-weight: bold;
-  background-color: #1e1e1e;
-  transition: background-color 0.3s, color 0.3s;
+  background-color: transparent;
+  border-radius: 5px;
   display: inline-block;
+  transition: all 0.3s;
 }
 
 .nav-tabs li a.active,
@@ -137,6 +138,18 @@ pre.sourceCode, pre code {
 }
 
 .backlink:hover, a[href="/index.html"]:hover, a[href="../index.html"]:hover {
+  color: #00c853;
+  text-decoration: underline;
+}
+
+/* Social and post links inside <main> */
+main a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main a:hover {
   color: #00c853;
   text-decoration: underline;
 }
