@@ -133,4 +133,33 @@ footer {
 .code-fold > summary,
 .cell > details > summary,
 .quarto-figure > details > summary {
-  color
+  color: #ff6f00;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* Style code block background */
+pre.sourceCode,
+pre code {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+/* Home link styling */
+a[href="/index.html"],
+a[href="../index.html"] {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #8ab4f8;
+  text-decoration: none;
+  font-weight: bold;
+}
+a[href="/index.html"]:hover,
+a[href="../index.html"]:hover {
+  color: #00c853;
+  text-decoration: underline;
+}
