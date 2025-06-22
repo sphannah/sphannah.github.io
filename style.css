@@ -56,7 +56,14 @@ nav ul.nav-tabs {
   height: 100%;               /* ensures full height use */
 }
 
-.nav-tabs li a.active,
+.nav-tabs li a.active {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.5;
+}
 .nav-tabs li a:hover {
   background-color: #2c2c2c;
   color: #00c853;
