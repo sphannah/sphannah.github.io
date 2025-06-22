@@ -73,7 +73,7 @@ main a:hover {
   text-decoration: underline;
 }
 /* Optional: layout tweak for Back to Home */
-a[href$="index.html"] {
+a[href$="../index.html"] {
   display: inline-block;
   margin-bottom: 1rem;
   font-weight: bold;
