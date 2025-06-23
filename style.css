@@ -9,15 +9,12 @@ body {
   line-height: 1.6;
 }
 
-.style14 {
-	color: #9370DB; /* medium purple */
-	font-size: 80%;
-}
-
-.style15 {
+.small-line-height {
+    line-height: 0.8; /* Adjust this value to make lines closer or further apart */
+    /* You can also adjust font-size here if needed for further control */
+    /* font-size: 0.9em; */
 	color: #DA70D6; /* orchid */
 	font-size: 80%;
-}
 
 header {
   padding: 1rem;
