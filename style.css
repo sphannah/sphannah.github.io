@@ -152,3 +152,25 @@ main a:hover {
   color: #00c853;
   text-decoration: underline;
 }
+
+/* FPL Page Specific Styles */
+.fpl-intro {
+    /* You already have 'color: #ffffff;' from body, so no need to repeat unless different */
+    /* Add any specific styles for emphasis here, e.g., */
+    font-size: 1.1em; /* Slightly larger */
+    margin-bottom: 2rem; /* Maybe a bit more space below it */
+}
+.blog-title {
+   margin-top: 1.5rem; /* Space above each blog title */
+    margin-bottom: 0.2rem; /* Small gap to the excerpt */
+    font-weight: bold; /* Make the title stand out a bit more */
+    /* If you want the *text* of the paragraph to be orange, not just the link */
+    /* color: #ff6f00; */
+}
+.blog-excerpt {
+   color: #a020f0; /* Purple shade */
+    font-style: italic;
+    font-size: 0.95em; /* Slightly smaller than body text for differentiation */
+    margin-top: 0; /* Remove default top margin to reduce gap to title */
+    margin-bottom: 1rem; /* Space below the excerpt before the next blog title */
+}
