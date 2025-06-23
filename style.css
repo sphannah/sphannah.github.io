@@ -10,9 +10,15 @@ body {
 }
 
 .style14 {
-	color: #545574;
+	color: #9370DB; /* medium purple */
 	font-size: 80%;
 }
+
+.style15 {
+	color: #DA70D6; /* orchid */
+	font-size: 80%;
+}
+
 header {
   padding: 1rem;
   background-color: #1e1e1e;
