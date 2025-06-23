@@ -9,13 +9,6 @@ body {
   line-height: 1.6;
 }
 
-.small-line-height {
-    color: #00c853; /* green */
-	line-height: 0.8; /* Adjust this value to make lines closer or further apart */
-    /* You can also adjust font-size here if needed for further control */
-    /* font-size: 0.9em; */
-}
-
 header {
   padding: 1rem;
   background-color: #1e1e1e;
