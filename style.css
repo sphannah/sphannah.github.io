@@ -154,8 +154,8 @@ main a:hover {
   text-decoration: underline;
 }
 
-/* FPL Page Specific Styles */
-.fpl-intro {
+/* Macro/Finance/FPL Page Specific Styles */
+.topic-intro {
     /* You already have 'color: #ffffff;' from body, so no need to repeat unless different */
     /* Add any specific styles for emphasis here, e.g., */
     font-size: 1.15em; /* Slightly larger */
