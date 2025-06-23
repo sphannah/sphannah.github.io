@@ -47,7 +47,7 @@ nav ul.nav-tabs {
   font-weight: bold;
   background-color: #1e1e1e;
   transition: background-color 0.3s, color 0.3s;
-  display: block;
+  display: inline-block;
 }
 
 .nav-tabs li a.active,
