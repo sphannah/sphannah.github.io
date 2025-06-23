@@ -158,7 +158,7 @@ main a:hover {
 .topic-intro {
     /* You already have 'color: #ffffff;' from body, so no need to repeat unless different */
     /* Add any specific styles for emphasis here, e.g., */
-    font-size: 1.15em; /* Slightly larger */
+    font-size: 1.2em; /* Slightly larger */
     margin-bottom: 2rem; /* Maybe a bit more space below it */
 }
 .blog-title {
