@@ -50,17 +50,25 @@
             color: #00c853; /* Hover color from style.css */
         }
 
-        /* Media queries for responsiveness */
-        @media (max-width: 768px) {
-            .main-content-paragraph {
-                padding: 0 10px;
-                margin-bottom: 15px;
-            }
-            td {
-                padding: 5px;
-            }
+         /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .main-content-paragraph {
+                padding: 0 10px;
+                margin-bottom: 15px;
+            }
+            td {
+                padding: 5px;
+            }
+        }
+
+        /* Style for the backlink, to give it some separation and align left */
+        .back-to-home-link {
+            display: block; /* Make it a block element to take full width */
+            text-align: left; /* Align text to the left */
+            margin: 20px auto 30px 1rem; /* Adjust margin for spacing and left alignment */
+            max-width: 800px; /* Match main content width */
         }
-    </style>
+    </style>
 </head>
 <body>
     <header>
@@ -118,8 +126,12 @@
         </div>
     </main>
 
-    <footer>
-        © 2025 Stephen Hannah
-    </footer>
+     <footer>
+    <p>
+        <a href="https://www.linkedin.com/in/stephen-hannah-96628524/" target="_blank">LinkedIn</a>
+        <a href="https://x.com/sp_hannah1953" target="_blank">X</a>
+        <a href="https://bsky.app/profile/sph53.bsky.social" target="_blank">Bluesky</a>
+    </p>
+ </footer>
 </body>
 </html>
