@@ -53,6 +53,17 @@
             padding: 0 1rem; /* Add some padding on smaller screens */
             box-sizing: border-box; /* Include padding in width */
         }
+		
+		 /* Media query for navigation tabs on smaller screens (for this page only) */
+        @media (max-width: 600px) { /* Adjust breakpoint if needed */
+            nav ul.nav-tabs {
+                gap: 0.5rem; /* Reduce the gap between tabs */
+                font-size: 0.9rem; /* Optionally reduce font size slightly */
+            }
+            .nav-tabs li a {
+                padding: 0.4rem 0.6rem; /* Reduce padding to make tabs smaller */
+            }
+        }
     </style>
 </head>
 <body>
