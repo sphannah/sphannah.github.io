@@ -5,6 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About</title>
   <link rel="stylesheet" href="style.css" />
+   /* Specific styles for a table/image within this page,
+           overriding or complementing the main stylesheet */
+        .image-table-container { /* A container to help center the table */
+            display: flex;
+            justify-content: center;
+            margin-top: 20px; /* Space above the table */
+            margin-bottom: 40px; /* Space below the table */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 400px; /* Limit table width for better mobile experience */
+            /* Remove margin as it's handled by the container now */
+        }
+        td {
+            border: 2px solid #ff6f00; /* Use orange from the theme for the border */
+            padding: 10px;
+            text-align: center;
+			background-color: #ffffff; /* Set background to white for table cells */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
 </head>
 <body>
   <header><h1>Dazed & Confused</h1></header>
@@ -20,14 +46,29 @@
 
   <main>
     <p style="font-weight: bold;">Stephen Hannah</p>
-	<p>Currently...NYU Global Lecturer, Macrofinance; coder & model builder; bread & pizza maker; Arsenal supporter; Fantasy Football stats</p>
+	<p>Currently...NYU Global Lecturer, Macrofinance; coder & model builder; &nbsp;
+	  bread & pizza maker;failed musician, Arsenal supporter; Fantasy Football stats</p>
 	<p>Misspent youth...Parliament, Politics, Academia, UK Treasury, Investment Banking</p>
+	
+	<div class="image-table-container">
+            <table>
+                <tr>
+                    <td>
+                        <a href="image1.png" target="_blank">
+                            <img src="image1.png" alt="Image 1 for 24/25 Season">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
 
-	<p style="text-align:center"><a href="https://www.linkedin.com/in/stephen-hannah-96628524/" target="_blank">LinkedIn</a> | <a href="https://x.com/sp_hannah1953" target="_blank">X</a> | <a href="https://bsky.app/profile/sph53.bsky.social" target="_blank">Bluesky</a>.</p>
+	<p style="text-align:center"><a href="https://www.linkedin.com/in/stephen-hannah-96628524/" target="_blank">LinkedIn</a> | <a href="https://x.com/sp_hannah1953" target="_blank">X</a> | <a href="https://bsky.app/profile/sph53.bsky.social" target="_blank">Bluesky</a></p>
     <ul>
       
-    </ul>
-  </main>
+    </tr>
+            </table>
+        </div>
+    </main>
+  
   <footer>© 2025 Stephen Hannah</footer>
 </body>
 </html>

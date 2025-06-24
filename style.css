@@ -159,6 +159,8 @@ main a:hover {
     /* You already have 'color: #ffffff;' from body, so no need to repeat unless different */
     /* Add any specific styles for emphasis here, e.g., */
     font-size: 1.2em; /* Slightly larger */
+	font-style: italic;
+	color: #BA55D3; 
     margin-bottom: 2rem; /* Maybe a bit more space below it */
 }
 .blog-title {
