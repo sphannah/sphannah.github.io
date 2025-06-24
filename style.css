@@ -169,7 +169,7 @@ main a:hover {
     /* color: #ff6f00; */
 }
 .blog-excerpt {
-   color: #BA55D3; /* Purple shade */
+   color: #ff6f00; /* Purple shade = #BA55D3; */
     font-style: italic;
     font-size: 0.95em; /* Slightly smaller than body text for differentiation */
     margin-top: 0; /* Remove default top margin to reduce gap to title */
