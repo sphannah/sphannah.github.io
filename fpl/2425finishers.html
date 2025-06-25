@@ -1,93 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About</title>
-  <link rel="stylesheet" href="style.css" />
-    <style>
-/* New styles for this page */
-/* Footer adjustments */
-footer p {
-display: flex; /* Use flexbox for spacing */
-justify-content: center; /* Center the links */
-align-items: center;
-gap: 1.5rem; /* Increased gap between links */
-margin: 1rem auto; /* Add vertical margin to the paragraph */
-max-width: fit-content; /* Helps center content if using gap */
-}
-footer a {
-color: #ffffff; /* Set inactive link color to white */
-font-size: 1.1rem; /* Slightly larger font size for links */
-text-decoration: none; /* Remove underline */
-transition: color 0.3s ease; /* Smooth transition for hover effect */
-}
-footer a:hover {
-color: #00c853; /* Green hover color from your theme */
-text-decoration: underline; /* Add underline on hover */
-}
-/* Adjust main content paragraphs for better centering and readability */
-main p {
-max-width: 700px; /* Limit width for better readability */
-margin-left: auto;
-margin-right: auto;
-padding: 0 1rem; /* Add some padding on smaller screens */
-box-sizing: border-box; /* Include padding in width */
-}
-/* Specific styles for this page content */
-.highlight-text {
-            font-weight: bold;
-            color: #ff6f00; /* Orange color from your existing theme */
-        }
-.centered-text {
-            text-align: center;
-        }
-.profile-image {
-            display: block; /* Ensures the image is on its own line */
-            margin: 20px auto; /* Centers the image horizontally and adds vertical space */
-            max-width: 100%; /* Ensures image is responsive */
-            height: auto; /* Maintains aspect ratio */
-            border-radius: 8px; /* Slightly rounded corners for the image */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Players at end of 2024-25 Season</title>
+	<link rel="stylesheet" href="style.css" />
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column; /* Changed to column to stack content vertically */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4; /* Light gray background */
+            padding: 20px; /* Add some padding around the body content */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+        p {
+            color: #ff6f00; /* orange */
+			max-width: 600px; /* Limit paragraph width for readability */
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 400px; /* Limit table width for better mobile experience */
+            margin: 20px;
+        }
+        td {
+            border: 2px solid #FFDAB9; /* Light orange border */
+            padding: 10px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Ensures image doesn't have extra space below it */
+            margin: 0 auto; /* Center image horizontally */
+        }
+        a {
+            display: block; /* Make the entire cell content clickable */
+            text-decoration: none; /* Remove underline from links */
+        }
 
-/* Override navigation bar margins specifically for this page */
-nav ul.nav-tabs {
-    margin: 1rem auto 0.5rem auto; /* Reduced bottom margin to 0.5rem for this page */
-}
-
-/* Media query for navigation tabs on smaller screens (for this page only) */
-@media (max-width: 600px) { /* Adjust breakpoint if needed */
-    nav ul.nav-tabs {
-        gap: 0.5rem; /* Reduce the gap between tabs */
-        font-size: 1.0rem; /* Keep existing font size or adjust if needed */
-        margin: 0.5rem auto 0.25rem auto; /* Further reduce margins for mobile */
-    }
-    .nav-tabs li a {
-        padding: 0.4rem 0.6rem; /* Reduce padding to make tabs smaller */
-    }
-}
-</style>
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            p {
+                margin-bottom: 15px;
+                padding: 0 10px; /* Add horizontal padding for smaller screens */
+            }
+            table {
+                margin: 10px;
+            }
+            td {
+                padding: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header><h1>Dazed & Confused</h1></header><nav>
-  <ul class="nav-tabs">
-    <li><a href="/index.html" class="active">About</a></li>
-    <li><a href="/macro/index.html">Macro</a></li>
-    <li><a href="/finance/index.html">Finance</a></li>
-    <li><a href="/fpl/index.html">FPL</a></li>
-  </ul>
-</nav><main>
-    <p style="font-weight: bold;font-size: 1.3rem;text-align: center;">Stephen Hannah</p>
-    <p class="centered-text"><span class="highlight-text">Currently</span> <a href="https://www.nyu.edu/london/academics/faculty.html" target="_blank">NYU Global Lecturer</a> in <a href="https://www.sphteaching.com/" target="_blank">Macrofinance</a>, Coder & Model Builder, <br>Grandad, Bread & Pizza Maker, Arsenal Supporter, Fantasy Football Stats</p>
-    <p class="centered-text"><span class="highlight-text">Misspent Youth</span> Parliament, Academia, Local Politics, UK Treasury, Investment Banking, Pundit</p>
-    <img src="sph.webp" alt="AI-generated portrait of Stephen Hannah" class="profile-image">
-</main><footer>
-<p>
-        <a href="https://www.linkedin.com/in/stephen-hannah-96628524/" target="_blank">LinkedIn</a>
-        <a href="https://x.com/sp_hannah1953" target="_blank">X</a>
-        <a href="https://bsky.app/profile/sph53.bsky.social" target="_blank">Bluesky</a>
-    </p>
- </footer>
+
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+
+    <p>
+        Curabitur pretium tincidunt lacus, in consequat mauris egestas ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam scelerisque, odio sed efficitur interdum, sapien mi lacinia purus, a maximus nulla nulla vitae est.
+    </p>
+
+    <table>
+        <tr>
+            <td>
+                <a href="image1.png" target="_blank">
+                    <img src="image1.png" alt="Description of Image 1">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="image2.png" target="_blank">
+                    <img src="image2.png" alt="Description of Image 2">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="timage3.png" target="_blank">
+                    <img src="image3.pngg" alt="Description of Image 3">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="image4.png.png" target="_blank">
+                    <img src="image4.png.png" alt="Description of Image 4">
+                </a>
+            </td>
+        </tr>
+    </table>
+
 </body>
 </html>
