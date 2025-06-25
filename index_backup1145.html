@@ -34,15 +34,15 @@ margin-right: auto;
 padding: 0 1rem; /* Add some padding on smaller screens */
 box-sizing: border-box; /* Include padding in width */
 }
-/* Specific styles for this page content */
-.highlight-text {
+/* New styles for this page */
+        .highlight-text {
             font-weight: bold;
             color: #ff6f00; /* Orange color from your existing theme */
         }
-.centered-text {
+        .centered-text {
             text-align: center;
         }
-.profile-image {
+        .profile-image {
             display: block; /* Ensures the image is on its own line */
             margin: 20px auto; /* Centers the image horizontally and adds vertical space */
             max-width: 100%; /* Ensures image is responsive */
@@ -50,43 +50,26 @@ box-sizing: border-box; /* Include padding in width */
             border-radius: 8px; /* Slightly rounded corners for the image */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
         }
-
-/* Override navigation bar margins specifically for this page */
-/* Default nav margin in style.css is 1rem 0 2rem 0; */
-/* Default main margin in style.css is 2rem auto; */
-/* If &nbsp; is present, you get 2rem (nav) + 2rem (main) = 4rem gap. */
-/* By setting nav bottom margin lower, and removing &nbsp;, we can control this. */
-nav ul.nav-tabs {
-    margin: 1rem auto 0.5rem auto; /* Reduced bottom margin to 0.5rem for this page */
-}
-
-/* Media query for navigation tabs on smaller screens (for this page only) */
-@media (max-width: 600px) { /* Adjust breakpoint if needed */
-    nav ul.nav-tabs {
-        gap: 0.5rem; /* Reduce the gap between tabs */
-        font-size: 1.0rem; /* Keep existing font size or adjust if needed */
-        margin: 0.5rem auto 0.25rem auto; /* Further reduce margins for mobile */
-    }
-    .nav-tabs li a {
-        padding: 0.4rem 0.6rem; /* Reduce padding to make tabs smaller */
-    }
-}
 </style>
 </head>
 <body>
-  <header><h1>Dazed & Confused</h1></header><nav>
+  <header><h1>Dazed & Confused</h1></header>  
+<nav>
   <ul class="nav-tabs">
     <li><a href="/index.html" class="active">About</a></li>
     <li><a href="/macro/index.html">Macro</a></li>
     <li><a href="/finance/index.html">Finance</a></li>
     <li><a href="/fpl/index.html">FPL</a></li>
   </ul>
-</nav><main>
+</nav>
+  <main>
     <p style="font-weight: bold;font-size: 1.3rem;text-align: center;">Stephen Hannah</p>
     <p class="centered-text"><span class="highlight-text">Currently</span> <a href="https://www.nyu.edu/london/academics/faculty.html" target="_blank">NYU Global Lecturer</a> in <a href="https://www.sphteaching.com/" target="_blank">Macrofinance</a>, Coder & Model Builder, <br>Grandad, Bread & Pizza Maker, Arsenal Supporter, Fantasy Football Stats</p>
     <p class="centered-text"><span class="highlight-text">Misspent Youth</span> Parliament, Academia, HM Treasury, Investment Banking, Pundit</p>
     <img src="sph.webp" alt="AI-generated portrait of Stephen Hannah" class="profile-image">
-</main><footer>
+  </main>
+  
+  <footer>
 <p>
         <a href="https://www.linkedin.com/in/stephen-hannah-96628524/" target="_blank">LinkedIn</a>
         <a href="https://x.com/sp_hannah1953" target="_blank">X</a>
