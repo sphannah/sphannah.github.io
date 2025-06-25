@@ -1,170 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2425finishers - FPL Insights</title>
-    <link rel="stylesheet" href="/style.css"> <style>
-        /* Specific styles for the table within this page,
-           overriding or complementing the main stylesheet */
-        .image-table-container { /* A container to help center the table */
-            display: flex;
-            justify-content: center;
-            margin-top: 20px; /* Space above the table */
-            margin-bottom: 40px; /* Space below the table */
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            max-width: 400px; /* Limit table width for better mobile experience */
-            /* Remove margin as it's handled by the container now */
-        }
-        td {
-            border: 2px solid #ff6f00; /* Use orange from the theme for the border */
-            padding: 10px;
-            text-align: center;
-			background-color: #ffffff; /* Set background to white for table cells */
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        a {
-            display: block;
-            text-decoration: none;
-        }
-        /* Adjust paragraph styling for main content area */
-        .main-content-paragraph {
-            max-width: 800px; /* Adjust as needed for your main content width */
-            margin: 0 auto 20px auto; /* Center and add bottom margin */
-            text-align: left; /* Align text to left within main content */
-            padding: 0 1rem; /* Add some horizontal padding */
-        }
-         /* Ensure image links use the main color scheme if not overridden */
-        td a {
-            color: #ffffff; /* Default link color from style.css */
-        }
-        td a:hover {
-            color: #00c853; /* Hover color from style.css */
-        }
-
-         /* Media queries for responsiveness */
-        @media (max-width: 768px) {
-            .main-content-paragraph {
-                padding: 0 10px;
-                margin-bottom: 15px;
-            }
-            td {
-                padding: 5px;
-            }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About</title>
+  <link rel="stylesheet" href="style.css" />
+    <style>
+/* New styles for this page */
+/* Footer adjustments */
+footer p {
+display: flex; /* Use flexbox for spacing */
+justify-content: center; /* Center the links */
+align-items: center;
+gap: 1.5rem; /* Increased gap between links */
+margin: 1rem auto; /* Add vertical margin to the paragraph */
+max-width: fit-content; /* Helps center content if using gap */
+}
+footer a {
+color: #ffffff; /* Set inactive link color to white */
+font-size: 1.1rem; /* Slightly larger font size for links */
+text-decoration: none; /* Remove underline */
+transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+footer a:hover {
+color: #00c853; /* Green hover color from your theme */
+text-decoration: underline; /* Add underline on hover */
+}
+/* Adjust main content paragraphs for better centering and readability */
+main p {
+max-width: 700px; /* Limit width for better readability */
+margin-left: auto;
+margin-right: auto;
+padding: 0 1rem; /* Add some padding on smaller screens */
+box-sizing: border-box; /* Include padding in width */
+}
+/* Specific styles for this page content */
+.highlight-text {
+            font-weight: bold;
+            color: #ff6f00; /* Orange color from your existing theme */
+        }
+.centered-text {
+            text-align: center;
+        }
+.profile-image {
+            display: block; /* Ensures the image is on its own line */
+            margin: 20px auto; /* Centers the image horizontally and adds vertical space */
+            max-width: 100%; /* Ensures image is responsive */
+            height: auto; /* Maintains aspect ratio */
+            border-radius: 8px; /* Slightly rounded corners for the image */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
         }
 
-        /* Style for the backlink, to give it some separation and align left */
-        .back-to-home-link {
-            display: block; /* Make it a block element to take full width */
-            text-align: left; /* Align text to the left */
-            margin: 20px auto 30px 1rem; /* Adjust margin for spacing and left alignment */
-            max-width: 800px; /* Match main content width */
-        }
-		/* Footer adjustments */
-        footer p {
-            display: flex; /* Use flexbox for spacing */
-            justify-content: center; /* Center the links */
-            align-items: center;
-            gap: 1.5rem; /* Increased gap between links */
-            margin: 1rem auto; /* Add vertical margin to the paragraph */
-            max-width: fit-content; /* Helps center content if using gap */
-        }
+/* Override navigation bar margins specifically for this page */
+nav ul.nav-tabs {
+    margin: 1rem auto 0.5rem auto; /* Reduced bottom margin to 0.5rem for this page */
+}
 
-        footer a {
-            color: #ffffff; /* Set inactive link color to white */
-            font-size: 1.1rem; /* Slightly larger font size for links */
-            text-decoration: none; /* Remove underline */
-            transition: color 0.3s ease; /* Smooth transition for hover effect */
-        }
-
-        footer a:hover {
-            color: #00c853; /* Green hover color from your theme */
-            text-decoration: underline; /* Add underline on hover */
-        }
-
-        /* Adjust main content paragraphs for better centering and readability */
-        main p {
-            max-width: 700px; /* Limit width for better readability */
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 1rem; /* Add some padding on smaller screens */
-            box-sizing: border-box; /* Include padding in width */
-        }
-    </style>
+/* Media query for navigation tabs on smaller screens (for this page only) */
+@media (max-width: 600px) { /* Adjust breakpoint if needed */
+    nav ul.nav-tabs {
+        gap: 0.5rem; /* Reduce the gap between tabs */
+        font-size: 1.0rem; /* Keep existing font size or adjust if needed */
+        margin: 0.5rem auto 0.25rem auto; /* Further reduce margins for mobile */
+    }
+    .nav-tabs li a {
+        padding: 0.4rem 0.6rem; /* Reduce padding to make tabs smaller */
+    }
+}
+</style>
 </head>
 <body>
-    <header>
-        <h1>FPL</h1>
-    </header>
-
-    <nav>
-        <ul class="nav-tabs">
-            <li><a href="/index.html">About</a></li>
-            <li><a href="/macro/index.html">Macro</a></li>
-            <li><a href="/finance/index.html">Finance</a></li>
-            <li><a href="/fpl/index.html" class="active">FPL</a></li> </ul>
-    </nav>
-
-    <main>
-	<div class="back-to-home-link">
-    <a href="../../index.html" class="backlink">← Back to Home</a>
-</div>
-        <p class="main-content-paragraph">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-
-        <p class="main-content-paragraph">
-            Curabitur pretium tincidunt lacus, in consequat mauris egestas ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam scelerisque, odio sed efficitur interdum, sapien mi lacinia purus, a maximus nulla nulla vitae est.
-        </p>
-
-        <div class="image-table-container">
-            <table>
-                <tr>
-                    <td>
-                        <a href="image1.png" target="_blank">
-                            <img src="image1.png" alt="Image 1 for 24/25 Season">
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="image2.png" target="_blank">
-                            <img src="image2.png" alt="Image 2 for 24/25 Season">
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="image3.png" target="_blank">
-                            <img src="image3.png" alt="Image 3 for 24/25 Season">
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="image4.png" target="_blank">
-                            <img src="image4.png" alt="Image 4 for 24/25 Season">
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </main>
-
-     <footer>
-    <p>
-        <a href="https://www.linkedin.com/in/stephen-hannah-96628524/" target="_blank">LinkedIn</a>
-        <a href="https://x.com/sp_hannah1953" target="_blank">X</a>
-        <a href="https://bsky.app/profile/sph53.bsky.social" target="_blank">Bluesky</a>
-    </p>
- </footer>
+  <header><h1>Dazed & Confused</h1></header><nav>
+  <ul class="nav-tabs">
+    <li><a href="/index.html" class="active">About</a></li>
+    <li><a href="/macro/index.html">Macro</a></li>
+    <li><a href="/finance/index.html">Finance</a></li>
+    <li><a href="/fpl/index.html">FPL</a></li>
+  </ul>
+</nav><main>
+    <p style="font-weight: bold;font-size: 1.3rem;text-align: center;">Stephen Hannah</p>
+    <p class="centered-text"><span class="highlight-text">Currently</span> <a href="https://www.nyu.edu/london/academics/faculty.html" target="_blank">NYU Global Lecturer</a> in <a href="https://www.sphteaching.com/" target="_blank">Macrofinance</a>, Coder & Model Builder, <br>Grandad, Bread & Pizza Maker, Arsenal Supporter, Fantasy Football Stats</p>
+    <p class="centered-text"><span class="highlight-text">Misspent Youth</span> Parliament, Academia, Local Politics, UK Treasury, Investment Banking, Pundit</p>
+    <img src="sph.webp" alt="AI-generated portrait of Stephen Hannah" class="profile-image">
+</main><footer>
+<p>
+        <a href="https://www.linkedin.com/in/stephen-hannah-96628524/" target="_blank">LinkedIn</a>
+        <a href="https://x.com/sp_hannah1953" target="_blank">X</a>
+        <a href="https://bsky.app/profile/sph53.bsky.social" target="_blank">Bluesky</a>
+    </p>
+ </footer>
 </body>
 </html>
