@@ -2369,7 +2369,7 @@ Y = A K^{\alpha} L^{1-\alpha}
 </ul>
 </section>
 <section id="scenario-vs-baseline-first-and-last-3yrs-of-simulation-period" class="level1">
-<h1>Scenario vs Baseline (first and last 3yrs of simulation period)</h1>
+<h1>Scenario vs Baseline<br>first and last 3yrs of simulation period</h1>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2394,10 +2394,10 @@ Y = A K^{\alpha} L^{1-\alpha}
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;gdp_pc&quot;</span>)</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="sc">%&gt;%</span> {<span class="fu">rbind</span>(<span class="fu">head</span>(., <span class="dv">6</span>), <span class="fu">tail</span>(., <span class="dv">6</span>))}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="sc">%&gt;%</span> {<span class="fu">rbind</span>(<span class="fu">head</span>(., <span class="dv">8</span>), <span class="fu">tail</span>(., <span class="dv">6</span>))}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 3
+<pre><code># A tibble: 14 × 3
     year case     gdp_pc
    &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;
  1     0 baseline 60000 
@@ -2406,12 +2406,14 @@ Y = A K^{\alpha} L^{1-\alpha}
  4     1 scenario 60750 
  5     2 baseline 61206 
  6     2 scenario 61509.
- 7    28 baseline 79277.
- 8    28 scenario 84960.
- 9    29 baseline 80070.
-10    29 scenario 86022.
-11    30 baseline 80871.
-12    30 scenario 87097.</code></pre>
+ 7     3 baseline 61818.
+ 8     3 scenario 62278.
+ 9    28 baseline 79277.
+10    28 scenario 84960.
+11    29 baseline 80070.
+12    29 scenario 86022.
+13    30 baseline 80871.
+14    30 scenario 87097.</code></pre>
 </div>
 </div>
 </section>
@@ -2946,7 +2948,7 @@ Y = A K^{\alpha} L^{1-\alpha}
 <span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**TFP growth baseline:** 1.00% per annum  </span>
 <span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**TFP growth scenario:** 1.25% per annum  </span>
 <span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="fu"># Scenario vs Baseline (first and last 3yrs of simulation period)</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="fu"># Scenario vs Baseline&lt;br&gt;first and last 3yrs of simulation period</span></span>
 <span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
@@ -2970,7 +2972,7 @@ Y = A K^{\alpha} L^{1-\alpha}
 <span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;gdp_pc&quot;</span>)</span>
 <span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview</span></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="sc">%&gt;%</span> {<span class="fu">rbind</span>(<span class="fu">head</span>(., <span class="dv">6</span>), <span class="fu">tail</span>(., <span class="dv">6</span>))}</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="sc">%&gt;%</span> {<span class="fu">rbind</span>(<span class="fu">head</span>(., <span class="dv">8</span>), <span class="fu">tail</span>(., <span class="dv">6</span>))}</span>
 <span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="fu"># Plot</span></span>
 <span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
