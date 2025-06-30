@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOGPAGETITLE</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+<script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+/* Specific styles for the table within this page,
+overriding or complementing the main stylesheet */
+.image-table-container
+{ /* A container to help center the table */
+display: flex;
+justify-content: center;
+margin-top: 20px; /* Space above the table */
+margin-bottom: 40px; /* Space below the table */
+}
+table {
+border-collapse: collapse;
+width: 100%;
+max-width: 400px; /* Limit table width for better mobile experience */
+/* Remove margin as it's handled by the container now */
+}
+td {
+border: 2px solid #ff6f00; /* Use orange from the theme for the border */
+padding: 10px;
+text-align: center;
+background-color: #ffffff; /* Set background to white for table cells */
+}
+img {
+max-width: 100%;
+height: auto;
+display: block;
+margin: 0 auto;
+}
+a {
+display: block;
+text-decoration: none;
+}
+/* Adjust paragraph styling for main content area */
+.main-content-paragraph {
+max-width: 800px; /* Adjust as needed for your main content width */
+margin: 0 auto 20px auto; /* Center and add bottom margin */
+text-align: left; /* Align text to left within main content */
+padding: 0 1rem; /* Add some horizontal padding */
+}
+/* Ensure image links use the main color scheme if not overridden */
+td a {
+color: #ffffff; /* Default link color from style.css */
+}
+td a:hover {
+color: #00c853; /* Hover color from style.css */
+}
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+.main-content-paragraph {
+padding: 0 10px;
+margin-bottom: 15px;
+}
+td {
+padding: 5px;
+}
+}
+/* Style for the backlink, to give it some separation and align left */
+.back-to-home-link {
+display: block; /* Make it a block element to take full width */
+text-align: left; /* Align text to the left */
+margin: 20px auto 30px 1rem; /* Adjust margin for spacing and left alignment */
+max-width: 800px; /* Match main content width */
+}
+/* Footer adjustments */
+footer p {
+display: flex; /* Use flexbox for spacing */
+justify-content: center; /* Center the links */
+align-items: center;
+gap: 1.5rem; /* Increased gap between links */
+margin: 1rem auto; /* Add vertical margin to the paragraph */
+max-width: fit-content; /* Helps center content if using gap */
+}
+
+footer a {
+color: #ffffff; /* Set inactive link color to white */
+font-size: 1.1rem; /* Slightly larger font size for links */
+text-decoration: none; /* Remove underline */
+transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+footer a:hover {
+color: #00c853; /* Green hover color from your theme */
+text-decoration: underline; /* Add underline on hover */
+}
+</style>
+</head>
+<body>
+<header>
+<h1>This is a blog title</h1>
+</header>
+<nav>
+<ul class="nav-tabs">
+<li><a href="/index.html">About</a></li>
+<li><a href="/macro/index.html">Macro</a></li>
+<li><a href="/finance/index.html">Finance</a></li>
+<li><a href="/fpl/index.html" class="active">FPL</a></li>
+</ul>
+</nav>
+<main>
+<div class="back-to-home-link">
+<a href="../../index.html" class="backlink">← Back to Home</a>
+</div>
+<p class="main-content-paragraph">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+
+<p>
+Here are some equations
+$$
+\[\frac{\partial Y}{\partial L} = MPL = {AK}^{\alpha}(1 - \alpha)L^{- \alpha} = \frac{{A(1 - \alpha)K}^{\alpha}L^{1 - \alpha}}{L} = (1 - \alpha)\frac{Y}{L}\]
+$$
+</p>
+<p>
+$$
+\[\text{share of labour} = MPL\frac{L}{Y} = (1 - \alpha)\]
+\[y = f(k) = {Ak}^{\alpha}\]
+\[\frac{\partial y}{\partial k} = {A\alpha k}^{\alpha - 1} = A\alpha K^{\alpha - 1}L^{1 - \alpha} = \frac{\partial Y}{\partial K}\]
+$$
+</p>
+
+
+<p class="main-content-paragraph">
+Curabitur pretium tincidunt lacus, in consequat mauris egestas ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam scelerisque, odio sed efficitur interdum, sapien mi lacinia purus, a maximus nulla nulla vitae est.
+</p>
+<div class="image-table-container">
+<table>
+<tr>
+<td>
+<a href="image1.png" target="_blank">
+<img src="image1.png" alt="Image 1 for 24/25 Season">
+</a>
+</td>
+</tr>
+</div>
+</main>
+<footer>
+<p>
+<a href="https://www.linkedin.com/in/stephen-hannah-96628524/" target="_blank">LinkedIn</a>
+<a href="https://x.com/sp_hannah1953" target="_blank">X</a>
+<a href="https://bsky.app/profile/sph53.bsky.social" target="_blank">Bluesky</a>
+</p>
+</footer>
+</body>
+</html>
