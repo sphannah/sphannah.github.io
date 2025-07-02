@@ -3,49 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/style.css">
     <title>Finace & Cellular Automata</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4; /* Light gray background */
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            max-width: 400px; /* Limit table width for better mobile experience */
-            margin: 20px;
-        }
-        td {
-            border: 2px solid #FFDAB9; /* Light orange border */
-            padding: 10px;
-            text-align: center;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block; /* Ensures image doesn't have extra space below it */
-            margin: 0 auto; /* Center image horizontally */
-        }
-        a {
-            display: block; /* Make the entire cell content clickable */
-            text-decoration: none; /* Remove underline from links */
-        }
+    /* Specific styles for the table within this page,
+overriding or complementing the main stylesheet */
+.image-table-container
+{ /* A container to help center the table */
+display: flex;
+justify-content: center;
+margin-top: 20px; /* Space above the table */
+margin-bottom: 40px; /* Space below the table */
+}
+table {
+border-collapse: collapse;
+width: 100%;
+max-width: 400px; /* Limit table width for better mobile experience */
+/* Remove margin as it's handled by the container now */
+}
+td {
+border: 2px solid #ff6f00; /* Use orange from the theme for the border */
+padding: 10px;
+text-align: center;
+background-color: #ffffff; /* Set background to white for table cells */
+}
+img {
+max-width: 100%;
+height: auto;
+display: block;
+margin: 0 auto;
+}
+a {
+display: block;
+text-decoration: none;
+}
+/* Adjust paragraph styling for main content area */
+.main-content-paragraph {
+max-width: 800px; /* Adjust as needed for your main content width */
+margin: 0 auto 20px auto; /* Center and add bottom margin */
+text-align: left; /* Align text to left within main content */
+padding: 0 1rem; /* Add some horizontal padding */
+}
+/* Ensure image links use the main color scheme if not overridden */
+td a {
+color: #ffffff; /* Default link color from style.css */
+}
+td a:hover {
+color: #00c853; /* Hover color from style.css */
+}
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+.main-content-paragraph {
+padding: 0 10px;
+margin-bottom: 15px;
+}
+td {
+padding: 5px;
+}
+}
+/* Style for the backlink, to give it some separation and align left */
+.back-to-home-link {
+display: block; /* Make it a block element to take full width */
+text-align: left; /* Align text to the left */
+margin: 20px auto 30px 1rem; /* Adjust margin for spacing and left alignment */
+max-width: 800px; /* Match main content width */
+}
+/* Footer adjustments */
+footer p {
+display: flex; /* Use flexbox for spacing */
+justify-content: center; /* Center the links */
+align-items: center;
+gap: 1.5rem; /* Increased gap between links */
+margin: 1rem auto; /* Add vertical margin to the paragraph */
+max-width: fit-content; /* Helps center content if using gap */
+}
 
-        /* Media queries for responsiveness */
-        @media (max-width: 768px) {
-            table {
-                margin: 10px;
-            }
-            td {
-                padding: 5px;
-            }
-        }
-    </style>
+footer a {
+color: #ffffff; /* Set inactive link color to white */
+font-size: 1.1rem; /* Slightly larger font size for links */
+text-decoration: none; /* Remove underline */
+transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+footer a:hover {
+color: #00c853; /* Green hover color from your theme */
+text-decoration: underline; /* Add underline on hover */
+}
+</style>
 </head>
 <body>
 
