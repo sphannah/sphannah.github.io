@@ -79,8 +79,9 @@ h2 {
 }
 
 ul {
-  list-style-type: disc;
-  padding: 0;
+  list-style-type: square;
+  padding-left: 1.5rem; /* adds indentation to the list as a whole */
+  margin-left: 0;       /* optional: adjust if your theme adds extra left margin */
 }
 
 ul li {
