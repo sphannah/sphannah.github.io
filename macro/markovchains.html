@@ -2204,25 +2204,26 @@ vertical-align: -.125em;
 <p><a href="../index.html" class="backlink">← Back to Home</a></p>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>In macroeconomics, we often discuss how economies experience <strong>booms and recessions</strong>, with periods of normal growth in between. But what causes these cycles, and how can we simulate them?</p>
+<p>In macroeconomics, we often discuss how economies experience <strong>booms and recessions</strong>, with periods of normal growth in between. But what causes these cycles, and how can we simulate them? Also what insights can Markov models give us into what economists call an “equilibrium”?</p>
 <p>One way to model business cycles is to use a <strong>Markov chain</strong>, where the economy switches between states like Recession, Normal Growth, and Boom, with certain probabilities.</p>
 </section>
-<section id="the-concept" class="level1">
-<h1>The Concept</h1>
-<ul>
-<li><strong>Markov chains</strong> are models of systems that move between states with given probabilities.</li>
-<li>In this example:
-<ul>
-<li><strong>Recession:</strong> negative or zero growth</li>
-<li><strong>Normal:</strong> steady positive growth</li>
-<li><strong>Boom:</strong> faster-than-normal growth</li>
-</ul></li>
-</ul>
-<p>We will simulate how these states influence <strong>Real GDP over time</strong>, producing a path that trends upward overall but fluctuates with business cycles.</p>
+<section id="how-do-markov-models-work" class="level1">
+<h1>How do Markov models work??</h1>
+<p>The key assumption of a simple Markov model is that to predict the economy’s state in the next quarter, all you need to know is its current state. The entire history of how the economy arrived at its current state doesn’t matter. For example, if the economy is currently in a “Normal” state, the model uses a set of probabilities to determine if it will stay “Normal,” transition to a “Strong” phase, or slip into a “Weak” phase in the next quarter. It doesn’t care whether the economy was booming or in a slump two years ago—only its state today matters for tomorrow’s forecast.</p>
+<p>This simple “memoryless” property makes these models surprisingly elegant and easy to work with, allowing us to quantify the likelihood of staying in a boom, entering a recession, or recovering to a stable trend.</p>
+</section>
+<section id="why-is-a-markov-model-useful" class="level1">
+<h1>Why is a Markov model useful?</h1>
+<p><strong>It helps identify hidden regimes</strong> If you look at a chart of GDP growth over time, you’ll see it goes up and down, but it’s not always obvious when the economy has truly shifted into a new phase. A Markov model provides a rigorous way to estimate the statistical characteristics of each phase (for example, the average growth rate and volatility in a “Strong” phase versus a “Weak” one) and to assign probabilities to which state the economy is most likely in at any given time.</p>
+<p><strong>It provides a framework for simulations and “what-if” scenarios</strong> Once we’ve estimated the probabilities of transitioning between states, we can run thousands of simulations to see what the future might look like. We can ask questions like: “What is the probability of a recession in the next 12 months?” or “If we stay in a ‘Weak’ state for two quarters, what are our chances of recovery?” This is a powerful tool for forecasting and for testing different policy interventions. For example, a policymaker could use a simulation to see how a fiscal stimulus might affect the likelihood of transitioning from a “Weak” to a “Normal” state.</p>
+<p><strong>It quantifies uncertainty</strong> Rather than just giving a single forecast, a Markov model can provide a range of possible outcomes and their probabilities, giving a much richer and more realistic picture of the future. This is particularly relevant in today’s world, where a single shock can lead to highly uncertain and volatile outcomes.</p>
 </section>
 <section id="setting-up-the-markov-model" class="level1">
 <h1>Setting Up the Markov Model</h1>
 <p>Below is the R code to create a simple 3-state Markov chain and simulate the resulting GDP path.</p>
+<p>In this example: - <strong>Recession:</strong> negative or zero growth (on average -1%yoy) - <strong>Normal:</strong> steady positive growth (on average +2%yoy) - <strong>Boom:</strong> faster-than-normal growth (on average +4%yoy)</p>
+<p>The Transition Probability Matrix (TPM) is a table of probabilities showing the chance of moving from one state to another in any given period. For example, our matrix specifies a 75% chance of staying in a “Normal” state, a 15% chance of morphing into a “boom”, but only a 10% chance of slipping into a “Weak” state. The 3 sets of probabilities chosen are consistent with a macro economy spending around half its time in the “Normal” trend state - not far from experienced reality.</p>
+<p>The code anables us to simulate how these states influence Real GDP over time, producing a path that trends upward overall but fluctuates with business cycles.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2357,6 +2358,27 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
+</section>
+<section id="what-does-all-this-mean-for-economic-eqilibrium-concepts" class="level1">
+<h1>What does all this mean for economic eqilibrium concepts?</h1>
+<p>In economics, <strong>static equilibrium</strong> refers to a place of rest where key endogenous variables remain constant over time unless disturbed. In an Econ101 supply and demand framework, for example, the market-clearing price and quantity represent a static equilibrium: there are no inherent forces pushing price or quantity away from that point, and the system remains at rest until an external shock intervenes.</p>
+<p>By contrast, a <strong>dynamic (deterministic) equilibrium</strong> describes a situation where variables change over time but in a balanced and predictable manner, such that crucial ratios remain constant despite growth or decline in absolute terms. The classic example here is the Solow growth model, where the economy moves towards a steady state in which output, capital, and labour all grow at the same constant rate. Despite these ongoing changes, the capital-labour ratio and the marginal product of capital remain stable, reflecting an underlying balance within a system of perpetual movement.</p>
+<p>A key insight of Markov models is that the real world can exhibit a so-called <strong>stochastic equilibrium</strong> arises in models incorporating random shocks, such as Real Business Cycle (RBC) and New Keynesian Dynamic Stochastic General Equilibrium (DSGE) models. In these frameworks, the economy is constantly buffeted by unpredictable disturbances – for example, productivity or policy shocks – but nonetheless exhibits an underlying tendency for key ratios and variables to revert towards their long-run equilibrium paths. Here, equilibrium is defined not as a fixed point or a deterministic growth path, but as a probabilistic distribution around which the economy fluctuates.</p>
+<p>Of course, in reality, there is no guarantee that a unique equilibrium exists. That is why societies value collective action and adaptibility in the face of randomness. <em>If we want things to stay as they are, things will have to change</em> Guiseppe Tomasi di Lampedusa, Il Gattopardo (The Leopard).</p>
+</section>
+<section id="do-markov-models-have-limitations" class="level1">
+<h1>Do Markov models have limitations?</h1>
+<p>The core assumption of a basic Markov model is that the future depends only on the present. While this is a powerful simplification, it might not always hold true in the real world. This brings us to a crucial concept in economics: <strong>path dependence</strong></p>
+<p>Path dependence suggests that “history matters” in a deeper way. It argues that the entire sequence of events that led to the current state is important, not just the state itself. Think of a “lock-in” effect, where an early choice or event makes it very difficult to switch to an alternative later on.</p>
+<p>Macro examples of pathe dependence include, <strong>Hysteresis (Scarring)</strong> A deep and prolonged recession (a “bad path”) might cause long-lasting damage to the workforce, eroding skills and permanently increasing the unemployment rate, making a return to the pre-recession “Normal” state much harder than a simple Markov transition would suggest.</p>
+<p><strong>Perma Shocks</strong> The choice to abolish slavery, the collapse of communism, or the impact of a global pandemic like COVID-19 are not just temporary state changes. These events set economies on fundamentally new and often irreversible trajectories. <strong>Industrial/Tech Revolutions</strong> The advent of a major General Purpose Technology (GPT) like steam, electricity, the internet or AI can create self-reinforcing dynamics, where early adoption by some countries or firms creates advantages that are very difficult for others to overcome.</p>
+<p>So, while a Markov model is a useful starting point for understanding short-term fluctuations, it is less suited to capturing these deep, historical, and often irreversible shifts.</p>
+</section>
+<section id="other-macro-applications-for-markov-models" class="level1">
+<h1>Other macro applications for Markov models?</h1>
+<p>Thinking about the labour market in simple terms, people are either employed, unemployed or absent from the labour force. They frequently move between these three states at different points in their life cycle. But what happens over the long run? Does the unemployment rate settle at a particular level, even with constant flows of people finding and losing jobs? This is where the concept of a steady state (or long-run equilibrium) using a Markov model can be useful.</p>
+<p>Imagine a large economy with millions of workers. Each period (say, a month or a quarter), some employed people might lose their jobs and become unemployed, while some unemployed people might find jobs and become employed. Some people may become discouraged, or too old/ill and exit the labour market entirely. Some may reverse their early retirment or leave school and get a job for the first time. A Markov model allows us to quantify these flows using transition probabilities.</p>
+<p>The steady state represents a point where, despite these ongoing movements, the overall proportion of people who are employed and unemployed no longer changes. It’s not that no one moves anymore; it’s that the number of people transitioning between states is balancing out to produce the appearnce of a steady state in terms of proportions. It’s like a bath where water is constantly flowing in and out, but the water level remains constant because the inflow equals the outflow. Using matrix algebra and flow data information, we can calculate what the long-run proportions would be, providing an insight into a very importnat macro concept called the <strong>natural rate of unemployment.</strong></p>
 <!-- -->
 
 </section>
@@ -2830,137 +2852,177 @@ vertical-align: -.125em;
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">← Back to Home</span><span class="co">](../index.html)</span>{.backlink}</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>In macroeconomics, we often discuss how economies experience **booms and recessions**, with periods of normal growth in between. But what causes these cycles, and how can we simulate them?</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>One way to model business cycles is to use a **Markov chain**, where the economy switches between states like Recession, Normal Growth, and Boom, with certain probabilities.</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu"># The Concept</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Markov chains** are models of systems that move between states with given probabilities.</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In this example:</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>**Recession:** negative or zero growth</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>**Normal:** steady positive growth</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>**Boom:** faster-than-normal growth</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>We will simulate how these states influence **Real GDP over time**, producing a path that trends upward overall but fluctuates with business cycles.</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="fu"># Setting Up the Markov Model</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>Below is the R code to create a simple 3-state Markov chain and simulate the resulting GDP path.</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Set random seed for reproducibility</span></span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="co"># State names for clarity</span></span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>state_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Strong&quot;</span>, <span class="st">&quot;Normal&quot;</span>, <span class="st">&quot;Weak&quot;</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">← Back to Home</span><span class="co">](../index.html)</span>{.backlink}</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>In macroeconomics, we often discuss how economies experience **booms and recessions**, with periods of normal growth in between. But what causes these cycles, and how can we simulate them? Also what insights can Markov models give us into what economists call an &quot;equilibrium&quot;?</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>One way to model business cycles is to use a **Markov chain**, where the economy switches between states like Recession, Normal Growth, and Boom, with certain probabilities.</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="fu"># How do Markov models work??</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>The key assumption of a simple Markov model is that to predict the economy&#39;s state in the next quarter, all you need to know is its current state. The entire history of how the economy arrived at its current state doesn&#39;t matter. For example, if the economy is currently in a &quot;Normal&quot; state, the model uses a set of probabilities to determine if it will stay &quot;Normal,&quot; transition to a &quot;Strong&quot; phase, or slip into a &quot;Weak&quot; phase in the next quarter. It doesn&#39;t care whether the economy was booming or in a slump two years ago—only its state today matters for tomorrow&#39;s forecast.</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>This simple &quot;memoryless&quot; property makes these models surprisingly elegant and easy to work with, allowing us to quantify the likelihood of staying in a boom, entering a recession, or recovering to a stable trend.</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="fu"># Why is a Markov model useful?</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>**It helps identify hidden regimes** If you look at a chart of GDP growth over time, you’ll see it goes up and down, but it&#39;s not always obvious when the economy has truly shifted into a new phase. A Markov model provides a rigorous way to estimate the statistical characteristics of each phase (for example, the average growth rate and volatility in a &quot;Strong&quot; phase versus a &quot;Weak&quot; one) and to assign probabilities to which state the economy is most likely in at any given time.</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>**It provides a framework for simulations and &quot;what-if&quot; scenarios** Once we&#39;ve estimated the probabilities of transitioning between states, we can run thousands of simulations to see what the future might look like. We can ask questions like: &quot;What is the probability of a recession in the next 12 months?&quot; or &quot;If we stay in a &#39;Weak&#39; state for two quarters, what are our chances of recovery?&quot; This is a powerful tool for forecasting and for testing different policy interventions. For example, a policymaker could use a simulation to see how a fiscal stimulus might affect the likelihood of transitioning from a &quot;Weak&quot; to a &quot;Normal&quot; state.</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>**It quantifies uncertainty** Rather than just giving a single forecast, a Markov model can provide a range of possible outcomes and their probabilities, giving a much richer and more realistic picture of the future. This is particularly relevant in today’s world, where a single shock can lead to highly uncertain and volatile outcomes.</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="fu"># Setting Up the Markov Model</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>Below is the R code to create a simple 3-state Markov chain and simulate the resulting GDP path.</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>In this example: - **Recession:** negative or zero growth (on average -1%yoy) - **Normal:** steady positive growth (on average +2%yoy) - **Boom:** faster-than-normal growth (on average +4%yoy)</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>The Transition Probability Matrix (TPM) is a table of probabilities showing the chance of moving from one state to another in any given period. For example, our matrix specifies a 75% chance of staying in a &quot;Normal&quot; state, a 15% chance of morphing into a &quot;boom&quot;, but only a 10% chance of slipping into a &quot;Weak&quot; state. The 3 sets of probabilities chosen are consistent with a macro economy spending around half its time in the &quot;Normal&quot; trend state - not far from experienced reality.</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>The code anables us to simulate how these states influence Real GDP over time, producing a path that trends upward overall but fluctuates with business cycles.</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the Transition Probability Matrix (TPM)</span></span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.70</span>, <span class="fl">0.25</span>, <span class="fl">0.05</span>,</span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.15</span>, <span class="fl">0.75</span>, <span class="fl">0.10</span>,</span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.70</span></span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>), <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">dimnames =</span> <span class="fu">list</span>(state_names, state_names))</span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Stationary Distribution</span></span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>eigen_result <span class="ot">&lt;-</span> <span class="fu">eigen</span>(<span class="fu">t</span>(P))</span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>target_eigen_value_index <span class="ot">&lt;-</span> <span class="fu">which.min</span>(<span class="fu">abs</span>(eigen_result<span class="sc">$</span>values <span class="sc">-</span> <span class="dv">1</span>))</span>
-<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>stationary_dist <span class="ot">&lt;-</span> <span class="fu">Re</span>(eigen_result<span class="sc">$</span>vectors[, target_eigen_value_index])</span>
-<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>stationary_dist <span class="ot">&lt;-</span> stationary_dist <span class="sc">/</span> <span class="fu">sum</span>(stationary_dist)</span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span>(stationary_dist <span class="sc">&lt;</span> <span class="dv">0</span>)) {</span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>  stationary_dist <span class="ot">&lt;-</span> <span class="fu">abs</span>(stationary_dist) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">abs</span>(stationary_dist))</span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(stationary_dist) <span class="ot">&lt;-</span> state_names</span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Calculated Stationary Distribution (S, N, W):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(stationary_dist)</span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Normal state long-run probability: %.2f%%</span><span class="sc">\n</span><span class="st">&quot;</span>, stationary_dist[<span class="dv">2</span>] <span class="sc">*</span> <span class="dv">100</span>))</span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the economic characteristics for each state</span></span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>mean_gdp_growth <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Strong =</span> <span class="fl">4.0</span>, <span class="at">Normal =</span> <span class="fl">2.0</span>, <span class="at">Weak =</span> <span class="sc">-</span><span class="fl">1.0</span>)</span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>sd_gdp_growth <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="fu"># Simulate states over 200 periods</span></span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>num_periods <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>initial_state_index <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Simulation ---</span></span>
-<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>states_sequence <span class="ot">&lt;-</span> <span class="fu">numeric</span>(num_periods)</span>
-<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>gdp_growth_sim <span class="ot">&lt;-</span> <span class="fu">numeric</span>(num_periods)</span>
-<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a>current_state_index <span class="ot">&lt;-</span> initial_state_index</span>
-<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a>states_sequence[<span class="dv">1</span>] <span class="ot">&lt;-</span> current_state_index</span>
-<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a>gdp_growth_sim[<span class="dv">1</span>] <span class="ot">&lt;-</span> mean_gdp_growth[current_state_index] <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, sd_gdp_growth)</span>
-<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>num_periods) {</span>
-<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>  current_state_probs <span class="ot">&lt;-</span> P[current_state_index, ]</span>
-<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>  next_state_index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="at">prob =</span> current_state_probs)</span>
-<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a>  states_sequence[t] <span class="ot">&lt;-</span> next_state_index</span>
-<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>  current_state_index <span class="ot">&lt;-</span> next_state_index</span>
-<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a>  gdp_growth_sim[t] <span class="ot">&lt;-</span> mean_gdp_growth[current_state_index] <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, sd_gdp_growth)</span>
-<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Prepare data for plotting ---</span></span>
-<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>  <span class="at">Time =</span> <span class="dv">1</span><span class="sc">:</span>num_periods,</span>
-<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>  <span class="at">State =</span> <span class="fu">factor</span>(states_sequence, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">labels =</span> state_names),</span>
-<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a>  <span class="at">GDP_Growth =</span> gdp_growth_sim</span>
-<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Simulated GDP Growth with states shown ---</span></span>
-<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sim_data, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> GDP_Growth, <span class="at">color =</span> State)) <span class="sc">+</span></span>
-<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">&quot;#002060&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Strong&quot;</span> <span class="ot">=</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="st">&quot;Normal&quot;</span> <span class="ot">=</span> <span class="st">&quot;steelblue&quot;</span>, <span class="st">&quot;Weak&quot;</span> <span class="ot">=</span> <span class="st">&quot;firebrick&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Simulated Macroeconomic GDP Growth&quot;</span>,</span>
-<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">&quot;Long-run Normal State Probability: &quot;</span>, <span class="fu">round</span>(stationary_dist[<span class="st">&quot;Normal&quot;</span>] <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%&quot;</span>),</span>
-<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Time Period (Calendar Quarters)&quot;</span>,</span>
-<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;GDP Growth Rate (%)&quot;</span></span>
-<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="st">&quot;24&quot;</span>,<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>),</span>
-<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="st">&quot;20&quot;</span>,<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">face=</span><span class="st">&quot;italic&quot;</span>,<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>),</span>
-<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="st">&quot;18&quot;</span>,<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>,<span class="at">vjust=</span><span class="dv">2</span>,</span>
-<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">margin=</span><span class="fu">margin</span>(<span class="at">t=</span><span class="dv">0</span>,<span class="at">r=</span><span class="dv">10</span>,<span class="at">b=</span><span class="dv">0</span>,<span class="at">l=</span><span class="dv">0</span>)),</span>
-<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="st">&quot;18&quot;</span>,<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>,<span class="at">vjust=</span><span class="dv">2</span>,</span>
-<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">margin=</span><span class="fu">margin</span>(<span class="at">t=</span><span class="dv">10</span>,<span class="at">r=</span><span class="dv">0</span>,<span class="at">b=</span><span class="dv">0</span>,<span class="at">l=</span><span class="dv">0</span>)),</span>
-<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">color=</span><span class="st">&quot;#002060&quot;</span>,<span class="at">size=</span><span class="dv">16</span>),</span>
-<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks=</span><span class="fu">element_blank</span>(),</span>
-<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text=</span><span class="fu">element_text</span>(<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>,<span class="at">size=</span><span class="dv">14</span>),</span>
-<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title=</span><span class="fu">element_text</span>(<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>,<span class="at">size=</span><span class="dv">18</span>),</span>
-<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position=</span><span class="st">&quot;top&quot;</span>,</span>
-<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a>        <span class="co">#legend.position.inside = c(0.5,0.9),</span></span>
-<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a>        <span class="co">#legend.key=element_blank(),</span></span>
-<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major=</span><span class="fu">element_blank</span>(),</span>
-<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor=</span><span class="fu">element_blank</span>(),</span>
-<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill=</span><span class="st">&#39;transparent&#39;</span>), </span>
-<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill=</span><span class="st">&#39;transparent&#39;</span>,<span class="at">color=</span><span class="cn">NA</span>))</span>
-<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;simulated_gdp_with_states.png&quot;</span>,<span class="at">bg=</span><span class="st">&#39;white&#39;</span>,<span class="at">width=</span><span class="dv">140</span>,<span class="at">height=</span><span class="dv">120</span>,<span class="at">units=</span><span class="st">&quot;mm&quot;</span>,<span class="at">dpi=</span><span class="dv">300</span>)</span>
-<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a>p1</span>
-<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Set random seed for reproducibility</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="co"># State names for clarity</span></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>state_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Strong&quot;</span>, <span class="st">&quot;Normal&quot;</span>, <span class="st">&quot;Weak&quot;</span>)</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the Transition Probability Matrix (TPM)</span></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.70</span>, <span class="fl">0.25</span>, <span class="fl">0.05</span>,</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.15</span>, <span class="fl">0.75</span>, <span class="fl">0.10</span>,</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.70</span></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>), <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">dimnames =</span> <span class="fu">list</span>(state_names, state_names))</span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Stationary Distribution</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>eigen_result <span class="ot">&lt;-</span> <span class="fu">eigen</span>(<span class="fu">t</span>(P))</span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>target_eigen_value_index <span class="ot">&lt;-</span> <span class="fu">which.min</span>(<span class="fu">abs</span>(eigen_result<span class="sc">$</span>values <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>stationary_dist <span class="ot">&lt;-</span> <span class="fu">Re</span>(eigen_result<span class="sc">$</span>vectors[, target_eigen_value_index])</span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>stationary_dist <span class="ot">&lt;-</span> stationary_dist <span class="sc">/</span> <span class="fu">sum</span>(stationary_dist)</span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span>(stationary_dist <span class="sc">&lt;</span> <span class="dv">0</span>)) {</span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>  stationary_dist <span class="ot">&lt;-</span> <span class="fu">abs</span>(stationary_dist) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">abs</span>(stationary_dist))</span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(stationary_dist) <span class="ot">&lt;-</span> state_names</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Calculated Stationary Distribution (S, N, W):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(stationary_dist)</span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Normal state long-run probability: %.2f%%</span><span class="sc">\n</span><span class="st">&quot;</span>, stationary_dist[<span class="dv">2</span>] <span class="sc">*</span> <span class="dv">100</span>))</span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the economic characteristics for each state</span></span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>mean_gdp_growth <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Strong =</span> <span class="fl">4.0</span>, <span class="at">Normal =</span> <span class="fl">2.0</span>, <span class="at">Weak =</span> <span class="sc">-</span><span class="fl">1.0</span>)</span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>sd_gdp_growth <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a><span class="fu"># Simulate states over 200 periods</span></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a>num_periods <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>initial_state_index <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Simulation ---</span></span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a>states_sequence <span class="ot">&lt;-</span> <span class="fu">numeric</span>(num_periods)</span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>gdp_growth_sim <span class="ot">&lt;-</span> <span class="fu">numeric</span>(num_periods)</span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a>current_state_index <span class="ot">&lt;-</span> initial_state_index</span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>states_sequence[<span class="dv">1</span>] <span class="ot">&lt;-</span> current_state_index</span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a>gdp_growth_sim[<span class="dv">1</span>] <span class="ot">&lt;-</span> mean_gdp_growth[current_state_index] <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, sd_gdp_growth)</span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>num_periods) {</span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>  current_state_probs <span class="ot">&lt;-</span> P[current_state_index, ]</span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>  next_state_index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="at">prob =</span> current_state_probs)</span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>  states_sequence[t] <span class="ot">&lt;-</span> next_state_index</span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a>  current_state_index <span class="ot">&lt;-</span> next_state_index</span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>  gdp_growth_sim[t] <span class="ot">&lt;-</span> mean_gdp_growth[current_state_index] <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, sd_gdp_growth)</span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Prepare data for plotting ---</span></span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a>  <span class="at">Time =</span> <span class="dv">1</span><span class="sc">:</span>num_periods,</span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a>  <span class="at">State =</span> <span class="fu">factor</span>(states_sequence, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">labels =</span> state_names),</span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a>  <span class="at">GDP_Growth =</span> gdp_growth_sim</span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Simulated GDP Growth with states shown ---</span></span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sim_data, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> GDP_Growth, <span class="at">color =</span> State)) <span class="sc">+</span></span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">&quot;#002060&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Strong&quot;</span> <span class="ot">=</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="st">&quot;Normal&quot;</span> <span class="ot">=</span> <span class="st">&quot;steelblue&quot;</span>, <span class="st">&quot;Weak&quot;</span> <span class="ot">=</span> <span class="st">&quot;firebrick&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Simulated Macroeconomic GDP Growth&quot;</span>,</span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">&quot;Long-run Normal State Probability: &quot;</span>, <span class="fu">round</span>(stationary_dist[<span class="st">&quot;Normal&quot;</span>] <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%&quot;</span>),</span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Time Period (Calendar Quarters)&quot;</span>,</span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;GDP Growth Rate (%)&quot;</span></span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="st">&quot;24&quot;</span>,<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>),</span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="st">&quot;20&quot;</span>,<span class="at">hjust=</span><span class="fl">0.5</span>,<span class="at">face=</span><span class="st">&quot;italic&quot;</span>,<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>),</span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="st">&quot;18&quot;</span>,<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>,<span class="at">vjust=</span><span class="dv">2</span>,</span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">margin=</span><span class="fu">margin</span>(<span class="at">t=</span><span class="dv">0</span>,<span class="at">r=</span><span class="dv">10</span>,<span class="at">b=</span><span class="dv">0</span>,<span class="at">l=</span><span class="dv">0</span>)),</span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="st">&quot;18&quot;</span>,<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>,<span class="at">vjust=</span><span class="dv">2</span>,</span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">margin=</span><span class="fu">margin</span>(<span class="at">t=</span><span class="dv">10</span>,<span class="at">r=</span><span class="dv">0</span>,<span class="at">b=</span><span class="dv">0</span>,<span class="at">l=</span><span class="dv">0</span>)),</span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">color=</span><span class="st">&quot;#002060&quot;</span>,<span class="at">size=</span><span class="dv">16</span>),</span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text=</span><span class="fu">element_text</span>(<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>,<span class="at">size=</span><span class="dv">14</span>),</span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title=</span><span class="fu">element_text</span>(<span class="at">colour=</span><span class="st">&quot;#002060&quot;</span>,<span class="at">size=</span><span class="dv">18</span>),</span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position=</span><span class="st">&quot;top&quot;</span>,</span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a>        <span class="co">#legend.position.inside = c(0.5,0.9),</span></span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a>        <span class="co">#legend.key=element_blank(),</span></span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill=</span><span class="st">&#39;transparent&#39;</span>), </span>
+<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill=</span><span class="st">&#39;transparent&#39;</span>,<span class="at">color=</span><span class="cn">NA</span>))</span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;simulated_gdp_with_states.png&quot;</span>,<span class="at">bg=</span><span class="st">&#39;white&#39;</span>,<span class="at">width=</span><span class="dv">140</span>,<span class="at">height=</span><span class="dv">120</span>,<span class="at">units=</span><span class="st">&quot;mm&quot;</span>,<span class="at">dpi=</span><span class="dv">300</span>)</span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a>p1</span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a><span class="fu"># What does all this mean for economic eqilibrium concepts?</span></span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a>In economics, **static equilibrium** refers to a place of rest where key endogenous variables remain constant over time unless disturbed. In an Econ101 supply and demand framework, for example, the market-clearing price and quantity represent a static equilibrium: there are no inherent forces pushing price or quantity away from that point, and the system remains at rest until an external shock intervenes.</span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a>By contrast, a **dynamic (deterministic) equilibrium** describes a situation where variables change over time but in a balanced and predictable manner, such that crucial ratios remain constant despite growth or decline in absolute terms. The classic example here is the Solow growth model, where the economy moves towards a steady state in which output, capital, and labour all grow at the same constant rate. Despite these ongoing changes, the capital-labour ratio and the marginal product of capital remain stable, reflecting an underlying balance within a system of perpetual movement.</span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a>A key insight of Markov models is that the real world can exhibit a so-called **stochastic equilibrium** arises in models incorporating random shocks, such as Real Business Cycle (RBC) and New Keynesian Dynamic Stochastic General Equilibrium (DSGE) models. In these frameworks, the economy is constantly buffeted by unpredictable disturbances – for example, productivity or policy shocks – but nonetheless exhibits an underlying tendency for key ratios and variables to revert towards their long-run equilibrium paths. Here, equilibrium is defined not as a fixed point or a deterministic growth path, but as a probabilistic distribution around which the economy fluctuates.</span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a>Of course, in reality, there is no guarantee that a unique equilibrium exists. That is why societies value collective action and adaptibility in the face of randomness.  *If we want things to stay as they are, things will have to change* Guiseppe Tomasi di Lampedusa, Il Gattopardo (The Leopard).</span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a><span class="fu"># Do Markov models have limitations?</span></span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a>The core assumption of a basic Markov model is that the future depends only on the present. While this is a powerful simplification, it might not always hold true in the real world. This brings us to a crucial concept in economics: **path dependence**</span>
+<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a>Path dependence suggests that &quot;history matters&quot; in a deeper way. It argues that the entire sequence of events that led to the current state is important, not just the state itself. Think of a &quot;lock-in&quot; effect, where an early choice or event makes it very difficult to switch to an alternative later on.</span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a>Macro examples of pathe dependence include, **Hysteresis (Scarring)** A deep and prolonged recession (a &quot;bad path&quot;) might cause long-lasting damage to the workforce, eroding skills and permanently increasing the unemployment rate, making a return to the pre-recession &quot;Normal&quot; state much harder than a simple Markov transition would suggest.</span>
+<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a>**Perma Shocks** The choice to abolish slavery, the collapse of communism, or the impact of a global pandemic like COVID-19 are not just temporary state changes. These events set economies on fundamentally new and often irreversible trajectories. **Industrial/Tech Revolutions** The advent of a major General Purpose Technology (GPT) like steam, electricity, the internet or AI can create self-reinforcing dynamics, where early adoption by some countries or firms creates advantages that are very difficult for others to overcome.</span>
+<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a>So, while a Markov model is a useful starting point for understanding short-term fluctuations, it is less suited to capturing these deep, historical, and often irreversible shifts.</span>
+<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a><span class="fu"># Other macro applications for Markov models?</span></span>
+<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a>Thinking about the labour market in simple terms, people are either employed, unemployed or absent from the labour force. They frequently move between these three states at different points in their life cycle. But what happens over the long run? Does the unemployment rate settle at a particular level, even with constant flows of people finding and losing jobs? This is where the concept of a steady state (or long-run equilibrium) using a Markov model can be useful.</span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a>Imagine a large economy with millions of workers. Each period (say, a month or a quarter), some employed people might lose their jobs and become unemployed, while some unemployed people might find jobs and become employed. Some people may become discouraged, or too old/ill and exit the labour market entirely. Some may reverse their early retirment or leave school and get a job for the first time. A Markov model allows us to quantify these flows using transition probabilities.</span>
+<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a>The steady state represents a point where, despite these ongoing movements, the overall proportion of people who are employed and unemployed no longer changes. It&#39;s not that no one moves anymore; it&#39;s that the number of people transitioning between states is balancing out to produce the appearnce of a steady state in terms of proportions. It’s like a bath where water is constantly flowing in and out, but the water level remains constant because the inflow equals the outflow. Using matrix algebra and flow data information, we can calculate what the long-run proportions would be, providing an insight into a very importnat macro concept called the **natural rate of unemployment.**</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
