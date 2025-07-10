@@ -79,7 +79,7 @@ h2 {
 }
 
 ul {
-  list-style: disc;
+  list-style-type: disc;
   padding: 0;
 }
 
