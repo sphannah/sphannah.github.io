@@ -156,15 +156,11 @@ ggplot(pred_summary, aes(x = date)) +
   labs(title = "US Real GDP YoY Growth",
        subtitle="Actual vs Estimated Trend 1960-2026",
        y = "% YoY Growth", x = "Date")+
-      # caption = "Blue = Estimated Trend (ex-Covid); Red Dots = Outturns 2024Q3–2025Q2") +
   theme(plot.title=element_text(size=28,hjust=0.5,colour="#002060"),
         plot.subtitle=element_text(size=24,hjust=0.5,face="italic",colour="#002060"),
-       # plot.caption=element_text(size=20,hjust=0.5,face="italic",colour="blue"),
         axis.title.y=element_text(size=18,colour="#002060",vjust=2,
                                   margin=margin(t=0,r=10,b=0,l=0)),
         axis.title.x=element_blank(),
-        #axis.title.x=element_text(size=18,colour="#002060",vjust=2,
-                                  #margin=margin(t=10,r=0,b=0,l=0)),
         axis.text=element_text(color="#002060",size=16),
         axis.ticks=element_blank(),
         legend.text=element_text(colour="#002060",size=14),
