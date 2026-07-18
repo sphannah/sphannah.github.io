@@ -35,7 +35,7 @@ Users must also remain alert with interpretation, especially where complex multi
 
 So, when we look at the latest GDP numbers, the obvious question - is this quarter’s number telling us something important? - is pretty hard to answer. But economists are there to guide and we have some tools to help distinguish the noise from the signal.\
 \
-An easy step is to be careful about which GDP measure we use. [Jason Furman](https://www.ft.com/content/58576abe-18b0-4216-940c-6e6f6c8bda60) makes a case for focussing on core GDP rather than the headline number. Thankfully, [FRED is at hand](https://fred.stlouisfed.org/graph/?graph_id=1459584&rn=514). Indeed that weak 2025Q1 US GDP figure was distorted by all sorts of stuff. It's worth reading the [BEA's technical notes](https://www.bea.gov/sites/default/files/2025-04/gdp1q25-adv.pdf) on gold and the California wildfires attached to advance estimates. Not only do we need to pay attention to detail but also, as [Bobby Kennedy](https://www.theguardian.com/news/datablog/2012/may/24/robert-kennedy-gdp) eloquently reminded us, GDP does not tell you all you need to know.
+An easy step is to be careful about which GDP measure we use. [Jason Furman](https://www.ft.com/content/58576abe-18b0-4216-940c-6e6f6c8bda60) makes a case for focussing on core GDP rather than the headline number. Thankfully, [FRED is at hand](https://fred.stlouisfed.org/graph/?graph_id=1459584). For example, that weak 2025Q1 US GDP figure was distorted by all sorts of stuff. It's worth reading the [BEA's technical notes](https://www.bea.gov/sites/default/files/2025-04/gdp1q25-adv.pdf) on gold and the California wildfires attached to advance estimates. Not only do we need to pay attention to detail but also, as [Bobby Kennedy](https://www.theguardian.com/news/datablog/2012/may/24/robert-kennedy-gdp) eloquently reminded us, GDP does not tell you all you need to know.
 
 There are more thorough approaches for identifying signal from noise. These methods typically involve estimating an underlying trend — the part of GDP growth that reflects longer-term, systematic changes in the economy — and separating it from the short-term fluctuations caused by temporary shocks or measurement errors.
 
@@ -151,7 +151,7 @@ ggplot(pred_summary, aes(x = date)) +
            label = "Estimated Trend (ex-Covid)",
            colour="blue",size=5)+
   annotate("text", x = as.Date('2000-01-01'), y = -6, 
-           label = "Outturns 2025Q1–2026Q2",
+           label = "Outturns since 2025Q1",
            colour="red",size=5)+
   labs(title = "US Real GDP YoY Growth",
        subtitle="Actual vs Estimated Trend 1960-2026",
