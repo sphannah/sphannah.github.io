@@ -8,9 +8,9 @@ format:
     code-fold: true
     code-tools: true
     embed-resources: true 
-    css: style.css
+    css: ../style.css
     theme: ""
-    include-in-header: quarto_folding.html
+    include-in-header: ../quarto_folding.html
 execute:
   echo: false
   warning: false
