@@ -8,7 +8,7 @@ format:
     code-fold: true
     code-tools: true
     embed-resources: true 
-    css: ../style.css
+    css: ../../style.css
     theme: ""
     include-in-header: ../quarto_folding.html
 execute:
@@ -23,7 +23,7 @@ execute:
 
 Quarterly GDP data are notoriously volatile and have been for some time. Nor does the volatility exhibit "normal" characteristics.
 
-![](images/Slide8.PNG){fig-align="center"}
+![](../images/Slide8.PNG){fig-align="center"}
 
 Randomness is part of life, with or without President Trump, and is [not just confined to economic outcomes.](https://www.ft.com/content/2a4fb079-5733-40b6-ac64-8d3b6b702a81)\
 \
@@ -31,7 +31,7 @@ Sometimes the randomness and confusion is self-induced. Some Europeans unwitting
 
 Users must also remain alert with interpretation, especially where complex multinational linkages are involved. [Ireland's stellar GDP per capita](https://www.economist.com/europe/2025/06/12/how-ireland-became-the-saudi-arabia-of-siphoned-off-global-profits) is a classic example.Then there are the dreaded revisions: what really happened to US GDP when Lehman Bros went bust in 2008? The "truth" took some time to emerge, well after time-critical policy decisions had to be made.
 
-![](images/Slide9.PNG){fig-align="center"}
+![](../images/Slide9.PNG){fig-align="center"}
 
 So, when we look at the latest GDP numbers, the obvious question - is this quarter’s number telling us something important? - is pretty hard to answer. But economists are there to guide and we have some tools to help distinguish the noise from the signal.\
 \
