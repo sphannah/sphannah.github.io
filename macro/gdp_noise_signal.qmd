@@ -23,7 +23,7 @@ execute:
 
 Quarterly GDP data are notoriously volatile and have been for some time. Nor does the volatility exhibit "normal" characteristics.
 
-![](../images/Slide8.PNG){fig-align="center"}
+![](images/Slide8.PNG){fig-align="center"}
 
 Randomness is part of life, with or without President Trump, and is [not just confined to economic outcomes.](https://www.ft.com/content/2a4fb079-5733-40b6-ac64-8d3b6b702a81)\
 \
