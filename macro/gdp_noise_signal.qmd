@@ -31,7 +31,7 @@ Sometimes the randomness and confusion is self-induced. Some Europeans unwitting
 
 Users must also remain alert with interpretation, especially where complex multinational linkages are involved. [Ireland's stellar GDP per capita](https://www.economist.com/europe/2025/06/12/how-ireland-became-the-saudi-arabia-of-siphoned-off-global-profits) is a classic example.Then there are the dreaded revisions: what really happened to US GDP when Lehman Bros went bust in 2008? The "truth" took some time to emerge, well after time-critical policy decisions had to be made.
 
-![](../images/Slide9.PNG){fig-align="center"}
+![](images/Slide9.PNG){fig-align="center"}
 
 So, when we look at the latest GDP numbers, the obvious question - is this quarter’s number telling us something important? - is pretty hard to answer. But economists are there to guide and we have some tools to help distinguish the noise from the signal.\
 \
