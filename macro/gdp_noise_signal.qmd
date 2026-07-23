@@ -8,9 +8,8 @@ format:
     code-fold: true
     code-tools: true
     embed-resources: true 
-    css: ../../style.css
+    css: ../style.css
     theme: ""
-    include-in-header: ../quarto_folding.html
 execute:
   echo: false
   warning: false
@@ -208,3 +207,5 @@ signal_prob %>%
 # Takeaways
 
 By the time the 2026Q3 US GDP data are released (the advance estimate is scheduled for 29 Oct 2026), such methods can quantify whether the number reflects meaningful economic change or not. This helps avoid overreacting to headlines and anchors policy and business decisions in a more stable view of economic momentum. The Bayesian approach, though advanced behind the scenes, offers a powerful and intuitive way to think about the economy as a dynamic system — evolving over time, but not at the mercy of every bump in the road.
+
+testing...
