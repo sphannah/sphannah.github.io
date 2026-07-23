@@ -1,0 +1,2 @@
+cd C:\Users\Stephen\Documents\GitHub\sphannah.github.io\mathjax
+pandoc mathjax_Word.docx -t markdown -o mathjax_equations.md

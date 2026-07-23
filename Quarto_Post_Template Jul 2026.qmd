@@ -1,0 +1,99 @@
+---
+title: "Replace with post title"
+subtitle: "Optional subtitle"
+date: last-modified
+format:
+  html:
+    fig-width: 10
+    fig-height: 6
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true
+    css: ../../style.css
+    theme: none
+    # Uncomment only when this file exists and custom folding behaviour is wanted:
+    # include-in-header: ../quarto_folding.html
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+# Introduction
+
+Opening text explaining the question, why it matters and what the post does.
+
+An ordinary hyperlink looks like [this](https://example.com).
+
+## An externally generated image
+
+![Useful alternative text](images/example.webp){fig-align="center" width="85%"}
+
+## Analysis
+
+```{r}
+#| label: setup-and-data
+#| echo: true
+#| warning: false
+#| message: false
+
+library(tidyverse)
+
+# Load data with a path relative to this .qmd file.
+# data <- readr::read_csv("data/example.csv")
+```
+
+```{r}
+#| label: example-chart
+#| echo: false
+#| fig-cap: "Replace with an informative caption."
+#| fig-alt: "Replace with an accessible description of the chart."
+
+example_data <- tibble(
+  year = 2021:2025,
+  value = c(100, 104, 103, 108, 112)
+)
+
+ggplot(example_data, aes(year, value)) +
+  geom_line(colour = "#002060", linewidth = 1.2) +
+  geom_point(colour = "#ff6f00", size = 3) +
+  labs(
+    title = "Example chart",
+    subtitle = "Replace with the relevant period",
+    x = NULL,
+    y = NULL,
+    caption = "Source: replace with source"
+  ) +
+  theme_minimal()
+```
+
+## Optional table
+
+| Item | Meaning |
+|---|---|
+| A | First item |
+| B | Second item |
+
+## Optional mathematics
+
+Inline mathematics uses `$y = Ax^\alpha$`.
+
+Display mathematics uses:
+
+$$
+y = A k^\alpha
+$$
+
+# Takeaways
+
+- First conclusion.
+- Second conclusion.
+- Qualification or caveat.
+
+*Data and page last refreshed: `r format(Sys.Date(), "%d %B %Y")`.*
+
