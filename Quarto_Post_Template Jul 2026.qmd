@@ -5,21 +5,17 @@ date: last-modified
 format:
   html:
     fig-width: 10
-    fig-height: 6
     toc: false
     number-sections: false
     code-fold: true
     code-tools: true
     embed-resources: true
-    css: ../../style.css
-    theme: none
-    # Uncomment only when this file exists and custom folding behaviour is wanted:
-    # include-in-header: ../quarto_folding.html
+    css: ../style.css
+    theme: ""
 execute:
   echo: false
   warning: false
   message: false
-  freeze: false
 ---
 
 [← Back to Home](../index.html){.backlink}
