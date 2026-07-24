@@ -147,7 +147,7 @@ pre.sourceCode, pre code {
 main a {
   color: #ffffff;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 main a:hover {
