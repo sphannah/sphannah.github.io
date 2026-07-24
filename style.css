@@ -179,3 +179,185 @@ main a:hover {
     margin-bottom: 1rem; /* Space below the excerpt before the next blog title */
 }
 
+/* =====================================================
+   PRINT-FRIENDLY VERSION
+   Applies only when printing or saving as PDF
+   ===================================================== */
+
+@media print {
+
+  /* Page dimensions and margins */
+  @page {
+    size: A4;
+    margin: 16mm 15mm 18mm 15mm;
+  }
+
+  /* Override the dark Quarto colour scheme */
+  :root {
+    --bs-body-bg: #ffffff !important;
+    --bs-body-color: #000000 !important;
+    --bs-link-color: #000000 !important;
+    --bs-code-color: #000000 !important;
+  }
+
+  html,
+  body,
+  main,
+  .page-columns,
+  .content,
+  #quarto-content {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.35;
+  }
+
+  /* Main text */
+  p,
+  li,
+  dd,
+  dt,
+  blockquote,
+  figcaption,
+  .figure-caption,
+  .caption,
+  .source-note {
+    color: #000000 !important;
+  }
+
+  /* Titles and headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .title,
+  .subtitle,
+  .quarto-title,
+  .quarto-title-block,
+  .quarto-title-meta {
+    color: #000000 !important;
+    background: transparent !important;
+    text-shadow: none !important;
+  }
+
+  h1 {
+    font-size: 22pt;
+  }
+
+  h2 {
+    font-size: 16pt;
+    border-bottom: 1px solid #777777;
+  }
+
+  h3 {
+    font-size: 13pt;
+  }
+
+  /* Links remain readable without using coloured ink */
+  a,
+  a:visited {
+    color: #000000 !important;
+    text-decoration: underline;
+  }
+
+  /* Code blocks */
+  pre,
+  code,
+  .sourceCode,
+  div.sourceCode {
+    color: #000000 !important;
+    background: #f2f2f2 !important;
+    border-color: #aaaaaa !important;
+  }
+
+  pre {
+    white-space: pre-wrap;
+    break-inside: avoid;
+  }
+
+  /* Standard tables */
+  table,
+  th,
+  td {
+    color: #000000 !important;
+    background: #ffffff !important;
+    border-color: #666666 !important;
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  /* gt tables: override their inline dark-theme formatting */
+  .gt_table,
+  .gt_table th,
+  .gt_table td,
+  .gt_heading,
+  .gt_title,
+  .gt_subtitle,
+  .gt_col_heading,
+  .gt_row,
+  .gt_stub,
+  .gt_group_heading,
+  .gt_sourcenote {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+    border-color: #777777 !important;
+  }
+
+  /* Preserve charts and images at a sensible size */
+  img,
+  svg,
+  figure {
+    max-width: 100% !important;
+    height: auto !important;
+    break-inside: avoid;
+  }
+
+  table,
+  .cell-output-display,
+  .figure {
+    break-inside: avoid;
+  }
+
+  /* Do not leave a heading stranded at the foot of a page */
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  /* Remove website-only elements */
+  nav,
+  .navbar,
+  .sidebar,
+  #quarto-sidebar,
+  #quarto-margin-sidebar,
+  .quarto-secondary-nav,
+  .quarto-title-banner,
+  .code-tools-button,
+  .code-copy-button,
+  .anchorjs-link,
+  footer,
+  .nav-footer {
+    display: none !important;
+  }
+
+  /* Use the full printable page width */
+  body,
+  main,
+  .page-columns,
+  .content,
+  #quarto-document-content {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
