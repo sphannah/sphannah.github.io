@@ -26,43 +26,59 @@ execute:
 
 # Beyond the Doom Loop
 
-For many years, Britain has been trapped in a self-fulfilling "doom loop." Productivity growth has stagnated. Structural health and disability expenditures have risen sharply. And, despite historically high tax rates, the fiscal backdrop just gets worse as debt interst burdens escalate. The despair feeds higher gilt yields, elevates risk premia, suppresses private investment, and ultimately shrinks the tax base. Governments get pressed into austerity mode, reinforcing the weakness in potential growth and accelerating the downward spiral.
+For many years, Britain has been trapped in a self-fulfilling "doom loop." Productivity growth has stagnated. Structural health and disability expenditures have risen sharply. And, despite historically high tax rates, the fiscal backdrop just gets worse as debt interest burdens escalate. The despair feeds higher gilt yields, elevates risk premia, suppresses private spending and growth, and ultimately shrinks the tax base. Governments then shrink into austerity mode, reinforcing the weakness in potential growth and accelerating the downward spiral.
 
 We all know that breaking out of this vicious cycle requires more than incremental
-adjustments; it demands a clear, novel, and self-reinforcing policy
-framework. Enter a hypothetical **S.T.E.P.** platform (*Switch, Tech, Empower,
+adjustments; it demands radical, innovative change.
+
+Who knows whether the Burnham administration will, or can, deliver the required policy changes within a timeframe, and with consequences, that are acceptable to an impatient, irascible electorate. Initial signs are encouraging but there is no guarantee that they will not end with a whimper. 
+
+What follows is a humble economist's attempt to identify a structural reform agenda that addresses the macro changes that need to happen. It does not claim originality of policy proposals but, in exploring feasible outcomes through macro-finance models, reveals that we can dare to dream. 
+
+## S.T.E.P. Forward
+
+Enter a hypothetical **S.T.E.P.** platform (*Switch, Tech, Empower,
 Purpose*) — a package of four targeted structural reforms designed for
 short-term implementation (Years 1–3) as a foundation for a long-run growth revival without fiscal headaches:
 
-1.  **S – Tax Switch for Working Families:** Reverses employment tax
-    squeezes by cutting Personal National Insurance by 2 percentage
-    points, funded by equalising the tax treatment of unearned
-    investment and capital income with earned income.
-2.  **T – Tech & AI Growth Guarantee:** Put AI, biotech and science at the heart of government and     education. Deploy co-investment (public/private, UK/European) vehicles via a National Wealth      Fund and a British Business Bank. 
-3.  **E – Empowering Regions (Single-Pot Devolution):** Collapse fragmented Whitehall
-    competitive bidding pots into single-pot
-    block grants for Combined Mayoral Authorities, funded by
-    rationalising central civil service overheads and active sales of
-    surplus public land assets. Manchester (and Grimsby? self-interest declared!) to be major         West/East hubs for devolution
-4.  **P – Purpose-Driven Welfare (Health-to-Work Gateway):** Replaces
-    duplicate, adversarial assessment processes with a single
-    Health-to-Work gateway tied directly to Integrated Care Boards,
-    substituting low-level cash top-ups with direct-access vouchers and
+1.  **S – Tax Switch for Working Families:** Rebalance the tax burden from income to wealth. This includes cutting employee National Insurance contributions, funded by equalising the tax treatment of unearned investment and capital income with earned income. Land taxes will also play a role in re-incentivising work and thus labour force participation.
+2.  **T – Tech & AI Growth Guarantee:** Put AI, biotech and science at the heart of government, education and worker skillsets. Deploy co-investment (public/private, UK/European) vehicles via a National Wealth Fund and a British Business Bank. Take adavantage of homegrown expertise in AI, biotech, quantum computing and financial services to maximise employment opportinities, and above all, significantly raise productivity growth. 
+3.  **E – Empowering Regions:** Fully activate and empower the revived National Economic Council. Joined-up thinking and action across regions, coupled with enhanced legitimacy through devolution, will raise productivity and boost both business and consumer confidence. 
+4.  **P – Purpose-Driven Welfare (Health-to-Work Gateway):** Replace
+    duplicate, adversarial assessment processes with a simplified, single
+    Health-to-Work gateway. Substitute low-level cash top-ups with direct-access vouchers and
     immediate occupational therapy triage.
 
-Pie-in-the-sky? Maybe. But there are plenty of similarly great ideas out there. Whether the new Burnham administartion will reallly follow through remians to be seen. What is clear is that the economics of such a paradigm shift are bfar from dismal. Indeed, as the following heuristic modelling shows, the outcome could be extremely positive.
-
-### The Self-Financing Virtuous Cycle
+## The Self-Financing Virtuous Cycle
 
 ```{mermaid}
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryTextColor': '#ffffff', 'lineColor': '#5dade2', 'edgeLabelBackground':'transparent'}}}%%
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'fontSize': '32px',
+    'fontFamily': 'Arial, sans-serif',
+    'primaryColor': '#dceef8',
+    'primaryTextColor': '#102a43',
+    'primaryBorderColor': '#2980b9',
+    'lineColor': '#2980b9',
+    'edgeLabelBackground': '#ffffff',
+    'clusterBkg': 'transparent',
+    'clusterBorder': '#2980b9'
+  },
+  'flowchart': {
+    'htmlLabels': true,
+    'nodeSpacing': 30,
+    'rankSpacing': 40
+  }
+}}%%
+
 flowchart LR
     subgraph STEP["THE S.T.E.P. PILLARS"]
         direction TB
-        S["SWITCH<br/>(Tax Swap)"]
+        S["SWITCH<br/>Tax Rebalancing"]
         T["TECH<br/>(GenAI TFP)"]
-        E["EMPOWER<br/>(Mayors)"]
-        P["PURPOSE<br/>(PIP Reform)"]
+        E["EMPOWER<br/>Devolution"]
+        P["PURPOSE<br/>Welfare Reform"]
     end
 
     S --> Hope
@@ -73,10 +89,10 @@ flowchart LR
     subgraph CYCLE[" "]
         direction TB
         Hope["Boost Sentiment<br/>& Hope"]
-        Growth["Accelerate Potential<br/>Real GDP Growth (g ↑)"]
+        Growth["Accelerate Potential<br/>Real GDP Growth"]
         TaxBase["Expand Tax Base<br/>& Structural Savings"]
-        Vigilantes["Ward Off Bond Vigilantes<br/>r_gov ↓ risk wedge π_risk ↓"]
-        Decay["Sustainable Debt Decay<br/>g > r_gov)"]
+        Vigilantes["Ward Off Bond Vigilantes<br/>Real Gilt Yields fall"]
+        Decay["Sustainable Debt Decay<br/>GDP Growth exceeds financing rate"]
 
         Hope --> Growth
         Growth --> TaxBase
@@ -84,41 +100,32 @@ flowchart LR
         Vigilantes --> Decay
     end
 
-    style STEP fill:transparent,stroke:#2980b9,stroke-width:1.5px,color:#ffffff
+    classDef processBox fill:#dceef8,stroke:#2980b9,stroke-width:2px,color:#102a43;
+    class S,T,E,P,Hope,Growth,TaxBase,Vigilantes,Decay processBox;
+
+    style STEP fill:transparent,stroke:#2980b9,stroke-width:2px,color:#102a43
     style CYCLE fill:transparent,stroke:none
-
-    style S fill:#1b4f72,stroke:#5dade2,stroke-width:1.5px,color:#ffffff
-    style T fill:#1b4f72,stroke:#5dade2,stroke-width:1.5px,color:#ffffff
-    style E fill:#1b4f72,stroke:#5dade2,stroke-width:1.5px,color:#ffffff
-    style P fill:#1b4f72,stroke:#5dade2,stroke-width:1.5px,color:#ffffff
-
-    style Hope fill:#1b4f72,stroke:#5dade2,stroke-width:1.5px,color:#ffffff
-    style Growth fill:#1b4f72,stroke:#5dade2,stroke-width:1.5px,color:#ffffff
-    style TaxBase fill:#1b4f72,stroke:#5dade2,stroke-width:1.5px,color:#ffffff
-    style Vigilantes fill:#1b4f72,stroke:#5dade2,stroke-width:1.5px,color:#ffffff
-    style Decay fill:#1b4f72,stroke:#5dade2,stroke-width:1.5px,color:#ffffff
 ```
 
 
-The core attraction of a S.T.E.P. platform lies in its **inbuilt
-self-financing design**. By prioritising revenue-neutral tax swaps,
-Whitehall operational savings, and off-budget asset-backed investment
-vehicles, the strategy protects public finances in the short term and builds a solid foundation for future sustainability.
+The core attraction of this S.T.E.P. platform lies in its **inbuilt
+self-financing design** together with its capacity to break out the doom-loop and enter a reinforcing virtuous cycle. 
 
 Crucially, as confidence returns, a positive feedback loop takes hold.
-Improved business sentiment crowds in private investment, labour force
+Improved sentiment crowds in private spending, labour force
 participation stabilises via health-to-work pathways, and GenAI adoption
-lifts baseline productivity. The resulting expansion of the real tax
+lifts baseline productivity. The strategy protects public finances in the short term and builds a solid foundation for future sustainability.
+
+The resulting expansion of the real tax
 base, combined with falling sovereign borrowing yields
-($r_{\text{gov}}$) and narrowing risk premia ($\pi_{\text{risk}}$),
-wards off bond vigilantes and secures a sustainable, long-run fiscal
+and narrowing risk premia, wards off bond vigilantes and secures a sustainable, long-run fiscal
 dividend.
 
 ------------------------------------------------------------------------
 
 # The Macro Modelling Framework
 
-To demonstrate that a positive outcome is entirely feasible, we model the policy platform
+To demonstrate that a positive outcome is feasible, we model the policy platform
 in the context of standard growth and public finance models.
 
 ## Supply-Side Potential Growth
@@ -133,37 +140,40 @@ accounting identity for potential real GDP growth ($g_t$):
 
 $$g_t = \alpha g_{K,t} + (1-\alpha)(g_{A,t} + g_{L,t})$$
 
-where: \* $\alpha = 0.40$ represents the profit share (capital share of
+where:<br>
+$\alpha = 0.40$ represents the profit share (capital share of
 aggregate income), calibrated from Penn World Table (PWT) 11.0 national
-income accounts. \* $g_{A,t}$ is labour-augmenting Total Factor
+income accounts<br><br>
+$g_{A,t}$ is labour-augmenting Total Factor
 Productivity (TFP) growth, which accelerates asymptotically from an
 initial OBR baseline of 0.9% to a GenAI-boosted steady-state target of
-**2.25%**. \* $g_{L,t}$ is labour force growth, stabilised at
-**0.4%–0.5%** via PIP health-to-work reforms. \* $g_{K,t}$ is capital
-stock growth, which endogenously converges toward the Solow Balanced
+**2.25%**<br><br>
+$g_{L,t}$ is labour force growth, stabilised at
+**0.4%–0.5%** via PIP health-to-work reforms<br><br>
+$g_{K,t}$ is capital stock growth, which endogenously converges toward the Solow Balanced
 Growth Path (BGP) equilibrium: $g_K^* = g_A + g_L = 2.65\%$.
 
 ## Capital Returns & Gilt Yields
 
 The gross Marginal Product of Capital ($\text{MPK}$) and the net private
 real return ($r_{\text{priv}}$) are derived from the aggregate
-capital-output ratio ($K/Y \approx 4.8$, based on PWT 11.0 broad capital
-stock data):
+capital-output ratio ($K/Y$ \approx 4.8$, with this value based on PWT 11.0 estimates for the UK:
 
 $$\text{MPK}_t = \alpha \left(\frac{Y_t}{K_t}\right) \approx 0.40 \times \left(\frac{1}{4.8}\right) \approx 8.3\%$$
 
 $$r_{\text{priv},t} = \text{MPK}_t - \delta = 8.3\% - 5.0\% = 3.3\%$$
 
-where $\delta = 5.0\%$ is the fixed rate of capital depreciation. Public
-sector real borrowing yields ($r_{\text{gov},t}$) are decoupled from
-private returns via a market risk/convenience wedge
-($\pi_{\text{risk},t}$):
+where $\delta = 5.0\%$ is the assumed fixed rate of capital depreciation.
+
+Public sector real borrowing yields ($r_{\text{gov},t}$) differ from
+private returns due to a market risk/convenience wedge ($\pi_{\text{risk},t}$):
 
 $$r_{\text{priv},t} = r_{\text{gov},t} + \pi_{\text{risk},t}$$
 
-Anchor-initialised at $r_{\text{gov}} = 3.1\%$ in 2027 (matching the
-10-year nominal gilt yield of \~5.1% minus 2.0% inflation expectations),
-$r_{\text{gov}}$ falls toward 1.0% as fiscal credibility is established.
+Initial conditions for $r_{\text{gov}} = 3.1\%$ use the current current
+10-year nominal gilt yield of \~5.1% less assumed inflation expectations of 2.0%.
+
+$r_{\text{gov}}$ falls toward 1.0% as fiscal credibility is established with both domestic and international financial markets.
 
 ## Debt Sustainability Mechanics
 
@@ -174,23 +184,18 @@ $$b_t = (1 + r_{\text{gov},t} - g_t) b_{t-1} + pd_t$$
 $$\Delta b_t = (r_{\text{gov},t} - g_t) b_{t-1} + pd_t$$
 
 where $pd_t$ is the primary deficit ratio. 
-The **Sustainability Gap** is defined as $g_t - r_{\text{gov},t}$ with a stable fiscal regime ensured once **$g > r_{\text{gov}}$
-
-The economy then generates a positive growth
-dividend that naturally erodes the debt ratio, allowing structural
-primary surpluses ($pd < 0$) to accelerate debt reduction.
+The **Sustainability Gap** is defined as $g_t - r_{\text{gov},t}$.
+Currently, Britain is in an unstable regime, signified by a negative gap. But, as the S.T.E.P program takes effect, the gap reverses into positive territory **$g > r_{\text{gov}}$. The economy then generates a positive growth dividend that naturally erodes the debt ratio, allowing structural primary surpluses ($pd < 0$) to accelerate debt reduction.
 
 ------------------------------------------------------------------------
 
-# Simulation Results & Horizon Projections
+## Simulation Results & Horizon Projections
 
-The simulation is initialised using Office for Budget
-Responsibility (OBR) baseline figures for 2025/26 
+The following simulation is calibrated using [Office for Budget Responsibility](https://obr.uk/frs/fiscal-risks-and-sustainability-july-2026/) (OBR) baseline figures for 2025/26 and estimates made in [Penn World Tables 11.0](https://www.rug.nl/ggdc/productivity/pwt/?lang=en)  
 
-$b_{2026} = 94.0\%$, initial primary deficit $= 1.4\%$, debt interest $= 2.9\%$, GDP growth
-$= 1.5\%$.
+Initial conditions are as follows: $b_{2026} = 94.0\%$ of GDP, initial primary deficit $= 1.4\%$ of GDP, debt interest payments $= 2.9\%$ of GDP, GDP growth $= 1.5\%$yoy.
 
-Into the 2030s, S.T.E.P. leads the UK toward its long-run steady state - its happy place.
+As expected, a successful and sustained S.T.E.P. implementation leads the UK toward a desirable long-run steady state - <b>a happy place</b>.
 
 ```{r}
 library(tidyverse)
@@ -264,7 +269,6 @@ macro_sim <- macro_sim %>%
 ```
 
 ```{r}
-
 #| label: macro-dashboard
 #| echo: false
 #| warning: false
@@ -272,24 +276,30 @@ macro_sim <- macro_sim %>%
 #| fig-cap: "Macroeconomic Growth Acceleration and Fiscal Sustainability Trajectory"
 #| fig-alt: "Two panel chart showing Solow potential growth convergence and declining government debt dynamics."
 
+library(tidyverse)
+library(gt)
+library(patchwork)
+
 theme_uk_policy <- function() {
-  theme_minimal(base_size = 11) +
+  theme_minimal(base_size = 14) +
     theme(
-      plot.title = element_text(face = "bold", size = 11, color = "#1a1a1a"),
-      plot.subtitle = element_text(size = 8.5, color = "#4a4a4a"),
-      axis.title = element_text(face = "bold", size = 9),
+      plot.title = element_text(face = "bold", size = 14, color = "#1a1a1a"),
+      plot.subtitle = element_text(size = 12, color = "#4a4a4a"),
+      axis.title = element_text(face = "bold", size = 12),
+      axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
       panel.grid.minor = element_blank(),
-      panel.grid.major.x = element_line(color = "#e5e5e5"),
-      panel.grid.major.y = element_line(color = "#e5e5e5"),
+      panel.grid.major = element_blank(),
+      # panel.grid.major.x = element_line(color = "#e5e5e5"),
+      # panel.grid.major.y = element_line(color = "#e5e5e5"),
       plot.background = element_rect(fill = "white", color = NA)
     )
 }
 
 p1 <- ggplot(macro_sim, aes(x = Period, group = 1)) +
-  geom_line(aes(y = gdp_growth * 100, color = "Real GDP Growth (g)"), linewidth = 1.2) +
-  geom_point(aes(y = gdp_growth * 100, color = "Real GDP Growth (g)"), size = 2.5) +
-  geom_line(aes(y = r_gov * 100, color = "Gov Real Funding Rate (r_gov)"), linewidth = 1.0, linetype = "dashed") +
-  geom_point(aes(y = r_gov * 100, color = "Gov Real Funding Rate (r_gov)"), size = 2.0) +
+  geom_line(aes(y = gdp_growth * 100, color = "Real GDP Growth (g)"), linewidth = 2.0) +
+  geom_point(aes(y = gdp_growth * 100, color = "Real GDP Growth (g)"), size = 5) +
+  geom_line(aes(y = r_gov * 100, color = "Gov Real Funding Rate (r_gov)"), linewidth = 2.0, linetype = "dashed") +
+  geom_point(aes(y = r_gov * 100, color = "Gov Real Funding Rate (r_gov)"), size = 5) +
   scale_color_manual(name = "", values = c("Real GDP Growth (g)" = "#002060", "Gov Real Funding Rate (r_gov)" = "#c0392b")) +
   labs(
     title = "A. Real Growth vs. Public Borrowing Yields",
@@ -300,22 +310,33 @@ p1 <- ggplot(macro_sim, aes(x = Period, group = 1)) +
   theme(legend.position = "bottom")
 
 p2 <- ggplot(macro_sim, aes(x = Period, group = 1)) +
-  geom_col(aes(y = headline_deficit * 100, fill = "Headline Deficit (% GDP)"), width = 0.4, alpha = 0.7) +
-  geom_line(aes(y = debt_end * 100 / 2.5, color = "Sovereign Debt Ratio (b_t)"), linewidth = 1.2) +
-  geom_point(aes(y = debt_end * 100 / 2.5, color = "Sovereign Debt Ratio (b_t)"), size = 2.5) +
-  scale_y_continuous(
-    name = "Headline Deficit (% GDP)",
-    sec.axis = sec_axis(~ . * 2.5, name = "Sovereign Debt Ratio (% GDP)")
+  geom_col(
+    aes(
+      y = debt_end * 100,
+      fill = "Government Debt Ratio (% GDP)"
+    ),
+    width = 0.8,
+    alpha = 0.9
   ) +
-  scale_fill_manual(name = "", values = c("Headline Deficit (% GDP)" = "#2980b9")) +
-  scale_color_manual(name = "", values = c("Sovereign Debt Ratio (b_t)" = "#8e44ad")) +
+  scale_y_continuous(
+    name = "% of GDP"
+  ) +
+  scale_fill_manual(
+    name = NULL,
+    values = c(
+      "Government Debt Ratio (% GDP)" = "#8e44ad"
+    )
+  ) +
   labs(
-    title = "B. Deficit Reduction & Sovereign Debt Decay",
+    title = "B. Sovereign Debt Decay",
     subtitle = "Debt ratio unwinds cleanly from 97% to 55% of GDP",
     x = NULL
   ) +
   theme_uk_policy() +
-  theme(legend.position = "bottom")
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank()
+  )
 
 p1 | p2
 ```
@@ -338,8 +359,8 @@ macro_transposed <- tibble(
   ),
   Variable = c(
     "Real GDP", "Labour Force", "Capital Stock", "Total Factor Productivity",
-    "Private Sector Real Return", "Risk Premium", "Government Real Funding Rate",
-    "Primary Deficit", "Debt Interest Costs", "Headline Deficit", "Debt Ratio, end-period", "Sustainability Gap*"
+    "Private Sector Net Real Return", "Risk Premium", "Government Real Funding Rate",
+    "Primary Deficit", "Debt Interest Costs", "Headline Deficit", "Debt Ratio, end-period", "Sustainability Gap"
   ),
   `2027` = c(
     macro_sim$gdp_growth[1], macro_sim$labour_growth[1], macro_sim$capital_growth[1], macro_sim$tfp_growth[1],
@@ -372,23 +393,21 @@ macro_transposed <- tibble(
 # 2. Construct Dynamic Footnote Text (With LaTeX Escaped % Symbols)
 # ------------------------------------------------------------------------------
 dynamic_source_note <- sprintf(
-  "**Notes & Model Specifications:**<br>
-   1. **OBR Alignment & Production Function:** Initialised using official OBR baseline data ($b_{2026} = %.1f\\%%$, primary deficit $= %.1f\\%%$, debt interest $= %.1f\\%%$, GDP growth $= %.1f\\%%$). <br>Production technology assumes Cobb-Douglas with profit share $\\alpha = %.0f\\%%$, capital depreciation $\\delta = %.1f\\%%$, and Penn World Table 11.0 $K/Y \\approx %.1f$. Gross $\\text{MPK} = \\alpha (Y/K) = %.1f\\%%$.<br>
-   2. **Debt & Inflation:** Inflation expectations anchored at $\\pi = %.1f\\%%$; corresponding nominal 10-year funding rate is $i = r_{\\text{gov}} + \\pi = %.1f\\%%$ in 2027.<br>
-   3. ***Sustainability Gap Definition:** Real GDP Growth less Government Real Funding Rate ($g - r_{\\text{gov}}$). Positive indicates dynamic stability ($g > r_{\\text{gov}}$).<br>
-   4. **Solow Balanced Growth Path (BGP):** Final column represents BGP steady state ($g_K^* = g_A + g_L = %.2f\\%%$, yielding $g^* = %.2f\\%%$).",
-  b_initial * 100,                                    # 1. b_2026 (%)
-  macro_sim$primary_deficit[1] * 100,                 # 2. Primary Deficit (%)
-  macro_sim$r_gov[1] * b_initial * 100,               # 3. Debt Interest (%)
-  macro_sim$gdp_growth[1] * 100,                      # 4. GDP Growth (%)
-  alpha * 100,                                        # 5. Alpha Profit Share (%)
-  delta * 100,                                        # 6. Depreciation Delta (%)
-  ky_init,                                            # 7. K/Y Ratio (No %)
-  macro_sim$mpk_gross[1] * 100,                       # 8. Gross MPK (%)
-  pi_target * 100,                                    # 9. Inflation Target pi (%)
-  (macro_sim$r_gov[1] + pi_target) * 100,             # 10. Nominal Funding Rate i (%)
-  (macro_sim$tfp_growth[5] + macro_sim$labour_growth[5]) * 100, # 11. BGP Effective Labour (%)
-  (macro_sim$gdp_growth[5]) * 100                     # 12. BGP Steady-State g* (%)
+  "**Notes & Model Specifications:**<br><br>
+   1. **Macro Supply:** Production technology assumes a Cobb-Douglas format with profit share $\\alpha = %.0f\\%%$, capital depreciation $\\delta = %.1f\\%%$, and $K/Y \\approx %.1f$. Gross $\\text{MPK} = \\alpha (Y/K) = %.1f\\%%$<br><br>
+   2. **Debt & Inflation:** Inflation expectations anchored at $\\pi = %.1f\\%%$; corresponding nominal 10-year funding rate is $i = r_{\\text{gov}} + \\pi = %.1f\\%%$ in 2027<br><br>
+   3. **Sustainability Gap:** Real GDP Growth less Government Real Funding Rate ($g - r_{\\text{gov}}$). Positive indicates dynamic stability ($g > r_{\\text{gov}}$)<br><br>
+   4. **Solow Balanced Growth Path:** Final column represents the model's steady state<br> $g_K^* = g_A + g_L = %.2f\\%%$, yielding $g^* = %.2f\\%%$",
+
+  alpha * 100,                                        
+  delta * 100,                                        
+  ky_init,                                            
+  macro_sim$mpk_gross[1] * 100,                       
+  pi_target * 100,                                    
+  (macro_sim$r_gov[1] + pi_target) * 100,             
+  (macro_sim$tfp_growth[5] +
+     macro_sim$labour_growth[5]) * 100,               
+  macro_sim$gdp_growth[5] * 100                       
 )
 
 # ------------------------------------------------------------------------------
@@ -397,10 +416,9 @@ dynamic_source_note <- sprintf(
 gt_a4_table <- macro_transposed %>%
   gt(groupname_col = "Category") %>%
   tab_header(
-    title = md("**Solow-BGP Macroeconomic & Dynamic Fiscal Simulation**"),
-    subtitle = md(sprintf("Initialised to OBR Baseline ($b_{2026} = %.1f%%$, Profit Share $\\alpha = %.0f%%$)", b_initial * 100, alpha * 100))
-  ) %>%
-  cols_label(Variable = "Macroeconomic Indicator") %>%
+    title = md("**Illustrative Macro-Fiscal Simulation**"),
+    subtitle = md("Initialised using OBR and Penn World Tables 11.0 estimates")) %>%
+  cols_label(Variable = "") %>%
   
   # --- Column Width Fine-Tuning ---
   # Adjust px or % values below to balance layout across desktop & mobile
@@ -440,11 +458,14 @@ gt_a4_table <- macro_transposed %>%
   tab_source_note(source_note = md(dynamic_source_note)) %>%
   tab_style(
     style = cell_text(
-    size = px(8),
+    size = px(16),
     color = "#111827"),
     locations = cells_source_notes()) %>%
-  opt_css(css = ".gt_sourcenote {line-height: 1.1;}")
+  opt_css(css = ".gt_sourcenote {line-height: 1.2;}")
 
 # Call the object directly for Quarto execution
 gt_a4_table
 ```
+
+# Take That
+Britain could limp along towards the next election. But who wants that and the dangers it poses to social and economic life. There is clearly appetite for radical change and the S.T.E.P framework offers ideas. For those worried about whether it all adds up, the macro-finance simulations show that it can - in terms of combining strong growtyh, better living standards, stable inflation and sustainable public finances. Whether the current administarion is      
