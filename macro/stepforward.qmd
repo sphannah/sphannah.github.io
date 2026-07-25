@@ -469,3 +469,18 @@ gt_a4_table
 
 # Take That
 Britain could limp along towards the next election. But who wants that and the dangers it poses to social and economic life. There is clearly appetite for radical change and the S.T.E.P framework offers ideas. For those worried about whether it all adds up, the macro-finance simulations show that it can - in terms of combining strong growtyh, better living standards, stable inflation and sustainable public finances. Whether the current administarion is      
+
+::: {.bibliography}
+
+<p class="bibliography-title">References</p>
+
+1. Resolution Foundation (2026),  
+   [*See it. Say it. Sort it: How to reset Britain’s economic policy*](https://www.resolutionfoundation.org/).
+
+2. IPPR (2026),  
+   [*Turning energy support into investment leverage*](https://www.ippr.org/).
+
+3. Joseph Rowntree Foundation (2026),  
+   [*Tackle economic failures at root to ease pressure on Universal Credit*](https://www.jrf.org.uk/).
+   
+:::

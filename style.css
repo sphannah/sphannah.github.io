@@ -361,3 +361,55 @@ main a:hover {
     padding: 0 !important;
   }
 }
+
+/* -------------------------------------------------------
+   Bibliography / References
+   ------------------------------------------------------- */
+
+.bibliography {
+  margin-top: 2rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #444;
+  color: #b8b8b8;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.bibliography p {
+  margin: 0.45rem 0;
+}
+
+.bibliography ul,
+.bibliography ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  padding-left: 1.4rem;
+}
+
+.bibliography li {
+  margin: 0.45rem 0;
+}
+
+/* Override the general bold white link style inside main */
+main .bibliography a {
+  color: #d0d0d0;
+  font-weight: normal;
+  text-decoration: none;
+  border-bottom: 1px dotted #666;
+}
+
+main .bibliography a:hover {
+  color: #00c853;
+  border-bottom-color: #00c853;
+  text-decoration: none;
+}
+
+/* Optional bibliography heading */
+.bibliography-title {
+  margin-bottom: 0.6rem;
+  color: #ff6f00;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
