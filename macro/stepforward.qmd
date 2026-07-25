@@ -26,28 +26,23 @@ execute:
 
 # Beyond the Doom Loop
 
-For many years, Britain has been trapped in a self-fulfilling "doom loop." Productivity growth has stagnated. Structural health and disability expenditures have risen sharply. And, despite historically high tax rates, the fiscal backdrop just gets worse as debt interest burdens escalate. The despair feeds higher gilt yields, elevates risk premia, suppresses private spending and growth, and ultimately shrinks the tax base. Governments then shrink into austerity mode, reinforcing the weakness in potential growth and accelerating the downward spiral.
+For many years, Britain has been trapped in a self-fulfilling "doom loop." Productivity growth has stagnated. Structural health and disability expenditures have risen sharply. And, despite historically high tax rates, the fiscal backdrop just gets worse. Debt interest burdens have escalated and there are accelerating pressures on the public purse from climate change and worsening geopolitical tensions. The despair feeds higher gilt yields, suppresses private spending and growth, and ultimately shrinks the tax base. Governments then feel forced to shrink into austerity mode, reinforcing the weakness in potential growth and accelerating the downward spiral.
 
-We all know that breaking out of this vicious cycle requires more than incremental
-adjustments; it demands radical, innovative change.
+We all know that breaking out of this vicious cycle requires more than incremental adjustments; it demands radical, innovative change.
 
-Who knows whether the Burnham administration will, or can, deliver the required policy changes within a timeframe, and with consequences, that are acceptable to an impatient, irascible electorate. Initial signs are encouraging but there is no guarantee that they will not end with a whimper. 
+Who knows whether the Burnham administration will, or can, deliver the required policy changes within a timeframe, and with consequences, that are acceptable to an impatient, irascible electorate. Initial signs are encouraging but there is no guarantee of success. 
 
 What follows is a humble economist's attempt to identify a structural reform agenda that addresses the macro changes that need to happen. It does not claim originality of policy proposals but, in exploring feasible outcomes through macro-finance models, reveals that we can dare to dream. 
 
 ## S.T.E.P. Forward
 
-Enter a hypothetical **S.T.E.P.** platform (*Switch, Tech, Empower,
-Purpose*) — a package of four targeted structural reforms designed for
+Enter a hypothetical **S.T.E.P.** platform (*Switch, Tech, Empower,Purpose*) — a package of four targeted structural reforms designed for
 short-term implementation (Years 1–3) as a foundation for a long-run growth revival without fiscal headaches:
 
-1.  **S – Tax Switch for Working Families:** Rebalance the tax burden from income to wealth. This includes cutting employee National Insurance contributions, funded by equalising the tax treatment of unearned investment and capital income with earned income. Land taxes will also play a role in re-incentivising work and thus labour force participation.
-2.  **T – Tech & AI Growth Guarantee:** Put AI, biotech and science at the heart of government, education and worker skillsets. Deploy co-investment (public/private, UK/European) vehicles via a National Wealth Fund and a British Business Bank. Take adavantage of homegrown expertise in AI, biotech, quantum computing and financial services to maximise employment opportinities, and above all, significantly raise productivity growth. 
-3.  **E – Empowering Regions:** Fully activate and empower the revived National Economic Council. Joined-up thinking and action across regions, coupled with enhanced legitimacy through devolution, will raise productivity and boost both business and consumer confidence. 
-4.  **P – Purpose-Driven Welfare (Health-to-Work Gateway):** Replace
-    duplicate, adversarial assessment processes with a simplified, single
-    Health-to-Work gateway. Substitute low-level cash top-ups with direct-access vouchers and
-    immediate occupational therapy triage.
+1.  **S – Switch and substitute revenue sources:** Rebalance the tax burden from income to wealth. This includes cutting employee National Insurance contributions, funded by equalising the tax treatment of unearned investment and capital income with earned income. Land taxes will also play a role in re-incentivising work and thus labour force participation. Focus on immovables, anticipate and address behavioural avoidance.
+2.  **T – Tech focus:** Put AI, robotics, digitalisation, biotech and science at the heart of government, education and worker skillsets. Deploy co-investment (public/private, UK/European) vehicles via a National Wealth Fund and a British Business Bank. Ensure that such vehicles enable the scaling of superstars and are not simply shelters for unproductive zombie companies.Take advantage of homegrown expertise in AI, biotech, quantum computing and financial services to maximise employment opportunities, and above all, significantly raise productivity growth.Promoting innovation clusters and accelerating diffusion of new ideas will be key. 
+3.  **E – Empowering Regions:** Fully activate the revived National Economic Council. Empower mayors as economic actors not simply Town Hall administrators. Joined-up thinking and action across regions, coupled with enhanced democratic legitimacy through devolution, will raise productivity and boost both business and consumer confidence. 
+4.  **P – Purposeful participation:** Engage fully in welfare reform. Replace duplicate, adversarial assessment processes with simplified Health-to-Work gateways. Substitute low-level cash top-ups with direct-access vouchers and immediate occupational therapy.
 
 ## The Self-Financing Virtuous Cycle
 
@@ -76,7 +71,7 @@ flowchart LR
     subgraph STEP["THE S.T.E.P. PILLARS"]
         direction TB
         S["SWITCH<br/>Tax Rebalancing"]
-        T["TECH<br/>(GenAI TFP)"]
+        T["TECH<br/>TFP GenAI"]
         E["EMPOWER<br/>Devolution"]
         P["PURPOSE<br/>Welfare Reform"]
     end
@@ -468,19 +463,43 @@ gt_a4_table
 ```
 
 # Take That
-Britain could limp along towards the next election. But who wants that and the dangers it poses to social and economic life. There is clearly appetite for radical change and the S.T.E.P framework offers ideas. For those worried about whether it all adds up, the macro-finance simulations show that it can - in terms of combining strong growtyh, better living standards, stable inflation and sustainable public finances. Whether the current administarion is      
+Britain could limp along towards the next election. But who wants that and the scary political dangers posed for socio-economic wellbeing. There is clearly appetite for radical change and the S.T.E.P framework offers workable ideas. For those worried about whether it all adds up, the macro-finance simulations show that it can - in terms of combining strong growth, better living standards, stable inflation and sustainable public finances. 
+
+Boosting productivity holds the key to exiting the Doom Loop. Easy to say but notoriously harder to do. AI and similarly progressive technologies offer a lifeline. But while tech creation is essential, adoption and diffusion are necessary. In this regard, rebalancing taxes, meaningful devolution, offering purpose and participation for all potential workers jointly unlock the door to the Virtuous Cycle, the happy place that we all crave.   
 
 ::: {.bibliography}
 
-<p class="bibliography-title">References</p>
+<p class="bibliography-title">Further Reading</p>
 
-1. Resolution Foundation (2026),  
-   [*See it. Say it. Sort it: How to reset Britain’s economic policy*](https://www.resolutionfoundation.org/).
+Resolution Foundation (2025) [*Call of duties*](https://www.resolutionfoundation.org/publications/call-of-duties)
 
-2. IPPR (2026),  
-   [*Turning energy support into investment leverage*](https://www.ippr.org/).
+Resolution Foundation (2026) [*See it. Say it. Sort it: How to reset Britain’s economic policy*](https://www.resolutionfoundation.org/app/uploads/2026/05/See-it.-Say-it.-Sort-it.pdf)
 
-3. Joseph Rowntree Foundation (2026),  
-   [*Tackle economic failures at root to ease pressure on Universal Credit*](https://www.jrf.org.uk/).
+Resolution Foundation (2026) [*Mountain Climbing*](https://www.resolutionfoundation.org/app/uploads/2026/01/Mountain-climbing.pdf)
+   
+Resolution Foundation (2026) [*Lost in Transition*](https://www.resolutionfoundation.org/app/uploads/2026/04/Lost-in-transition.pdf)
+   
+IFS (2025) [*How to fix property taxes*](https://ifs.org.uk/articles/how-fix-property-taxes)
+
+IPPR (2026) [*Turning energy support into investment leverage*](https://www.ippr.org/articles/turning-energy-support-into-investment-leverage)
+
+Joseph Rowntree Foundation (2026) [*Tackle economic failures at root to ease pressure on Universal Credit*](https://www.jrf.org.uk/social-security/tackle-economic-failures-at-root-to-ease-pressure-on-universal-credit)
+   
+Centre for Cities (2026) [*Fiscal Devolution for England*](https://www.centreforcities.org/devolution/)
+   
+New Economics Foundation (2026) [*Reclaiming Our Regional Economies*](https://neweconomics.org/campaigns/reclaiming-our-regional-economies)
+   
+Centre for Policy Studies (2026) [*Patently Absurd: Why Britain is No Longer an Innovation Nation*](https://cps.org.uk/wp-content/uploads/2026/04/CPS_PATENTLY_ABSURD-final.pdf)
+   
+Centre for Policy Studies (2026) [*Why Raising Capital Taxes Won't Work*](https://cps.org.uk/wp-content/uploads/2026/07/Why-Raising-Capital-Gains-Tax-Wont-Work.pdf)
+   
+Centre for Policy Studies (2026) [*PA Productivity Toolkit for Britain*](https://cps.org.uk/wp-content/uploads/2026/02/CPS_A5_A_PRODUCTIVITY_TOOLKIT_FOR_BRITAIN.pdf)
+
+UK Government (2026) [*No10 North/revived National Economic Council*](https://www.gov.uk/government/news/no10-north-open-for-business-as-the-governments-new-situation-room-for-making-britain-better)
+
+UK Government (2026 update) [*The Timms Review: Interim*](https://www.gov.uk/government/collections/the-timms-review)
+
+UK Government (2026 update) [*The Milburn Report: Interim*](https://www.gov.uk/government/publications/young-people-and-work-interim-report/young-people-and-work-interim-report)
+
    
 :::
