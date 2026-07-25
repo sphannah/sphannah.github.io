@@ -26,7 +26,7 @@ execute:
 
 # Beyond the Doom Loop
 
-For many years, Britain has been trapped in a self-fulfilling "doom loop." Productivity growth has stagnated. Structural health and disability expenditures have risen sharply. And, despite historically high tax rates, the fiscal backdrop just gets worse. Debt interest burdens have escalated and there are accelerating pressures on the public purse from climate change and worsening geopolitical tensions. The despair feeds higher gilt yields, suppresses private spending and growth, and ultimately shrinks the tax base. Governments then feel forced to shrink into austerity mode, reinforcing the weakness in potential growth and accelerating the downward spiral.
+For many years, Britain has been trapped in a self-fulfilling "doom loop." Productivity growth has stagnated. Structural health and disability expenditures have risen sharply. And, despite historically high tax rates, the fiscal backdrop just gets worse. Debt interest burdens have escalated, and there are accelerating pressures on the public purse from climate change and worsening geopolitical tensions. The despair feeds higher gilt yields, suppresses private spending and growth, and ultimately shrinks the tax base. Governments then feel forced to shrink into austerity mode, reinforcing the weakness in potential growth and accelerating the downward spiral.
 
 We all know that breaking out of this vicious cycle requires more than incremental adjustments; it demands radical, innovative change.
 
@@ -41,7 +41,7 @@ short-term implementation (Years 1–3) as a foundation for a long-run growth re
 
 1.  **S – Switch and substitute revenue sources:** Rebalance the tax burden from income to wealth. This includes cutting employee National Insurance contributions, funded by equalising the tax treatment of unearned investment and capital income with earned income. Land taxes will also play a role in re-incentivising work and thus labour force participation. Focus on immovables, anticipate and address behavioural avoidance.
 2.  **T – Tech focus:** Put AI, robotics, digitalisation, biotech and science at the heart of government, education and worker skillsets. Deploy co-investment (public/private, UK/European) vehicles via a National Wealth Fund and a British Business Bank. Ensure that such vehicles enable the scaling of superstars and are not simply shelters for unproductive zombie companies.Take advantage of homegrown expertise in AI, biotech, quantum computing and financial services to maximise employment opportunities, and above all, significantly raise productivity growth.Promoting innovation clusters and accelerating diffusion of new ideas will be key. 
-3.  **E – Empowering Regions:** Fully activate the revived National Economic Council. Empower mayors as economic actors not simply Town Hall administrators. Joined-up thinking and action across regions, coupled with enhanced democratic legitimacy through devolution, will raise productivity and boost both business and consumer confidence. 
+3.  **E – Empowering Regions:** Fully activate the revived National Economic Council. Empower mayors as economic actors, not simply Town Hall administrators. Joined-up thinking and action across regions, coupled with enhanced democratic legitimacy through devolution, will raise productivity and boost both business and consumer confidence. 
 4.  **P – Purposeful participation:** Engage fully in welfare reform. Replace duplicate, adversarial assessment processes with simplified Health-to-Work gateways. Substitute low-level cash top-ups with direct-access vouchers and immediate occupational therapy.
 
 ## The Self-Financing Virtuous Cycle
@@ -104,7 +104,7 @@ flowchart LR
 
 
 The core attraction of this S.T.E.P. platform lies in its **inbuilt
-self-financing design** together with its capacity to break out the doom-loop and enter a reinforcing virtuous cycle. 
+self-financing design** together with its capacity to break out of the doom loop and enter a reinforcing virtuous cycle. 
 
 Crucially, as confidence returns, a positive feedback loop takes hold.
 Improved sentiment crowds in private spending, labour force
@@ -152,7 +152,7 @@ Growth Path (BGP) equilibrium: $g_K^* = g_A + g_L = 2.65\%$.
 
 The gross Marginal Product of Capital ($\text{MPK}$) and the net private
 real return ($r_{\text{priv}}$) are derived from the aggregate
-capital-output ratio ($K/Y$ \approx 4.8$, with this value based on PWT 11.0 estimates for the UK:
+capital-output ratio $K/Y$ \approx 4.8$, based on PWT 11.0 estimates for the UK:
 
 $$\text{MPK}_t = \alpha \left(\frac{Y_t}{K_t}\right) \approx 0.40 \times \left(\frac{1}{4.8}\right) \approx 8.3\%$$
 
@@ -165,8 +165,7 @@ private returns due to a market risk/convenience wedge ($\pi_{\text{risk},t}$):
 
 $$r_{\text{priv},t} = r_{\text{gov},t} + \pi_{\text{risk},t}$$
 
-Initial conditions for $r_{\text{gov}} = 3.1\%$ use the current current
-10-year nominal gilt yield of \~5.1% less assumed inflation expectations of 2.0%.
+Initial conditions for $r_{\text{gov}} = 3.1\%$ use the current 10-year nominal gilt yield of \~5.1% less assumed inflation expectations of 2.0%.
 
 $r_{\text{gov}}$ falls toward 1.0% as fiscal credibility is established with both domestic and international financial markets.
 
@@ -180,7 +179,7 @@ $$\Delta b_t = (r_{\text{gov},t} - g_t) b_{t-1} + pd_t$$
 
 where $pd_t$ is the primary deficit ratio. 
 The **Sustainability Gap** is defined as $g_t - r_{\text{gov},t}$.
-Currently, Britain is in an unstable regime, signified by a negative gap. But, as the S.T.E.P program takes effect, the gap reverses into positive territory **$g > r_{\text{gov}}$. The economy then generates a positive growth dividend that naturally erodes the debt ratio, allowing structural primary surpluses ($pd < 0$) to accelerate debt reduction.
+Currently, Britain is in an unstable regime, signified by a negative gap. But, as the S.T.E.P program takes effect, the gap reverses into positive territory **$g > r_{\text{gov}}.$ The economy then generates a positive growth dividend that naturally erodes the debt ratio, allowing structural primary surpluses ($pd < 0$) to accelerate debt reduction.
 
 ------------------------------------------------------------------------
 
@@ -188,9 +187,9 @@ Currently, Britain is in an unstable regime, signified by a negative gap. But, a
 
 The following simulation is calibrated using [Office for Budget Responsibility](https://obr.uk/frs/fiscal-risks-and-sustainability-july-2026/) (OBR) baseline figures for 2025/26 and estimates made in [Penn World Tables 11.0](https://www.rug.nl/ggdc/productivity/pwt/?lang=en)  
 
-Initial conditions are as follows: $b_{2026} = 94.0\%$ of GDP, initial primary deficit $= 1.4\%$ of GDP, debt interest payments $= 2.9\%$ of GDP, GDP growth $= 1.5\%$yoy.
+Initial conditions are as follows: $b_{2026} = 94.0\%$ of GDP, initial primary deficit $= 1.4\%$ of GDP, debt interest payments $= 2.9\%$ of GDP, GDP growth  $= 1.5\%$yoy.
 
-As expected, a successful and sustained S.T.E.P. implementation leads the UK toward a desirable long-run steady state - <b>a happy place</b>.
+As expected, a successful and sustained S.T.E.P. implementation leads the UK toward a desirable long-run steady state, <b>a happy place</b>.
 
 ```{r}
 library(tidyverse)
@@ -392,7 +391,7 @@ dynamic_source_note <- sprintf(
    1. **Macro Supply:** Production technology assumes a Cobb-Douglas format with profit share $\\alpha = %.0f\\%%$, capital depreciation $\\delta = %.1f\\%%$, and $K/Y \\approx %.1f$. Gross $\\text{MPK} = \\alpha (Y/K) = %.1f\\%%$<br><br>
    2. **Debt & Inflation:** Inflation expectations anchored at $\\pi = %.1f\\%%$; corresponding nominal 10-year funding rate is $i = r_{\\text{gov}} + \\pi = %.1f\\%%$ in 2027<br><br>
    3. **Sustainability Gap:** Real GDP Growth less Government Real Funding Rate ($g - r_{\\text{gov}}$). Positive indicates dynamic stability ($g > r_{\\text{gov}}$)<br><br>
-   4. **Solow Balanced Growth Path:** Final column represents the model's steady state<br> $g_K^* = g_A + g_L = %.2f\\%%$, yielding $g^* = %.2f\\%%$",
+   4. **Solow Balanced Growth Path:** Final column represents the model's steady state<br> $g_K^* = g_A + g_L = %.1f\\%%$, yielding $g^* = %.1f\\%%$",
 
   alpha * 100,                                        
   delta * 100,                                        
@@ -463,7 +462,7 @@ gt_a4_table
 ```
 
 # Take That
-Britain could limp along towards the next election. But who wants that and the scary political dangers posed for socio-economic wellbeing. There is clearly appetite for radical change and the S.T.E.P framework offers workable ideas. For those worried about whether it all adds up, the macro-finance simulations show that it can - in terms of combining strong growth, better living standards, stable inflation and sustainable public finances. 
+Britain could limp along towards the next election. But who wants that, and the scary political dangers posed for socio-economic wellbeing? There is clearly appetite for radical change and the S.T.E.P framework offers workable ideas. For those worried about whether it all adds up, the macro-finance simulations show that it can - in terms of combining strong growth, better living standards, stable inflation and sustainable public finances. 
 
 Boosting productivity holds the key to exiting the Doom Loop. Easy to say but notoriously harder to do. AI and similarly progressive technologies offer a lifeline. But while tech creation is essential, adoption and diffusion are necessary. In this regard, rebalancing taxes, meaningful devolution, offering purpose and participation for all potential workers jointly unlock the door to the Virtuous Cycle, the happy place that we all crave.   
 
