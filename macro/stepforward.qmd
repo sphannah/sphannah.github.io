@@ -36,13 +36,13 @@ What follows is a humble economist's attempt to identify a structural reform age
 
 ## S.T.E.P. Forward
 
-Enter a hypothetical **S.T.E.P.** platform (*Switch, Tech, Empower,Purpose*) — a package of four targeted structural reforms designed for
-short-term implementation (Years 1–3) as a foundation for a long-run growth revival without fiscal headaches:
+Enter a hypothetical **S.T.E.P.** platform (*Switch, Tech, Empower,Purpose*) - a package of four targeted structural reforms designed for
+short-term implementation (Years 1-3) as a foundation for a long-run growth revival without fiscal headaches:
 
-1.  **S – Switch and substitute revenue sources:** Rebalance the tax burden from income to wealth. This includes cutting employee National Insurance contributions, funded by equalising the tax treatment of unearned investment and capital income with earned income. Land taxes will also play a role in re-incentivising work and thus labour force participation. Focus on immovables, anticipate and address behavioural avoidance.
-2.  **T – Tech focus:** Put AI, robotics, digitalisation, biotech and science at the heart of government, education and worker skillsets. Deploy co-investment (public/private, UK/European) vehicles via a National Wealth Fund and a British Business Bank. Ensure that such vehicles enable the scaling of superstars and are not simply shelters for unproductive zombie companies.Take advantage of homegrown expertise in AI, biotech, quantum computing and financial services to maximise employment opportunities, and above all, significantly raise productivity growth.Promoting innovation clusters and accelerating diffusion of new ideas will be key. 
-3.  **E – Empowering Regions:** Fully activate the revived National Economic Council. Empower mayors as economic actors, not simply Town Hall administrators. Joined-up thinking and action across regions, coupled with enhanced democratic legitimacy through devolution, will raise productivity and boost both business and consumer confidence. 
-4.  **P – Purposeful participation:** Engage fully in welfare reform. Replace duplicate, adversarial assessment processes with simplified Health-to-Work gateways. Substitute low-level cash top-ups with direct-access vouchers and immediate occupational therapy.
+1.  **S = Switch and substitute revenue sources:** Rebalance the tax burden from income to wealth. This includes cutting employee National Insurance contributions, funded by equalising the tax treatment of unearned investment and capital income with earned income. Land taxes will also play a role in re-incentivising work and thus labour force participation. Focus on immovables, anticipate and address behavioural avoidance.
+2.  **T = Tech focus:** Put AI, robotics, digitalisation, biotech and science at the heart of government, education and worker skillsets. Deploy co-investment (public/private, UK/European) vehicles via a National Wealth Fund and a British Business Bank. Ensure that such vehicles enable the scaling of superstars and are not simply shelters for unproductive zombie companies.Take advantage of homegrown expertise in AI, biotech, quantum computing and financial services to maximise employment opportunities, and above all, significantly raise productivity growth.Promoting innovation clusters and accelerating diffusion of new ideas will be key. 
+3.  **E = Empowering Regions:** Fully activate the revived National Economic Council. Empower mayors as economic actors, not simply Town Hall administrators. Joined-up thinking and action across regions, coupled with enhanced democratic legitimacy through devolution, will raise productivity and boost both business and consumer confidence. 
+4.  **P = Purposeful participation:** Engage fully in welfare reform. Replace duplicate, adversarial assessment processes with simplified Health-to-Work gateways. Substitute low-level cash top-ups with direct-access vouchers and immediate occupational therapy.
 
 ## The Self-Financing Virtuous Cycle
 
@@ -388,7 +388,7 @@ macro_transposed <- tibble(
 # ------------------------------------------------------------------------------
 dynamic_source_note <- sprintf(
   "**Notes & Model Specifications:**<br><br>
-   1. **Macro Supply:** Production technology assumes a Cobb-Douglas format with profit share $\\alpha = %.0f\\%%$, capital depreciation $\\delta = %.1f\\%%$, and $K/Y \\approx %.1f$. Gross $\\text{MPK} = \\alpha (Y/K) = %.1f\\%%$<br><br>
+   1. **Macro Supply:** Production technology assumes a Cobb-Douglas format with profit share $\\alpha = %.0f\\%%$, capital depreciation $\\delta = %.1f\\%%$, and $K/Y \\approx %.1f$.<br>Gross $\\text{MPK} = \\alpha (Y/K) = %.1f\\%%$<br><br>
    2. **Debt & Inflation:** Inflation expectations anchored at $\\pi = %.1f\\%%$; corresponding nominal 10-year funding rate is $i = r_{\\text{gov}} + \\pi = %.1f\\%%$ in 2027<br><br>
    3. **Sustainability Gap:** Real GDP Growth less Government Real Funding Rate ($g - r_{\\text{gov}}$). Positive indicates dynamic stability ($g > r_{\\text{gov}}$)<br><br>
    4. **Solow Balanced Growth Path:** Final column represents the model's steady state<br> $g_K^* = g_A + g_L = %.1f\\%%$, yielding $g^* = %.1f\\%%$",
@@ -464,7 +464,7 @@ gt_a4_table
 # Take That
 Britain could limp along towards the next election. But who wants that, and the scary political dangers posed for socio-economic wellbeing? There is clearly appetite for radical change and the S.T.E.P framework offers workable ideas. For those worried about whether it all adds up, the macro-finance simulations show that it can - in terms of combining strong growth, better living standards, stable inflation and sustainable public finances. 
 
-Boosting productivity holds the key to exiting the Doom Loop. Easy to say but notoriously harder to do. AI and similarly progressive technologies offer a lifeline. But while tech creation is essential, adoption and diffusion are necessary. In this regard, rebalancing taxes, meaningful devolution, offering purpose and participation for all potential workers jointly unlock the door to the Virtuous Cycle, the happy place that we all crave.   
+Boosting productivity holds the key to exiting the Doom Loop. Easy to say but notoriously harder to do. AI and similarly progressive technologies offer a lifeline. But while tech creation is essential, adoption and diffusion are necessary. In this regard, rebalancing taxes, meaningful devolution, offering purpose and participation for all potential workers jointly unlock the door to the Virtuous Cycle, leading to the happy place that we all crave.   
 
 ::: {.bibliography}
 
