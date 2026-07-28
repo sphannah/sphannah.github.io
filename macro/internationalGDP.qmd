@@ -2,14 +2,17 @@
 title: "Notes on Comparing GDP"
 format:
   html:
+    fig-width: 10
     toc: false
     number-sections: false
     code-fold: true
-    code-tools: true
-    embed-resources: true 
-    css: style.css
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    embed-resources: true
+    css: ../style.css
     theme: ""
-    include-in-header: quarto_folding.html
 execute:
   echo: false
   warning: false
@@ -65,7 +68,7 @@ ggplot(data,aes(x=date,y=value,group=country))+
   theme(plot.title=element_text(size=28,hjust=0.5,colour="#002060"),
         plot.subtitle=element_text(size=20,hjust=0.5,face="italic",colour="#002060"),
         plot.caption=element_text(size=16,hjust=0.5,face="italic",colour="#002060"),
-        axis.title=element_text(size="16",colour="#002060",vjust=2),
+        axis.title=element_text(size=16,colour="#002060",vjust=2),
         axis.title.y =element_text(margin=unit(c(0,6,0,0), "mm")),
         axis.text=element_text(color="#002060",size=16),
         legend.text=element_text(color="#002060",size=18),
@@ -159,7 +162,7 @@ ggplot(China_fx, aes(x = period, y = rate)) +
   theme(plot.title=element_text(size=24,hjust=0.5,colour="#002060"),
         plot.subtitle=element_text(size=20,hjust=0.5,face="italic",colour="#002060"),
         plot.caption=element_text(size=18,hjust=0.5,face="italic",colour="#002060"),
-        axis.title=element_text(size="18",colour="#002060",vjust=2),
+        axis.title=element_text(size=18,colour="#002060",vjust=2),
         axis.title.y =element_text(margin=unit(c(0,6,0,0), "mm")),
         axis.text=element_text(color="#002060",size=16),
         legend.position = "none",
@@ -296,7 +299,7 @@ ggplot(df, aes(x = Series, y = Value_per_person, fill = Series)) +
   theme(plot.title=element_text(size=24,hjust=0.5,colour="#002060"),
         plot.subtitle=element_text(size=18,hjust=0.5,face="italic",colour="#002060"),
         plot.caption=element_text(size=14,hjust=0.5,face="italic",colour="#002060"),
-        axis.title=element_text(size="18",colour="#002060",vjust=2),
+        axis.title=element_text(size=18,colour="#002060",vjust=2),
         axis.title.y =element_text(margin=unit(c(0,6,0,0), "mm")),
         axis.text=element_text(color="#002060",size=16),
         legend.position = "none",

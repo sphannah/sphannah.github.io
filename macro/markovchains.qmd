@@ -2,14 +2,17 @@
 title: "Understanding Business Cycles<br>with Markov Chains"
 format:
   html:
+    fig-width: 10
     toc: false
     number-sections: false
     code-fold: true
-    code-tools: true
-    embed-resources: true 
-    css: /style.css
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    embed-resources: true
+    css: ../style.css
     theme: ""
-    include-in-header: quarto_folding.html
 execute:
   echo: false
   warning: false
@@ -26,7 +29,7 @@ One way to model business cycles is to use a **Markov chain**, where the economy
 
 # How do Markov models work?
 
-The key assumption of a simple Markov model is that to predict the economy's state in the next quarter, all you need to know is its current state. The entire history of how the economy arrived at its current state doesn't matter. For example, if the economy is currently in a "Normal" state, the model uses a set of probabilities to determine if it will stay "Normal," transition to a "Strong" phase, or slip into a "Weak" phase in the next quarter. It doesn't care whether the economy was booming or in a slump two years ago—only its state today matters for tomorrow's forecast.
+The key assumption of a simple Markov model is that to predict the economy's state in the next quarter, all you need to know is its current state. The entire history of how the economy arrived at its current state doesn't matter. For example, if the economy is currently in a "Normal" state, the model uses a set of probabilities to determine if it will stay "Normal," transition to a "Strong" phase, or slip into a "Weak" phase in the next quarter. It doesn't care whether the economy was booming or in a slump two years ago - only its state today matters for tomorrow's forecast.
 
 This simple "memoryless" property makes these models easy to work with, allowing us to quantify the likelihood of staying in a boom, entering a recession, or recovering to a stable trend.
 
@@ -148,11 +151,11 @@ p1 <- ggplot(sim_data, aes(x = Time, y = GDP_Growth, color = State)) +
     x = "Time Period (Calendar Quarters)",
     y = "GDP Growth Rate (%)"
   ) +
-  theme(plot.title=element_text(size="24",hjust=0.5,colour="#002060"),
-        plot.subtitle=element_text(size="20",hjust=0.5,face="italic",colour="#002060"),
-        axis.title.y=element_text(size="18",colour="#002060",vjust=2,
+  theme(plot.title=element_text(size=24,hjust=0.5,colour="#002060"),
+        plot.subtitle=element_text(size=20,hjust=0.5,face="italic",colour="#002060"),
+        axis.title.y=element_text(size=18,colour="#002060",vjust=2,
                                   margin=margin(t=0,r=10,b=0,l=0)),
-        axis.title.x=element_text(size="18",colour="#002060",vjust=2,
+        axis.title.x=element_text(size=18,colour="#002060",vjust=2,
                                   margin=margin(t=10,r=0,b=0,l=0)),
         axis.text=element_text(color="#002060",size=16),
         axis.ticks=element_blank(),

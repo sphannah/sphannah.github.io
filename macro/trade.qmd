@@ -2,12 +2,16 @@
 title: "Tricks of the Trade"
 format:
   html:
+    fig-width: 10
     toc: false
     number-sections: false
     code-fold: true
-    code-tools: true
-    embed-resources: true 
-    css: /style.css
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    embed-resources: true
+    css: ../style.css
     theme: ""
 execute:
   warning: false
@@ -26,11 +30,11 @@ Initially, global uncertainty spiked. For markets, this threatened to choke inve
 
 But, as is often the case after a major shock, first impressions had to be revised.
 
--   **Was the US entirely wrong?** Maybe not. There is some truth in the criticism that allies have leaned too heavily on US defence spending. Challenging the status quo and shaking things up is not necessarily a bad thing. It’s not even a new idea—think creative destruction. For years, advanced economies have been stuck in a productivity slump. So there’s something appealing about the idea of doing something rather than just talking about it. Of course, we can argue about the means—tariffs, green energy rollbacks, mass deportations, crypto mania, DOGE chaos. Questionable actions for sure. But at least they inject some urgency into otherwise barren conversations.
+-   **Was the US entirely wrong?** Maybe not. There is some truth in the criticism that allies have leaned too heavily on US defence spending. Challenging the status quo and shaking things up is not necessarily a bad thing. It’s not even a new idea - think creative destruction. For years, advanced economies have been stuck in a productivity slump. So there’s something appealing about the idea of doing something rather than just talking about it. Of course, we can argue about the means: tariffs, green energy rollbacks, mass deportations, crypto mania, DOGE chaos. Questionable actions for sure. But at least they inject some urgency into otherwise barren conversations.
 
--   **Is he serious?** Many of the most dramatic proposals were never likely to happen. The acronym TACO—Trump Always Chickens Out—caught on. There’s been a lot of flip-flopping and empty threats. Does the President have the required legal powers? White House bark often seems worse than its bite. Markets calmed down, and recession fears have eased. \[Insert charts here\]
+-   **Is he serious?** Many of the most dramatic proposals were never likely to happen. The acronym TACO - Trump Always Chickens Out - caught on. There’s been a lot of flip-flopping and empty threats. Does the President have the required legal powers? White House bark often seems worse than its bite. Markets calmed down, and recession fears have eased.
 
--   **Talking tough works**. The idea is to trigger change without always needing the State to intervene. The message was clear: if you want to stay in the game, adapt. Companies — and countries — got the memo. Building more resilient and flexible supply chains is underway. Production practices are evolving. The world will face plenty of shocks in the coming decades. History may show that Trump was the least of our worries.
+-   **Talking tough works**. The idea is to trigger change without always needing the State to intervene. The message was clear: if you want to stay in the game, adapt. Companies and countries got the memo. Building more resilient and flexible supply chains is underway. Production practices are evolving. The world will face plenty of shocks in the coming decades. History may show that Trump was the least of our worries.
 
 # Blame Shifting
 
@@ -62,11 +66,11 @@ $$
 \end{align*}
 $$
 
-There is a common view that the US has been pushed into a disadvantaged position. Foreigners take advantage of open capital markets to scoop up US assets—bonds, equities, prime real estate. That drives up prices and makes them unaffordable for ordinary Americans. Maybe that’s one reason US saving is so low.
+There is a common view that the US has been pushed into a disadvantaged position. Foreigners take advantage of open capital markets to scoop up US assets: bonds, equities, prime real estate. That drives up prices and makes them unaffordable for ordinary Americans. Maybe that’s one reason US saving is so low.
 
 At the same time, the budget deficit remains high. One factor is defence spending. The US shoulders much of the burden for NATO while some European members lag behind. And because the US dollar is the global reserve currency, America effectively supplies dollars to the rest of the world through trade deficits.
 
-The idea that foreigners are pushing the US into a trade deficit, via capital flows, is often tied to the **“global savings glut”** thesis—famously used to explain the 2008 financial crisis. But a more credible thesis, certainly as applied to the GFC, is the **“banking glut”** view. Foreign-owned banks were highly active in US financial markets, flooding the system with credit. But the US was not a helpless victim. The flows were “pulled in” by domestic factors—an overblown housing boom, lax oversight, and a wave of financial innovation (a gearing up of securitisation and associated derivatives).
+The idea that foreigners are pushing the US into a trade deficit, via capital flows, is often tied to the **“global savings glut”** thesis - famously used to explain the 2008 financial crisis. But a more credible thesis, certainly as applied to the GFC, is the **“banking glut”** view. Foreign-owned banks were highly active in US financial markets, flooding the system with credit. But the US was not a helpless victim. The flows were “pulled in” by domestic factors, notably by an overblown housing boom, lax oversight, and a wave of financial innovation (a gearing up of securitisation and associated derivatives).
 
 As the National Income Accounting framework shows, **current imbalances reflect pull rather than push factors**; that is, domestic decisions revolving around consumer spending habits, investment financing and fiscal policy. The strength of corporate investment, by itself, is not the problem. But financing it would be better served through more household saving, less generous tax breaks and fewer stock buybacks and dividends.
 
@@ -114,7 +118,7 @@ ggplot(us_iip_ratio)+
   labs(title="US Net International Investment",
        y="% of GDP",
        x="")+
-  theme(plot.title=element_text(size="28",hjust=0.5,colour="#002060"),
+  theme(plot.title=element_text(size=28,hjust=0.5,colour="#002060"),
         axis.text=element_text(color="#002060",size=18),
         axis.title.y=element_text(color="#002060",size=18,margin=unit(c(0,6,0,0), "mm")),
         axis.ticks=element_blank(),
@@ -123,7 +127,7 @@ ggplot(us_iip_ratio)+
         panel.grid.major=element_blank(),
         panel.grid.minor=element_blank())+
   scale_y_continuous(limits = c(-100,0),breaks=seq(-100,0,by=20))+
-  scale_x_date(limits = c(as.Date("2006-01-01"),as.Date("2026-01-01")),breaks=pretty_breaks(8))
+  scale_x_date(limits = c(as.Date("2006-01-01"),as.Date("2030-01-01")),breaks=pretty_breaks(8))
 ```
 
 This is not entirely bad. Some of the rise simply reflects the success of US stocks and stable interest rates. It is not something to blame on foreigners. But it still grates with many politicians that the gains often go to “offending” overseas holders of US assets.
@@ -142,7 +146,7 @@ Back in 2019, the San Francisco Fed published an interesting article: “[How mu
 
 Many products labelled “Made in the USA” rely heavily on imported parts – about 45% in some industries, like the Jeep Patriot’s supply chain. On the flip side, goods made abroad often contain significant US inputs. Take a Nike shoe. It’s designed by an American company and generates valuable US service exports in the form of intellectual property royalties and tech knowhow. And once it’s imported, the shoe adds local US value through marketing, storage, transport, and retail. Overall, over 40% of US goods imports end up containing local US value added.
 
-The mantra – *“bring manufacturing home”* —is simple. But the reality is messier. It is not easy, quick, or cheap. And tariffs risk damaging the very domestic sectors they aim to help.
+The mantra *“bring manufacturing home”* is simple. But the reality is messier. It is not easy, quick, or cheap. And tariffs risk damaging the very domestic sectors they aim to help.
 
 The key takeaway is that a product is not just a physical object. It combines a bundle of services and ideas. Think of eating out. You are not just paying for raw food. You pay for the chef’s skills, the recipe, kitchen staff, ambience, location, and the impressive wine list. Once you factor in foreign and local contributions at each stage, untangling it all becomes almost impossible.
 

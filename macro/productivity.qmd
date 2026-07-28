@@ -2,12 +2,16 @@
 title: "Power to Productivity"
 format:
   html:
+    fig-width: 10
     toc: false
     number-sections: false
     code-fold: true
-    code-tools: true
-    embed-resources: true 
-    css: /style.css
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    embed-resources: true
+    css: ../style.css
     theme: ""
 execute:
   warning: false
@@ -191,8 +195,8 @@ ggplot(tempdf,aes(x=date))+
        legend.position.inside=c(0.3,0.8),
        legend.key=element_blank(),
        legend.background = element_rect(fill="transparent"),
-       axis.title.y.left=element_text(size="14",colour="#002060",vjust=2),
-       axis.title.y.right=element_text(size="14",colour="#002060",vjust=2),
+       axis.title.y.left=element_text(size=14,colour="#002060",vjust=2),
+       axis.title.y.right=element_text(size=14,colour="#002060",vjust=2),
        axis.text=element_text(color="dark blue",size=16),
        axis.ticks=element_blank(),
        panel.background = element_rect(fill='transparent'), #transparent panel bg

@@ -2,14 +2,17 @@
 title: "Does Manufacturing Matter?"
 format:
   html:
+    fig-width: 10
     toc: false
     number-sections: false
     code-fold: true
-    code-tools: true
-    embed-resources: true 
-    css: style.css
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    embed-resources: true
+    css: ../style.css
     theme: ""
-    include-in-header: quarto_folding.html
 execute:
   echo: false
   warning: false
@@ -20,7 +23,7 @@ execute:
 
 # Supply Chain Stress
 
-In a world that seems ever more fragmented and divided, the political importance of domestic manufacturing has risen sharply. Politicians across advanced economies now emphasise the security of supply chains, talk of “bringing jobs back home,” and stress the national pride associated with making physical goods within their borders. Whether it is the United States under its CHIPS and IRA Acts, or the United Kingdom with its renewed industrial strategies, manufacturing has become a focal point of economic policy. This shift reflects both geopolitical tensions and public anxieties around dependence on foreign production.
+In a world that seems ever more fragmented and divided, the political importance of domestic manufacturing has risen sharply. Politicians across advanced economies now emphasise the security of supply chains, talk of “bringing jobs back home”, and stress the national pride associated with making physical goods within their borders. Whether it is the United States under its CHIPS and IRA Acts, or the United Kingdom with its renewed industrial strategies, manufacturing has become a focal point of economic policy. This shift reflects both geopolitical tensions and public anxieties around dependence on foreign production.
 
 Yet there is an apparent contradiction at the heart of this new manufacturing enthusiasm. Manufacturing today represents just a small part of economic activity in advanced economies. In the United States, manufacturing accounts for around 11% of Gross Value Added (GVA); in the UK it is even lower at 8%. The vast bulk of output and consumption comprises services. For example, UK household consumption of services is roughly three times as large as household spending on goods. This raises the question: are politicians misguided in their new-found love of making physical stuff?
 
@@ -93,12 +96,12 @@ print(decomposition, row.names = FALSE)
 
 # Takeaways
 
-The big idea that emerges is this: manufacturing turns out to be much more important than first impressions suggest. Its direct share of GDP may be small, but its indirect effects – through supply chains – and its induced effects – through household spending of wages – generate a much larger economic footprint. In our stylised example, a 1% rise in manufacturing demand leads to a total increase in output that is more than three times the initial shock. In other words, manufacturing’s contribution extends far beyond the factory gate.
+The big idea that emerges is this: manufacturing turns out to be much more important than first impressions suggest. Its direct share of GDP may be small, but its indirect effects through supply chains, and its induced effects through household spending of wages, generate a much larger economic footprint. In our stylised example, a 1% rise in manufacturing demand leads to a total increase in output that is more than three times the initial shock. In other words, manufacturing’s contribution extends far beyond the factory gate.
 
 Of course, this simplicity comes with qualifications. The model makes restrictive assumptions: fixed coefficients, no capacity constraints, and a static snapshot without dynamics or prices. Yet its power lies in clarity. It illustrates multiplier effects that are crucial for understanding economic interdependencies. An <a href="https://www.oxfordeconomics.com/resource/the-true-impact-of-uk-manufacturing/"> Oxford Economics study</a> (April 2024) commissioned by the Manufacturing Technologies Association used UK input-output tables to estimate a Type II multiplier of 2.8, confirming that manufacturing’s GDP impact is almost three times its direct share.
 
 In fact, as the study argues, manufacturing has an even broader role to play in 21st century economies. The sector acts as a crucial engine for <a href="https://medium.com/ifm-insights/changing-how-we-talk-and-think-about-manufacturing-ad8d4c58c8ff"> innovation and productivity growth</a>. It is the primary sphere where cutting-edge research and development are translated into tangible products and processes, often with spillover benefits across the entire economy. This innovation is not confined to the manufacturing sector itself; it provides the physical infrastructure and advanced goods that enable service sectors to thrive and evolve, from advanced medical devices, to green energy solutions and to high-performance computing hardware that is fuelling the AI revolution.
 
-The "cloud" is not an ethereal concept but relies on vast data centres, sophisticated cooling systems, and enormous energy infrastructure — all of which require complex manufacturing processes to design, build, and maintain. Without a robust and innovative manufacturing base, advanced economies would struggle to meet their climate goals, harness the full potential of emerging technologies, or ensure a reliable supply of essential products.
+The "cloud" is not an ethereal concept but relies on vast data centres, sophisticated cooling systems, and enormous energy infrastructure. All of these require complex manufacturing processes to design, build, and maintain. Without a robust and innovative manufacturing base, advanced economies would struggle to meet their climate goals, harness the full potential of emerging technologies, or ensure a reliable supply of essential products.
 
-The latest <a href="https://www.pmi.spglobal.com/Public/Release/PressReleases"> S&P Global PMI surveys </a>offer a glimpse into current realities. The June 2025 survey for US manufacturing looked quite encouraging, showing an expansion in production and new orders, even if concerns about input cost inflation remain – but that’s another story for another post.
+The latest <a href="https://www.pmi.spglobal.com/Public/Release/PressReleases"> S&P Global PMI surveys </a>offer a glimpse into current realities. The July 2026 survey for US manuafacturing was disappointing compared with services. Price pressures also intensified, with input cost inflation reaching a 14-month high and selling price inflation close to a four-year peak. But that’s another story for another post.
