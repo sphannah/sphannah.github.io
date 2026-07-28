@@ -1,0 +1,46 @@
+---
+title: "Why R?"
+format:
+  html:
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true 
+    css: /style.css
+    theme: ""
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+<p><a href="../index.html" class="backlink">← Back to Home</a></p>
+
+## R..eady For Action?
+
+Using R is typically not a requirement for elementary macro but has advantages. It's a step up from spreadsheets (think digital rather than analogue), it comes in handy for data transformations, pretty graphics, running simulations and making forecasts. Moreover, evidence of coding experience can add value to a resume.\
+\
+To use R and RStudio without downloading anything, there is [Posit Cloud](https://posit.cloud/), formerly known as RStudio Cloud. This service allows users to run R and RStudio directly in a web browser, eliminating the need for local installation. \
+\
+**Here's how it works:**
+
+**1. Sign up:** Visit the Posit Cloud website and create a free account.
+
+**2. Access RStudio:** Once logged in, users have access to the RStudio environment within their browser.
+
+**3. Start coding:** R code can be written and executed directly in the RStudio interface, just like on a local PC or laptop.
+
+**4. No downloads:** The advantage is that there is no need to download or install any software, making it convenient for beginners or when using a shared computer.
+
+Posit Cloud offers a free plan with basic computing resources, which is suitable for learning and smaller projects.
+
+Check out the YouTube video below.\
+R = Research\
+R = Repeatable\
+R = Reproducible\
+R = Rewarding
+
+{{< video https://www.youtube.com/embed/9kYUGMg_14s?si=BzpYVESd7xOUMyit>}}
+
+Needless to say, R is not the only programming language in town - there are many, many alternatives. Of these, [Python](https://www.python.org/) is a popular choice (and is supported in Posit Cloud) with a wide range of applications, including web development and machine learning. However, in my humble opinion, when it comes to statistical computing and data visualisation, R has the edge.

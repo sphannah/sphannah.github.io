@@ -1,0 +1,89 @@
+---
+title: "Games Markets Play"
+format:
+  html:
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true 
+    css: /style.css
+    theme: ""
+execute:
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+**Market Paradigms**
+
+For much of the late 20th century, financial theory was dominated by the Efficient Markets Hypothesis (EMH) - the idea that security prices fully reflect all available information. In this world, arbitrage ensures that any mispricings are rapidly eliminated, and price changes only occur in response to fresh news. The assumptions behind EMH are deceptively elegant: market participants obey the rules, information is symmetrically distributed, expectations are rational, and forecast errors are random - not systematic. In such a setting, prices represent true economic value, and markets are largely self-correcting. During the 1980s and 1990s, this framework fit neatly with the zeitgeist of deregulation, financial innovation, and the rise of securitisation and derivatives.
+
+But the Global Financial Crisis (GFC) of 2008 shattered that illusion. In its aftermath, former Fed Chair Janet Yellen remarked that the chaos unfolding was *“a classic case of the kind of systemic breakdown that \[Hyman\] Minsky envisioned.”* Unlike EMH, Minsky’s Financial Instability Hypothesis recognised that markets are inherently prone to booms and busts - not in spite of stability, but because of it. When calm prevails, risk-taking grows unchecked. Stability breeds complacency. Borrowers and lenders alike become overconfident, leveraging themselves on the assumption that tomorrow will resemble today. This sets the stage for the eventual "Minsky Moment"; the abrupt shift from euphoria to panic, from expansion to collapse.
+
+Minsky’s world is rich with system dynamics - a web of interacting feedback loops. Positive feedbacks amplify trends: rising asset prices encourage more borrowing and investment, which further fuels asset prices. But these same mechanisms can reverse: when asset values fall, collateral evaporates, credit tightens, and defaults spiral. Importantly, “positive” does not always mean “good” - these amplifying loops can drive systems into catastrophe. Likewise, “negative” feedbacks, mechanisms that dampen fluctuations, are not always benign if they arrive too late or in unexpected ways. Think of it like [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life): a simple set of rules can produce highly complex behaviours, with growth, stagnation, or collapse depending on crowding, neighbour effects, and emergent patterns.
+
+In Minsky’s schema, stocks and flows interact with devastating effect. Borrowers accumulate debt (stocks), while their ability to service it depends on future income streams (flows). If asset prices fall or incomes stall, balance sheets become fragile. Financial firms can become dysfunctional, triggering a credit crunch. As lending dries up, investment falls, and recession ensues. Unlike EMH, which assumes smooth adjustment, Minsky sees turbulence: feedback-driven crises, asymmetric information, credit frictions, and institutional fragility. The market is not a pristine mechanism of price discovery - it’s a messy, evolving organism where distress in one corner can infect the whole.
+
+These systemic dynamics help explain why financial systems behave more like nuclear reactors than thermostats - prone to tipping points, nonlinear reactions, and sometimes explosive failures. EMH assumes order, rationality, and transparency; the Minsky view recognises fragility, herd behaviour, and the danger of complexity in tightly coupled systems.
+
+Central banks are all too aware that financial cycles interact with business cycles, and not necessarily in a good way. The evidence shows that financial cycles, such as in debt ratios, property and stock prices often have longer duration than their GDP counterparts (see [Secular stagnation or financial cycle drag?](https://www.bis.org/speeches/sp170307.pdf) CBIS speech, March 2017). They show greater amplitude and can generate substantial scarring effects for long periods after the event.
+
+The challenge for economists and policymakers is to move beyond idealised models and embrace frameworks that account for the grit, frictions, and feedbacks of real-world finance. As history has shown, the cost of clinging to comforting myths can be ruinously high.
+
+**The Race to the Bottom**
+
+The “Race to the Bottom” game is a well-known example in game theory that captures the dynamics of iterative reasoning and strategic expectations. Each participant is asked to pick a number between 0 and 100, and the winner is the one whose choice is closest to two-thirds of the average number chosen. If all players are perfectly rational and believe others to be perfectly rational too, the unique equilibrium is zero. Any higher choice can be undercut by anticipating one step further into others’ reasoning. However, when not all players are fully rational - or when they are uncertain about others' rationality - higher numbers become strategically sensible.
+
+Take a simplified case with two rational players (R) and one irrational player (I), who is assumed to pick 50. The rational players aim to guess 2/3 of the mean. Let R be the number each rational player chooses. Then the average is (R + R + 50)/3, and the target is 2/3 of that. So each rational player solves:
+
+$$
+R = \frac{2}{3} \cdot \frac{(2R + 50)}{3} \Rightarrow 9R = 2(2R + 50) \Rightarrow 9R = 4R + 100 \Rightarrow R = \frac{100}{5} = 20.
+$$
+
+But what happens when irrational players dominate? If there are 4 irrational players (each choosing 50) and only 1 rational player, then the rational player solves:
+
+$$
+R = \frac{2}{3} \cdot \frac{(R + 4 \cdot 50)}{5} = \frac{2}{3} \cdot \frac{R + 200}{5}
+$$ which yields $$
+15R = 2(R + 200) \Rightarrow 15R = 2R + 400 \Rightarrow 13R = 400 \Rightarrow R \approx 30.77.
+$$
+
+So, as the proportion of irrational players increases, the optimal rational response rises.
+
+This insight resonates with financial markets, where not all participants behave rationally or process information efficiently. Even if a subset of market participants applies rigorous valuation models, they must account for the pricing behaviour of the broader crowd, which may be driven by sentiment, heuristics, or momentum. Consequently, prices can remain above what seems justified by fundamentals, as rational investors adjust their expectations in light of the prevailing "irrational" average.
+
+In [The General Theory of Employment, Interest and Money (1936)](https://www.amazon.co.uk/General-Theory-Employment-Interest-Money/dp/1494854740#) John Maynard Keynes uses the metaphor of a newspaper beauty contest to explain how financial markets often function, not by assessing underlying value, but by anticipating the average opinion of others:
+
+*“It is not a case of choosing those \[faces\] which, to the best of one’s judgment, are really the prettiest, nor even those which average opinion genuinely thinks the prettiest. We have reached the third degree where we devote our intelligences to anticipating what average opinion expects the average opinion to be. And there are some, I believe, who practise the fourth, fifth and higher degrees.”*
+
+This analogy was based on a then-popular competition in British newspapers where readers were asked to pick the six prettiest faces out of a set of photographs. Prizes were awarded not for personal taste, but for matching the most commonly chosen faces among all entrants. Keynes uses this to highlight the recursive, self-referential nature of market expectations - where investors try to guess what other investors will think others will think, and so on.
+
+It illustrates how financial markets can become dominated by expectations of expectations, rather than fundamental valuations, a core insight that continues to underpin modern behavioural finance and macro-financial modelling.
+
+Another observation, often attributed to Keynes, is that *"The market can stay irrational longer than you can stay solvent."* Its essence captures the strategic dilemma highlighted by the Race to the Bottom game: knowing the "correct" answer is not enough if others persist in behaving otherwise.
+
+**Financial Institutions as Nuclear Reactors?**
+
+Charles Perrow, an American sociologist, was the author of [Normal Accidents: Living With High Risk Technologies](https://www.amazon.co.uk/Normal-Accidents-Technologies-Princeton-Paperbacks/dp/0691004129) which analyses the social side of technological risk. He argued that catastrophic accidents can be expected in tightly coupled and complex systems, involving failures in multiple and unforeseen ways that are virtually impossible to predict. At Chernobyl, for example, tests of a new safety system helped produce the meltdown and subsequent fire.
+
+Financial institutions, like nuclear power plants, operate within systems that are both highly complex and tightly coupled. Complexity arises from the multitude of instruments, actors, and interdependent markets in modern finance, while tight coupling refers to the speed and strength of connections between these elements: a shock in one corner of the system can rapidly cascade through counterparties, funding markets, and balance sheets before corrective action can be taken. Just as a small valve failure in a nuclear reactor might trigger an uncontrolled chain of events, so too can a mispriced tranche of mortgage debt ignite a global credit crunch.
+
+The Global Financial Crisis (GFC) of 2007–08 offered insights into Perrow’s thesis. Perrow himself noted ([The meltdown was not an accident](https://www.researchgate.net/publication/235294272_The_meltdown_was_not_an_accident), Jul 2010) that the structural characteristics of finance are certainly complex and connected but that the cause of the GFC was not the system itself but the behaviour by key agents, who were aware of the great risks they were exposing to their firms, clients, and society.
+
+For sure, seemingly unrelated parts of the financial system - subprime loans, derivatives markets, investment banks, and insurance companies - turned out to be dangerously interconnected. The failure of Lehman Brothers was not just a isolated bankruptcy but a systemic tremor that rippled across balance sheets worldwide. The whole episode illustrated why financial regulation must consider not only individual institutional soundness (microprudential regulation) but also the architecture and coupling of the system as a whole (macroprudential regulation). Avoiding crises is impossible, so the public challenge is not to eliminate defaults, but to redesign systems so that failure, when inevitably it happens, does not morph into a socio-economic catastrophe.
+
+**Bank Runs and Games of Chickens**
+
+The possibility of a bank run can be modelled as a simple game of “chicken,” where two rational depositors face the decision of whether to withdraw their funds from a distressed bank.
+
+![](images/Slide8.PNG){fig-align="center"}
+
+In the above example, both depositors have \$100 million at stake. If neither withdraws, they each receive their full deposit plus interest, \$105 million. But if both withdraw in panic, the bank collapses and they only recover \$25 million each. Worse still, if one withdraws while the other stays, the withdrawing party recovers \$50 million, while the other loses everything. This stark asymmetry of outcomes produces a classic chicken game with two Nash equilibria: either both stay, or both withdraw. Game theory, however, cannot predict which equilibrium will be chosen. Rational actions, each player trying to avoid being the loser, can easily result in mutual withdrawal and collective loss.
+
+This fragility of the banking system highlights the potential for bad equilibria, where rational self-interest leads to socially disastrous outcomes. It explains why governments often intervene to change the “rules of the game”, for instance through deposit insurance schemes that guarantee a minimum level of recovery. By offering a credible pre-commitment that removes the incentive to be the first to flee, such safety nets aim to eliminate the run equilibrium and nudge the system toward the collectively optimal outcome. However, this safety net comes at a cost. If depositors feel no need to scrutinise bank risk, and if banks anticipate bailouts in times of trouble, both parties may act less prudently - giving rise to the dreaded [moral hazard](https://www.moneyandbanking.com/primers/2017/9/24/moral-hazard-a-primer?rq=Moral%20Hazard). Banks might pursue riskier lending strategies, and depositors may chase marginally higher returns without regard for underlying stability.
+
+The costs of financial crises are not theoretical. According to the Minneapolis Fed’s 2018 [Minneapolis Plan](https://www.minneapolisfed.org/policy/endingtbtf), the average cost of a major banking crisis since World War II has been estimated at around 158% of pre-crisis GDP, factoring in the longer-term drag on output. The public cost of preventing these crises, via bailouts or guarantees, may therefore be justified. But paradoxically, those very guarantees may contribute to future instability by distorting incentives. In theory, if all agents were rational and forward-looking, the mere possibility of crisis should encourage greater caution. In practice, the expectation of rescue dulls that caution. The challenge, then, is to design credible institutions that can navigate safely between [a rock and a hard place](https://www.greeklegendsandmyths.com/scylla-and-charybdis.html).
+
+For additional philosophical insights on finance take a look at [The Metaphysical Menagerie That Stalks Trump's Tariffs](https://www.bloomberg.com/opinion/articles/2025-07-11/metaphysical-menagerie-that-stalks-trump-s-tariffs?) John Authers, Bloomberg, 11 Jul 2025.

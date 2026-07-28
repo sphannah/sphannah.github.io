@@ -1,0 +1,90 @@
+---
+title: "Money 101"
+format:
+  html:
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true 
+    css: /style.css
+    theme: ""
+execute:
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+------------------------------------------------------------------------
+
+## Money Layers
+
+Although we use it every day, money can get surprisingly complicated once we dive deeper. What qualifies as money? Can we trust it? How does placing a smartphone onto a retail card machine actually work? It's not just the technology that gets complex. For example, take a £5 note - what does it mean when the Bank of England's Chief Cashier promises to pay the bearer on demand the sum of five pounds?
+
+As a starting point, to help fix ideas, it might be useful to take a three-layer framework.The diagram below illustrates a *Modern Money Hierarchy*, inspired by Stephanie Bell's [The Hierarchy of Money](https://www.levyinstitute.org/pubs/wp/231.pdf), Perry Mehrling's [The Inherent Hierarchy of Money](https://sites.bu.edu/perry/files/2019/04/Mehrling_P_FESeminar_Sp12-02.pdf) and extended using the [BIS's 2025 framework for a stable monetary system](https://www.bis.org/publ/arpdf/ar2025e.pdf). It integrates three key ideas:
+
+-   The **functions of money** (unit of account, means of payment, store of value)\
+    In other words, what money does for society and why money, in its various guises, is useful
+-   The **forms of money** (cash, deposits, stablecoins)\
+    In other words, how money manifests itself in everyday life, the real-world technologies involved that enable money to fulfil its key functions
+-   The **foundations of trust** (singleness, finality, safety)\
+    In other words, the conditions required for money to work effectively in a modern financial system, why some types of money are more attractive than others, and why State institutions (such as central banks) pay special attention to the structure of payments in society. *Singleness* refers to the concept of par; all forms of money should be exchangeable 1:1 whether it is cash, standard deposits or tokens). *Finality* (sometimes referred to as *elasticity*) means that settlements are timely, irrevocable and legally binding. *Safety* means that the monetary instrument is backed by sound legal, financial, and operational infrastructure.
+
+```{r setup, echo: false}
+#| label: setup
+#| message: false
+#| warning: false
+#| fig-width: 10
+#| fig-height: 6
+
+# Global options for all chunks (can be overridden per chunk)
+knitr::opts_chunk$set(
+  echo = TRUE, # Default to showing code
+  warning = FALSE,
+  message = FALSE
+)
+
+library(ggplot2)
+library(ggtext)
+
+
+# Data for hierarchy levels
+pyramid_data <- data.frame(
+  tier = factor(c("Central Bank Money", "Commercial Bank Money", "Private Tokens / Stablecoins"),
+                levels = rev(c("Central Bank Money", "Commercial Bank Money", "Private Tokens / Stablecoins"))),
+  xmin = c(2, 1.5, 1),
+  xmax = c(4, 4.5, 5),
+  ymin = c(3, 2, 1),
+  ymax = c(4, 3, 2),
+  fill = c("gold", "bisque", "lavender") # Public, Regulated Private, Unregulated Private
+)
+
+# Labels
+label_data <- data.frame(
+  tier = c("Central Bank Money", "Commercial Bank Money", "Private Tokens / Stablecoins"),
+  x = c(3, 3, 3),
+  y = c(3.5, 2.5, 1.5),
+  text = c(
+    "<span style='color:firebrick;'><b>Central Bank Money</b></span><br><span style='color:#002060;'>Cash, Reserves, CBDCs</span><br><span style='color:forestgreen;'>Singleness + Finality + Safety</span>",
+    "<span style='color:firebrick;'><b>Commercial Bank Money</b></span><br><span style='color:#002060;'>Deposits, Tokenised Deposits</span><br><span style='color:forestgreen;'>? Singleness ? Finality ? Safety</span>",
+    "<span style='color:firebrick;'><b>Private Stablecoins</b></span><br><span style='color:#002060;'>Tether, USDC, Crypto tokens</span><br><span style='color:forestgreen;'>X Singleness X Finality X Safety</span>"
+  )
+)
+
+# Base plot
+ggplot() +
+  geom_rect(data = pyramid_data, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = tier), color = NA) +
+  geom_richtext(data = label_data, aes(x = x, y = y, label = text), fill = NA, label.color=NA, size = 5.5, lineheight = 1.2) +
+  scale_fill_manual(values = setNames(pyramid_data$fill, pyramid_data$tier)) +
+  coord_fixed(ratio = 1.5) +
+  theme_void() +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 28,hjust=0.5, color="#002060",face = "bold"),
+        plot.subtitle = element_text(size = 20,face="italic", color="#002060",hjust=0.5)) +
+  labs(title = "Modern Money Hierarchy",
+       subtitle = "From Trustworthy Public Money to Riskier Private Claims")
+
+```
+
+Fundamental changes in the financial system are likely in the years ahead. Money is yet again in form-shifting mode with many bold claims being made about tokenisation. Critical evaluation, asking the right questions about the shiny new instruments on offer, will be vital for both individuals and society as a whole.

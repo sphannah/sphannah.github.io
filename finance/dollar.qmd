@@ -1,0 +1,61 @@
+---
+title: "Dollar Ducking & Diving"
+format:
+  html:
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true 
+    css: /style.css
+    theme: ""
+execute:
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+## Dollar Hegemony
+
+For almost a century, the US dollar has reigned supreme as the world’s preferred currency. In the 1960s, the French finance minister famously spoke of America's "*exorbitant privilege*"; its top dog status enabling the US to sell its bonds at lower interest rates than others and to be able to run large current account deficits without fear of a run on its currency. Ironic then, the [Mar-a-Lago thesis](https://www.hudsonbaycapital.com/documents/FG/hudsonbay/research/638199_A_Users_Guide_to_Restructuring_the_Global_Trading_System.pdf) puts the boot on the other foot. Apparently, it's foreigners who have the exorbitant privilege; freeloading off a large pool of safe assets, gratis US military backup, and a massive consumer market for imported goods.
+
+Not that its dominance has been left unchallenged. In the floating exchange rate era, the dollar has been humbled by its dramatic price fall against gold. But gold is not a credible alternative. In any case, all fiat currencies have witnessed similar "real" devaluations. The euro's launch in the late-1990s was a possible contender for top status but the fragmented nature of the monetary and political union, especially as witnessed in the post-GFC debt crisis, undermined European claims of a truly "single" currency.
+
+Why has the dollar proved so dominant in recent decades? Several factors stand out.
+
+-   The US economy’s size, military reach and tech mastery
+-   Its legal stability and respect for property rights
+-   Deep, liquid financial markets anchored in trust and the rule of law
+-   A global network effect; if everyone uses dollars, it pays to join the crowd
+
+In recent years, the weaponisation of the dollar - through the use of financial sanctions (mainly against Iran and Russia) - followed by Trump's threats of tariffs, mass deportations, dubious executive orders, general policy randomness and fiscal overload have raised questions about property rights, the rule of law, currency stability and public debt sustainability. The renminbi has been identified as a potential threat to US\$ hegemony but it starts from a very weak starting position. And China has problems of its own in terms of transparency, capital flows, debt and demographics.
+
+![](images/Slide17-01.PNG){fig-align="center"}
+
+As evidence of the dollar's demise, some note the [Dollar Smile being replaced by a Frown](https://www.reuters.com/markets/europe/haven-no-more-dollar-smile-looks-lopsided-2025-03-05/). The Dollar Smile references a once common observation that the greenback appreciates in two opposing scenarios:
+
+-   When the US economy outperforms the rest of the world
+-   When things go very wrong globally and investors seek safety
+
+Only in the middle zone, when growth is broadly synchronised and the world feels stable, does the dollar tend to soften.
+
+![](images/Slide21-02.PNG){fig-align="center"}
+
+For sure, there were unusual deviations from the usual correlations between interest rate expectations and currency performance in the immediate aftermath of Liberation Day. But these deviations have not gone far enough to dislodge the Smile paradigm and it's worth remembering that, despite weakness in Spring 2025, the greenback remained close to historical highs.
+
+![](images/Slide20-01.PNG){fig-align="center"}
+
+![](images/Slide22-01.PNG){fig-align="center"}
+
+More generally, trade threats have softened (if not fully reversed), risk appetite has rebounded, and investor fear — [as measured by the VIX](https://fred.stlouisfed.org/graph/?graph_id=1482822&rn=812) — has receded. President Trump’s wilder actions will likely dissipate ahead of the midterms; many investors have already concluded that White House bark is worse than the bite. Some of the more radical ideas floated by the White House, such as undermining the Fed’s independence, have failed to gain traction. [Junk bond spreads](https://fred.stlouisfed.org/graph/?graph_id=1482828&rn=957) continue to be tight. [Bitcoin](https://fred.stlouisfed.org/graph/?graph_id=1483698&rn=790) and [equities](https://fred.stlouisfed.org/graph/?graph_id=1483699) have marched higher.
+
+If anything, the most recent market battleground - stablecoins - will actually strengthen the US dollar. The ECB itself has acknowledged that Tether (USDT) and Circle (USDC) are reshaping global finance, with the US dollar at the helm. *"The global market is increasingly dominated by US dollar-based stablecoins. These account for some 99% of total stablecoin market capitalisation. In contrast, euro-denominated stablecoins remain marginal."* [From hype to hazard: what stablecoins mean for Europe](https://www.ecb.europa.eu/press/blog/date/2025/html/ecb.blog20250728~e6cb3cf8b5.en.html) ECB blog 28 Jul 2025.
+
+## No Obvious Challenger
+
+History reminds us that reserve currency transitions are glacial. Sterling clung to global leadership long after Britain’s economic primacy had faded. It was only after World War II that the pound finally lost its elevated status. The US\$ emerged as leader, not overnight, but through sustained demonstration of institutional strength and strategic reach.
+
+![](images/Slide16-01.PNG){fig-align="center"}
+
+The dollar may no longer inspire the awe it once did. But, until a credible alternative emerges, the greenback will remain the global currency of choice for some time to come. Indeed, if the US clings onto its A(G)I dominance and US\$ stablecoins take off, the hegemony could morph into total world domination.

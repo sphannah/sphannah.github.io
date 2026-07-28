@@ -1,0 +1,385 @@
+---
+title: "US Markets & Recession Outlook"
+format:
+  html:
+    fig-width: 10
+    code-fold: true
+    code-tools: true
+    toc: false
+    number-sections: false
+    embed-resources: true 
+    css: ../../style.css
+    theme: ""
+execute:
+  warning: false
+  message: false
+---
+
+There are numerous market indicators that can be examined to assess the risk of the US economy entering a recession over the coming year. This briefing focuses on four key areas: the yield curve for US government debt, signs of debt distress on traditional bank balance sheets, official survey data on bank loan risk premia, and the Federal Reserve’s own assessment of US financial conditions.
+
+## Yield Curve & Recession
+
+This chart presents the estimated probability of a US recession within the next 12 months, based on the term spread between the 10-year Treasury yield and the 3-month T-bill rate. The model is estimated using monthly data from FRED and a logistic regression framework.
+
+------------------------------------------------------------------------
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(fredr)
+library(tidyverse)
+library(tidyquant)
+library(pROC)
+library(scales)
+library(lubridate)
+library(readr)
+library(ggplot2)
+library(readxl)
+
+fredr_set_key("b983b76cb6464ac40940192891b5839f")
+```
+
+```{r formatted-date, include=FALSE}
+formatted_date <- format(Sys.Date(), "%e %b %Y")
+formatted_date_trimmed <- trimws(formatted_date, "l")
+```
+
+## FRED Data Sources
+
+```{r fredr-download, echo=TRUE}
+params <- list(
+  series_id = c("GS10","TB3MS","USREC"),
+  frequency = c("m"))
+
+usdata <- pmap_dfr(
+  .l = params,
+  .f = ~ fredr(series_id = .x, frequency = .y)) %>% 
+  dplyr::select(-c(realtime_start, realtime_end)) %>%
+  pivot_wider(names_from = series_id, values_from = value) %>%
+  filter(date > "1994-12-01") %>% 
+  mutate(curve10 = GS10 - TB3MS)
+```
+
+```{r load-recessions, echo=FALSE}
+mrecessions.df = read_csv("recessions.csv")
+date_formats_peak <- c("%Y-%m-%d", "%m/%d/%Y")
+mrecessions.df$Peak <- as.Date(lubridate::parse_date_time(mrecessions.df$Peak, orders = date_formats_peak))
+mrecessions.df$Trough <- lubridate::ymd(mrecessions.df$Trough)
+recessions.trim <- subset(mrecessions.df, Peak >= min(usdata$date))
+```
+
+```{r logit-function, include=FALSE}
+logitprob <- function(logit){
+  odds <- exp(logit)
+  prob <- odds / (1 + odds)
+  return(prob)
+}
+```
+
+```{r create-dataset, include=FALSE}
+usdata_extend <- usdata %>%
+  mutate(date = as.Date(date)) %>%
+  arrange(date) %>%
+  mutate(across(USREC, list(
+    lead_1 = ~lead(., 1), lead_2 = ~lead(., 2), lead_3 = ~lead(., 3),
+    lead_4 = ~lead(., 4), lead_5 = ~lead(., 5), lead_6 = ~lead(., 6),
+    lead_7 = ~lead(., 7), lead_8 = ~lead(., 8), lead_9 = ~lead(., 9),
+    lead_10 = ~lead(., 10), lead_11 = ~lead(., 11), lead_12 = ~lead(., 12)
+  ))) %>%
+  rowwise() %>%
+  mutate(check = as.integer(any(c_across(starts_with("USREC_")) == 1))) %>%
+  ungroup() %>%
+  select(date, curve10, check)
+
+usdata_mod <- usdata_extend %>% filter(date > "1994-11-28")
+usdata_mod_valid <- usdata_mod %>% filter(!is.na(check))
+```
+
+```{r estimate-model, include=FALSE}
+logitmod <- glm(check ~ curve10, data = usdata_mod_valid, family = "binomial")
+glm_probs_mod <- data.frame(probs = 100 * predict(logitmod, type = "response"))
+glm_probs_mod$date <- usdata_mod$date[1:length(glm_probs_mod$probs)]
+plot_df <- glm_probs_mod %>% filter(date > "1994-11-28")
+recessions.trim <- mrecessions.df %>% filter(Peak > "1994-11-28")
+```
+
+## Logistic Regression Output
+
+```{r final-plot, echo=TRUE,fig.width=10, fig.height=6}
+ggplot(plot_df) +
+  geom_rect(data = recessions.trim, aes(xmin = Peak, xmax = Trough, ymin = -Inf, ymax = +Inf), 
+            fill = "khaki4", alpha = 0.2) +
+  geom_line(aes(x = date, y = probs), linewidth = 1.5, color = "firebrick") +
+  labs(title = "US Recession Probability (One Year Horizon)",
+       subtitle = "Estimation period 1995–2025 using UST 10yr–3mth term spread",
+       caption = paste0("Logistic regression model re-estimated in R using FRED data on ", formatted_date_trimmed),
+       x = "") +
+  scale_y_continuous(
+    name = "", 
+    limits = c(0, 40), 
+    breaks = pretty_breaks(6),
+    sec.axis = sec_axis(~., name = "Recession Probability (%)", breaks = pretty_breaks(6))
+  ) +
+  theme(plot.title = element_text(size = 24, hjust = 0.5, colour = "#002060"),
+        plot.subtitle = element_text(size = 18, hjust = 0.5, face = "italic", colour = "#002060"),
+        plot.caption = element_text(size = 18, hjust = 0.5, face = "italic", colour = "forestgreen"),
+        axis.text = element_text(color = "#002060", size = 16),
+        axis.title.y.right = element_text(size = 18, colour = "#002060", vjust = 2),
+        axis.ticks = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill = 'transparent'), 
+        plot.background = element_rect(fill = 'transparent', color = NA)) +
+  scale_x_date(breaks = pretty_breaks(10)) +
+  expand_limits(x = as.Date('2027-01-01'))
+```
+
+# Recession Notes
+
+-   Shaded areas = official NBER recession periods
+-   Latest value = probability of a recession **within the next 12 months**
+-   FRB New York estimates, based on a much longer estimation period, can be found [here](https://www.newyorkfed.org/research/capital_markets/ycfaq#/overview)
+
+## US Debt Distress
+
+Noncurrent loans and charge-offs, expressed as a % of total loans and leases, serve as important indicators of credit quality and broader financial stress in the US banking system. Noncurrent loans - typically defined as those 90 days or more past due or placed on nonaccrual status - reflect borrowers' growing difficulty in meeting debt obligations. Charge-offs, by contrast, represent the portion of loans that banks have written off as unrecoverable, effectively acknowledging credit losses. Both metrics tend to rise when economic conditions deteriorate, as households and businesses face tighter cash flow, weakening collateral values, and declining income prospects.
+
+Historically, a sustained uptick in noncurrent loans and charge-off rates has often preceded or accompanied US recessions, particularly when concentrated in key sectors such as commercial real estate or consumer credit. These indicators provide insight not only into borrower distress but also into the risk-taking posture and underwriting standards of the banking sector in prior cycles.
+
+While current levels remain modest by historical standards, a sharp or persistent increase in either series may signal that financial conditions are tightening in a way that could amplify broader economic weakness. As such, they are closely monitored by both market participants and regulators for early signs of cyclical turning points.
+
+```{r debt-data, echo=TRUE,fig.width=10, fig.height=6}
+usncur<-fredr(
+  series_id = "QBPLNTLNNCUR",
+  observation_start = as.Date("2000-01-01"),
+  frequency = "q")%>%
+  dplyr::select(date,npl=value)
+
+uschargeoff<-fredr(
+  series_id = "CORALACBN",
+  observation_start = as.Date("2000-01-01"),
+  frequency = "q") %>%
+  dplyr::select(date,choff=value)
+
+usnpl<-uschargeoff %>%
+  left_join(usncur, by="date")
+
+recessions<-fredr(
+  series_id = "USRECQ",
+  observation_start = as.Date("2000-01-01"),
+  frequency = "q")
+
+recessions.trim = subset(mrecessions.df,Peak >= min(usnpl$date) )
+ggplot(usnpl,aes(x = date))+
+  geom_rect(data = recessions.trim, aes(xmin = Peak, xmax = Trough, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, fill = "slategray", alpha = 0.2) +  # Inherit.aes=FALSE ensures no mixing up aesthetics
+  geom_line(aes(y=npl,color="Noncurrent Loans"),linewidth=3)+
+  geom_line(aes(y=choff,color="Charge-Offs"),linewidth=3)+
+  scale_color_manual(values = c("Noncurrent Loans" = "orange",
+                                "Charge-Offs" = "firebrick"))+
+                               
+  labs(title="US Noncurrent Loans & Net Charge-Offs",
+       subtitle="% of Total Loans & Leases",
+       x="")+
+  scale_y_continuous("%",breaks=pretty_breaks(6),sec.axis=sec_axis(~ .* 1.00,name="%",breaks=pretty_breaks(6)))+
+  theme(plot.title=element_text(size="28",hjust=0.5,colour="#002060"),
+        plot.subtitle=element_text(size="24",face="italic",hjust=0.5,colour="#002060"),
+        axis.title.y.left=element_text(size="18",colour="#002060",vjust=2),
+        axis.title.y.right=element_text(size="18",colour="#002060",vjust=2),
+        axis.text=element_text(color="#002060",size=18),
+        legend.key=element_blank(),
+        legend.title=element_blank(),
+        legend.background=element_rect(fill='transparent'),
+        legend.text=element_text(color="#002060",size=18),
+        legend.position="top",
+        axis.ticks=element_blank(),
+        panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.background = element_rect(fill='transparent'), 
+        plot.background = element_rect(fill='transparent',color=NA))+
+  scale_x_date(breaks=pretty_breaks(10),limits = as.Date(c("2000-01-01", "2027-12-30")), ) 
+```
+
+## US Risk Premium
+
+The [Federal Reserve’s Senior Loan Officer Opinion Survey (SLOOS)](https://www.federalreserve.gov/data/sloos.htm) provides a timely, qualitative assessment of credit market conditions in the United States. Conducted quarterly, it gathers responses from senior loan officers at a range of domestic and foreign banks operating in the US. Of particular relevance for recession monitoring is the question concerning changes in loan spreads - specifically, whether banks are widening the spreads of loan rates over their cost of funds for commercial and industrial (C&I) borrowers. A fall in these spreads typically signals looser credit conditions, either due to reduced perceived risk or a more generous lending stance, and may presage robust investment and economic activity.
+
+```{r riskprem-data, echo=TRUE,fig.width=10, fig.height=6}
+sloos_riskprem<-map_dfr(c("DRISCFLM"),fredr)
+
+recessionsQ.df<-read_csv("NBERchronolQ.csv") %>%
+  mutate(Peak=as.Date(Peak,"%d/%m/%Y"),
+         Trough=as.Date(Trough,"%d/%m/%Y"))
+recessions_riskprem.trim = subset(recessionsQ.df,Peak >= min(sloos_riskprem$date))
+
+ggplot(sloos_riskprem)+
+  geom_rect(data=recessions_riskprem.trim,aes(xmin=Peak,xmax=Trough,ymin=-Inf,ymax=+Inf),fill="gray10",alpha=0.2)+
+  geom_line(aes(x=date,y=value),color="#002060",linewidth=2)+
+  geom_hline(yintercept=0, linetype="dashed",color="red",linewidth=1.5)+
+  labs(title="US Risk Premium Cycles",
+       subtitle="based on Fed's Senior Loan Officer Opinion Survey (SLOOS)",
+       caption="Net % of Domestic Banks Increasing Spreads of Loan Rates\nover Banks' Cost of Funds to Large and Middle-Market Firms",
+       x="",y="")+
+  scale_y_continuous(breaks=breaks_pretty(10))+
+  scale_x_date(breaks=breaks_pretty(10),
+               labels=date_format("%Y"),
+               limits = as.Date(c("1990-01-01","2026-01-01")))+
+  theme(plot.title=element_text(size="28",hjust=0.5,colour="#002060"),
+        plot.subtitle=element_text(size="20",hjust=0.5,face="italic",colour="#002060"),
+        plot.caption=element_text(size="18",hjust=0.5,face="italic",colour="#002060"),
+        axis.text=element_text(color="#002060",size=18),
+        legend.text=element_text(color="#002060",size=18),
+        legend.position="none",
+        legend.background = element_rect(fill='transparent', color=NA), #transparent plot bg
+        axis.ticks=element_blank(),
+        panel.background = element_rect(fill='transparent'), #transparent panel bg
+        plot.background = element_rect(fill='transparent', color=NA), #transparent plot bg
+        panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank())
+
+```
+
+## US Financial Conditions
+
+The Fed’s FCI-G is a composite measure that captures the extent to which financial conditions are supportive of or restrictive to near-term US GDP growth. Unlike simpler financial condition indexes, the FCI-G is designed to isolate the component of financial conditions that has predictive power for future economic activity. It draws on a broad range of variables, including interest rates, credit spreads, equity valuations, and the exchange rate. A tightening in the FCI-G, indicated by a rising index value, suggests that prevailing financial conditions are likely to exert a drag on economic growth, independent of other macroeconomic factors.
+
+Negative (positive) values measure tailwinds (headwinds) to GDP growth over the next year. A zero value means that the cumulative effect on growth of current and past changes in all financial variables sums up to zero, while a reading of 1 percent below (above) the zero line means that financial conditions are a notable tailwind (headwind) to economic activity that is equivalent to a 100 basis point boost (drag) on GDP growth over the coming year.
+
+```{r financial-conditions, echo=TRUE,fig.width=10, fig.height=6}
+
+fcig_mth<-read_csv("https://www.federalreserve.gov/econres/notes/feds-notes/fci_g_public_monthly_3yr.csv")
+
+fcig_mth$value<-fcig_mth$`FCI-G Index (baseline)`
+fcig_mth<-as.data.frame(fcig_mth) %>%
+  mutate(date=as.Date(date)) %>%
+  select(date,value)
+fcig_mth <- fcig_mth %>%
+  mutate(month = as.yearmon(date))
+
+recessions.trim = subset(mrecessions.df,Peak >= min(fcig_mth$date) )
+ggplot(fcig_mth)+
+  geom_rect(data=recessions.trim,aes(xmin=Peak,xmax=Trough,ymin=-Inf,ymax=+Inf),fill="dimgray",alpha=0.2)+
+  geom_hline(yintercept=0, linetype="dashed",color="red",linewidth=1.0)+
+  geom_line(aes(x=date,y=value),color="#002060",linewidth=2)+
+  labs(title="Index of US Financial Conditions (FCI-G)",
+       subtitle="Positive implies tight, negative implies loose",
+       x="",y="")+
+  scale_y_continuous(breaks=breaks_pretty(10))+
+  theme(plot.title=element_text(size="28",hjust=0.5,colour="#002060"),
+        plot.subtitle=element_text(size="24",hjust=0.5,face="italic",colour="#002060"),
+        axis.title.y.right=element_text(size="18",angle=180,colour="#002060",hjust=1),
+        axis.text=element_text(color="#002060",size=16),
+        axis.ticks=element_blank(),
+        panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.background = element_rect(fill='transparent'), 
+        plot.background = element_rect(fill='transparent',color=NA))+
+  expand_limits(x=as.Date('2030-01-01')) +
+  scale_x_date(breaks=breaks_pretty(10)) 
+```
+
+## US Term Premium
+
+The [Federal Reserve Bank of New York’s Treasury term premium](https://www.newyorkfed.org/research/data_indicators/term-premia-tabs#/overview), as estimated by the Adrian–Crump–Moench (ACM) affine term structure model, captures the additional compensation investors require for holding long-term government bonds instead of continuously rolling over short-term instruments. The model employs a no-arbitrage framework to decompose observed Treasury yields into two components: expected future short-term rates and the term premium, using zero-coupon yield data extending back to 1961.
+
+The ACM estimates are updated weekly and reported across maturities ranging from one to ten years. While term premia were notably subdued, often even negative, in the post-global financial crisis era, they have recently returned to positive territory, in line with historical norms over the longer term. This shift reflects growing investor demand for compensation against uncertainty surrounding the future path of interest rates and inflation, beyond what is implied by the expected policy rate trajectory.
+
+Importantly, the term premium can be either positive or negative. When positive, it stacks intuitively atop the risk-neutral yield: the total observed yield (depicted as a line) lies above both components. In contrast, a negative term premium depresses the overall yield, such that the observed yield line sits below the top of the risk-neutral bar, indicating that investors are accepting lower returns in exchange for the perceived safety and liquidity of long-term Treasuries.
+
+In the latter part of the Biden administration, and increasingly under Trump 2.0, the bond market has exhibited greater volatility, with the term premium turning more erratic (*aka* "yippy"). However, viewed through a long-run lens, the presence of a positive term premium is entirely unremarkable and broadly consistent with historical precedent.
+
+```{r termrisk, echo=TRUE,fig.width=10, fig.height=6}
+
+url <- "https://www.newyorkfed.org/medialibrary/media/research/data_indicators/ACMTermPremium.xls"
+destfile <- tempfile(fileext = ".xls")
+download.file(url, destfile, mode = "wb")
+term_premium <- read_excel(destfile, sheet = 1)
+
+term_premium_data<-term_premium %>%
+  mutate(date = dmy(DATE)) %>%
+  dplyr::select(date,
+                "UST 10yr Yield"=ACMY10,
+                "Risk-Neutral Component"=ACMRNY10,
+                "Term Premium Component"=ACMTP10) %>%
+  filter(date>="2020-01-01")
+
+term_premium_data_check <- term_premium_data %>%
+  mutate(
+    calc_yield = `Risk-Neutral Component` + `Term Premium Component`,
+    diff = `UST 10yr Yield` - calc_yield
+  ) %>%
+  filter(date >= as.Date("2020-01-01") & abs(diff) > 1e-6)  # tolerance to avoid rounding issues
+
+# View any inconsistencies
+print(term_premium_data_check)
+
+# Reshape to long format for fill mapping
+plot_data_long <- term_premium_data %>%
+  filter(date >= as.Date("2020-01-01")) %>%
+  select(date, `Risk-Neutral Component`, `Term Premium Component`, `UST 10yr Yield`) %>%
+  pivot_longer(cols = c(`Risk-Neutral Component`, `Term Premium Component`),
+               names_to = "Component", values_to = "Value") %>%
+  mutate(Component = factor(Component, levels = c("Risk-Neutral Component", "Term Premium Component")))
+
+term_premium_data <- term_premium_data %>%
+  mutate(`Legend Line` = "UST 10yr Yield")
+
+component_fills <- c(
+  "Risk-Neutral Component" = "#D2C1E0",
+  "Term Premium Component" = "darkorange")
+
+line_color <- c("UST 10yr Yield" = "#002060")
+
+ggplot() +
+  geom_col(data = plot_data_long, aes(x = date, y = Value, fill = Component), width = 25) +
+  geom_line(data = term_premium_data, 
+            aes(x = date, y = `UST 10yr Yield`, color = `Legend Line`), 
+            linewidth = 2.5) +
+  geom_hline(yintercept = 0, color = "#002060", linetype = "dotted") +
+  scale_fill_manual(values = component_fills) +
+  scale_color_manual(values = line_color) +
+  guides(
+    fill = guide_legend(order = 1),
+    color = guide_legend(order = 2)
+  ) +
+  scale_y_continuous(
+    limits = c(-2, 6),
+    breaks = seq(-2, 6, by = 2),
+    labels = label_percent(scale = 1),
+    sec.axis = dup_axis(name = "")
+  ) +
+  scale_x_date(
+    date_breaks = "1 year",
+    date_labels = "%Y",
+    expand = expansion(mult = c(0, 0.01)),
+    limits = c(as.Date("2020-01-01"), as.Date("2026-01-01"))
+  ) +
+  labs(
+    title = "Decomposing US Treasury 10yr Bond Yield",
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    color = NULL
+  ) +
+  annotate("text", x = as.Date("2020-02-01"), y = 6.1, label = "%", angle = 90, 
+           color = "#002060", size = 6, hjust = 0) +
+  annotate("text", x = as.Date("2026-01-01"), y = 6.1, label = "%", angle = 90, 
+           color = "#002060", size = 6, hjust = 1) +
+  theme_minimal(base_size = 18) +
+  theme(
+    plot.title=element_text(size="24",hjust=0.5,colour="#002060"),
+    panel.grid = element_blank(),
+    axis.text = element_text(color = "#002060"),
+    axis.ticks=element_blank(),
+    legend.key = element_blank(),
+    legend.title = element_blank(),
+    legend.background = element_blank(),
+    legend.text = element_text(color = "#002060", size = 18),
+    legend.position = "inside",
+    legend.position.inside=c(0.5,0.9),
+    legend.box = "vertical",
+    legend.spacing.y = unit(0.0, "cm"))+
+   guides(fill = guide_legend(order = 1, nrow = 1, byrow = TRUE),
+          color = guide_legend(order = 2, nrow = 1, byrow = TRUE))
+
+```

@@ -1,0 +1,171 @@
+---
+title: "Understanding Labour Market Dynamics: A Markov Chain Approach"
+subtitle: "Calculating the Natural Rate of Unemployment with R"
+format:
+  html:
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true 
+    css: /style.css
+    theme: ""
+    include-in-header: quarto_folding.html
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## [← Back to Home](../index.html){.backlink}
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+knitr::opts_chunk$set(echo = TRUE)
+
+# --- 1. Define the Transition Probability Matrix (TPM) ---
+# States: E (Employed), U (Unemployed)
+# Rows represent current state, columns represent next state
+# P_ij = Probability of transitioning from state i to state j
+
+# P = [ P_EE  P_EU ]
+#     [ P_UE  P_UU ]
+
+# From Employed (E):
+#   - Stays Employed (E to E): 0.8
+#   - Becomes Unemployed (E to U): 0.2
+# From Unemployed (U):
+#   - Gets a job (U to E): 0.7
+#   - Stays Unemployed (U to U): 0.3
+
+P <- matrix(c(
+  0.8, 0.2, # Row 1: Transitions from Employed
+  0.7, 0.3  # Row 2: Transitions from Unemployed
+), byrow = TRUE, nrow = 2, dimnames = list(c("Employed", "Unemployed"), c("Employed", "Unemployed")))
+
+cat("--- Transition Probability Matrix (P) ---\n")
+print(P)
+cat("\n")
+
+# --- 2. Calculate the Steady State (Stationary Distribution) ---
+# The steady state vector (pi) satisfies pi * P = pi, and sum(pi) = 1.
+# This means pi is a left eigenvector of P corresponding to an eigenvalue of 1.
+# In R, eigen() function computes right eigenvectors, so we use t(P) for left.
+
+eigen_result <- eigen(t(P))
+
+# Find the eigenvector corresponding to the eigenvalue closest to 1
+# (Due to numerical precision, it might not be exactly 1)
+target_eigen_value_index <- which.min(abs(eigen_result$values - 1))
+
+# Extract the corresponding eigenvector
+steady_state_raw <- eigen_result$vectors[, target_eigen_value_index]
+
+# Normalize the eigenvector so its elements sum to 1
+# And ensure all values are real and non-negative
+steady_state <- Re(steady_state_raw) / sum(Re(steady_state_raw))
+
+# Ensure all probabilities are non-negative (sometimes sign might flip due to normalization)
+if (any(steady_state < 0)) {
+  steady_state <- abs(steady_state) / sum(abs(steady_state))
+}
+
+# Assign names for clarity
+names(steady_state) <- c("Employed", "Unemployed")
+
+cat("--- Steady State Probabilities ---\n")
+print(steady_state)
+cat(sprintf("\nLong-run Employment Rate: %.2f%%\n", steady_state["Employed"] * 100))
+cat(sprintf("Long-run Unemployment Rate: %.2f%%\n", steady_state["Unemployed"] * 100))
+
+# --- 3. (Optional) Verify the result: pi * P = pi ---
+# Note: due to floating point precision, it might not be exactly equal, but very close.
+cat("\n--- Verification (pi * P) ---\n")
+print(steady_state %*% P)
+
+cat("\n(The result should be very close to the steady_state probabilities)\n")
+```
+
+A More Analytical Approach to Macroeconomics: Beyond the Headlines Welcome to this hands-on exploration of economic fluctuations. If you've been monitoring economic news, you know that the economy is constantly in motion—it experiences booms, busts, periods of steady growth, and unexpected shocks. While it’s essential to track key data like GDP, unemployment, and inflation, becoming a "master-economist" requires a deeper analytical toolkit. As the great economist John Maynard Keynes wrote of his mentor Alfred Marshall, the master economist must be a "rare bird"—part mathematician, historian, and philosopher, able to "contemplate the particular in terms of the general."
+
+This blog post is your first step into that world. We’re going to use a simple but powerful mathematical tool called a Markov model to help us think more rigorously about economic cycles. By doing so, we’ll move beyond simply observing data to building a framework for understanding and even simulating the economy's dynamic behavior.
+
+1.  What is a Markov Model? At its core, a Markov model is a way of describing a system that moves between different "states" over time. Think of our economy as being in one of three possible states in any given quarter: a Strong growth phase, a Normal (trend) growth phase, or a Weak (recessionary) phase.
+
+The key assumption of a simple Markov model is that to predict the economy's state in the next quarter, all you need to know is its current state. The entire history of how the economy arrived at its current state doesn't matter. For example, if the economy is currently in a "Normal" state, the model uses a set of probabilities to determine if it will stay "Normal," transition to a "Strong" phase, or slip into a "Weak" phase in the next quarter. It doesn't care whether the economy was booming or in a slump two years ago—only its state today matters for tomorrow's forecast.
+
+This simple "memoryless" property makes these models surprisingly elegant and easy to work with, allowing us to quantify the likelihood of staying in a boom, entering a recession, or recovering to a stable trend.
+
+2.  Why is this useful for understanding the macroeconomy? Mapping the economy's fluctuations using a Markov model is incredibly useful for a few reasons:
+
+It helps us identify hidden regimes: If you look at a chart of GDP growth over time, you’ll see it goes up and down, but it's not always obvious when the economy has truly shifted into a new phase. A Markov model provides a rigorous way to estimate the statistical characteristics of each phase (e.g., the average growth rate and volatility in a "Strong" phase vs. a "Weak" one) and to assign probabilities to which state the economy is most likely in at any given time.
+
+It provides a framework for simulations and "what-if" scenarios: Once we've estimated the probabilities of transitioning between states, we can run thousands of simulations to see what the future might look like. We can ask questions like: "What is the probability of a recession in the next 12 months?" or "If we stay in a 'Weak' state for two quarters, what are our chances of recovery?" This is a powerful tool for forecasting and for testing different policy interventions. For example, a policymaker could use a simulation to see how a fiscal stimulus might affect the likelihood of transitioning from a "Weak" to a "Normal" state.
+
+It quantifies uncertainty: Rather than just giving a single forecast, a Markov model can provide a range of possible outcomes and their probabilities, giving a much richer and more realistic picture of the future. This is particularly relevant in today’s world, where a single shock can lead to highly uncertain and volatile outcomes.
+
+3.  What are the limitations? As we have seen, the core assumption of a basic Markov model is that the future depends only on the present. While this is a powerful simplification, it might not always hold true in the real world. This brings us to a crucial concept in economics: path dependence.
+
+Path dependence suggests that "history matters" in a deeper way. It argues that the entire sequence of events that led to the current state is important, not just the state itself. Think of a "lock-in" effect, where an early choice or event (like adopting the QWERTY keyboard) makes it very difficult to switch to an alternative later on, even if it's superior.
+
+In macroeconomics, this kind of strong path dependence is very relevant. For instance:
+
+Hysteresis: A deep and prolonged recession (a "bad path") might cause long-lasting damage to the workforce, eroding skills and permanently increasing the unemployment rate, making a return to the pre-recession "Normal" state much harder than a simple Markov transition would suggest.
+
+Major Shocks: The choice to abolish slavery, the collapse of communism, or the impact of a global pandemic like COVID-19 are not just temporary state changes. These events set economies on fundamentally new and often irreversible trajectories.
+
+Technological Revolutions: The advent of a major General Purpose Technology like the internet or AI can create self-reinforcing dynamics, where early adoption by some countries or firms creates advantages that are very difficult for others to overcome.
+
+So, while a Markov model is an excellent starting point for understanding short-term fluctuations, it is less suited to capturing these deep, historical, and often irreversible shifts. A full-fledged macroeconomist must be aware of both the power of simplified models and the limitations of their assumptions, always staying grounded in history to understand the forces shaping the present and future.
+
+Understanding Labour Market Dynamics: A Steady State Perspective In macroeconomics, we often look at the labour market. People are either employed or unemployed, and they frequently move between these two states. But what happens over the long run? Does the unemployment rate settle at a particular level, even with constant flows of people finding and losing jobs? This is where the concept of a steady state (or long-run equilibrium) using a Markov model becomes incredibly useful.
+
+Imagine a large economy with millions of workers. Each period (say, a month or a quarter), some employed people might lose their jobs and become unemployed, while some unemployed people might find jobs and become employed. A Markov model allows us to quantify these flows using transition probabilities.
+
+Let's consider a specific example:
+
+An employed worker has a probability of 0.8 (80%) of staying employed and a 20% chance of becoming unemployed.
+
+An unemployed person has a 70% chance of getting a job but a 30% chance of staying unemployed.
+
+The steady state represents a point where, despite these ongoing movements, the overall proportion of people who are employed and unemployed no longer changes. It's not that no one moves anymore; it's that the number of people transitioning from employed to unemployed is exactly balanced by the number of people transitioning from unemployed to employed. It’s like a bathtub where water is constantly flowing in and out, but the water level remains constant because the inflow equals the outflow.
+
+Solving with Matrix Algebra in R We can represent these transition probabilities in a Transition Probability Matrix (TPM), denoted as P. Our states are Employed (E) and Unemployed (U).
+
+$$P = \begin{pmatrix} 0.8 & 0.2 \\ 0.7 & 0.3 \end{pmatrix} $$Here, the first row represents transitions *from* Employed (E), and the second row represents transitions *from* Unemployed (U). The columns represent transitions *to* Employed (E) and *to* Unemployed (U). The condition $\\pi P = \\pi$ can be written out as: $$\begin{pmatrix} \pi_E & \pi_U \end{pmatrix} \begin{pmatrix} 0.8 & 0.2 \\ 0.7 & 0.3 \end{pmatrix} = \begin{pmatrix} \pi_E & \pi_U \end{pmatrix}$$ This expands into a system of linear equations: 1. $0.8\\pi\_E + 0.7\\pi\_U = \\pi\_E$ 2. $0.2\\pi\_E + 0.3\\pi\_U = \\pi\_U$ From equation (1), we can rearrange: $0.7\\pi\_U = \\pi\_E - 0.8\\pi\_E$ $0.7\\pi\_U = 0.2\\pi\_E$ We also know that $\\pi\_E + \\pi\_U = 1$, which implies $\\pi\_U = 1 - \\pi\_E$. Substitute this into the rearranged equation: $0.7(1 - \\pi\_E) = 0.2\\pi\_E$ $0.7 - 0.7\\pi\_E = 0.2\\pi\_E$ $0.7 = 0.2\\pi\_E + 0.7\\pi\_E$ $0.7 = 0.9\\pi\_E$ $\\pi\_E = \\frac{0.7}{0.9} = \\frac{7}{9} \\approx 0.7778$ Now, substitute $\\pi\_E$ back into $\\pi\_U = 1 - \\pi\_E$: $\\pi\_U = 1 - \\frac{7}{9} = \\frac{2}{9} \\approx 0.2222$ Therefore, the steady-state probabilities are: $$\pi = \begin{pmatrix} \frac{7}{9} & \frac{2}{9} \end{pmatrix} \approx \begin{pmatrix} 0.7778 & 0.2222 \end{pmatrix}$$ This indicates that in the long run, approximately **77.78%** of the labor force will be employed, and **22.22%** will be unemployed, given these constant transition rates.\$\$
+
+An Easier Way to Solve for the Equilibrium Unemployment Rate (Without Matrix Algebra) For a simple two-state model, we can actually find the steady state using straightforward algebra. This provides a very intuitive way to see why the equilibrium emerges.
+
+Let E be the proportion of employed people and U be the proportion of unemployed people in the steady state.
+
+We know two fundamental things:
+
+The proportions of employed and unemployed must sum to 1:
+
+E+U=1 In the steady state, the number of people flowing into a state must exactly equal the number of people flowing out of that state. Let's focus on the "Unemployed" state:
+
+Flows into Unemployed: These are people who were Employed and become Unemployed. This flow is the proportion of employed (E) multiplied by the probability of an employed person becoming unemployed (0.2). So, E times0.2.
+
+Flows out of Unemployed: These are people who were Unemployed and find a job (become Employed). This flow is the proportion of unemployed (U) multiplied by the probability of an unemployed person getting a job (0.7). So, U times0.7.
+
+In the steady state, these flows must balance:
+
+$$0.2E=0.7U$$ Now we have a simple system of two linear equations:
+
+$$E+U=1$$ $$0.2E=0.7U$$ From equation (1), we can express E in terms of U:
+
+$$E=1−U$$ Substitute this into equation (2):
+
+$$0.2(1−U)=0.7U$$ $$0.2−0.2U=0.7U$$
+
+Add 0.2U to both sides:
+
+$$0.2=0.7U+0.2U$$ $$0.2=0.9U$$
+
+Now, solve for U:
+
+$$U=0.2/0.9$$ which is approximately 22.22%.
+
+This algebraic approach confirms the results obtained from the matrix calculations, demonstrating that at this "natural rate," the number of people losing jobs perfectly balances the number of people finding jobs, creating a stable long-run equilibrium in the labor market.

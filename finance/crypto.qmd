@@ -1,0 +1,214 @@
+---
+title: "Crypto Wars"
+format:
+  html:
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true 
+    css: /style.css
+    theme: ""
+execute:
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+# Big Beautiful Bitcoin
+
+Launched in 2009 by the pseudonymous Satoshi Nakamoto, Bitcoin emerged as a peer-to-peer digital cash system, solving the double-spending problem without a central authority. Its simple promise — a finite, decentralised, and censorship-resistant store of value — struck a chord in a world still reeling from the Global Financial Crisis. Over time, Bitcoin has transcended its original payments vision to become "digital gold" — an asset prized for its scarcity and neutrality.
+
+![](images/Slide1.PNG){fig-align="center"}
+
+# Ethereum: A New Kid on the Block
+
+As concerns mounted over Bitcoin’s high energy consumption and its relatively narrow use case, Ethereum arrived in 2015 with an ambitious mission: to be the world’s decentralised computer. With a fully programmable blockchain supporting smart contracts and dApps, Ethereum promised to revolutionise finance, governance, and everything in between. It also moved from energy-intensive proof-of-work to proof-of-stake in 2022, a change seen as more climate-friendly and aligned with ESG-conscious investment mandates.
+
+# Who Likes a Show-Off?
+
+Despite its technical sophistication and bold vision, Ethereum has underwhelmed in terms of market performance. From 2022 through 2024, it has consistently lost value relative to Bitcoin. Scalability issues, congested networks, and competition from newer, faster Layer 1 platforms like Solana and Aptos have chipped away at Ethereum's dominance. Even the long-anticipated launch of US Ethereum ETFs saw lukewarm investor interest. Meanwhile, Bitcoin remains the trusted macro hedge: battle-tested, widely held, and perceived as less risky. In times of uncertainty, investors keep returning to the simplicity and security of the original.
+
+![](images/Slide2.PNG){fig-align="center"}
+
+![](images/Slide3.PNG){fig-align="center"}
+
+# Will Stablecoins Prevail?
+
+The next wave of competition may not come from other Layer 1s, but from stablecoins — tokenised dollar substitutes that are fast becoming the medium of exchange in crypto markets. Regulatory moves, such as America's [Genius Act](https://www.bbc.co.uk/news/articles/cd78lvd94zyo), signal growing political support for US-based stablecoin innovation. If these instruments gain formal recognition and institutional backing, they could further erode Ethereum’s transactional relevance — especially as many stablecoins (like Tether USDT) now operate primarily on faster chains like Tron or Solana.
+
+![](images/Slide5.PNG)\
+\
+
+# Memecoins: A Completely Different Matter!
+
+A memecoin is a cryptocurrency that starts as a playful nod to internet culture - often \$DOGE-style jokes based on memes, celebrities, or trends. These coins typically lack traditional utility and derive value from viral hype, social media momentum, and community enthusiasm.The most popular in mid-2025 is [Dogecoin with a market cap of \$6.2bn](https://coinmarketcap.com/view/memes/).
+
+![](images/Slide4.PNG){fig-align="center"}
+
+Memecoins are niche, highly speculative instruments and can display substantial volatility. Here are a couple of real oddballs that, for some unknown reason, have not really captured speculative imagination.
+
+![](images/MACRO_meme.jpg){fig-align="center"}
+
+![](images/MANDB_memecoin.jpg){fig-align="center"}
+
+# Keeping Perspective
+
+But step back and recall that crypto assets, for all their media coverage, still make up a small slice of global financial markets. The combined market cap of all cryptocurrencies hovers around \$4 trillion — a fraction of the world’s \$500+ trillion in financial assets. Whether Bitcoin, Ethereum, or stablecoins lead the charge, the broader question is whether crypto can evolve from speculative playground to embedded infrastructure in global finance.
+
+# Ethereum vs Bitcoin: The Lowdown
+
+|   | **Ethereum** | **Bitcoin** |
+|------------------------|------------------------|------------------------|
+| **Primary Use Case** | Smart contracts, dApps, DeFi | Store of value, digital gold |
+| **Blockchain Sophistication** | Programmable, supports complex applications | Simple, secure, focused on value transfer |
+| **Scalability** | Moderate (improving with Layer 2s); faces strong competition from newer chains | Limited scalability, but sufficient for its narrow use case |
+| **Consensus Mechanism** | Proof-of-Stake (energy-efficient, but newer and more complex) | Proof-of-Work (energy-intensive but battle-tested) |
+| **Energy Usage** | Low | High |
+| **Investor Sentiment** | Mixed; seen as riskier and underperforming since 2022 | Strong; viewed as safe-haven asset during volatility |
+| **Adoption by Institutions** | Growing, but ETF launch disappointed | High; embraced by many corporates and funds |
+| **Competition** | Significant (Solana, Avalanche, Aptos, etc.) | Less direct competition; Bitcoin remains category leader |
+| **Transaction Fees** | Lower with L2s, but cannibalizes L1 fee revenue | More stable, but less relevant as a payments network |
+| **Resilience** | Innovation brings risk; vulnerable to technical complexity and fragmentation | Robust and stable; little has changed in over a decade |
+
+# The Original Gangster Remains in Charge
+
+```{r setup, echo: false}
+#| label: setup
+#| include: false
+#| message: false
+#| warning: false
+
+# Global options for all chunks (can be overridden per chunk)
+knitr::opts_chunk$set(
+  echo = TRUE, # Default to showing code
+  warning = FALSE,
+  message = FALSE
+)
+
+library(crypto2)
+library(tidyverse)
+library(scales)
+listings_20250717 <- crypto_listings(which="historical", quote=TRUE,
+                                     start_date="20250717", end_date="20250717")
+top_slugs <- c("bitcoin", "ethereum", "tether", "bnb", "solana", "usd-coin", "xrp", "toncoin", "cardano","dogecoin", "tron")
+
+filtered_data_now <- listings_20250717 %>% 
+  dplyr::filter(slug %in% top_slugs) %>% 
+  dplyr::select(slug, market_cap)
+
+topcoins_now <- filtered_data_now %>%
+  mutate(slug=factor(slug),
+         slug=reorder(slug,market_cap),
+         market_cap=market_cap/1000000000) %>%
+  arrange(desc(market_cap))
+
+topsum_now<-sum(topcoins_now$market_cap)
+
+listings_2020 <- crypto_listings(which="historical", quote=TRUE,
+                                     start_date="20200101", end_date="20200101")
+
+filtered_data_2020 <- listings_2020 %>% 
+  dplyr::filter(slug %in% top_slugs) %>% 
+  dplyr::select(slug, market_cap)
+
+topcoins_2020 <- filtered_data_2020 %>%
+  mutate(slug=factor(slug),
+         slug=reorder(slug,market_cap),
+         market_cap=market_cap/1000000000) %>%
+  arrange(desc(market_cap))
+
+topsum_2020<-sum(topcoins_2020$market_cap)
+
+
+listings_2022 <- crypto_listings(which="historical", quote=TRUE,
+                                 start_date="20220101", end_date="20220101")
+
+filtered_data_2022 <- listings_2022 %>% 
+  dplyr::filter(slug %in% top_slugs) %>% 
+  dplyr::select(slug, market_cap)
+
+topcoins_2022 <- filtered_data_2022 %>%
+  mutate(slug=factor(slug),
+         slug=reorder(slug,market_cap),
+         market_cap=market_cap/1000000000) %>%
+  arrange(desc(market_cap))
+
+topsum_2022<-sum(topcoins_2022$market_cap)
+topcoins_now<-slice_head(topcoins_now,n=10)
+
+
+
+```
+
+```{r revealed-code, echo: true}
+#| label: revealed-code
+#| message: false
+#| warning: false
+
+
+#############################################################################
+### COMBINING HISORICAL DATA
+#############################################################################
+# Step 1: Summarize and create distinct data frames for each year
+topcoins_2020_summary <- topcoins_2020 %>%
+  group_by(slug) %>%
+  summarise(market_cap_2020 = sum(market_cap))
+
+topcoins_2022_summary <- topcoins_2022 %>%
+  group_by(slug) %>%
+  summarise(market_cap_2022 = sum(market_cap))
+
+topcoins_2025_summary <- topcoins_now %>%
+  group_by(slug) %>%
+  summarise(market_cap_2025 = sum(market_cap))
+
+# Step 2: Combine the summarized data frames into a new data frame
+combined_data_all_years <- full_join(topcoins_2020_summary, topcoins_2022_summary, by = "slug") %>%
+  full_join(topcoins_2025_summary, by = "slug") %>%
+  replace_na(list(market_cap_2020 = 0, market_cap_2022 = 0, market_cap_2025 = 0))
+
+# Reshape the data into a long format for plotting
+combined_data_long_format <- combined_data_all_years %>%
+  pivot_longer(cols = c(market_cap_2020, market_cap_2022, market_cap_2025), 
+               names_to = "year", 
+               values_to = "market_cap") %>%
+  mutate(year = recode(year, 
+                       `market_cap_2020` = "2020", 
+                       `market_cap_2022` = "2022", 
+                       `market_cap_2025` = "2025"))
+
+# Step 3: Filter and order the top 5 coins for plotting
+top_10_coins_2025 <- topcoins_2025_summary %>%
+  slice_head(n = 10) %>%
+  arrange(market_cap_2025)
+
+# Set the factor levels of slug based on the market cap in 2025
+combined_data_long_format$slug <- factor(combined_data_long_format$slug, 
+                                         levels = top_10_coins_2025$slug)
+
+# Step 4: Create the plot with the ordered data
+ggplot(data = combined_data_long_format %>% filter(slug %in% top_10_coins_2025$slug), 
+       aes(x = slug, y = market_cap, fill = year)) + 
+  geom_bar(position = "dodge", stat = "identity") +
+  labs(title = "Largest Cryptocoins by Market Cap",
+       subtitle = "Comparing Market Caps Over Time",
+       x = "", y = "Market Capitalisation $bn") +
+  theme(plot.title = element_text(size = 22, hjust = 0.5, colour = "#002060"),
+        plot.subtitle = element_text(size = 18, hjust = 0.5, face = "italic", colour = "#002060"),
+        axis.title.y = element_text(size = 18, colour = "#002060", margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.text.y = element_text(color = "#002060", size = 18),
+        axis.text.x = element_text(color = "#002060", size = 20, angle = 45, hjust = 1),
+        legend.text=element_text(colour="#002060",size=18),
+        legend.background=element_rect(fill='transparent'),
+        legend.position = "top",
+        legend.title=element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill = 'transparent'),
+        plot.background = element_rect(fill = 'transparent', color = NA)) +
+  scale_fill_manual(values = c("2020" = "springgreen", "2022" = "green3", "2025" = "forestgreen"))+
+  scale_y_continuous(breaks=pretty_breaks(6))
+```

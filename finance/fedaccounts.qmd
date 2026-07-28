@@ -1,0 +1,159 @@
+---
+title: "Creative Accounting"
+format:
+  html:
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true 
+    css: /style.css
+    theme: ""
+execute:
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+# Mar-a-Lago & Trump 2.0
+
+Liberation Day, 2 April 2025. Trumpeted as the dawn of a new era in global trade. Trade is no longer celebrated as a partnership bringing mutual benefits. Instead, it is a battleground, the return of zero-sum thinking. If you are not a winner, you are a loser. And President Trump made it clear he believed the system was rigged against the United States.
+
+The argument goes like this. Foreigners are dumping cheap goods and freeloading off the back of US taxpayers and workers. Unfair trade practices and undue reliance on America’s military prowess are driving the US into an existential crisis.
+
+Initially, global uncertainty spiked. For markets, this threatened to choke investment and damage growth. Fears of stagflation surfaced. A global recession seemed likely.
+
+But, as is often the case after a major shock, first impressions had to be revised.
+
+-   **Was the US entirely wrong?** Maybe not. There is some truth in the criticism that allies have leaned too heavily on US defence spending. Challenging the status quo and shaking things up is not necessarily a bad thing. It’s not even a new idea—think creative destruction. For years, advanced economies have been stuck in a productivity slump. So there’s something appealing about the idea of doing something rather than just talking about it. Of course, we can argue about the means—tariffs, green energy rollbacks, mass deportations, crypto mania, DOGE chaos. Questionable actions for sure. But at least they inject some urgency into otherwise barren conversations.
+
+-   **Is he serious?** Many of the most dramatic proposals were never likely to happen. The acronym TACO—Trump Always Chickens Out—caught on. There’s been a lot of flip-flopping and empty threats. Does the President have the required legal powers? White House bark often seems worse than its bite. Markets calmed down, and recession fears have eased. \[Insert charts here\]
+
+-   **Talking tough works**. The idea is to trigger change without always needing the State to intervene. The message was clear: if you want to stay in the game, adapt. Companies — and countries — got the memo. Building more resilient and flexible supply chains is underway. Production practices are evolving. The world will face plenty of shocks in the coming decades. History may show that Trump was the least of our worries.
+
+# Blame Shifting
+
+Still, for all the noise, the **underlying issues** facing the US have not gone away. Persistent trade and budget deficits continue to loom. How did the US end up with this “twin deficit” problem? Who’s to blame, and what can be done?
+
+Going back to basic Econ 101. The US trade deficit reflects two key gaps:
+
+-   Private investment exceeds private savings
+-   The government spends more than it raises in taxes (a budget deficit)
+
+The following identities use the *f* subscript to denote firms and the *h* subscript to denote households. The bottom line is that the current account deficit equals the government's budget deficit plus the private sector's investment/savings deficit.
+
+$$
+\begin{align*}
+Y&=C+I+G+X-M\\
+Y&=C+S+T⇒ \\
+\end{align*}
+$$ 
+$$
+\begin{align*}
+I−𝑆& = (𝑇−𝐺)+(𝑀−𝑋)⇒\\
+(I_f+I_h)−(𝑆_𝑓+𝑆_ℎ)&= (𝑇−𝐺)+(𝑀−𝑋)⇒\\
+\end{align*}
+$$ 
+
+$$
+\begin{align*}
+\boldsymbol{M-X}&=\boldsymbol{(G-T)}+\boldsymbol{(I_f-S_f)}+\boldsymbol{(I_h-S_h)}
+\end{align*}
+$$
+
+There is a common view that the US has been pushed into a disadvantaged position. Foreigners take advantage of open capital markets to scoop up US assets—bonds, equities, prime real estate. That drives up prices and makes them unaffordable for ordinary Americans. Maybe that’s one reason US saving is so low.
+
+At the same time, the budget deficit remains high. One factor is defence spending. The US shoulders much of the burden for NATO while some European members lag behind. And because the US dollar is the global reserve currency, America effectively supplies dollars to the rest of the world through trade deficits.
+
+The idea that foreigners are pushing the US into a trade deficit, via capital flows, is often tied to the **“global savings glut”** thesis—famously used to explain the 2008 financial crisis. But a more credible thesis, certainly as applied to the GFC, is the **“banking glut”** view. Foreign-owned banks were highly active in US financial markets, flooding the system with credit. But the US was not a helpless victim. The flows were “pulled in” by domestic factors—an overblown housing boom, lax oversight, and a wave of financial innovation (a gearing up of securitisation and associated derivatives).
+
+As the National Income Accounting framework shows, **current imbalances reflect pull rather than push factors**; that is, domestic decisions revolving around consumer spending habits, investment financing and fiscal policy. The strength of corporate investment, by itself, is not the problem. But financing it would be better served through more household saving, less generous tax breaks and fewer stock buybacks and dividends.
+
+# Stocks & Flows
+
+Years of current account deficits have built up a mountain of liabilities—debt and equity held by foreigners. The US now owes the world a lot.
+
+```{r setup, echo: false}
+#| label: setup
+#| include: false
+#| message: false
+#| warning: false
+
+# Global options for all chunks (can be overridden per chunk)
+knitr::opts_chunk$set(
+  echo = TRUE, # Default to showing code
+  warning = FALSE,
+  message = FALSE
+)
+
+library(fredr)
+library(tidyverse)
+library(lubridate)
+library(scales)
+
+fredr_set_key("b983b76cb6464ac40940192891b5839f")
+```
+
+```{r revealed-code, echo: true}
+#| label: revealed-code
+#| message: false
+#| warning: false
+
+########################## US BEA/CBO DATA ##########################
+us_iip<-map_dfr(c("IIPUSNETIQ","GDP","IIPUSLIAQ","IIPUSASSQ"),fredr) %>%
+  dplyr::select(date,series_id,value) %>%
+  filter(date > "2006-01-01")%>%
+  pivot_wider(names_from=series_id,values_from=value) 
+# check same date periods # when pivoting  GDP in $bn, IIP data in mns
+us_iip_ratio<-us_iip %>%
+  mutate(netiip=(100*(IIPUSNETIQ/GDP))/1000) 
+
+ggplot(us_iip_ratio)+
+  geom_line(aes(x=date,y=netiip),color="firebrick",linewidth=2)+
+  labs(title="US Net International Investment",
+       y="% of GDP",
+       x="")+
+  theme(plot.title=element_text(size="28",hjust=0.5,colour="#002060"),
+        axis.text=element_text(color="#002060",size=18),
+        axis.title.y=element_text(color="#002060",size=18,margin=unit(c(0,6,0,0), "mm")),
+        axis.ticks=element_blank(),
+        panel.background = element_rect(fill='transparent'), #transparent panel bg
+        plot.background = element_rect(fill='transparent', color=NA), #transparent plot bg
+        panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank())+
+  scale_y_continuous(limits = c(-100,0),breaks=seq(-100,0,by=20))+
+  scale_x_date(limits = c(as.Date("2006-01-01"),as.Date("2026-01-01")),breaks=pretty_breaks(8))
+```
+
+This is not entirely bad. Some of the rise simply reflects the success of US stocks and stable interest rates. It is not something to blame on foreigners. But it still grates with many politicians that the gains often go to “offending” overseas holders of US assets.
+
+So is the US on an unsustainable path? Maybe not. The dollar remains the go-to safe haven. But evasive action might be needed before the picture worsens. Ideally, that can happen without damaging the dollar’s global status. Some possible steps:
+
+-   Get Europe to spend more on defence, widening their fiscal deficits.
+-   Push China to boost domestic consumption.
+-   Onshore more US production, and energise the private sector—perhaps by scaling back government spending.
+
+But do the means justify the end? It’s hard to see how the Big Beautiful Bill, the DOGE debacle, reversing the green revolution, or crypto superchargers fit neatly into the rebalancing story.
+
+# Dining Out on Trade
+
+Back in 2019, the San Francisco Fed published an interesting article: “[How much do we spend on imports?](https://www.frbsf.org/research-and-insights/publications/economic-letter/2019/01/how-much-do-we-spend-on-imports/)”
+
+Many products labelled “Made in the USA” rely heavily on imported parts – about 45% in some industries, like the Jeep Patriot’s supply chain. On the flip side, goods made abroad often contain significant US inputs. Take a Nike shoe. It’s designed by an American company and generates valuable US service exports in the form of intellectual property royalties and tech knowhow. And once it’s imported, the shoe adds local US value through marketing, storage, transport, and retail. Overall, over 40% of US goods imports end up containing local US value added.
+
+The mantra – *“bring manufacturing home”* —is simple. But the reality is messier. It is not easy, quick, or cheap. And tariffs risk damaging the very domestic sectors they aim to help.
+
+The key takeaway is that a product is not just a physical object. It combines a bundle of services and ideas. Think of eating out. You are not just paying for raw food. You pay for the chef’s skills, the recipe, kitchen staff, ambience, location, and the impressive wine list. Once you factor in foreign and local contributions at each stage, untangling it all becomes almost impossible.
+
+Economists try to do this using input-output analysis. The OECD and WTO’s work on [global value chains](https://www.oecd.org/en/topics/sub-issues/trade-in-value-added.html) shows that around 10% - 20% of US exports come from imported inputs.
+
+{{< video https://youtu.be/RZKX-0SK41U?si=mHg47o22zIpnMnj7 >}}
+
+# Love Thy Neighbour
+
+The [ECB’s June 2025 Economic Bulletin](https://www.ecb.europa.eu/press/economic-bulletin/focus/2025/html/ecb.ebbox202504_02~b993bf44eb.en.html) provided further insights into the trade saga. Specifically, the commentary reiterated the complexity of the global trading system and showed that the net benefits of onshoring are not always clear-cut.
+
+The EU runs a large goods trade surplus with the US. For some, that’s daylight robbery, justifying tariffs and tough talk. But the reality is more nuanced. Much of the surplus comes from US multinationals operating in Europe, especially Ireland. While Europe’s goods trade surplus with the US is big, it is offset by a large services deficit. US firms based in Europe – notably Big Tech and Big Pharma – import huge amounts of US intellectual property and ICT services, adding lots of money and job opportunities for home-based US folk.
+
+So, here is the dilemma. Reviving US manufacturing and slashing the trade deficit with Europe sounds good. But, in doing so, the interest of big (and politically powerful) American firms could be hurt. When shooting the enemy, avoid pointing the gun towards your foot.

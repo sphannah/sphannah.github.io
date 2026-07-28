@@ -1,0 +1,232 @@
+---
+title: "SP500 & Random Walks"
+format:
+  html:
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true 
+    css: /style.css
+    theme: ""
+execute:
+  # REMOVE OR CHANGE THIS TO TRUE FOR CHUNKS YOU WANT TO FOLD
+  # echo: false
+  warning: false
+  message: false
+---
+[← Back to Home](../index.html){.backlink}
+
+# Package & Data Housekeeping
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+# Load necessary packages
+library(quantmod)   # For fetching financial data
+library(tseries)    # For statistical tests (Ljung-Box, ADF)
+library(tidyverse)    # For plotting
+library(knitr)      # For kable (table rendering)
+library(kableExtra) # For enhancing kable tables
+library(scales)     # For formatting p-values nicely
+
+getSymbols("^GSPC", src = "yahoo", from = as.Date("2000-01-04"), to = as.Date("2025-06-30"))
+SP500_adjusted_prices <- GSPC$GSPC.Adjusted
+daily_returns <- dailyReturn(SP500_adjusted_prices, type = "log")
+daily_returns <- daily_returns[!is.na(daily_returns)]
+
+daily_returns_df <- data.frame(
+  date = index(daily_returns),
+  returns = 100*coredata(daily_returns) 
+)
+```
+# Plot SP500 Price Index
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+plotdata<-data.frame(date = index(SP500_adjusted_prices), price = coredata(SP500_adjusted_prices))
+
+ggplot(plotdata,aes(x = date, y = GSPC.Adjusted)) +
+  geom_line(colour="#002060",linewidth=2) +
+  labs(title = "S&P 500 Daily Price Index", x = "", y = "Price Index") +
+  theme(plot.title=element_text(size="32",hjust=0.5,colour="#002060"),
+        plot.subtitle=element_text(size="28",hjust=0.5,face="italic",colour="#002060"),
+        axis.title =element_text(face="plain", size=18, colour = "#002060"),
+        axis.title.y =element_text(margin = unit(c(0, 6, 0, 0), "mm")),
+        axis.text.y=element_text(color = "#002060", size = 16),
+        axis.text.x=element_text(color = "#002060", size = 16),
+        legend.text=element_text(color = "#002060", size = 18),
+        legend.position="bottom",
+        axis.ticks=element_blank(),
+        legend.key=element_blank(),
+        legend.title=element_blank(),
+        legend.background=element_rect(fill='transparent'),
+        panel.grid.major.y=element_line(linewidth=0.5,linetype="solid",colour="grey"),
+        panel.grid.major.x=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.background = element_rect(fill='transparent'), 
+        plot.background = element_rect(fill='transparent',color=NA))+
+  scale_y_continuous(breaks=breaks_pretty(6),limits=c(NA,7000))+
+  expand_limits(x=as.Date('2025-12-01')) +
+  scale_x_date(breaks = breaks_pretty(10))
+# ggsave("sp500priceindex.png",bg='white',width=160,height=120,units="mm",dpi=300)
+```
+# Plot SP500 Returns Data
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+ggplot(daily_returns_df, aes(x = date, y = daily.returns)) +
+  geom_line(colour="firebrick") +
+  labs(title = "Daily S&P 500 Returns",
+       x = "", y = "Log Return %") +
+  theme(plot.title=element_text(size="32",hjust=0.5,colour="#002060"),
+        plot.subtitle=element_text(size="28",hjust=0.5,face="italic",colour="#002060"),
+        axis.title =element_text(face="plain", size=18, colour = "#002060"),
+        axis.title.y =element_text(margin = unit(c(0, 6, 0, 0), "mm")),
+        axis.text.y=element_text(color = "#002060", size = 16),
+        axis.text.x=element_text(color = "#002060", size = 16),
+        legend.text=element_text(color = "#002060", size = 18),
+        legend.position="bottom",
+        axis.ticks=element_blank(),
+        legend.key=element_blank(),
+        legend.title=element_blank(),
+        legend.background=element_rect(fill='transparent'),
+        panel.grid.major.y=element_line(linewidth=0.5,linetype="solid",colour="grey"),
+        panel.grid.major.x=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.background = element_rect(fill='transparent'), 
+        plot.background = element_rect(fill='transparent',color=NA))+
+  scale_y_continuous(breaks=breaks_pretty(6))+
+  expand_limits(x=as.Date('2025-12-01')) +
+  scale_x_date(breaks = breaks_pretty(10))
+# ggsave("sp500dailyreturns.png",bg='white',width=160,height=120,units="mm",dpi=300)
+```
+# Random Walk in Returns (Ljung-Box test)
+# Null is no serial correlation (random returns)
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+
+library(dplyr) # Ensure dplyr is loaded for %>%
+lags_to_test <- c(1, 5, 10, 20)
+lb_results <- tibble(
+  Lag = integer(),
+  `X-squared` = double(),
+  `df` = integer(),
+  `p-value` = double(),
+  Conclusion = character()
+)
+
+for (lag in lags_to_test) {
+  lb_test <- Box.test(daily_returns, lag = lag, type = "Ljung-Box")
+  conclusion_text <- if (lb_test$p.value < 0.05) {
+    "REJECT H0: Significant serial correlation (NOT a random walk)."
+  } else {
+    "FAIL TO REJECT H0: No significant serial correlation (MAY follow a random walk)."
+  }
+  lb_results <- lb_results %>%
+    add_row(
+      Lag = lag,
+      `X-squared` = lb_test$statistic,
+      `df` = lb_test$parameter,
+      `p-value` = lb_test$p.value,
+      Conclusion = conclusion_text
+    )
+}
+
+lb_results %>%
+  mutate(`p-value` = scales::pvalue(`p-value`, accuracy = 0.0001)) %>%
+  kable(caption = "Ljung-Box Test Results for Daily S&P 500 Log Returns",
+        align = c('c', 'c', 'c', 'c', 'l')) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#f2f2f2") %>%
+  # Highlight rows where the null hypothesis is rejected (p-value < 0.05)
+  row_spec(which(lb_results$`p-value` < 0.05), color = "red", bold = TRUE)
+```
+# ADF test on SP500 Daily Prices
+# Null is series has unit root (non-stationary)
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+
+library(dplyr) # Ensure dplyr is loaded for %>%
+adf_test_prices <- adf.test(SP500_adjusted_prices, alternative = "stationary", k = trunc((length(SP500_adjusted_prices)-1)^(1/3)))
+# Create a tibble for the results
+prices_adf_df <- tibble(
+  `Statistic` = "Dickey-Fuller",
+  `Value` = adf_test_prices$statistic,
+  `Lag Order` = adf_test_prices$parameter,
+  `p-value` = adf_test_prices$p.value
+)
+
+# Print table
+cat("#### ADF Test Results for S&P 500 Prices\n")
+prices_adf_df %>%
+  mutate(`p-value` = scales::pvalue(`p-value`, accuracy = 0.0001)) %>% # Corrected: Reference the column using backticks
+  kable(caption = "ADF Test for S&P 500 Prices",
+        align = c('l', 'c', 'c', 'c')) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#f2f2f2")
+
+# Determine and print conclusion using inline R
+price_conclusion_text <- if (adf_test_prices$p.value < 0.05) {
+  "**REJECT** the null hypothesis. The S&P 500 price series appears to be stationary (unlikely to be a random walk)."
+} else {
+  "**FAIL TO REJECT** the null hypothesis. The S&P 500 price series appears to be non-stationary (consistent with a random walk)."
+}
+cat(paste0("\n\n**Conclusion:** With a p-value of `r scales::pvalue(adf_test_prices$p.value, accuracy = 0.0001)`, we ", price_conclusion_text, "\n"))
+```
+# ADF test on SP500 Daily Returns
+# Null is series has unit root (non-stationary)
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+
+library(dplyr) # Ensure dplyr is loaded for %>%
+adf_test_returns <- adf.test(daily_returns, alternative = "stationary", k = trunc((length(daily_returns)-1)^(1/3)))
+
+# Create a tibble for the results
+returns_adf_df <- tibble(
+  `Statistic` = "Dickey-Fuller",
+  `Value` = adf_test_returns$statistic,
+  `Lag Order` = adf_test_returns$parameter,
+  `p-value` = adf_test_returns$p.value
+)
+
+# Print table
+cat("#### ADF Test Results for Daily Returns\n")
+returns_adf_df %>%
+  mutate(`p-value` = scales::pvalue(`p-value`, accuracy = 0.0001)) %>% # Corrected: Reference the column using backticks
+  kable(caption = "ADF Test for Daily S&P 500 Log Returns",
+        align = c('l', 'c', 'c', 'c')) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE) %>%
+  row_spec(0, bold = TRUE, background = "#f2f2f2")
+
+# Determine and print conclusion using inline R
+returns_conclusion_text <- if (adf_test_returns$p.value < 0.05) {
+  "**REJECT** the null hypothesis. The S&P 500 daily return series appears to be stationary."
+} else {
+  "**FAIL TO REJECT** the null hypothesis. The S&P 500 daily return series appears to be non-stationary."
+}
+cat(paste0("\n\n**Conclusion:** With a p-value of `r scales::pvalue(adf_test_returns$p.value, accuracy = 0.0001)`, we ", returns_conclusion_text, "\n"))
+```
+# Takeaways
+The Efficient Market Hypothesis (EMH) suggests that asset prices fully reflect all available information. This means that you cannot routinely outperform the market because prices already incorporate all relevant knowledge.The EMH is closely related to Random Walk Theory (RWT) which suggests that stock prices move randomly and unpredictably, making it impossible to consistently predict future price movements based on past trends. Past price changes don't influence future changes and trying to outperform the market through active trading or stock picking is often futile. 
+
+Seminal work by Eugene Fama in the 1960s and 70s provided strong empirical support for the EMH. Early tests generally found very little or no statistically significant patterns that could be exploited for profit after accounting for transaction costs. This led to the widespread acceptance of the idea that market prices reflect all publicly available past information.
+
+Burton Malkiel's <a href="https://www.amazon.co.uk/Random-Walk-Down-Wall-Street/dp/0393358380">A Random Walk Down Wall Street</a> popularised the Random Walk view, arguing that even a blindfolded monkey throwing darts at stock listings could pick a portfolio that performs as well as one chosen by experts.
+
+However, subsequent research has cast doubt on the undiluted EMH view highlighting evidence of momentum patterns, reversal trades, seasonality and volatility clustering. Efficiency can be time-varying and, importantly, While statistical tests might detect some serial correlation or other patterns, these patterns are often too small to be exploited for consistent abnormal profits after accounting for transaction costs (brokerage fees, bid-ask spread) and taxes.  
+
+Both the Ljung-Box and ADF test results reported above provide evidence of serial correlation (unsupportive of the idea that stock market returns follow a random walk). Contrary to the EMH, this suggests that past returns do contain information that could potentially be used to predict future returns, at least to a statistically significant degree. Note that the key for time series models like random walk tests is the stationarity of the series being analysed, which is typically achieved by using returns rather than raw prices. When analysing daily returns for a random walk, explicit inflation normalisation is generally not necessary. The use of log returns effectively normalises for the magnitude of the price index, as they represent percentage changes. Daily inflation is negligible and unlikely to significantly affect the autocorrelation structure of daily returns.
+
+The Warren Buffett conundrum is worth considering. His long-term, extraordinary success seems to defy the strict interpretation of the EMH and RWH. How can someone consistently outperform for decades if markets are truly efficient? Has he just been super-lucky? Or, more likely, his longer-term perspective, information advantages and disciplined strategies are testimony to his skill in identifying intrinsic value and understanding businesses. Yet he would be the first to agree that trying to predict the next day's SP500 move from its past daily returns, is a mug's game.

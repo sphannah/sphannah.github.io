@@ -1,0 +1,148 @@
+---
+title: "Simulating AGI"
+format:
+  html:
+    fig-width: 10
+    fig_height: 6
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true
+    html-math-method: mathjax
+    css: ../style.css
+    theme: none
+execute:
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+## Towards the Singularity
+
+The concept of exponential growth in simple Solow-style models, a process where something grows at a constant percentage rate over time, is generally [well understood](https://sphannah.github.io/macro/productivity.html). But what happens if the rate of growth itself starts to grow?
+
+This question lies at the heart of current debates about artificial intelligence (AI) and the possibility of a so-called “intelligence explosion" or artificial general intelligence (AGI where human-level cognitive abilities are acquired, capable of understanding, learning, and applying knowledge across a wide range of tasks, similar to a human). In this scenario, improvements in AI do not just make machines smarter - they make them better at making themselves smarter. Progress begets more progress. The system becomes self-improving, and the feedback loop begins to take off.
+
+The consequences can be dramatic. If the growth rate increases slowly over time - say, inching up a little each year - we could call that exponential-plus growth. It still starts off looking tame, but soon outpaces any ordinary exponential process. If, however, the growth rate itself is increasing exponentially - each doubling leading to the next, faster doubling - the result is far more explosive. We could call that process "Double Exponential" and then we get close to what is often termed a [singularity](https://www.ibm.com/think/topics/technological-singularity).
+
+To the naked eye, it resembles a system going from calm to chaos. One moment, the trajectory seems manageable. The next, it looks out of control. In the case of productivity it improves not just because of better machines, but because the machines are designing their own upgrades, and doing so faster each time.
+
+Of course, in the real world, constraints exist. Bottlenecks in data, hardware, regulation, or even energy use may slow the process. But conceptually, the mathematics of runaway growth provides a stark warning. If feedback loops are strong enough, and unchecked, even small early gains can compound into transformations of dizzying speed.
+
+For economists used to thinking in terms of steady states, marginal changes, and gradual equilibria, this can be unsettling. But it may be the right mindset for understanding how certain technologies, especially AI, could defy historical precedent. When growth feeds on itself, the future may not arrive gradually. It may arrive all at once.
+
+Here is a simple simulation in R...
+
+```{r}
+library(tidyverse)
+library(scales)
+library(glue)
+library(ggtext)
+
+#################################################
+### GRAPHICS THEME
+#################################################
+theme_sph <- function() {
+  theme(plot.title=element_text(size=24,hjust=0.5,colour="#002060"),
+        plot.subtitle=element_text(size=20,hjust=0.5,face="italic",colour="#002060"),
+        plot.caption=element_text(color="#002060",size=16,hjust=0.5),
+        axis.text.y=element_text(colour="#002060",size=18),
+        axis.text.x=element_text(colour="#002060",size=18),
+        axis.title.x=element_text(colour="#002060",size=18,
+                                  margin=margin(t=10,r=0,b=0,l=0)),
+        axis.title.y=element_text(colour="#002060",size=18,
+                                  margin=margin(t=0,r=10,b=0,l=0)),
+        axis.ticks=element_blank(),
+        axis.line.x=element_blank(),
+        legend.position="top",
+        legend.direction="vertical",
+        legend.text=element_text(colour="#002060",size=18),
+        legend.title=element_blank(),
+        panel.background=element_blank(),
+        panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank())
+     }
+
+# Initialisation
+t <- seq(0, 20, by = 1/12)
+y0 <- 1
+
+# Parameters
+g0    <- 0.02      # 10% constant growth
+alpha <- 0.002  # linear increase per year
+beta  <- 0.1     # exponential increase parameter
+
+# Calculate growth trajectories
+y_const     <- y0 * exp(g0 * t)
+y_superexp  <- y0 * exp(g0 * t + 0.5 * alpha * t^2)
+y_doubleexp <- y0 * exp((g0 / beta) * (exp(beta * t) - 1))
+
+# Define model labels dynamically
+label_const <- "Exponential (g constant)"
+label_super <- "Exponential-plus (g linearly increasing)"
+label_double <- "Double Exponential (g exponentially increasing)"
+
+# Combine into dataframe
+growth_df <- tibble(
+  time = rep(t, 3),
+  value = c(y_const, y_superexp, y_doubleexp),
+  model = rep(c(label_const, label_super, label_double), each = length(t)))
+
+# Growth rates at t = 15
+t_check <- 15
+g_const  <- g0
+g_super  <- g0 + alpha * t_check
+g_double <- g0 * exp(beta * t_check)
+
+# Line colors
+col_const  <- "#002060"
+col_super  <- "forestgreen"
+col_double <- "firebrick"
+
+# Plot
+ggplot(growth_df, aes(x = time, y = value, color = model)) +
+  geom_line(linewidth = 2.5) +
+  geom_vline(xintercept=15,linetype = "dashed",color = "#002060") +
+  geom_richtext(
+    data = tibble(x = 0, y = 3.5, label = glue(
+      "**Growth rates at year {t_check}**<br>",
+      "{label_const}: {round(100 * g_const)}%<br>",
+      "{label_super}: {round(100 * g_super)}%<br>",
+      "{label_double}: {round(100 * g_double)}%")),
+    aes(x = x, y = y, label = label),
+    hjust = 0, vjust = 1,
+    fill = "white", color = "#002060", 
+    size = 6, lineheight = 1.1,
+    label.size = 0.4,
+    label.r = grid::unit(0.15, "lines"),
+    label.padding = grid::unit(0.3, "lines")) +
+  scale_color_manual(values = c(col_const, col_super, col_double)) +
+  scale_y_continuous(breaks = seq(0, 4, by = 1),limits=c(1,4)) +
+  scale_x_continuous(breaks = seq(0, 20, by = 2)) +
+  labs(
+    title = "Constant vs Accelerating Growth Processes",
+    subtitle = "",
+    x = "Time (Years)",
+    y = "Index Level") +
+  theme_sph() +
+  theme(plot.tag = element_markdown())
+
+```
+
+## Who Gains When Machines Run the Show?
+
+The prospect of runaway technological growth raises profound questions about who benefits, and who gets left behind. At the centre of this debate is the role of labour. In a world where machines not only do the work but improve themselves with each iteration, the traditional link between human effort and rising living standards begins to fray.
+
+Real wages, in such a scenario, may stagnate or even fall; not because the economy lacks productivity, but because human labour becomes economically redundant. For decades, economists have argued that new technologies destroy jobs but also create new ones. Yet if machines become general-purpose problem-solvers, even the task of designing new industries may fall to them.
+
+The risk is not just job displacement, but income polarisation. Ownership of capital - the machines, the algorithms, the data - becomes the decisive source of wealth. And unlike labour, capital is increasingly concentrated in the hands of a small elite: tech founders, large institutional investors, or state-backed innovation funds. In effect, an AI-driven economy could produce spectacular growth, while leaving the majority of people with little claim on the returns.
+
+This echoes a theme familiar from classical economics: the distinction between functional income shares. If capital becomes vastly more productive while labour's contribution diminishes, capital’s share of income rises; rentier power returns with a vengeance.
+
+Then there’s the question of interest rates. Traditional growth models suggest that higher growth should go hand-in-hand with higher real interest rates: people want to shift consumption into the future, and capital must deliver returns commensurate with rising productivity. But this creates a paradox. High real interest rates, if sustained, could actually undermine the value of capital assets, particularly those with long-term payoffs such as tech stocks. The faster the future arrives, the more the discounting of that future eats into today's valuations.
+
+In short: even with dazzling profits and record productivity, the stock market may falter if interest rates rise sharply. Add to that political backlash over inequality, or new taxation on capital gains, and the picture becomes murkier still.
+
+The upshot? A future shaped by recursive, self-improving AI is not just about more - more output, more capability, more speed. It is also about who controls the levers of this growth, and how its rewards are divided. That, more than any purely technical challenge, may prove the defining economic question of the AI era.

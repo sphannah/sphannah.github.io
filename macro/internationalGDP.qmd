@@ -1,0 +1,323 @@
+---
+title: "Notes on Comparing GDP"
+format:
+  html:
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true 
+    css: style.css
+    theme: ""
+    include-in-header: quarto_folding.html
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+
+# What's Up with Europe?
+Recent data highlight Europe’s relatively poor performance compared to the US in terms of GDP per capita. While both economies were hit hard during the Covid period, the US appears to have suffered somewhat less and has made an impressive recovery in the aftermath, with output per person now comfortably ahead of most European economies. This raises important questions about underlying drivers of growth. Is America’s tech prowess playing a decisive role, enabling it to leverage its strengths in artificial intelligence, cloud computing, and digital platforms more effectively than Europe? As AI continues to reshape productivity dynamics, Europe may find itself falling further behind unless it can match the US in innovation and adoption.
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+knitr::opts_chunk$set(echo = TRUE)
+
+library(rdbnomics)
+library(tidyverse)
+library(scales)
+library(knitr)
+library(kableExtra)
+
+###################################################################################
+# OECD NEW SETUP ECONOMIC OUTLOOK (INCLUDES FORECASTS)
+# https://db.nomics.world/OECD/DSD_​EO@DF_​EO  Economic Outlook 117 (latest June 2025)
+# OECD Data explorer for Economic Outlook: for specific reference area (country) check
+# table for specifics about series eg UK GDP per capita vol in US$ at constant PPP 
+# confirms that reference year is 2021 (most recent in ICP program)
+
+real_GDP<- rdb(ids=c("OECD/DSD_EO@DF_EO/USA.GDPVD_CAP.A",
+                     "OECD/DSD_EO@DF_EO/EA17.GDPVD_CAP.A", 
+                     "OECD/DSD_EO@DF_EO/GBR.GDPVD_CAP.A"))
+
+data <- real_GDP %>%
+  select(date = period, value, country = REF_AREA) %>%
+  filter(date >= "1990-01-01") %>%
+  mutate(value=value/1000,
+         country = recode(as_factor(country), "USA" = "US", "GBR" = "UK", "EA17" = "EMU"),
+         country = factor(country, levels = c("US", "UK", "EMU"))) %>%
+  ungroup()
+
+# Custom colors for the lines
+line_colors <- c("US" = "#1f77b4", "UK" = "#ff7f0e", "EMU" = "#2ca02c")
+
+ggplot(data,aes(x=date,y=value,group=country))+
+  geom_line(aes(colour=country),linewidth=2)+
+  labs(title="European Laggards?",
+       subtitle="Real GDP per capita",
+       caption="OECD Economic Outlook Jun 2025 (including 2026 forecasts)",
+       x="",y="2021 International US$ ($000s, PPPs)")+
+  theme(plot.title=element_text(size=28,hjust=0.5,colour="#002060"),
+        plot.subtitle=element_text(size=20,hjust=0.5,face="italic",colour="#002060"),
+        plot.caption=element_text(size=16,hjust=0.5,face="italic",colour="#002060"),
+        axis.title=element_text(size="16",colour="#002060",vjust=2),
+        axis.title.y =element_text(margin=unit(c(0,6,0,0), "mm")),
+        axis.text=element_text(color="#002060",size=16),
+        legend.text=element_text(color="#002060",size=18),
+        legend.position = "inside",
+        legend.position.inside = c(0.4,0.8),
+        legend.direction="horizontal",
+        legend.background = element_rect(fill='transparent', color=NA), #transparent plot bg
+        legend.title=element_blank(),
+        axis.ticks=element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill='transparent'), #transparent panel bg
+        plot.background = element_rect(fill='transparent', color=NA),
+        plot.margin = margin(t = 5, r = 20, b = 10, l = 20))+ # Reduce top margin
+  scale_y_continuous(limits = c(30,80),breaks=pretty_breaks(6))+
+  scale_x_date(limits = c(min(data$date), as.Date("2030-01-01")),breaks=pretty_breaks(10))+
+  scale_color_manual(values = line_colors)
+ggsave("internationalGDP.png", bg="transparent",width=240,height=137,units="mm")
+```
+# China Taking on the US
+When measured using market exchange rates, the US remains the world’s largest economy, reflecting the US dollar's hegemony and its global economic reach. However, when comparing countries using purchasing power parity (PPP) rates, which adjust for local price differences, China emerges as the largest economy in absolute terms. Despite this, China’s GDP per capita remains far below that of the US, underlining its status as a developing economy with a vast population. Nonetheless, with continued growth and urbanisation, China’s income levels are poised to catch up gradually in the decades ahead, potentially reshaping the balance of global economic power.
+
+When comparing the economic size or living standards of different countries, economists often prefer purchasing power parity (PPP) exchange rates over market exchange rates. This is because PPP adjusts for differences in local prices, providing a more accurate measure of what people can actually buy with their income within their own country. Market exchange rates reflect international currency markets and can be distorted by capital flows, speculation, or government policies. This distinction is particularly important when comparing countries at very different stages of development. For example, in lower-income economies, many services and non-tradable goods are far cheaper than in advanced economies, meaning market exchange rates understate their real domestic purchasing power. Using PPP helps overcome this bias, giving a clearer picture of true living standards and economic capacity.
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+knitr::opts_chunk$set(echo = TRUE)
+
+library(rdbnomics)
+library(tidyverse)
+library(scales)
+library(knitr)
+library(kableExtra)
+###################################################################################
+# IMF WORLD ECONOMIC OUTLOOK
+# Check latest releases (currently Apr 2025)
+
+# Real GDP per capital PPP 2017 US$ (international dollar)
+raw_China_data<-rdb(ids=c("IMF/WEO:2025-04/CHN.NGDP.national_currency",
+                          "IMF/WEO:2025-04/CHN.NGDPD.us_dollars",
+                          "IMF/WEO:2025-04/CHN.NGDPDPC.us_dollars",
+                          "IMF/WEO:2025-04/CHN.PPPGDP.purchasing_power_parity_international_dollars",
+                          "IMF/WEO:2025-04/CHN.PPPPC.purchasing_power_parity_international_dollars",
+                          "IMF/WEO:2025-04/CHN.PPPEX.national_currency_per_current_international_dollar"))
+
+raw_US_data<-rdb(ids=c("IMF/WEO:2025-04/USA.NGDPD.us_dollars","IMF/WEO:2025-04/USA.NGDPDPC.us_dollars",
+                       "IMF/WEO:2025-04/USA.PPPGDP.purchasing_power_parity_international_dollars",
+                       "IMF/WEO:2025-04/USA.PPPPC.purchasing_power_parity_international_dollars"))
+
+# Reshape to wide form to calculate market exchange rate
+China_fx <- raw_China_data %>%
+  filter(period >= "2010-01-01") %>%
+  dplyr::select(period,"weo-subject",value) %>% 
+  filter(`weo-subject` %in% c("NGDP", "NGDPD", "PPPEX")) %>%
+  pivot_wider(names_from = `weo-subject`, values_from = value) %>%
+  # Calculate market_fx only if both NGDP and NGDPD are available
+  mutate(market_fx = ifelse(!is.na(NGDP) & !is.na(NGDPD), NGDP / NGDPD, NA_real_)) %>%
+  # Reshape to long form for plotting
+  select(period, market_fx, PPPEX) %>%
+  pivot_longer(cols = c(market_fx, PPPEX), names_to = "type", values_to = "rate")
+
+# Plotting parameters
+market_col <- "firebrick"
+ppp_col <- "darkblue"
+lw <- 1.2
+y_limits <- c(2,8)
+y_breaks <- seq(2,10,by=1)
+
+# Create the plot
+ggplot(China_fx, aes(x = period, y = rate)) +
+  annotate("rect",
+           xmin = as.Date("2025-01-01"),
+           xmax = as.Date("2030-01-01"),
+           ymin = -Inf,
+           ymax = Inf,
+           fill = "lightgrey",
+           alpha = 0.4)+
+  geom_line(aes(color = type), linewidth = lw, na.rm = TRUE) +
+  scale_color_manual(values = c("market_fx" = market_col, "PPPEX" = ppp_col),
+                     labels = c("Market exchange rate (Yuan per USD)", "PPP exchange rate (Yuan per Int'l $)"),
+                     name = "Exchange Rate Type") +
+  # (rest of your code unchanged)
+  scale_y_continuous(limits = y_limits, breaks = y_breaks) +
+  labs(title = "China's Market vs PPP Exchange Rates",
+       subtitle = "2000-2030 (IMF WEO forecasts shaded in grey)",
+       x = "",
+       y = "Exchange rate (CNY per US$)",
+       caption = "IMF World Economic Outlook Apr 2025") +
+  theme(plot.title=element_text(size=24,hjust=0.5,colour="#002060"),
+        plot.subtitle=element_text(size=20,hjust=0.5,face="italic",colour="#002060"),
+        plot.caption=element_text(size=18,hjust=0.5,face="italic",colour="#002060"),
+        axis.title=element_text(size="18",colour="#002060",vjust=2),
+        axis.title.y =element_text(margin=unit(c(0,6,0,0), "mm")),
+        axis.text=element_text(color="#002060",size=16),
+        legend.position = "none",
+        legend.position.inside = c(0.4,0.5),
+        legend.direction="vertical",
+        legend.background = element_rect(fill='transparent', color=NA),
+        legend.title=element_blank(),
+        axis.ticks=element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill='transparent'),
+        plot.background = element_rect(fill='transparent', color=NA),
+        plot.margin = margin(t = 5, r = 20, b = 10, l = 20)) +
+  scale_x_date(limits = c(as.Date("2010-01-01"), as.Date("2030-01-01")), breaks=pretty_breaks(6))
+
+PPP<-raw_China_data %>%
+  dplyr::select("original_period","weo-country","weo-subject",value) %>%
+  filter(original_period==2025)%>%
+  filter(`weo-subject`=="PPPEX")
+PPP2025<-PPP$value
+
+MEXN<-raw_China_data %>%
+  dplyr::select("original_period","weo-country","weo-subject",value) %>%
+  filter(original_period==2025)%>%
+  filter(`weo-subject`=="NGDP")
+MEXD<-raw_China_data %>%
+  dplyr::select("original_period","weo-country","weo-subject",value) %>%
+  filter(original_period==2025)%>%
+  filter(`weo-subject`=="NGDPD")
+
+MEX2025<-MEXN$value/MEXD$value
+
+China_2025<-raw_China_data %>%
+  dplyr::select("original_period","weo-country","weo-subject",value) %>%
+  filter(original_period==2025)%>%
+  filter(!`weo-subject` %in% c("NGDP", "PPPEX"))
+
+US_2025<-raw_US_data %>%
+  dplyr::select("original_period","weo-country","weo-subject",value) %>%
+  filter(original_period==2025) 
+
+combo<-bind_rows(China_2025,US_2025)
+
+# Define mapping for indicators
+indicator_map <- c(
+  "NGDPD" = "Whole Economy GDP $bn (market exchange rate)",
+  "PPPGDP" = "Whole Economy GDP $bn (PPP exchange rate)",
+  "NGDPDPC" = "Per capita GDP $",
+  "PPPPC" = "Per capita GDP PPP$"
+)
+
+# Format to 2 decimal places
+MEX2025_fmt <- formatC(MEX2025, format = "f", digits = 2)
+PPP2025_fmt <- formatC(PPP2025, format = "f", digits = 2)
+
+caption_text <- paste0(
+  "<span style='color:orange;'>",
+  "US and China Selected Indicators (2025)<br>",
+  "IMF World Economic Outlook, Apr 2025<br>",
+  "Market exchange rate (USD-CNY) = ", MEX2025_fmt, "<br>",
+  "PPP exchange rate (USD-CNY) = ", PPP2025_fmt,
+  "</span>"
+)
+
+combo %>%
+  filter(`weo-subject` %in% names(indicator_map)) %>%
+  mutate(
+    Country = recode(`weo-country`, "CHN" = "China", "USA" = "US"),
+    Indicator = recode(`weo-subject`, !!!indicator_map),
+    Value = comma(value)
+  ) %>%
+  select(Country, Indicator, Value) %>%
+  kable("html", caption = caption_text, escape = FALSE) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = FALSE,
+                position = "center") %>%
+  column_spec(1:3, border_left = TRUE, border_right = TRUE) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#004c99")
+
+```
+
+
+# The Irish Question
+
+Ireland’s official GDP data are notoriously distorted due to the impact of globalisation and multinational tax planning strategies. Large multinational firms, particularly in technology and pharmaceuticals, often route profits through Ireland to benefit from its low corporate tax rates, artificially inflating the country’s GDP figures. While Gross National Product (GNP) has traditionally been used as a better measure – since it excludes income earned by foreign firms repatriated abroad – even this is skewed in Ireland’s case due to massive depreciation allowances on intellectual property assets that have been shifted onto Irish balance sheets.
+
+To address these distortions and provide a more realistic indication of the true economic welfare of Irish residents, the Central Statistics Office (CSO) has developed a measure called *Modified GNI (or GNI)**. This indicator strips out the profits of re-domiciled firms, depreciation on intellectual property imports, and aircraft leasing activities to better reflect income generated from genuinely Irish economic activity. Without such adjustments, headline GDP can give a deeply misleading picture of Ireland’s living standards and economic capacity.
+
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+knitr::opts_chunk$set(echo = TRUE)
+
+library(rdbnomics)
+library(tidyverse)
+library(scales)
+library(knitr)
+library(kableExtra)
+###################################################################################
+# IRELAND DATA
+# dbnomics feed dated; for latest update see CSO website below 
+# https://www.cso.ie/en/releasesandpublications/ep/p-ana/annualnationalaccounts2024/gniandde-globalisedresults/
+# use current prices as in CSO deglobalised chart
+
+raw_Ireland_data<-rdb(ids=c("CSO/NA001/NA001C01.01","CSO/NA001/NA001C01.03",
+                            "CSO/NA001/NA001C01.10"))
+
+Ireland_2023check<-raw_Ireland_data %>%
+  filter(original_period==2023)
+
+df <- tribble(
+  ~Year, ~Series, ~Value, ~Population,
+  2024, "GDP", 562.8, 5.3,
+  2024, "GNI", 422.8, 5.3,
+  2024, "Modified GNI", 321.1, 5.3
+)
+
+# Calculate Value per person (in million / million = units)
+df <- df %>%
+  mutate(Value_per_person = Value / Population)
+
+# Create the ggplot bar chart
+ggplot(df, aes(x = Series, y = Value_per_person, fill = Series)) +
+  geom_col() +
+  labs(
+    title = "Ireland's Economy 2024",
+    subtitle = "Per Capita GDP, GNI, and Modified GNI",
+    caption = "CSO Ireland (National Accounts Explained/Globalisation)",
+    x = "",
+    y = "€000s"
+  ) +
+  theme(plot.title=element_text(size=24,hjust=0.5,colour="#002060"),
+        plot.subtitle=element_text(size=18,hjust=0.5,face="italic",colour="#002060"),
+        plot.caption=element_text(size=14,hjust=0.5,face="italic",colour="#002060"),
+        axis.title=element_text(size="18",colour="#002060",vjust=2),
+        axis.title.y =element_text(margin=unit(c(0,6,0,0), "mm")),
+        axis.text=element_text(color="#002060",size=16),
+        legend.position = "none",
+        axis.ticks=element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill='transparent'),
+        plot.background = element_rect(fill='transparent', color=NA),
+        plot.margin = margin(t = 5, r = 20, b = 10, l = 20)) 
+
+###################################################################################
+# OUR WORLD IN DATA
+# https://cran.r-project.org/web/packages/owidR/owidR.pdf
+# easier to download zipped file to relevant directory and then import csv
+
+# https://ourworldindata.org/grapher/maternal-mortality-rate-who-mdb
+# https://ourworldindata.org/grapher/homicide-rate-vs-gdp-pc #NB Ireland
+# https://ourworldindata.org/us-life-expectancy-low
+```
+# Takeaways
+
+Cross-country GDP comparisons can be a mug's game if care is not taken in assembling and understanding the raw data. The examples above are just a few of the better-known issues. But there are many more pitfalls lurking beneath the surface, including statistical imputations, the treatment of intangibles, differing production boundaries, frequent data revisions, and questionable methodologies in some countries. Trustworthy and well-understood data are vital for building and deploying effective macroeconomic models. To avoid falling at the first hurdle, analysts need to take extra care in understanding the limitations and construction of the figures they are dealing with.
+
+

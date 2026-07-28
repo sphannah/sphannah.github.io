@@ -1,0 +1,180 @@
+---
+title: "US Megabanks Update"
+format:
+  html:
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    embed-resources: true 
+    css: /style.css
+    theme: ""
+execute:
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+**US Megabanks: summary of 2025 Q2 results**
+
+Second-quarter earnings announcements for the four major US banks - JP Morgan, Wells Fargo, Citibank, and Bank of America - presented a mixed, yet generally resilient, performance.
+
+-   **Profitability metrics** like Return on Assets (ROA) and Return on Equity (ROE) varied. Similarly, Net Interest Income (NII) saw diverse trends on the back of interest rate uncertainty and changes in deposit mixes. Meanwhile, non-interest income generally proved a strong contributor, particularly in areas like wealth management and trading.
+
+-   **Efficiency ratios** indicated varying degrees of cost control across the banks, with some demonstrating improved operational leverage through expense discipline, even as others reported increased non-interest expenses driven by investments in technology and compensation. A common positive theme was the continued strength in capital ratios. All banks maintained robust Common Equity Tier 1 (CET1) levels well above regulatory thresholds, a strong buffer against potential economic headwinds.
+
+-   **Asset quality**, a crucial indicator of financial health, largely showed improvement across the board. Provisions for credit losses generally decreased, and metrics like net charge-offs and non-performing assets indicated a relatively benign credit environment. While specific pockets of concern, such as commercial real estate office loans, were noted by some banks, the overall trend suggests a healthy loan book, contributing to reduced credit loss provisions.
+
+-   Looking ahead, **consensus analyst views** project cautious optimism for the year ahead, anticipating modest growth amidst an uncertain domestic and global economic landscape. Key challenges include the ongoing volatility in interest rates, potential geopolitical and tariff disruptions, cautious business sentiment, and the evolving regulatory environment. Despite these headwinds, banks are expected to continue their focus on efficient capital management, aiming to deliver shareholder returns, while also navigating the increasing importance of digital transformation and cybersecurity threats.
+
+**Market signals as forward-looking diagnostics**
+
+Assessing the health and prospects of major banks, means complementing traditional balance sheet analysis with market-based indicators such as share prices. While financial statements offer a snapshot of current conditions, they are inherently backward-looking. Equity markets, by contrast, reflect investor forward-looking expectations, pricing in not just present, but also future, fundamentals: regulatory shifts, macro conditions, and structural changes in the sector. For banks, whose solvency and relevance are highly sensitive to such dynamics, market signals offer essential supplementary insights.
+
+**Structural scarring from crises**
+
+The equity performance of US banks in the 21st century reflects a succession of trust-eroding events. The Global Financial Crisis (GFC) delivered a catastrophic blow to the sector, as seen in the collapse of the KBW Bank Index relative to the S&P 500. Although heavily backstopped by the Fed and Treasury, conventional banks never fully recovered their former market stature. Subsequent blows - the Covid-19 pandemic and the Spring 2023 regional banking crisis - have only deepened investor skepticism. Taking a long-term perspective, the market has been heavily discounting US banks, relative to the broader index, for nearly two decades.
+
+![](images/Slide10.PNG){fig-align="center"}
+
+**A poor long-run bet?**
+
+From a risk-return standpoint, banks appear worse than boring. Historical data show they offer low annualised returns while exposing investors to greater volatility. Yet, despite this unattractive trade-off, bank stocks continue to pull in capital. Why? Because banks are integral to the functioning of modern economies — they are effectively part of the State’s operating infrastructure. In return for this privileged position, banks enjoy an implicit safety net. They are TBTF (too big to fail). This moral hazard leads equity investors to tolerate sub-par returns. Despite their subordinated status in the event of a bank failing, shareholders cling on to the hope that government intervention will make them whole.
+
+```{r setup, echo: true}
+#| fig-width: 10
+#| fig-height: 6
+
+library(tidyquant)
+library(tidyverse)
+library(ggrepel)
+library(scales)
+
+### SECTOR SPDRS http://www.sectorspdr.com/sectorspdr/ 
+### excluded sectors = XLC=comm services and XLRE = real estate...data gaps)
+### use KBE SPDR S&P Bank ETF rather than overall Financials
+daystart<-as_date("2005-12-01")
+vector<-c("SPY","XLY","XLP","XLE","KBE","XLV","XLI","XLB","XLK","XLU")
+n<-length(vector)
+############################ FUNCTION FOR GENERATING TIDY SET OF MONTHLY LOG RETURNS #########
+logmret<- function(stocks,daystart){
+  df_prices<- tibble(vector) %>%
+    mutate(stock.prices=map(.x=vector,~tq_get(.x,get="stock.prices",from=daystart))) %>%
+    unnest(cols=c(stock.prices)) %>%
+    select(symbol=vector,date,adjusted) %>%
+    mutate(symbol=if_else(symbol=="^GSPC",sub('.','',symbol),symbol))%>%
+    group_by(symbol) %>%
+    tq_transmute(select=adjusted, mutate_fun=to.monthly,indexAt="lastof") %>%
+    group_by(symbol) %>%
+    tq_transmute(select=adjusted,mutate_fun=periodReturn,period="monthly",type="log") %>%
+    mutate(date=parse_date_time(date,"ymd")) %>%
+    filter(date>daystart+30)
+}
+
+##############################################################################################
+mretdata<-logmret(vector,daystart)
+mretdata_wide<-mretdata %>%
+  pivot_wider(names_from=symbol,values_from=monthly.returns)
+
+mretdata_summary <- mretdata %>%
+  group_by(symbol) %>%
+  summarise(mean=mean(monthly.returns),
+            stdev=sd(monthly.returns),
+            ann_mean=1200*mean,
+            ann_risk=100*(sqrt(12)*stdev)) %>%
+  mutate(symbol=recode(symbol,
+                       "SPY"="SP500",
+                       "XLY"="Consumer Discretionary",
+                       "XLP"="Consumer Staples",
+                       "XLE"="Energy",
+                       "KBE"="Banks",
+                       "XLV"="Health Care",
+                       "XLI"="Industrials",
+                       "XLB"="Materials",
+                       "XLK"="Technology",
+                       "XLU"="Utilities"))
+
+mretdata_summary <- mretdata_summary %>%
+  mutate(label_colour = case_when(
+    symbol == "SP500" ~ "#002060",
+    symbol == "Banks" ~ "firebrick",
+    TRUE ~ "gray30"
+  ),
+  
+  nudge_x = case_when(
+    symbol == "SP500" ~ 0.0,
+    symbol == "Banks" ~ 0.0,
+    symbol == "Health Care" ~ -0.5,
+    symbol == "Consumer Discretionary" ~ 3.5,
+    symbol == "Utilities" ~ 1.5,
+    TRUE ~ 0
+  ),
+  nudge_y = case_when(
+    symbol == "SP500" ~ 1.5,
+    symbol == "Banks" ~ -1.5,
+    symbol == "Health Care" ~ 0.8,
+    symbol == "Consumer Discretionary" ~ 0,
+    TRUE ~ -0.8
+  ),
+  label_size = case_when(
+    symbol %in% c("SP500", "Banks") ~ 9,
+    TRUE ~ 6
+  ),
+  label_fontface = case_when(
+    symbol %in% c("SP500", "Banks") ~ "bold",
+    TRUE ~ "plain"
+  ))
+
+ggplot(mretdata_summary) +
+  geom_point(aes(ann_risk, ann_mean), size = 5, colour = "gray30", alpha = 0.2) +
+  geom_point(data = mretdata_summary %>% filter(symbol == "SP500"), 
+             aes(ann_risk, ann_mean), colour = "#002060", size = 7) +
+  geom_point(data = mretdata_summary %>% filter(symbol == "Banks"), 
+             aes(ann_risk, ann_mean), colour = "firebrick", size = 7) +
+  geom_text(aes(x = ann_risk + nudge_x, 
+                y = ann_mean + nudge_y, 
+                label = symbol,
+                color = label_colour,
+                fontface = label_fontface,
+                size = label_size),
+            show.legend = FALSE) +
+  scale_color_identity() +
+  scale_size_identity()+
+  labs(title="US Stock Sectors: Risk-Return Tradeoff",
+       subtitle="based on monthly ETF data: Jan 2006 - Jul 2025",
+       caption = "RETURNS = annualised average of monthly log returns\nRISK = annualised standard deviation of monthly log returns",
+       x="% Risk", y="% Returns")+
+  theme(plot.title=element_text(color="#002060",hjust=0.5,size=28),
+        plot.subtitle=element_text(color="#002060",face="italic",
+                                   size=24,hjust=0.5),
+        plot.caption=element_text(color="#002060",size=16,hjust=0.5),
+        axis.title=element_text(size="18",colour="#002060"),
+        axis.text=element_text(color="#002060",size=16),
+        axis.ticks=element_blank(),
+        panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.background = element_rect(fill='transparent'), 
+        plot.background = element_rect(fill='transparent',color=NA))+
+  scale_y_continuous(breaks = seq(0, 16, by = 2), limits = c(0, 16))+
+  scale_x_continuous(breaks = seq(10, 30, by = 5), limits = c(10, 30))
+
+```
+
+**The Big Four: A study in divergence**
+
+Not all banks are created equal. The post-GFC period shows a striking divergence in the equity performance of the US Big Four. JPMorgan Chase has significantly outpaced both the S&P 500 and the KBW Bank Index, thanks to its strong management, diversified earnings base, and relative prudence during the GFC. In sharp contrast, Citibank appears to have lagged substantially — a stark reminder that individual institutions carry very different risk-return profiles even within the same regulatory and macro environment.
+
+![](images/Slide13.PNG){fig-align="center"}
+
+**Trump 2.0 and the rebound story**
+
+Fast forward to the latest cycle. Once the shock of Liberation Day (2 April) had been absorbed and the TACO jibe gained traction, bank stocks regained their mojo, amid expectations of lighter regulation and an economy that continues to hum along. The striking thing in this short-term window is Citibank’s resurgence. It leads the pack in relative performance. Citigroup had just got "too cheap" against a backdrop of its restructuring, enhanced cost management and better-than-expected results.(This turnaround shows how radically perspectives can shift depending on the time horizon chosen in the graphs!)
+
+![](images/Slide14.PNG){fig-align="center"}
+
+**The global perspective**
+
+While US banks have enjoyed a bounce, their European counterparts have done even better. This reflects strong earnings, cost efficiencies, and generous shareholder returns (dividends and buybacks). US banks, while admittedly in good shape, have not completely shaken off doubts from the SVB+ crisis and remain weighed down by relative valuation concerns, doubts about the dollar's long-term future and general US policy uncertainty.
+
+![](images/Slide12.PNG){fig-align="center"}
