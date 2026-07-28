@@ -59,18 +59,7 @@ library(lubridate)
 library(tidybayes)
 library(scales)
 
-# setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) # Commented out for Quarto rendering
-# getwd() # Commented out
-# rm(list=ls()) # Commented out
-
-# API Key Retrieval
-# The FRED API key is retrieved from an environment variable for security.
-api_key <- Sys.getenv("MY_API_KEY")
-if (api_key =="") {
-stop("API key 'MY_API_KEY' not found. Please set it as an environment variable in .Renviron.")
-}
-
-fredr_set_key(api_key)
+fredr_set_key(Sys.getenv("MY_API_KEY"))
 
 # Data Import and Preparation
 # We import historical Real Gross Domestic Product (GDPC1) data from the
