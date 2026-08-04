@@ -45,63 +45,89 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(matlib)
 
-# Define the calibrated A matrix
-A <- matrix(c(
+# 1. Calibrated Model Setup (Type II Closed Model)
+A_closed <- matrix(c(
   0.10, 0.10, 0.30,
   0.15, 0.25, 0.30,
   0.33, 0.67, 0.00
 ), nrow = 3, byrow = TRUE)
-colnames(A) <- rownames(A) <- c("Manufacturing", "Services", "Households")
+colnames(A_closed) <- rownames(A_closed) <- c("Manufacturing", "Services", "Households")
 
-# Leontief inverse
-I <- diag(3)
-L <- inv(I - A)
-
-# Define baseline final demand vector
+# Exogenous final demand vector for open sectors
 baseline_FD <- matrix(c(20, 80, 0), nrow = 3)
+L_closed    <- inv(diag(3) - A_closed)
+baseline_output <- L_closed %*% baseline_FD
 
-# Calculate baseline output
-baseline_output <- L %*% baseline_FD
+# 2. Extract Primitives for Richmond Fed (FRB) Analysis
+# Pull out the open inter-industry intermediate input matrix (Phi)
+Phi_prime <- A_closed[1:2, 1:2] 
 
-# Compute 1% exogenous shock to manufacturing
-baseline_manufacturing <- baseline_output[1,1]
-shock_size <- 0.01 * baseline_manufacturing
-shock_FD <- matrix(c(shock_size, 0, 0), nrow = 3)
+# Calculate the open Leontief Inverse focusing on production efficiency
+L_open <- inv(diag(2) - Phi_prime)
 
-# Calculate output change
-shock_output <- L %*% shock_FD
-rownames(shock_output) <- c("Manufacturing", "Services", "Households")
+# Calculate Macro GDP (Total Final Demand across industries)
+total_gdp <- sum(baseline_FD[1:2, 1])
 
-# Decompose effects
-direct_effect <- shock_size
-indirect_effect <- shock_output["Services", 1]
-induced_effect <- shock_output["Households", 1]
-total_effect <- sum(shock_output)
+# Calculate True Sectoral Domar Weights (Gross Output / GDP)
+domar_weights <- baseline_output[1:2, 1] / total_gdp
 
-# Create normalised table (Direct = 1.00)
-decomposition <- data.frame(
-  Effect = c("Direct", "Indirect", "Induced", "Total"),
-  Index = c(1.00,
-            indirect_effect / direct_effect,
-            induced_effect / direct_effect,
-            total_effect / direct_effect)
+# 3. Construct Integrated Summary Table
+frb_summary <- data.frame(
+  Sector             = c("Manufacturing", "Services"),
+  Standard_GVA_Share = round(c(20, 80) / total_gdp, 2),
+  Domar_Weight       = round(domar_weights, 2),
+  FRB_Role           = c("High Propagation (Capital-Hub)", "High Impact (Direct Consumption)")
 )
 
-# Round for neat display
-decomposition$Index <- round(decomposition$Index, 2)
+# Render clean markdown table for the blog layout
+knitr::kable(frb_summary, col.names = c("Sector", "GVA Share", "Domar Weight", "Structural Macro Role"))
 
-# Print results
-print(decomposition, row.names = FALSE)
 ```
+
+## Beyond Demand: Hulten's Theorem and Dynamic Propagation
+
+While our input-output matrix captures a demand-driven "pull" effect, modern macroeconomics also looks at the supply side. What happens if manufacturing doesn't just pull demand, but becomes structurally more efficient through a **Total Factor Productivity (TFP)** shock? 
+
+To answer this, macroeconomists rely on two foundational ideas:
+
+* **Domar Weights**: A sector's total sales (gross output) divided by total aggregate GDP. Because industries sell intermediate goods to each other, these weights count transactions multiple times and sum to more than 1.0 across the economy.
+* **Hulten’s Theorem (1978)**: A classic rule stating that a 1% productivity boost in any single sector changes overall market GDP by exactly that sector's Domar weight. 
+
+### The Short-Run vs. Medium-Run Paradox
+
+On paper, service industries look massive because they dominate direct household consumption. However, a recent [Federal Reserve Bank of Richmond Working Paper (WP 26-11)](https://richmondfed.org) by Paul Ho, Danial Lashkari, and Pierre-Daniel Sarte extends Hulten's logic into a dynamic world with investment networks. 
+
+They show that a sector's total economic influence (its Domar weight) splits into two channels:
+
+1. **The Impact Component**: The immediate, short-run boost to consumption.
+2. **The Propagation Component**: The long-run ripple effect that alters investment and builds future capital stocks.
+
+### Why Physical Stuff Still Matters
+
+This creates a fascinating structural asymmetry in advanced economies. Service sectors (like hospitality or entertainment) have high *impact* components; their shocks hit GDP instantly but fade within a year because they don't produce capital. 
+
+Goods-producing sectors (like manufacturing and construction) are heavily integrated into the **investment supply chain**. They build the physical machines, factories, and technology infrastructure that other sectors rely on. 
+
+The Richmond Fed authors find that nearly **93% of the Construction sector's weight** is purely forward-looking propagation. Over a three-year horizon, productivity gains in goods-producing industries accumulate and eventually overtake services in their total macro impact—even though goods make up less than one-third of total GDP. 
+
+This provides the supply-side mathematical backbone to our earlier takeaway: a bottleneck in physical production penalizes the entire service-driven economy over time.
 
 # Takeaways
 
-The big idea that emerges is this: manufacturing turns out to be much more important than first impressions suggest. Its direct share of GDP may be small, but its indirect effects through supply chains, and its induced effects through household spending of wages, generate a much larger economic footprint. In our stylised example, a 1% rise in manufacturing demand leads to a total increase in output that is more than three times the initial shock. In other words, manufacturing’s contribution extends far beyond the factory gate.
+Manufacturing plays a crucial role beyond its direct share of GDP, operating through two main channels:
 
-Of course, this simplicity comes with qualifications. The model makes restrictive assumptions: fixed coefficients, no capacity constraints, and a static snapshot without dynamics or prices. Yet its power lies in clarity. It illustrates multiplier effects that are crucial for understanding economic interdependencies. An <a href="https://www.oxfordeconomics.com/resource/the-true-impact-of-uk-manufacturing/"> Oxford Economics study</a> (April 2024) commissioned by the Manufacturing Technologies Association used UK input-output tables to estimate a Type II multiplier of 2.8, confirming that manufacturing’s GDP impact is almost three times its direct share.
+1. **Demand Pull (Multipliers):** An increase in manufacturing demand creates significant upstream ripple effects through supply chains and worker spending. 
+2. **Supply Ripple (Domar Weights):** A productivity boost in manufacturing lowers input costs downstream, structurally expanding aggregate GDP (Hulten's Theorem).
 
-In fact, as the study argues, manufacturing has an even broader role to play in 21st century economies. The sector acts as a crucial engine for <a href="https://medium.com/ifm-insights/changing-how-we-talk-and-think-about-manufacturing-ad8d4c58c8ff"> innovation and productivity growth</a>. It is the primary sphere where cutting-edge research and development are translated into tangible products and processes, often with spillover benefits across the entire economy. This innovation is not confined to the manufacturing sector itself; it provides the physical infrastructure and advanced goods that enable service sectors to thrive and evolve, from advanced medical devices, to green energy solutions and to high-performance computing hardware that is fuelling the AI revolution.
+**Why Physical Production Remains Critical**
+While services have a large, short-run consumption footprint, manufacturing creates the essential capital assets such as machinery, infrastructure, and hardware that are needed for long-term growth. Manufacturing disruptions act as a supply-side bottleneck for the entire economy, including high-tech services. Therefore, manufacturing serves as an investment engine for medium-run macro growth.
 
-The "cloud" is not an ethereal concept but relies on vast data centres, sophisticated cooling systems, and enormous energy infrastructure. All of these require complex manufacturing processes to design, build, and maintain. Without a robust and innovative manufacturing base, advanced economies would struggle to meet their climate goals, harness the full potential of emerging technologies, or ensure a reliable supply of essential products.
+The big idea that emerges is that manufacturing's true economic footprint extends far beyond the factory gate. In our stylised three-sector model, the total increase in economic output is more than three times the initial demand shock due to these deep interdependencies. 
 
-The latest <a href="https://www.pmi.spglobal.com/Public/Release/PressReleases"> S&P Global PMI surveys </a>offer a glimpse into current realities. The July 2026 survey for US manuafacturing was disappointing compared with services. Price pressures also intensified, with input cost inflation reaching a 14-month high and selling price inflation close to a four-year peak. But that’s another story for another post.
+Of course, this simplicity comes with qualifications. The Leontief model makes restrictive assumptions: fixed coefficients, no capacity constraints, and a static snapshot without dynamics or prices. Yet its power lies in clarity. It illustrates multiplier effects that are crucial for understanding economic networks. Empirically, an <a href="https://www.oxfordeconomics.com/resource/the-true-impact-of-uk-manufacturing/">Oxford Economics study</a> (April 2024) commissioned by the Manufacturing Technologies Association used UK input-output tables to estimate a Type II multiplier of 2.8, confirming that manufacturing’s macro GDP impact is almost three times its direct value-added share.
+
+In fact, as that study argues, manufacturing plays an even broader structural role in 21st-century economies as a primary engine for innovation and productivity growth. It is the sphere where cutting-edge research and development are translated into tangible goods, creating massive spillover benefits. This innovation provides the physical infrastructure and advanced goods that enable service sectors to thrive, ranging from advanced medical devices and green energy solutions to the high-performance computing hardware fuelling the AI revolution.
+
+The "cloud" is not an ethereal concept; it relies on vast data centres, sophisticated cooling systems, and enormous energy infrastructure. All of these require complex manufacturing processes to design, build, and maintain. Without a robust and innovative manufacturing base, advanced economies would struggle to meet their climate goals, harness the full potential of emerging technologies, or ensure a resilient supply of essential products.
+
+The latest <a href="https://www.pmi.spglobal.com/Public/Release/PressReleases">S&P Global PMI surveys</a> offer a glimpse into current realities. The July 2026 survey for US manufacturing was disappointing compared with services. Price pressures also intensified, with input cost inflation reaching a 14-month high and selling price inflation close to a four-year peak. But that’s another story for another post.
