@@ -1,0 +1,71 @@
+---
+title: "Fantasy Faves"
+subtitle: "Popular FPL Resources"
+format:
+  html:
+    fig-width: 10
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    embed-resources: true
+    css: ../style.css
+    theme: ""
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html)
+
+Because FPL rules and pricing mechanics evolve rapidly, top-selling print literature generally falls into two categories: **enduring analytical/psychological frameworks** and **season-focused strategy releases**.
+
+### Commercial Titles
+
+[*FPL Obsessed: Tips for Success in Fantasy Premier League*](https://www.amazon.co.uk/FPL-Obsessed-Success-Fantasy-Premier/dp/1838475125) Matt Whelan (2021)  
+  Consistently one of the highest-selling dedicated strategy guides on Amazon UK. Focuses on bias mitigation, disciplined transfer planning, and mental bankroll management.
+
+[*Wasting Your Wildcard: The Method and Madness of Fantasy Football*](https://www.amazon.co.uk/Wasting-Your-Wildcard-Madness-Football/dp/1787290166) David Wardale (2018)  
+  Published by Octopus/Hachette; a mainstream commercial hit exploring FPL culture through interviews with former World No. 1s and elite managers.
+
+[*FPL Elite: How to Be the Best at Fantasy Premier League*](https://www.amazon.co.uk/FPL-Elite-Fantasy-Premier-League/dp/1739860861) Matt Whelan (2024)  
+  Analyses behavioural traits and statistical patterns extracted from habitual top-10k and top-1k managers ("Elite XI").
+
+[*The Mind Game: Gaining a Psychological Edge in Fantasy Premier League*](https://www.amazon.co.uk/Mind-Game-Gaining-Psychological-Fantasy/dp/1919624007) Ross Dowsett / FPL Raptor (2023)  
+  Applies behavioural decision science to mini-league management and chip execution, achieving strong sales on digital and indie chart rankings.
+
+[*FPL: Chasing Green Arrows*](https://www.amazon.co.uk/Fantasy-Premier-League-Chasing-Strategies/dp/1739860845) Paul Rogers (2022)  
+  A streamlined foundational handbook covering squad structure, captaincy rotation algorithms, and fixture difficulty rating (FDR) optimisation.
+
+[*Fifty Shades of Green: A Disciplined Approach to Fantasy Football*](https://www.amazon.co.uk/Fantasy-Premier-League-Chasing-Strategies/dp/1739860845) Ash / FPL Juice (2021)  
+  Frames FPL team management as a portfolio allocation problem, emphasising asset value tracking and variance control.
+
+### Dynamic Media, Digital Tools & Data Ecosystems
+Because static print titles risk obsolescence when official rules or scoring mechanics change, manager engagement has largely migrated to dedicated web platforms, analytics suites, and underlying provider feeds:
+
+* **Strategy & Planning Platforms:** Dedicated community hubs like [*Fantasy Football Scout*](https://www.fantasyfootballscout.co.uk/), [*Fantasy Football Hub*](https://www.fantasyfootballhub.co.uk/), [*Premier Fantasy Tools*](https://www.premierfantasytools.com/), and [*AllAboutFPL*](https://allaboutfpl.com/) provide real-time fixture planners, rate-my-team (RMT) algorithms, mini-league analysers, and seasonal PDF guides.
+* **Underlying Big Data & Expected Metrics:** Advanced managers increasingly rely on granular spatial and event data supplied by statistical powerhouses such as [*Opta*](https://www.statsperform.com/opta/), [*StatsBomb*](https://statsbomb.com/), and [*Understat*](https://understat.com/) to track underlying metrics (expected goals [xG], expected assists [xA], shot map distributions), etc rather than relying on historical point returns alone.
+
+### Social Media & Content Creators
+
+A significant portion of real-time strategy discussion, gameweek previews, and injury news happens across social video and microblogging platforms:
+
+#### Long-Form Video & Live Streams (YouTube)
+* **[*Let's Talk FPL (Andy)*](https://www.youtube.com/@LetsTalkFPL):** The largest independent FPL YouTube channel, featuring weekly squad reveals, live deadline streams, and transfer strategy breakdowns.
+* **[*FPL Harry*](https://www.youtube.com/@FPLHarry):** Known for exceptionally high overall world rankings across multiple consecutive seasons, focusing on data-driven squad selection and chip strategy.
+* **[*FPL Focal*](https://www.youtube.com/@FPLfocal):** Popular for concise, highly visual statistical summaries, team news updates, and custom fixture planners.
+* **[*FPL Mate (Dan)*](https://www.youtube.com/@FPLMate):** Blends statistical analysis with engaging, accessible gameweek previews and mini-league advice.
+
+#### Real-Time News, Fixtures & Threads (X / Twitter)
+* **[*@BenCrellin*](https://x.com/BenCrellin):** The leading authority on Premier League fixture scheduling, blank/double gameweek modeling, and chip timing.
+* **[*@BigManBakar*](https://x.com/BigManBakar):** Widely read for structured, data-heavy threads analyzing captaincy metrics and underlying player stats before every deadline.
+* **[*@FPLStatus*](https://x.com/FPLStatus):** Automated real-time alerts tracking nightly price rises, price falls, and building squad value.
+* **[*@OfficialFPL*](https://x.com/OfficialFPL):** The official Premier League account for definitive bonus point confirmations, injury updates, and game updates.
+
+#### Short-Form Strategy & Quick Tips (TikTok)
+* **[*@FPLTom*](https://www.tiktok.com/@fpltom_):** Rapid bite-sized transfer tips, differential picks, and fixture previews designed for quick mobile consumption.
+* **[*@HollyShand*](https://www.tiktok.com/@hollyshand):** Accessible short-form previews, captaincy guides, and team news breakdowns from an established community pundit.

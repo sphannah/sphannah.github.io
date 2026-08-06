@@ -1,0 +1,340 @@
+---
+title: "Substance Over Form"
+subtitle: "Why fantasy football’s favourite metric is broken"
+format:
+  html:
+    fig-width: 10
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    embed-resources: true
+    css: ../style.css
+    theme: ""
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+<style>
+.gt_table .gt_heading img{
+  height:30px!important;
+  width:auto!important;
+  max-width:42px!important;
+  object-fit:contain!important;
+  vertical-align:middle!important;
+}
+@media print{
+  .gt_table .gt_heading img{
+    height:24px!important;
+    width:auto!important;
+    max-width:34px!important;
+  }
+  .gt_table tfoot{display:table-row-group!important;}
+  .gt_table tr{break-inside:avoid!important;}
+}
+</style>
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(runner)
+library(jsonlite)
+library(gt)
+library(magick)
+library(showtext)
+library(webshot2)
+
+playersraw<-read_csv("./data/activeplayers_DGW_disagg_2526.csv",show_col_types=FALSE)
+current_raw<-read_csv("./data/players_fullcurrent_2526.csv",show_col_types=FALSE)
+current_gw<-38
+img_file<-"./images/fpl.png"
+
+showtext_auto()
+showtext_opts(dpi=300)
+```
+
+## Form is not a fact
+
+Every fantasy manager talks about form. The difficulty begins when somebody tries to measure it.
+
+The official Fantasy Premier League statistic has the virtue of clarity. FPL defines Form as a player’s average score per match, using all matches played by his club in the previous 30 days. That figure is displayed prominently and is easy to sort. It is also a rather fragile guide to what might happen next.
+
+A 30-day window contains no fixed quantity of football. During a crowded part of the calendar it may include six club fixtures; across an international break it may contain only two or three. Blank gameweeks, postponements and rearranged matches add further variation. Two players with the same displayed Form can therefore have reached it from quite different samples.
+
+There is a second complication. FPL’s definition uses *club matches*, not merely matches in which the player appeared. This mixes two questions which a fantasy manager ought to consider separately:
+
+- How productive was the player when he played?
+- How reliably did he get onto the pitch, and for how long?
+
+That distinction matters. A substitute who scores eight points in one appearance during a four-match window is not the same proposition as a regular starter who averages eight points across four full matches. One may offer explosive returns; the other combines returns with dependable minutes.
+
+The official measure is not wrong. It is simply being asked to do too much.
+
+## Reconstructing the official number
+
+The first task is to reproduce FPL’s statistic faithfully. For each player-match record, the code below counts club fixtures, appearances, points and minutes in rolling 30-day and 45-day windows. The reconstructed official measure divides 30-day points by 30-day club fixtures. A separate appearance-based figure is retained because it answers a different and useful question.
+
+```{r}
+#| label: rolling-form
+#| echo: true
+players_perf<-playersraw %>%
+  dplyr::select(playerid,playername,short_team,position,team,cost,gw,fixture,
+                kickoff_time,minutes,event_points,total_defcon,defcon_pts) %>%
+  mutate(date=as.Date(kickoff_time),team_fix=as.integer(!is.na(fixture)),
+         fixplay=as.integer(minutes>0),app_points=if_else(minutes>0,event_points,0),
+         app_mins=if_else(minutes>0,minutes,0)) %>%
+  filter(!is.na(fixture)) %>%
+  group_by(playerid) %>%
+  arrange(kickoff_time,.by_group=TRUE) %>%
+  mutate(s_teamfix=cumsum(team_fix),s_fixplay=cumsum(fixplay),
+         s_points=cumsum(app_points),s_mins=cumsum(app_mins),
+         sppg=if_else(s_fixplay>0,s_points/s_fixplay,NA_real_),
+         smtf=if_else(s_teamfix>0,s_mins/s_teamfix,NA_real_),
+         app_rate=if_else(s_teamfix>0,s_fixplay/s_teamfix,NA_real_),
+         across(c(team_fix,fixplay,app_points,app_mins),
+                list(r30=~sum_run(.x,k=30,idx=date),r45=~sum_run(.x,k=45,idx=date)))) %>%
+  mutate(form30_official=if_else(team_fix_r30>0,app_points_r30/team_fix_r30,NA_real_),
+         form30_app=if_else(fixplay_r30>0,app_points_r30/fixplay_r30,NA_real_),
+         form45=if_else(fixplay_r45>0,app_points_r45/fixplay_r45,NA_real_),
+         m45tf=if_else(team_fix_r45>0,app_mins_r45/team_fix_r45,NA_real_),
+         app45_rate=if_else(team_fix_r45>0,fixplay_r45/team_fix_r45,NA_real_)) %>%
+  ungroup()
+```
+
+The validation below compares the latest reconstructed value with the `form` field downloaded from FPL. Since the official field is published to one decimal place, a difference below 0.05 points is treated as a match. The short diagnostics table is deliberately left in the analysis: if FPL changes its convention, or the two source files represent different snapshots, the discrepancy will be visible rather than buried.
+
+```{r}
+#| label: validate-official-form
+#| echo: true
+perf_latest<-players_perf %>%
+  arrange(playerid,kickoff_time,gw) %>%
+  group_by(playerid) %>%
+  slice_tail(n=1) %>%
+  ungroup()
+
+form_check<-perf_latest %>%
+  dplyr::select(playerid,playername,form30_official) %>%
+  left_join(current_raw %>%
+              transmute(playerid,official_form=as.numeric(form)) %>%
+              distinct(playerid,.keep_all=TRUE),by="playerid") %>%
+  mutate(difference=form30_official-official_form,
+         matches=near(round(form30_official,1),official_form))
+
+form_check %>%
+  summarise(players_compared=sum(complete.cases(form30_official,official_form)),
+            exact_to_1dp=sum(matches,na.rm=TRUE),
+            match_rate=mean(matches,na.rm=TRUE),
+            largest_gap=max(abs(difference),na.rm=TRUE)) %>%
+  gt() %>%
+  fmt_number(columns=c(match_rate,largest_gap),decimals=2) %>%
+  fmt_percent(columns=match_rate,decimals=1)
+```
+
+If the match rate is materially below 100 per cent, first check that both CSV files were captured after the same fixture and at the same time. FPL may also define the boundary of “30 days” differently from `runner`, particularly for matches played exactly 30 days before the snapshot. Those are data-timing questions, not evidence that either productivity concept is intrinsically superior.
+
+## When form fades without another ball being kicked
+
+David Raya provides a particularly revealing example of the calendar problem. Arsenal's final five league fixtures of 2025-26 produced the following fantasy record:
+
+| Gameweek | Date | Raya's points |
+|:--|:--|--:|
+| GW34 | 25 April | 10 |
+| GW35 | 2 May | 6 |
+| GW36 | 10 May | 9 |
+| GW37 | 18 May | 6 |
+| GW38 | 24 May | 0, did not play |
+
+Viewed immediately after GW38, the previous 30 days stretched back to 24 April. All five Arsenal fixtures therefore fell inside the window. Raya collected 31 points from four appearances.
+
+There are already two possible interpretations. Dividing by Arsenal's five fixtures gives 6.2 points per club match. Dividing by Raya's four actual appearances gives 7.75 points per appearance. The second calculation is our appearance-based `form30` measure and arguably says more about Raya's productivity when selected.
+
+Yet the official FPL data subsequently reported Form of just 5.0. At first sight, neither calculation explains it.
+
+The answer lies in the date on which the data were downloaded. The CSV snapshot was created on 8 June. By then, the rolling 30-day window began on 9 May. Raya's returns from GW34 and GW35 had dropped out of the calculation, even though neither Raya nor Arsenal had played another match. Only Arsenal's final three fixtures remained:
+
+$$
+\frac{9+6+0}{3}=5.0
+$$
+
+The official figure was therefore correct according to its own definition. It was also rather peculiar as a description of Raya's footballing form. His reported Form fell from what would have been 6.2 immediately after GW38 to 5.0 in early June, solely because two strong performances became 31 and 37 days old. No new performance caused the decline.
+
+If we assessed productivity only when Raya appeared during that narrower period, the corresponding figure would be $(9+6)/2=7.5$. The official statistic and the appearance-based measure are not merely using different denominators. Unless they are calculated on precisely the same date, they may also be using different matches.
+
+### A statistic with a moving information content
+
+The Raya example exposes the central weakness of a calendar-based measure. "The last 30 days" sounds like a consistent sample, but the number of observations changes with the fixture schedule and with the date on which the statistic is viewed.
+
+A player's official Form can consequently rise or fall while no football is being played. Strong performances disappear mechanically as they cross the 30-day boundary. During international breaks, FA Cup weekends, blank gameweeks or the close season, the sample can shrink to only one or two matches. A Form of 7.0 might describe sustained returns across several fixtures, or simply one seven-point score dressed up as an average.
+
+Official Form values are therefore not necessarily comparable. An average based on one match is much less reliable than an average based on five, even if both carry the same label. The statistic also blends productivity with availability. Raya's GW38 absence enters the official calculation because Arsenal played, reducing his average for the window. That may be useful when assessing selection risk, but it does not isolate his scoring ability when on the pitch.
+
+### Why Form45 is preferable
+
+`Form45` does not solve every problem, but it provides a more stable starting point. In Raya's case, a 45-day window viewed on 8 June reaches back to 24 April and retains all five of Arsenal's closing fixtures. Measuring points per appearance gives $31/4=7.75$.
+
+This reflects Raya's recent productivity when selected, while `Mins45` and `App45` separately reveal that he missed the final fixture. The manager can see both parts of the story: Raya scored strongly when he played, but his recent appearance record was not perfect.
+
+The longer window is also less likely to collapse during an international break, a blank gameweek or a sparse fixture period. It remains responsive to recent changes, but is less sensitive to an arbitrary change in the calendar date. The important claim is not that 45 days possesses some unique statistical virtue. It is that recent output and playing-time security should be measured separately.
+
+The Raya episode offers a neat editorial verdict: according to FPL, a player can lose form while sitting at home after the season has finished. That is mathematically defensible, but it is not what most football supporters mean by form.
+
+## A more useful dashboard
+
+For squad selection, I prefer a small family of indicators rather than a single headline number.
+
+**Form45** is average fantasy points per *appearance* over the previous 45 days. The slightly wider window is less vulnerable to an isolated haul, while remaining recent enough to notice a new role, tactical change or late-season surge. It measures productivity when used, not certainty of being used.
+
+**SPPG** is season points per appearance. It provides the long-run anchor against which a purple patch can be judged. Form45 well above SPPG may indicate genuine improvement, but it may also be a warning that recent returns are unusually hot.
+
+**Mins45** is average minutes per club fixture over the previous 45 days. It captures current selection security. **SMins** supplies the season-long comparison, while **App45** records the proportion of recent club fixtures in which the player appeared. A player can therefore be productive but insecure, secure but unproductive, or strong on both dimensions.
+
+The definition is still a choice, not a discovery. Forty-five days is not a uniquely correct window, and points per appearance can flatter a substitute whose returns came from few minutes. That is precisely why Form45 is shown alongside playing-time measures rather than presented as a replacement oracle.
+
+## Who finished 2025-26 in strong form?
+
+The following screen asks for both returns and a minimum level of involvement. Forwards and goalkeepers face lower Form45 thresholds than midfielders and defenders, reflecting their different FPL scoring patterns. Every listed player must also have averaged at least 45 minutes per club fixture and appeared in at least 60 per cent of fixtures over the 45-day window.
+
+Crucially, **Official** now appears as the first column under the Points spanner. The table therefore allows the familiar FPL statistic to be compared directly with the preferred Form45 measure rather than quietly discarding it.
+
+```{r}
+#| label: top-player-table
+players<-perf_latest %>%
+  left_join(current_raw %>%
+              dplyr::select(playerid,total_points,form,selected_by_percent,status,news,
+                            chance_of_playing_next_round,expected_goal_involvements_per_90,
+                            ep_next,now_cost) %>%
+              distinct(playerid,.keep_all=TRUE),by="playerid") %>%
+  mutate(cost=coalesce(cost,now_cost/10))
+
+form45_thresholds<-c(FWD=4,MID=5,DEF=5,GKP=3.5)
+latest_gw<-max(players$gw,na.rm=TRUE)
+
+form_snapshot<-players %>%
+  filter(gw==latest_gw,
+         form45>=form45_thresholds[position],m45tf>=45,app45_rate>=.60) %>%
+  transmute(Player=playername,Position=factor(position,levels=c("FWD","MID","DEF","GKP")),
+            Team=short_team,Official=round(as.numeric(form),2),Form45=round(form45,2),
+            SPPG=round(sppg,2),Mins45=round(m45tf,1),SMins=round(smtf,1),
+            App45=paste0(round(100*app45_rate),"%"),
+            Cost=paste0("£",format(round(cost,1),nsmall=1),"m"),
+            Pop=paste0(format(round(selected_by_percent,1),nsmall=1),"%")) %>%
+  arrange(Position,desc(Form45),desc(SPPG))
+
+form_snapshot_table<-form_snapshot %>%
+  gt() %>%
+  opt_row_striping(row_striping=FALSE) %>%
+  cols_width(Player~px(130),c(Position,Team)~px(42),
+             c(Official,Form45,SPPG,Mins45,SMins,App45,Cost,Pop)~px(60)) %>%
+  tab_header(title=html(local_image(img_file,height=30),"Top Player Metrics at end of 2025-26"),
+             subtitle=paste0("GW",latest_gw," snapshot ranked by Position and Form45")) %>%
+  tab_spanner("Points",c(Official,Form45,SPPG)) %>%
+  tab_spanner("Security",c(Mins45,SMins,App45)) %>%
+  tab_spanner("Market",c(Cost,Pop)) %>%
+  cols_label(Position="Pos",Official="FPL",Form45="Form45") %>%
+  tab_source_note(html(paste0(
+    "<div style='text-align:left;line-height:1.05'>",
+    "<div style='margin-bottom:5px'><b>Data:</b> official FPL website.</div>",
+    "<div style='margin-bottom:5px'><b>Points:</b> <b>FPL</b> = official 30-day Form; ",
+    "<b>Form45</b> = 45-day points per appearance; <b>SPPG</b> = season points per appearance.</div>",
+    "<div style='margin-bottom:5px'><b>Security:</b> <b>Mins45/SMins</b> = average minutes per club fixture ",
+    "over 45 days/season; <b>App45</b> = 45-day appearance rate.</div>",
+    "<div style='margin-bottom:5px'><b>Market:</b> <b>Pop</b> = global selection share.</div>",
+    "<div><b>Filters:</b> Form45 ≥ ",form45_thresholds["FWD"]," FWD, ",
+    form45_thresholds["MID"]," MID, ",form45_thresholds["DEF"]," DEF, ",
+    form45_thresholds["GKP"]," GKP; Mins45 ≥ 45; App45 ≥ 60%.</div></div>"))) %>%
+  tab_options(heading.title.font.size=35,heading.subtitle.font.size=24,
+              column_labels.font.size=15,source_notes.font.size=13,
+              heading.background.color="white",table.border.top.color="white",
+              table.border.bottom.color="white",table_body.border.bottom.color="white",
+              data_row.padding=px(1)) %>%
+  tab_style(cell_text(color="#2d132c",style="italic"),cells_title(groups="subtitle")) %>%
+  tab_style(cell_text(color="#2d132c",weight="bold"),cells_column_spanners()) %>%
+  tab_style(cell_text(color="#2d132c",weight="bold"),cells_body(columns=Player)) %>%
+  tab_style(cell_text(color="firebrick",weight="bold"),
+            list(cells_column_labels(columns=Form45),cells_body(columns=Form45))) %>%
+  tab_style(cell_text(color="darkgreen",style="italic"),
+            list(cells_column_labels(columns=c(App45,Pop)),cells_body(columns=c(App45,Pop)))) %>%
+  cols_align("right",c(Official,Form45,SPPG,Mins45,SMins,App45,Cost,Pop)) %>%
+  cols_align("center",c(Position,Team)) %>%
+  tab_style(cell_fill(color="#f2edf5"),cells_body(rows=Position=="FWD")) %>%
+  tab_style(cell_fill(color="#ffffff"),cells_body(rows=Position=="MID")) %>%
+  tab_style(cell_fill(color="#eaf2f7"),cells_body(rows=Position=="DEF")) %>%
+  tab_style(cell_fill(color="#eef4e8"),cells_body(rows=Position=="GKP"))
+
+gtsave(form_snapshot_table,"./images/form_snapshot_table.png",zoom=2.5,expand=10)
+form_snapshot_table
+```
+
+This is a shortlist, not a shopping list. Late-season form can carry information about a player’s role and confidence, but the summer breaks the statistical continuity. Transfers, new managers, promoted clubs, injuries, pre-season workloads, changed prices and altered fixtures all matter. Several players listed here may no longer occupy the same role when 2026-27 begins.
+
+## Looking beneath fantasy points
+
+Fantasy points are the outcome managers care about, but outcomes are noisy. Goals and assists in the final six gameweeks can be compared with expected goals and expected assists to ask whether the underlying attacking involvement was as strong as the returns.
+
+```{r}
+#| label: contributions
+gw_window<-(current_gw-5):current_gw
+
+players_last6<-playersraw %>%
+  filter(gw %in% gw_window) %>%
+  group_by(playerid) %>%
+  summarise(Player=last(playername),Position=factor(last(position),levels=c("FWD","MID","DEF","GKP")),
+            Team=last(short_team),Goals=sum(if_else(minutes>0,goals_scored,0),na.rm=TRUE),
+            xG=sum(if_else(minutes>0,xG,0),na.rm=TRUE),
+            Assists=sum(if_else(minutes>0,assists,0),na.rm=TRUE),
+            xA=sum(if_else(minutes>0,xA,0),na.rm=TRUE),
+            `G+A`=sum(if_else(minutes>0,goals_scored+assists,0),na.rm=TRUE),
+            xGI=sum(if_else(minutes>0,xGI,0),na.rm=TRUE),Apps=sum(minutes>0,na.rm=TRUE),.groups="drop") %>%
+  filter(Position %in% c("FWD","MID","DEF"),Apps>=2) %>%
+  group_by(Position) %>%
+  arrange(desc(xGI),desc(xG),desc(`G+A`),.by_group=TRUE) %>%
+  slice_head(n=10) %>%
+  ungroup() %>%
+  dplyr::select(Player,Position,Team,Goals,Assists,`G+A`,xG,xA,xGI,Apps)
+
+players_last6 %>%
+  gt() %>%
+  opt_row_striping(row_striping=FALSE) %>%
+  tab_header(title=html(local_image(img_file,height=30),"Ending on a High"),
+             subtitle="Top player goal involvements, last 6 GWs of 2025-26") %>%
+  tab_spanner("Actual",c(Goals,Assists,`G+A`)) %>%
+  tab_spanner("Expected",c(xG,xA,xGI)) %>%
+  fmt_number(c(Goals,Assists,`G+A`,Apps),decimals=0) %>%
+  fmt_number(c(xG,xA,xGI),decimals=2) %>%
+  tab_source_note(md(paste0("<b>Apps</b> = appearances during GW",min(gw_window),"–GW",max(gw_window),
+                            ". Expected metrics are estimates, not promises."))) %>%
+  tab_options(heading.title.font.size=35,heading.subtitle.font.size=24,
+              column_labels.font.size=15,source_notes.font.size=12,data_row.padding=px(1)) %>%
+  tab_style(cell_text(color="firebrick",weight="bold"),
+            list(cells_column_labels(columns=xGI),cells_body(columns=xGI))) %>%
+  tab_style(cell_fill(color="#f2edf5"),cells_body(rows=Position=="FWD")) %>%
+  tab_style(cell_fill(color="#ffffff"),cells_body(rows=Position=="MID")) %>%
+  tab_style(cell_fill(color="#eaf2f7"),cells_body(rows=Position=="DEF"))
+```
+
+A player whose actual goal involvements greatly exceeded xGI may have finished brilliantly, but managers should be cautious about simply extrapolating the conversion rate. Conversely, strong xGI with modest returns can identify involvement that the FPL points column has not yet rewarded. Expected metrics remain model estimates and omit much that creates fantasy value, including bonus points, clean sheets and defensive contributions.
+
+## What survives into a new season?
+
+The end of 2025-26 offers a useful prior for 2026-27, not a forecast carved in stone. The strongest candidates are not necessarily those with the highest single form number. More interesting are players who combine recent productivity, a credible season-long record, secure minutes and underlying involvement, then retain a favourable role after the summer.
+
+| Measure | What it captures | Principal weakness |
+|:--|:--|:--|
+| Official FPL Form | Recent points per club fixture over 30 days | Window and denominator blend output with availability |
+| Form45 | Recent points per appearance over 45 days | Can flatter productive cameos and small samples |
+| SPPG | Season-long points per appearance | Slow to recognise a changed role |
+| Mins45 | Recent minutes per club fixture | Measures opportunity, not quality |
+| SMins | Season-long minutes per club fixture | Can conceal a recent selection change |
+| App45 | Recent appearance rate | Treats a one-minute cameo as an appearance |
+| xGI | Estimated attacking involvement | Model-dependent and incomplete for fantasy scoring |
+
+The editorial verdict is simple. Use the official Form statistic as a prompt, not a verdict. Form45 improves the view of recent productivity; SPPG keeps it anchored; Mins45, SMins and App45 make availability explicit; xGI asks whether the attacking process supports the visible returns. No one measure eliminates luck. Used together, they can at least reduce the number of management own goals.
+
+*Official definition and data source: [Fantasy Premier League FAQs](https://fantasy.premierleague.com/en/help/faqs). The calculations are illustrative and depend on the timing and completeness of the downloaded 2025-26 match-level files.*

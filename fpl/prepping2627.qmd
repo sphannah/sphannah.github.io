@@ -1,0 +1,198 @@
+---
+title: "Prepping for FPL 2026-27"
+subtitle: "Player profiles"
+format:
+  html:
+    fig-width: 10
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    embed-resources: true
+    css: ../style.css
+    theme: ""
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+Fantasy Premier League, usually shortened to FPL, turns every participant into the manager of a virtual Premier League squad. Points are awarded according to what the selected players do in real matches, including goals, assists, clean sheets, saves and other contributions.
+
+The game attracts millions of managers across the world. It is free to play, easy to join and capable of producing an entertaining mixture of football insight, statistical obsession and mainly friendly rivalry. Private mini-leagues allow friends, families and colleagues to compete for local supremacy, which is often more important than the official global ranking.
+
+**The official game is now open. You can register and select your 2026-27 squad at [Fantasy Premier League](https://fantasy.premierleague.com/en/).**
+
+The Premier League season begins later in August. The opening FPL deadline is **Friday 21 August 2026 at 18:30 BST**, 90 minutes before the first match of Gameweek 1. Until then, managers have unlimited transfers and plenty of opportunity to rearrange their squads.
+
+## How the game works
+
+Each manager receives a budget of £100 million and must select a squad of 15 players:
+
+- two goalkeepers;
+- five defenders;
+- five midfielders;
+- three forwards.
+
+No more than three players may be selected from any one Premier League club. Before each Gameweek, the manager chooses a starting eleven, a captain whose score is doubled, a vice-captain and four substitutes.
+
+These rules make the opening selection trickier than it first appears. An attractive collection of individual players may be unaffordable, may contain too many players from the same club, or may leave one position seriously weakened. Money spent on an expensive forward cannot also be spent on a premium midfielder or defender.
+
+The official [FPL rules and help pages](https://fantasy.premierleague.com/en/help/rules) explain the scoring system, transfers, substitutions and special playing chips. New managers can also ask the game to generate a personalised starting squad, although selecting and revising the team manually is a large part of the fun.
+
+## A game within the game
+
+FPL has developed its own extensive community of analysts, writers, podcasters and content creators. Numerous websites publish predicted line-ups, injury news, fixture ratings, statistical models and transfer recommendations. Some are free, while others reserve more detailed tools for subscribers.
+
+Books have also been written about the subject. *Wasting Your Wildcard* explored the strategy, psychology and culture surrounding FPL. A later account, [From pitch to paper: How we published a book about FPL](https://www.fantasyfootballscout.co.uk/2021/02/22/from-pitch-to-paper-how-we-published-a-book-about-fpl/), describes the development of another guide to the game. *[Fantasy Premier League: Unlocking the Secrets to a Top 1% Finish](https://www.ockleybooks.co.uk/shop/fantasy-premier-league-unlocking-the-secrets-to-a-top-1-finish)* offers further evidence of the demand for any insight that might secure a better rank and, more importantly, mini-league bragging rights.
+
+No website, model or book can remove the role of luck. A carefully chosen player may hit the post, miss a penalty or be substituted in the 59th minute, just before becoming eligible for clean-sheet points. An inactive rival may receive an unexpected substitute because one of their selected players failed to appear.
+
+Intelligent use of freely available data can nevertheless reduce the number of management own-goals. The purpose is not to predict every event correctly. It is to make consistently sensible decisions while recognising that sensible decisions sometimes produce disappointing results.
+
+## The starting-squad problem
+
+Selecting an opening squad is one of the most enjoyable and frustrating parts of FPL. Hundreds of players are available, but the combination must satisfy restrictions on positions, clubs and total cost.
+
+The problem is also dynamic. Player prices, injuries, pre-season performances and expected starting roles can all change before the deadline. A seemingly settled squad may need to be rebuilt after a transfer, an injury or an unexpected managerial comment.
+
+It helps to think beyond Gameweek 1. A player with one attractive opening match may face several difficult opponents immediately afterwards. Selecting that player can create a transfer problem almost as soon as the season begins. A strong initial squad should ideally remain useful across several Gameweeks, while retaining enough flexibility to respond when new information arrives.
+
+[INSERT PNG: Principal player changes for 2026-27, including prices, clubs and FPL positions]
+
+[INSERT PNG: Fixture difficulty heatmap for the opening Gameweeks of 2026-27]
+
+## Starting with recent form
+
+One reasonable starting point is to identify players who performed well towards the end of 2025-26. Late-season form may reflect a new tactical role, an improvement in fitness, a change of manager or a player finally establishing a regular place in the team.
+
+Recent form should not be followed mechanically. A run of goals from relatively few shots may be difficult to sustain, while a player who finished strongly could face new competition for a starting position. Transfers and managerial changes can also make last season's role less relevant.
+
+Even so, focusing on proven recent performers provides a manageable shortlist. It is generally safer than beginning with every available player and trying to identify value among hundreds of unfamiliar names.
+
+## Popularity and the wisdom of crowds
+
+FPL reports the percentage of managers who have selected each player. This ownership figure is not a direct measure of quality, but it contains useful information.
+
+Popular selections may reflect a favourable price, strong recent performances, attractive fixtures or confidence that a player will start regularly. When millions of managers examine the same player list, their combined choices can reveal candidates worthy of closer attention.
+
+The crowd can still be wrong. Managers copy online templates, follow last season's points or react too strongly to a single pre-season match. Popularity can therefore help to narrow the field, but it should not replace judgement.
+
+The following tables combine early ownership with information from the previous season and the first six fixtures of 2026-27.
+
+[INSERT PNG: Most popular goalkeepers, including 2025-26 metrics and the first six fixtures]
+
+[INSERT PNG: Most popular defenders, including 2025-26 metrics and the first six fixtures]
+
+[INSERT PNG: Most popular midfielders, including 2025-26 metrics and the first six fixtures]
+
+[INSERT PNG: Most popular forwards, including 2025-26 metrics and the first six fixtures]
+
+The fixture cells use the official difficulty ratings to show how each player's immediate schedule develops. These ratings are guides rather than facts. A supposedly easy fixture can become less attractive if a team loses key players, while promoted clubs are especially difficult to assess before they have played several Premier League matches.
+
+## Is a premium player worth the price?
+
+The most expensive FPL players usually have high expected scores, secure starting places and strong captaincy potential. That does not automatically make every premium player good value.
+
+The relevant question is not simply whether an expensive player will score more points. It is whether the extra points justify the additional cost and the sacrifices required elsewhere in the squad.
+
+A £12 million midfielder does not compete only with another midfielder. Selecting that player might require replacing an £8 million defender with a £4.5 million alternative. The true comparison is therefore between complete squad structures.
+
+Premium players can have an additional advantage because of captaincy. Doubling the score of an outstanding player can justify paying a price that looks less attractive on a simple points-per-million calculation. A premium player who is rarely considered for captaincy must work harder to justify the investment.
+
+[INSERT PNG: Goalkeeper price and performance in 2025-26]
+
+[INSERT PNG: Defender price and performance in 2025-26]
+
+[INSERT PNG: Midfielder price and performance in 2025-26]
+
+[INSERT PNG: Forward price and performance in 2025-26]
+
+Last season's elite players did not deliver a large FPL return in every match. Even the best assets produced blanks, short appearances and ordinary scores. Paying a premium improves the odds of a return, but the probability is rarely high enough to justify expecting points every week.
+
+## Thinking of a squad as a portfolio
+
+There are useful similarities between an FPL squad and an investment portfolio. Each player has an expected return and an associated risk. Some produce relatively steady scores, while others alternate between blanks and very large hauls.
+
+Diversification is a standard method of reducing portfolio risk. An FPL manager might spread selections across several clubs so that one poor team performance does not damage the whole Gameweek.
+
+That logic has limits in a fantasy competition. The objective is not merely to avoid a bad score. It is to outscore rival managers. Concentrating on a strong team during a favourable run of fixtures can produce much greater upside than spreading selections evenly across the league.
+
+Mark Twain made the contrary case for concentration in *Pudd'nhead Wilson*:
+
+> “Behold, the fool saith, ‘Put not all thine eggs in the one basket’, which is but a manner of saying, ‘Scatter your money and your attention’; but the wise man saith, ‘Put all your eggs in the one basket and watch that basket.’”
+
+Hedging and diversification are valuable when managing a pension fund. FPL sometimes rewards a more aggressive approach.
+
+If one player looks particularly attractive, it may be worth examining his team-mates. A creative midfielder and the forward finishing his chances may score well together. An attacking defender can combine clean-sheet points with assists for another player from the same club. A goalkeeper and defender share the benefit of a clean sheet.
+
+This is the case for a double-up or, occasionally, a triple-up. The manager accepts greater exposure to one club in return for the possibility of a much larger combined score.
+
+[INSERT PNG: Correlations between player points during the closing matches of 2025-26]
+
+Correlation needs careful interpretation. Two players may have scored well together because their club had an unusually favourable set of fixtures. A relationship observed over a short period may also disappear after a change in tactics or personnel.
+
+The chart is best used to identify plausible combinations for further investigation. It is not proof that past correlations will continue throughout 2026-27.
+
+## Form or fixture?
+
+The argument between form and fixtures is often presented as a choice. In practice, it is a false dichotomy.
+
+Good fixtures can help to create good form. A forward facing several weak defences receives more opportunities to shoot, score and accumulate confidence. Strong players can also make fixtures appear easy. An opponent's defensive record may deteriorate because it has recently faced several of the league's best attacks.
+
+The useful question is not whether form or fixtures matter. It is how much weight each should receive alongside price, playing time, position and the quality of the player's team.
+
+A random forest model provides one way of examining this question. It searches for patterns between a large collection of player characteristics and subsequent FPL points. It can capture relationships that are not neatly linear, such as the possibility that an additional shot is especially valuable for a player who already receives many touches near goal.
+
+The resulting variable-importance chart shows which pieces of information were most useful in explaining 2025-26 fantasy points. Importance does not necessarily mean causation, and a relationship found last season may weaken after changes to teams or the scoring system. The exercise is better viewed as a guide to where attention should be concentrated.
+
+[INSERT PNG: Variable importance from the 2025-26 random forest analysis]
+
+If expected playing time, recent involvement and attacking opportunities dominate the results, those variables deserve more attention than an eye-catching but weakly informative statistic. A sophisticated model can therefore produce a fairly traditional conclusion: select good players, in secure roles, representing capable teams and facing reasonable fixtures.
+
+[INSERT PNG: Player performance by price and position]
+
+[INSERT PNG: Cross-tabulation of recent form, price and opening fixture difficulty]
+
+## Differentials without recklessness
+
+A differential is a player owned by relatively few managers. If that player scores well, the manager gains points that most rivals do not receive.
+
+Low ownership alone is not a reason to select anyone. Players are often unpopular because their starting place is uncertain, their fixtures are difficult or their price is unattractive. An obscure selection is not automatically an insightful one.
+
+The most promising differentials usually have some established pedigree. They may be returning from injury, benefiting from a new position, taking set pieces, or moving into a more prominent role. There should be a clear footballing reason why the wider market may have undervalued them.
+
+[INSERT PNG: Potential low-ownership players with established Premier League records]
+
+Premier League newcomers and pre-season mavericks require particular caution. A player may have an excellent record in another league but need time to adjust. New signings may also face uncertain minutes, unfamiliar tactical demands and competition from established team-mates.
+
+For the opening squad, reliable assets usually offer a sounder foundation. The first few Gameweeks will reveal which new players are starting regularly, taking set pieces and occupying productive areas of the pitch. There is no prize for identifying every breakout player before sufficient evidence exists.
+
+## A practical opening approach
+
+A manageable selection process might proceed as follows:
+
+1. Identify players with secure starting roles and strong late-season or pre-season evidence.
+2. Compare their opening six fixtures rather than concentrating only on Gameweek 1.
+3. Use ownership to identify the crowd's leading candidates, then examine why they are popular.
+4. Assess premium players as part of complete squad structures, including likely captaincy choices.
+5. Consider selective club double-ups where the expected return justifies the additional risk.
+6. Keep speculative newcomers and differentials to a limited share of the squad.
+7. Retain enough flexibility to respond after the first few Gameweeks.
+
+The opening team does not need to solve the entire season. Transfers, wildcards and other chips allow the squad to evolve. The aim is to begin with a balanced collection of reliable players, sensible prices and sufficiently favourable fixtures, while avoiding commitments that demand immediate repair.
+
+Data can improve that process, but it cannot eliminate uncertainty. A successful FPL manager needs analysis, patience and a willingness to distinguish a poor decision from a good decision that happened to produce a poor result. The remaining ingredient is luck, preferably at the expense of one's mini-league rivals.
+
+## Useful links
+
+- **[Play Fantasy Premier League](https://fantasy.premierleague.com/en/)**
+- [Official FPL rules and help](https://fantasy.premierleague.com/en/help/rules)
+- [Full 2026-27 FPL player list](https://fantasy.premierleague.com/en/player-list)
+- [Official guide to selecting a 2026-27 squad](https://www.premierleague.com/en/news/4682360/everything-you-need-to-pick-your-202627-fantasy-squad)
+- [Changes to FPL for 2026-27](https://www.premierleague.com/en/news/4679873/all-you-need-to-know-about-changes-to-fpl-for-202627)

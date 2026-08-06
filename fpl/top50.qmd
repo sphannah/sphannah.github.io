@@ -1,0 +1,404 @@
+---
+title: "Joining the Fantasy Elite"
+subtitle: "Lessons from the top 50 managers in 2025–26"
+format:
+  html:
+    fig-width: 10
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    embed-resources: true
+    css: ../style.css
+    theme: ""
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(gt)
+library(scales)
+
+file<-c("./data/mgr_t50_fulldata.csv","mgr_t50_fulldata.csv") |>
+  keep(file.exists) |>
+  first()
+
+fpl<-read_csv(file,show_col_types=FALSE)
+
+mgrgw<-fpl |>
+  distinct(gw,managerid,gw_ftsy_rank,chip,grosspoints,netpoints,
+           event_transfers,event_transfers_cost,points_on_bench,
+           cumul_gross_score,cumul_net_score,squadvalue,bank,value) |>
+  mutate(chip=recode(chip,
+                     "na"="No chip",
+                     "bboost"="Bench Boost",
+                     "3xc"="Triple Captain",
+                     "wildcard"="Wildcard",
+                     "freehit"="Free Hit"))
+
+captains<-fpl |>
+  filter(is_captain) |>
+  transmute(gw,managerid,playername,player_event_points,multiplier,
+            captain_bonus=player_event_points*(multiplier-1))
+
+season<-mgrgw |>
+  arrange(managerid,gw) |>
+  summarise(final_score=last(cumul_net_score),
+            average_week=mean(netpoints),
+            transfers=sum(event_transfers),
+            transfer_cost=sum(event_transfers_cost),
+            bench_points=sum(points_on_bench),
+            final_value=last(value),
+            maximum_value=max(value),
+            best_week=max(netpoints),
+            worst_week=min(netpoints),
+            .by=managerid) |>
+  left_join(captains |>
+              summarise(captain_bonus=sum(captain_bonus),
+                        captain_hauls=sum(player_event_points>=10),
+                        captain_blanks=sum(player_event_points<=2),
+                        .by=managerid),
+            by="managerid")
+
+med<-function(x,d=0) round(median(x,na.rm=TRUE),d)
+```
+
+Fantasy Premier League attracts millions of managers, but only a tiny proportion finish near the summit. What did the leading managers actually do during the 2025–26 season? Were they relentless gamblers, constantly taking transfer hits and chasing differentials, or was elite performance built on something less dramatic?
+
+This analysis follows **50 highly ranked managers through all 38 gameweeks**. The underlying file contains each manager's complete 15-player squad in every gameweek: **28,500 player-manager-gameweek observations**. It therefore permits analysis of transfers, captaincy, chips, squad value, bench points and the extent to which successful managers converged on the same players.
+
+There is an important qualification. This is a study of **successful managers only**. It describes what the top 50 tended to do, but it cannot prove that every shared behaviour caused their success. Some common choices will simply reflect sensible managers responding to the same fixtures, injuries and outstanding players.
+
+## The typical top-50 season
+
+```{r}
+#| label: typical-manager-table
+
+typical<-tibble(
+  Measure=c("Final score","Average weekly score","Transfers made",
+            "Points spent on transfers","Points left on bench",
+            "Final squad value","Highest squad value reached",
+            "Best gameweek","Worst gameweek",
+            "Captain hauls of 10+ points",
+            "Captain scores of 2 or fewer"),
+  `Typical top-50 manager`=c(
+    comma(med(season$final_score)),
+    number(med(season$average_week,1),accuracy=.1),
+    med(season$transfers),med(season$transfer_cost),
+    med(season$bench_points),
+    paste0("£",number(med(season$final_value,1),accuracy=.1),"m"),
+    paste0("£",number(med(season$maximum_value,1),accuracy=.1),"m"),
+    med(season$best_week),med(season$worst_week),
+    med(season$captain_hauls),med(season$captain_blanks)))
+
+typical |>
+  gt() |>
+  cols_align("left",Measure) |>
+  cols_align("center",`Typical top-50 manager`) |>
+  tab_header(title=md("**The Typical Top-50 Manager**"),
+             subtitle="Median outcomes across the 2025–26 season") |>
+  tab_style(style=cell_text(weight="bold"),locations=cells_column_labels()) |>
+  tab_options(table.width=pct(76),table.font.size=px(15),
+              heading.title.font.size=px(20),data_row.padding=px(6))
+```
+
+The median manager accumulated **`r comma(med(season$final_score))` points**, averaging **`r number(med(season$average_week,1),accuracy=.1)` points per gameweek**. The range within this elite group was relatively narrow: the highest final total was **`r comma(max(season$final_score))`**, while the lowest was **`r comma(min(season$final_score))`**.
+
+Once a manager has entered this rarefied group, the difference between an excellent and an exceptional season may amount to only a few dozen points.
+
+## Hurdle 1: turn up every week
+
+The first hurdle is not brilliance but sustained participation. Successful managers remained engaged throughout the full season, responding to injuries, fixture changes, suspensions and emerging players.
+
+```{r}
+#| label: weekly-score-chart
+#| fig-cap: "Weekly net points among the top 50 managers. The shaded region covers the middle 50 per cent."
+
+weekly<-mgrgw |>
+  summarise(median=median(netpoints),
+            lower=quantile(netpoints,.25),
+            upper=quantile(netpoints,.75),.by=gw)
+
+ggplot(weekly,aes(gw,median))+
+  geom_ribbon(aes(ymin=lower,ymax=upper),alpha=.18)+
+  geom_line(linewidth=1)+
+  geom_point(size=1.8)+
+  scale_x_continuous(breaks=seq(1,38,3))+
+  labs(title="Elite performance still fluctuates",
+       subtitle="Median weekly score and interquartile range",
+       x="Gameweek",y="Net points",
+       caption="Source: mgr_t50_fulldata.csv")+
+  theme_minimal(base_size=14)+
+  theme(panel.grid.minor=element_blank(),plot.title=element_text(face="bold"))
+```
+
+The median manager's best week produced **`r med(season$best_week)` points**, while the median worst week still returned **`r med(season$worst_week)`**. Success was not built on a handful of spectacular scores. It came from repeatedly avoiding severe damage and accumulating respectable returns.
+
+> FPL rewards 38 weeks of reasonably good decisions more than occasional flashes of genius.
+
+Missing deadlines, leaving injured players in the team or failing to react to major fixture changes creates a formidable handicap.
+
+## Hurdle 2: avoid paying for indecision
+
+Top managers were notably reluctant to sacrifice points for extra transfers. The typical manager made **`r med(season$transfers)` transfers** but spent only **`r med(season$transfer_cost)` points** on them across the whole season.
+
+```{r}
+#| label: transfer-hit-chart
+#| fig-cap: "Distribution of total transfer points spent by the top 50 managers."
+
+season |>
+  count(transfer_cost) |>
+  ggplot(aes(factor(transfer_cost),n))+
+  geom_col(width=.7)+
+  geom_text(aes(label=n),vjust=-.4,size=4)+
+  scale_y_continuous(expand=expansion(mult=c(0,.12)),breaks=pretty_breaks())+
+  labs(title="Transfer hits were the exception",
+       subtitle="Total points deducted over the full season",
+       x="Points spent on transfers",y="Number of managers",
+       caption="Source: mgr_t50_fulldata.csv")+
+  theme_minimal(base_size=14)+
+  theme(panel.grid.minor=element_blank(),panel.grid.major.x=element_blank(),
+        plot.title=element_text(face="bold"))
+```
+
+Of the **`r comma(nrow(mgrgw))` manager-gameweeks**, **`r comma(sum(mgrgw$event_transfers_cost==0))` involved no deduction**. A transfer hit was therefore an occasional intervention rather than a routine management tool.
+
+This does not mean that a hit is always wrong. It can repair a badly injured squad, exploit a double gameweek or facilitate an exceptional captaincy opportunity. The evidence instead suggests that elite managers demanded a clear expected payoff.
+
+A four-point hit requires the incoming player to outperform the outgoing player by more than four points merely to break even. Repeated speculative hits force the manager to clear a substantial hurdle before making any genuine progress.
+
+## Hurdle 3: own the important players
+
+The top 50 did not consist of 50 radically different squads. Successful managers repeatedly converged on a core of productive and dependable players.
+
+```{r}
+#| label: ownership-chart
+#| fig-cap: "Average share of top-50 squads containing each player across all 38 gameweeks."
+
+top_owned<-fpl |>
+  summarise(selections=n_distinct(managerid),.by=c(gw,playerid,playername)) |>
+  summarise(average_ownership=sum(selections)/(50*38),.by=c(playerid,playername)) |>
+  slice_max(average_ownership,n=12) |>
+  arrange(average_ownership)
+
+ggplot(top_owned,aes(average_ownership,reorder(playername,average_ownership)))+
+  geom_col(width=.7)+
+  geom_text(aes(label=percent(average_ownership,accuracy=1)),hjust=-.15,size=3.8)+
+  scale_x_continuous(labels=percent_format(),
+                     limits=c(0,max(top_owned$average_ownership)*1.15),
+                     expand=expansion(mult=c(0,.01)))+
+  labs(title="Successful managers shared a strong template core",
+       subtitle="Season-wide average ownership among the top 50",
+       x=NULL,y=NULL,caption="Source: mgr_t50_fulldata.csv")+
+  theme_minimal(base_size=14)+
+  theme(panel.grid.minor=element_blank(),panel.grid.major.y=element_blank(),
+        plot.title=element_text(face="bold"))
+```
+
+The first selection task is therefore to identify the reliable core. Refusing to own an exceptional player merely because everyone else owns him is usually not a useful strategy. When a player combines strong underlying performance, secure minutes, favourable fixtures and heavy captaincy support, his absence can be extremely damaging.
+
+Differentials should generally be used **around** a strong core rather than **instead of** it.
+
+## Hurdle 4: do not confuse originality with an edge
+
+Elite squads still contained considerable variety. Most of that variation, however, occurred around a concentrated group of heavily selected assets.
+
+```{r}
+#| label: squad-concentration
+
+concentration<-fpl |>
+  summarise(owned_by=n_distinct(managerid),.by=c(gw,playerid)) |>
+  summarise(distinct_players=n(),majority_owned=sum(owned_by>=25),.by=gw)
+```
+
+In a typical gameweek, the top 50 collectively used **`r med(concentration$distinct_players)` different players**, but only **`r med(concentration$majority_owned)`** appeared in at least half of the squads.
+
+That suggests a sensible structure: a dependable template core, several flexible positions through which fixtures and form can be attacked, and one or two genuinely distinctive selections.
+
+Too much conformity makes it difficult to gain ground, but excessive novelty exposes the manager to several avoidable failures simultaneously. The challenge is not to be different everywhere. It is to identify the few positions where the crowd may be wrong, slow or insufficiently attentive.
+
+## Hurdle 5: accept that captaincy is partly defensive
+
+Captaincy choices were highly concentrated. The most popular captain in a typical gameweek was selected by a large majority of the top 50.
+
+```{r}
+#| label: captain-chart
+#| fig-cap: "Share of top-50 managers selecting the most popular captain in each gameweek."
+
+captain_week<-captains |>
+  count(gw,playername,name="captains") |>
+  slice_max(captains,n=1,with_ties=FALSE,by=gw) |>
+  mutate(share=captains/50)
+
+ggplot(captain_week,aes(gw,share))+
+  geom_hline(yintercept=.5,linetype="dashed",alpha=.55)+
+  geom_line(linewidth=1)+
+  geom_point(size=2)+
+  scale_x_continuous(breaks=seq(1,38,3))+
+  scale_y_continuous(labels=percent_format(),limits=c(0,1))+
+  labs(title="Captaincy was usually concentrated",
+       subtitle="Share backing the most popular captain in each gameweek",
+       x="Gameweek",y="Top-captain share",
+       caption="Source: mgr_t50_fulldata.csv")+
+  theme_minimal(base_size=14)+
+  theme(panel.grid.minor=element_blank(),plot.title=element_text(face="bold"))
+```
+
+```{r}
+#| label: captain-facts
+
+top_captains<-captains |>
+  count(playername,sort=TRUE) |>
+  mutate(share=n/sum(n))
+```
+
+In the median gameweek, the leading captain attracted **`r percent(median(captain_week$share),accuracy=1)`** of selections. The five most frequently captained players accounted for **`r percent(sum(head(top_captains$share,5)),accuracy=1)`** of all captaincies.
+
+The typical manager nevertheless captained a player scoring two points or fewer in **`r med(season$captain_blanks)` gameweeks**. Captaincy failure is unavoidable. A sound process should not be discarded merely because a heavily backed player blanks on a particular weekend.
+
+Opposing an overwhelming captain has asymmetric consequences. A successful alternative may generate a large rise, but a haul by the popular captain can inflict an equally dramatic fall. Such a gamble requires a clear basis in expected minutes, underlying threat and fixtures—not merely a desire to be distinctive.
+
+## Hurdle 6: plan chips around opportunities
+
+Chip deployment was far from evenly distributed. The top managers clustered their chips around particular gameweeks, indicating that they responded to identifiable fixture opportunities rather than arbitrary calendar dates.
+
+```{r}
+#| label: chip-chart
+#| fig-cap: "Number of top-50 managers using each chip by gameweek."
+
+chip_use<-mgrgw |>
+  filter(chip!="No chip") |>
+  count(gw,chip) |>
+  mutate(chip=factor(chip,levels=c("Wildcard","Free Hit",
+                                  "Bench Boost","Triple Captain")))
+
+ggplot(chip_use,aes(gw,n))+
+  geom_col(width=.78)+
+  facet_wrap(~chip,ncol=1,scales="free_y")+
+  scale_x_continuous(breaks=seq(1,38,3))+
+  scale_y_continuous(breaks=pretty_breaks())+
+  labs(title="Chip use clustered around particular opportunities",
+       subtitle="Number of managers activating each chip",
+       x="Gameweek",y="Managers",caption="Source: mgr_t50_fulldata.csv")+
+  theme_minimal(base_size=13)+
+  theme(panel.grid.minor=element_blank(),panel.grid.major.x=element_blank(),
+        strip.text=element_text(face="bold"),plot.title=element_text(face="bold"))
+```
+
+The interesting feature is not that every manager acted identically—they did not—but that chip use was clearly responsive to the fixture calendar.
+
+A serious manager therefore needs to monitor blank and double gameweeks, rearranged matches, fixture swings, player availability and whether the desired squad can be reached using free transfers alone.
+
+The chip itself does not create an advantage. The advantage comes from matching it to a situation in which it solves a genuine constraint.
+
+## Hurdle 7: build team value—but do not worship it
+
+The median manager finished with a squad value of **`r paste0("£",number(med(season$final_value,1),accuracy=.1),"m")`**, having reached a season maximum of **`r paste0("£",number(med(season$maximum_value,1),accuracy=.1),"m")`**.
+
+```{r}
+#| label: value-points-chart
+#| fig-cap: "Maximum squad value and final points among the top 50 managers."
+
+value_cor<-cor(season$maximum_value,season$final_score)
+
+ggplot(season,aes(maximum_value,final_score))+
+  geom_point(size=2.6,alpha=.8)+
+  geom_smooth(method="lm",se=FALSE,linewidth=.9)+
+  scale_x_continuous(labels=label_dollar(prefix="£",suffix="m"))+
+  scale_y_continuous(labels=comma)+
+  labs(title="Team value helped, but did not determine success",
+       subtitle=paste0("Correlation with final points: ",number(value_cor,accuracy=.01)),
+       x="Maximum squad value",y="Final points",
+       caption="Source: mgr_t50_fulldata.csv")+
+  theme_minimal(base_size=14)+
+  theme(panel.grid.minor=element_blank(),plot.title=element_text(face="bold"))
+```
+
+Higher team value was associated with somewhat higher final points, but the relationship was far from decisive. Team value is best regarded as an **enabling resource**. An additional £1m can make later transfers easier and permit stronger combinations, but points remain the ultimate objective.
+
+Buying a player solely because his price may rise is counterproductive when the move weakens the starting XI or consumes a valuable transfer. Early-season price movements matter most when budgets are tight. Later in the campaign, fixtures, minutes and expected points normally become more important than preserving every £0.1m.
+
+## The benching problem
+
+The typical manager accumulated **`r comma(med(season$bench_points))` bench points** during the season.
+
+That should not be interpreted as `r comma(med(season$bench_points))` points that could realistically have been recovered. A 15-player squad inevitably leaves four players unused each week, including a goalkeeper, and many bench returns will have been difficult to predict.
+
+The relevant distinction is between **unavoidable bench points**, generated by unexpected goals, saves or clean sheets, and **avoidable bench points**, caused by overlooking expected minutes, playing role or a major fixture difference.
+
+An excessively expensive bench ties up money that could strengthen the active XI. Conversely, a bench consisting entirely of non-playing assets leaves the manager vulnerable to rotation, injuries and postponements. The hurdle is to build a bench that is inexpensive but functional.
+
+## What separated the very best?
+
+```{r}
+#| label: quartile-comparison
+
+season |>
+  mutate(group=ntile(final_score,4),
+         group=case_when(group==1~"Lowest-scoring quarter",
+                         group==4~"Highest-scoring quarter",
+                         TRUE~NA_character_)) |>
+  filter(!is.na(group)) |>
+  summarise(`Final points`=mean(final_score),
+            Transfers=mean(transfers),
+            `Transfer cost`=mean(transfer_cost),
+            `Captain bonus`=mean(captain_bonus),
+            `Maximum value`=mean(maximum_value),
+            `Bench points`=mean(bench_points),.by=group) |>
+  gt() |>
+  fmt_number(columns=-group,decimals=1) |>
+  cols_label(group="") |>
+  tab_header(title=md("**The Highest and Lowest Quarters of the Top 50**"),
+             subtitle="Average season outcomes") |>
+  tab_style(style=cell_text(weight="bold"),locations=cells_column_labels()) |>
+  tab_options(table.width=pct(92),table.font.size=px(13),data_row.padding=px(6))
+```
+
+Differences within this elite sample were surprisingly small. There was no single magic statistic that explained the final ordering. The strongest managers did not simply make far more transfers, habitually take more hits or enjoy spectacular weekly peaks.
+
+At the top level, success appears to emerge from the cumulative effect of many small decisions: one fewer unnecessary hit, one better bench call, reacting to an injury before the deadline, retaining a strong player through a temporary blank, choosing a better week for a chip, avoiding an ill-judged captaincy punt and anticipating a fixture swing one transfer earlier.
+
+No single decision guarantees a top finish. The compounding of marginal advantages does.
+
+## A practical blueprint
+
+**Remain engaged.** Check injuries, press conferences, fixtures and deadlines every week.
+
+**Use free transfers efficiently.** Carry a transfer forward when the squad is healthy and no move has a compelling expected payoff.
+
+**Treat hits as investments.** Demand a plausible multi-week return rather than chasing points already scored.
+
+**Identify the genuine template.** Own highly productive players when their expected returns justify their popularity.
+
+**Differentiate selectively.** Concentrate risk in a few informed choices rather than making the entire squad unconventional.
+
+**Captain the best option.** Ownership matters because it affects rank risk, but expected points should remain the principal criterion.
+
+**Plan chips several weeks ahead.** Preserve flexibility for blanks, doubles and major fixture transitions.
+
+**Maintain a playable bench.** Avoid both excessive reserve expenditure and a squad with no substitute minutes.
+
+**Value secure minutes.** A glamorous player receiving irregular cameos is generally inferior to a slightly less exciting player who regularly completes matches.
+
+**Judge decisions by process.** A good decision can produce a bad result in one week; a poor decision can occasionally be rewarded.
+
+## Conclusion
+
+The typical top-50 manager was active but not hyperactive, conservative with transfer deductions, heavily invested in the strongest mainstream players and willing to concentrate chips around the best fixture opportunities.
+
+The data do not portray elite FPL as a contest won through relentless gambling. They portray a game of disciplined attention, controlled risk and incremental optimisation.
+
+The largest initial hurdle is avoiding self-inflicted damage. Only after that hurdle has been cleared do sophisticated differentials, predictive statistics and tactical chip strategies become capable of turning a good manager into a genuinely outstanding one.
+
+---
+
+*Data source: complete weekly squads and manager outcomes for 50 leading Fantasy Premier League managers during the 2025–26 season. Calculations are based on `mgr_t50_fulldata.csv`. The sample contains successful managers only and should therefore be interpreted descriptively rather than as a controlled causal comparison.*

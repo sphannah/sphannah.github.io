@@ -1,0 +1,219 @@
+---
+title: "Modelling Matches"
+subtitle: "History, betting markets and predictions"
+format:
+  html:
+    fig-width: 10
+    toc: false
+    number-sections: false
+    code-fold: true
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    embed-resources: true
+    css: ../style.css
+    theme: ""
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+[← Back to Home](../index.html){.backlink}
+
+Football is unusually well suited to statistical modelling. Matches generate clear outcomes, teams play under broadly comparable rules, and many years of results are readily available. Yet it is also a difficult sport to predict. Goals are scarce, a single deflection or refereeing decision can alter a result, and even a full 38-match season provides a relatively small sample from which to judge a team.
+
+A useful model must therefore do two things. It should identify persistent differences in team quality, but it should also acknowledge that football contains a substantial element of chance. The aim is not to predict every score correctly. It is to describe the range of plausible outcomes and attach sensible probabilities to them.
+
+## Modelling goals
+
+The traditional starting point is the Poisson model. It treats goals as events that occur during a match at an estimated average rate. If a team is expected to score 1.6 goals, this does not mean that it will score exactly 1.6 goals. It means that 1.6 is the centre of a probability distribution covering zero, one, two and higher numbers of goals.
+
+The expected scoring rate can be allowed to vary according to three main influences:
+
+- the attacking strength of the team trying to score;
+- the defensive weakness of its opponent;
+- the advantage associated with playing at home.
+
+Suppose, for example, that Arsenal are playing at home against Everton. Arsenal's expected goals would reflect Arsenal's attacking strength, Everton's defensive weakness and the general home advantage found across the Premier League. Everton's expected goals would similarly combine Everton's attacking strength with Arsenal's defensive weakness, but without the home advantage.
+
+The model produces separate expected-goal estimates for the two teams. These can then be converted into probabilities for every plausible scoreline. Adding the relevant scoreline probabilities gives the chances of a home win, draw or away win. The same distribution can also be used to estimate the probability of a clean sheet, both teams scoring, or the match containing more than a specified number of goals.
+
+### Attack strength and defence weakness
+
+Attack strength (AS) measures how readily a team scores relative to the league average. A value above one normally indicates an above-average attack, while a value below one indicates a weaker attack.
+
+Defence weakness (DW) measures how readily a team concedes. Here a lower value is desirable. A value below one indicates a defence that concedes less frequently than average, while a value above one indicates greater defensive vulnerability.
+
+These measures are relative rather than absolute. They describe performance against the other teams in the same league and period. A team with an AS of 1.25 can be interpreted as scoring at a rate around 25 per cent above the relevant league benchmark, after allowing for its opponents and whether matches were played at home or away.
+
+[INSERT PNG: Premier League attack strength and defence weakness factors over the last five seasons]
+
+The broad pattern is reassuring. Teams occupying Champions League positions generally combine high attacking strength with low defensive weakness. Relegated teams tend to display the opposite combination. Good teams score more and concede less.
+
+The more interesting feature is the large group between these extremes. Many mid-table teams have quite similar estimated strengths. Apparently precise league positions can therefore exaggerate the differences between them. Finishing ninth rather than thirteenth does not necessarily demonstrate a large or permanent superiority. It may reflect a few close matches, injuries, refereeing decisions or goals that happened to arrive at particularly valuable moments.
+
+## Improving the basic Poisson model
+
+The appeal of the Poisson model lies in its simplicity. Only a modest number of parameters is required, and the results can be translated directly into familiar football probabilities. Its assumptions are not, however, a perfect description of actual matches.
+
+### Mean and variance
+
+A standard Poisson distribution assumes that the mean and variance are equal. In everyday language, the average scoring rate also determines how widely actual scores vary around that average.
+
+Football data can be more variable than this assumption allows. Some teams and matches produce a wider range of scores than the Poisson model predicts. A negative binomial model relaxes this restriction by allowing the variance to exceed the mean, a feature known as overdispersion.
+
+This additional flexibility can improve the treatment of unusually high or volatile scores. It does not transform the underlying logic of the model. Teams still have different attacking and defensive characteristics, but the distribution around the expected number of goals is allowed to be wider.
+
+### Low-scoring matches
+
+A second problem concerns the relationship between the two teams' scores. The simplest Poisson model treats them as independent once team strengths and home advantage have been taken into account. In practice, the development of a match links the two sides.
+
+A team taking an early lead may defend more cautiously. A late equaliser may cause both teams to accept a draw, or it may prompt them to take greater risks. Tactical behaviour therefore affects the two scoring processes simultaneously.
+
+The Dixon-Coles adjustment was developed to improve the treatment of low-scoring football matches. It modifies the probabilities attached to 0-0, 1-0, 0-1 and 1-1 results, which are not always represented adequately by two independent Poisson distributions. The adjustment is relatively small, but it can matter because low scores are common and often determine the difference between a win, draw and defeat.
+
+A negative binomial model and a Dixon-Coles adjustment address different issues. The negative binomial allows a wider distribution of goals, while Dixon-Coles modifies the relationship between the two teams' scores in low-scoring matches.
+
+## Estimation is not certainty
+
+Attack and defence factors are estimates derived from a limited number of matches. They should not be treated as fixed measurements comparable to a player's height or the dimensions of the pitch.
+
+A team may score more goals because it created better opportunities, but it may also have benefited from unusually accurate finishing. Another team may concede repeatedly from long-range shots that would normally be saved. Unless the model recognises this uncertainty, temporary good or bad fortune can be mistaken for a permanent difference in quality.
+
+A Bayesian model provides one way of making the uncertainty explicit. Instead of reporting a single attack or defence estimate, it produces a range of plausible values. An 80 per cent credible interval contains the central 80 per cent of values supported by the model and the observed data.
+
+Bayesian estimates also tend to pull unusually extreme results towards the league average when the supporting evidence is limited. This process, sometimes called partial pooling, is particularly useful early in a season or for newly promoted teams. It reduces the risk of declaring a team exceptionally strong or weak on the basis of a handful of matches.
+
+Attack and defence can also be combined into a Total Power Index. One simple version compares attacking strength with defensive weakness, so that a strong attack and a resistant defence produce a high overall rating.
+
+[INSERT PNG: Bayesian Total Power Index with 80 per cent credible intervals]
+
+The resulting intervals are an important part of the picture. The best and worst teams may be clearly separated, but the intervals for many other clubs overlap substantially. Statistical analysis therefore supports a more cautious reading of the league table. There are real differences in quality, but the precise ordering of similarly matched teams is much less certain than the published table suggests.
+
+## The role of luck
+
+David Spiegelhalter and Mike Pearson illustrated the role of chance by imagining a Premier League in which every team possessed exactly the same underlying ability. Matches would still produce winners, draws and losers, and the resulting league table would still show teams spread across a wide range of points.
+
+The table would look meaningful even though, by construction, none of the teams was genuinely better than another.
+
+The size of this chance variation can be estimated from the proportions of home wins, draws and away wins. Suppose that the 2025-26 Premier League produced the following outcome frequencies:
+
+- home win: 46 per cent;
+- draw: 22 per cent;
+- away win: 32 per cent.
+
+For an equal-strength team, the expected points from a home match would be:
+
+3 × 0.46 + 1 × 0.22 = 1.60 points.
+
+The expected points from an away match would be:
+
+3 × 0.32 + 1 × 0.22 = 1.18 points.
+
+Each team plays 19 matches at home and 19 away. Expected home points would therefore be 30.4 and expected away points 22.42, giving expected total points of 52.82.
+
+The average is only part of the story. Random match outcomes would create variation around that average even if all teams were identical. The relevant calculation is not an ordinary binomial distribution because a match has three possible points outcomes: three, one or zero. Home and away matches must also be treated separately because their win probabilities differ.
+
+The following R code calculates the chance variance and compares it with the observed variance in the final league table. The only item that needs to be replaced is the vector containing the 20 clubs' final points totals.
+
+    p_home<-0.46
+    p_draw<-0.22
+    p_away<-0.32
+    n_home<-19
+    n_away<-19
+
+    mean_home<-3*p_home+p_draw
+    mean_away<-3*p_away+p_draw
+
+    var_home<-9*p_home+p_draw-mean_home^2
+    var_away<-9*p_away+p_draw-mean_away^2
+
+    expected_points<-n_home*mean_home+n_away*mean_away
+    chance_variance<-n_home*var_home+n_away*var_away
+    chance_sd<-sqrt(chance_variance)
+
+    points<-c(
+      # Insert final points totals for the 20 Premier League teams
+    )
+
+    observed_variance<-mean((points-mean(points))^2)
+    luck_share<-chance_variance/observed_variance
+
+    tibble(
+      expected_points,
+      chance_variance,
+      chance_sd,
+      observed_variance,
+      luck_share
+    )
+
+Using the assumed 46/22/32 probabilities, the chance variance is approximately 66.64 points squared and its standard deviation is approximately 8.16 points. In an equal-strength league, roughly two-thirds of teams would therefore be expected to finish within about eight points of the average, even though all teams had identical ability.
+
+The final comparison is:
+
+chance variance ÷ observed variance.
+
+If the observed variance of Premier League points were 240, for example, the calculation would give:
+
+66.64 ÷ 240 = 0.278.
+
+This would suggest that around 28 per cent of the observed spread in points was consistent with ordinary match-to-match randomness. Spiegelhalter and Pearson obtained a figure of about 25 per cent for the 2006-07 Premier League.
+
+This ratio should be interpreted as a benchmark rather than a precise allocation of every point between skill and luck. The equal-strength calculation assumes matches are independent and that every club faces the same probabilities. Actual football contains differences in ability, changing line-ups, injuries, tactical responses and fixture effects. Nevertheless, the exercise demonstrates that a substantial spread in points can arise without any underlying difference in skill.
+
+Luck can also influence teams differently. A club may win several evenly balanced matches by one goal, while another repeatedly loses similar matches. Over a longer period these effects may partly cancel, but 38 matches are not enough to guarantee that they will do so.
+
+## From historical estimates to a 2026-27 outlook
+
+The forecasting exercise for 2026-27 begins with the previous five Premier League seasons. For each season, teams are assigned attack strength and defence weakness estimates from a negative binomial goal model. These estimates are then grouped by final league position.
+
+This produces a historical profile for each finishing place. The model can show, for example, the typical attacking strength, defensive weakness and overall power associated with finishing first, sixth, twelfth or twentieth.
+
+A five-season average reduces the influence of unusual results in any single year. It also provides a practical benchmark for promoted clubs and teams whose playing personnel or managerial arrangements have changed substantially.
+
+### Using betting markets
+
+Pre-season betting odds provide a collective assessment of each team's prospects. They incorporate publicly available information about transfers, injuries, managers, finances and expected team selection. Although bookmakers' odds are not infallible, they offer a useful forward-looking complement to historical performance.
+
+The 20 clubs can be ordered by their market-implied expected finishing positions. Each team is then assigned the historical attack and defence profile associated with that position.
+
+This approach does not claim that the favourite will reproduce the exact characteristics of the average champion. It uses the betting market to provide a disciplined initial ranking, then maps that ranking onto attack and defence values observed in recent Premier League seasons.
+
+The resulting estimates can be updated once the season begins. Actual 2026-27 results should gradually receive more weight, while the influence of the pre-season assumptions declines.
+
+### Turning fixtures into probabilities
+
+Once the Premier League fixture list is available, the model combines the estimated strength of each home team with the estimated weakness of each away defence. The equivalent calculation is made for the away team, with home advantage included where appropriate.
+
+For every fixture, the model can then estimate:
+
+- expected goals for each team;
+- probabilities of a home win, draw and away win;
+- probabilities for individual scorelines;
+- the expected total number of goals;
+- the probability that each team keeps a clean sheet;
+- the probability that both teams score.
+
+These are probability estimates, not promises. A team given a 60 per cent chance of winning is also being given a 40 per cent chance of failing to win. If the model is well calibrated, apparent surprises should occur regularly.
+
+[INSERT PNG: Modelled Premier League fixtures and probabilities for the first six gameweeks of 2026-27]
+
+## Reading the forecasts
+
+The most useful output is not the predicted scoreline with the highest individual probability. Football score distributions are usually broad, and even the most likely exact score may have a probability of only 10 or 15 per cent.
+
+Expected goals and grouped outcome probabilities are more informative. A forecast of 1.8 expected goals for the home side and 0.9 for the away side describes the balance of the match more effectively than simply predicting 2-1. It also supports several related estimates, including win probability, clean-sheet probability and expected total goals.
+
+The same caution applies to team rankings. Differences between the strongest and weakest clubs are usually clear. Differences among the large middle group are much less secure. Credible intervals, probability ranges and alternative simulated league tables communicate this uncertainty more honestly than a single predicted final table.
+
+Statistical modelling cannot remove the luck, tactical surprises and human errors that make football compelling. It can, however, separate what appears persistent from what may be temporary, quantify the uncertainty surrounding each judgement, and replace confident guesses with probabilities that can be tested as the season unfolds.
+
+## Sources and further reading
+
+Spiegelhalter, D. and Pearson, M. (2008), *Understanding Uncertainty: The Premier League*, Plus Magazine. The article demonstrates how an equal-strength chance league can be used to estimate the contribution of randomness to the observed variance of Premier League points.
+
+Battersby, D. (2011), *Poisson Model and R Code*, University of Leeds. The study explains the construction and implementation of a Poisson regression model for football scores, including team parameters, home advantage and league simulations.
+
+Dixon, M. J. and Coles, S. G. (1997), “Modelling Association Football Scores and Inefficiencies in the Football Betting Market”, *Journal of the Royal Statistical Society: Series C*, 46(2), pp. 265-280.
