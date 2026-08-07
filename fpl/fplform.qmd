@@ -1,6 +1,6 @@
 ---
 title: "Substance Over Form"
-subtitle: "Why fantasy football’s favourite metric is broken"
+subtitle: "Wh fantasy football’s favourite metric is broken"
 format:
   html:
     fig-width: 10

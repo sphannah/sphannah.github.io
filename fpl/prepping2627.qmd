@@ -1,6 +1,6 @@
 ---
 title: "Prepping for FPL 2026-27"
-subtitle: "Player profiles"
+subtitle: "Play profiles"
 format:
   html:
     fig-width: 10
