@@ -3,14 +3,17 @@ title: "Understanding Labour Market Dynamics: A Markov Chain Approach"
 subtitle: "Calculating the Natural Rate of Unemployment with R"
 format:
   html:
+    fig-width: 10
     toc: false
     number-sections: false
     code-fold: true
-    code-tools: true
-    embed-resources: true 
-    css: /style.css
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    embed-resources: true
+    css: ../style.css
     theme: ""
-    include-in-header: quarto_folding.html
 execute:
   echo: false
   warning: false

@@ -23,9 +23,9 @@ execute:
 
 # Introduction
 
-In macroeconomics, we often discuss how economies experience **booms and recessions**, with periods of normal growth in between. But what causes these cycles, and how can we simulate them? Also what insights can Markov models give us into what economists call an "equilibrium"?
+In macroeconomics, we often discuss how economies experience **booms and recessions**, with periods of normal growth in between. But what causes these cycles, and how can we simulate them? What insights can Markov models give us into what economists call an "equilibrium"?
 
-One way to model business cycles is to use a **Markov chain**, where the economy switches between states like Recession, Normal Growth, and Boom, with certain probabilities.
+One way to model business cycles is to use a **Markov chain**, in which the economy switches between states such as Weak, Normal and Strong growth with specified probabilities.
 
 # How do Markov models work?
 
@@ -35,11 +35,11 @@ This simple "memoryless" property makes these models easy to work with, allowing
 
 # Why is a Markov model useful?
 
-**It helps identify hidden regimes** If you look at a chart of GDP growth over time, you’ll see it goes up and down, but it's not always obvious when the economy has truly shifted into a new phase. A Markov model provides a rigorous way to estimate the statistical characteristics of each phase (for example, the average growth rate and volatility in a "Strong" phase versus a "Weak" one) and to assign probabilities to which state the economy is most likely in at any given time.
+**It helps identify hidden regimes.** If you look at a chart of GDP growth over time, you will see that it rises and falls, but it is not always obvious when the economy has genuinely shifted into a new phase. A Markov model provides a rigorous way to estimate the statistical characteristics of each phase (for example, the average growth rate and volatility in a "Strong" phase compared with a "Weak" one) and to assign probabilities to the state the economy is most likely to occupy at any given time.
 
-**It provides a framework for simulations and "what-if" scenarios** Once we've estimated the probabilities of transitioning between states, we can run thousands of simulations to see what the future might look like. We can ask questions like: "What is the probability of a recession in the next 12 months?" or "If we stay in a 'Weak' state for two quarters, what are our chances of recovery?" This is a powerful tool for forecasting and for testing different policy interventions. For example, a policymaker could use a simulation to see how a fiscal stimulus might affect the likelihood of transitioning from a "Weak" to a "Normal" state.
+**It provides a framework for simulations and "what-if" scenarios.** Once we have estimated the probabilities of moving between states, we can run thousands of simulations to see what the future might look like. We can ask questions such as: "What is the probability of a recession in the next 12 months?" or "If we remain in a 'Weak' state for two quarters, what are our chances of recovery?" This is a powerful tool for forecasting and for testing different policy interventions. For example, a policymaker could use a simulation to examine how fiscal stimulus might affect the likelihood of moving from a "Weak" to a "Normal" state.
 
-**It quantifies uncertainty** Rather than just giving a single forecast, a Markov model can provide a range of possible outcomes and their probabilities, giving a much richer and more realistic picture of the future. This is particularly relevant in today’s world, where a single shock can lead to highly uncertain and volatile outcomes.
+**It quantifies uncertainty.** Rather than giving a single forecast, a Markov model can provide a range of possible outcomes and their probabilities, producing a richer and more realistic picture of the future. This is particularly relevant in a world in which a single shock can generate highly uncertain and volatile outcomes.
 
 # Setting Up the Markov Model
 
@@ -47,23 +47,13 @@ Below is the R code to create a simple 3-state Markov chain and simulate the res
 
 In this example,
 
-<ul>
+-   *Weak* = negative growth (on average, -1% year on year)
+-   *Normal* = steady positive growth (on average, +2% year on year)
+-   *Strong* = faster-than-normal growth (on average, +4% year on year)
 
-<li><em>Recession</em> = negative or zero growth (on average -1% yoy)</li>
+The Transition Probability Matrix (TPM) is a table showing the probability of moving from one state to another in any given period. For example, our matrix specifies a 75% chance of remaining in a "Normal" state, a 15% chance of moving into a "Strong" state and a 10% chance of slipping into a "Weak" state. Taken together, the transition probabilities imply that the economy will spend 50% of the time in the "Normal" state in the long run.
 
-<li><em>Normal</em> = steady positive growth (on average +2% yoy)</li>
-
-<li><em>Boom</em> = faster-than-normal growth (on average +4% yoy)</li>
-
-</ul>
-
--   *Recession* = negative or zero growth (on average -1%yoy)
--   *Normal* = steady positive growth (on average +2%yoy)
--   *Boom* = faster-than-normal growth (on average +4%yoy)
-
-The Transition Probability Matrix (TPM) is a table of probabilities showing the chance of moving from one state to another in any given period. For example, our matrix specifies a 75% chance of staying in a "Normal" state, a 15% chance of morphing into a "boom", but only a 10% chance of slipping into a "Weak" state. The 3 sets of probabilities chosen are consistent with a macro economy spending around half its time in the "Normal" trend state - not far from experienced reality.
-
-The code anables us to simulate how these states influence Real GDP over time, producing a path that trends upward overall but fluctuates with business cycles.
+The code enables us to simulate how these states influence real GDP growth over time, producing a growth series that fluctuates with the business cycle.
 
 ```{r}
 #| echo: true
@@ -89,6 +79,11 @@ P <- matrix(c(
   0.05, 0.25, 0.70
 ), byrow = TRUE, nrow = 3, dimnames = list(state_names, state_names))
 
+# Display the matrix and check its row and column sums
+P
+rowSums(P)
+colSums(P)
+
 # Calculate Stationary Distribution
 eigen_result <- eigen(t(P))
 target_eigen_value_index <- which.min(abs(eigen_result$values - 1))
@@ -108,6 +103,36 @@ mean_gdp_growth <- c(Strong = 4.0, Normal = 2.0, Weak = -1.0)
 sd_gdp_growth <- 0.8
 
 ```
+
+## Reading the transition matrix: rows and columns
+
+Each **row** begins with the economy's current state and shows all the states it could occupy next period. The first row, for example, asks: *if the economy is Strong now, what could it be next quarter?* It gives a 70% chance of remaining Strong, a 25% chance of moving to Normal and a 5% chance of moving to Weak.
+
+These alternatives exhaust the possibilities, so every row must sum to one:
+
+$$
+0.70+0.25+0.05=1.
+$$
+
+This is the essential probability constraint on a transition matrix. Every entry must lie between zero and one, and every row must sum to one (or 100%). In plain language, given where the economy is today, it must be somewhere next period.
+
+The **columns** should be read differently. A column collects the probabilities of arriving in a particular state from several different starting states. The Normal column contains:
+
+-   a 25% probability of moving from Strong to Normal;
+-   a 75% probability of remaining Normal; and
+-   a 25% probability of moving from Weak to Normal.
+
+These add to 1.25, but this does **not** imply a 125% probability of being Normal. The three probabilities answer different conditional questions because each assumes a different current state. Adding them is rather like adding the probability of passing an examination for students who studied extensively, studied moderately or did not study: the resulting total is not an overall pass probability unless we also know the proportion of students in each group.
+
+Consequently, individual columns do not generally have to sum to one. With three states, each column sum must lie between zero and three, while the three column sums together must equal three because the three row sums each equal one. More generally, for an $n$-state transition matrix, all the column sums together equal $n$.
+
+Column sums can nevertheless offer a useful preliminary intuition. In this example, they are 0.90 for Strong, 1.25 for Normal and 0.85 for Weak. The relatively high Normal column suggests that Normal is accessible from all three starting states and acts as something of a gravitational centre. However, this comparison gives equal weight to each starting state, irrespective of how frequently it occurs.
+
+To calculate genuine next-period probabilities, we must weight each row by the economy's current probability of occupying that state. If the three current states were initially equally likely, the next-period probabilities would be the column sums divided by three: 30.0% Strong, 41.7% Normal and 28.3% Weak. This is only the distribution after **one** transition from an initially equal distribution; it is not the long-run distribution.
+
+The stationary distribution calculated above repeatedly allows for the economy's changing distribution across the three starting states. It is the distribution that reproduces itself after another transition. For this matrix, the long-run probabilities are approximately 28.6% Strong, 50.0% Normal and 21.4% Weak. Thus, if the economy already has these probabilities, applying the transition matrix leaves them unchanged.
+
+If every row and every column sum to one, the matrix is described as **doubly stochastic**. An equal probability for each state is then a stationary distribution. If the chain is also irreducible and aperiodic, this distribution is the unique long-run distribution towards which the system converges. Our matrix is not doubly stochastic, so its long-run probabilities are not one-third each.
 
 # Simulate states over 200 periods
 
@@ -147,7 +172,7 @@ p1 <- ggplot(sim_data, aes(x = Time, y = GDP_Growth, color = State)) +
   scale_color_manual(values = c("Strong" = "darkgreen", "Normal" = "steelblue", "Weak" = "firebrick")) +
   labs(
     title = "Simulated Macroeconomic GDP Growth",
-    subtitle = paste0("Long-run Normal State Probability: ", round(stationary_dist["Normal"] * 100, 2), "%"),
+    subtitle = paste0("Long-Run Probability of Normal State: ", round(stationary_dist["Normal"] * 100, 2), "%"),
     x = "Time Period (Calendar Quarters)",
     y = "GDP Growth Rate (%)"
   ) +
@@ -157,10 +182,10 @@ p1 <- ggplot(sim_data, aes(x = Time, y = GDP_Growth, color = State)) +
                                   margin=margin(t=0,r=10,b=0,l=0)),
         axis.title.x=element_text(size=18,colour="#002060",vjust=2,
                                   margin=margin(t=10,r=0,b=0,l=0)),
-        axis.text=element_text(color="#002060",size=16),
+        axis.text=element_text(color="#002060",size=18),
         axis.ticks=element_blank(),
-        legend.text=element_text(colour="#002060",size=14),
-        legend.title=element_text(colour="#002060",size=18),
+        legend.text=element_text(colour="#002060",size=18),
+        legend.title=element_text(colour="#002060",size=18, face="italic"),
         legend.position="top",
         #legend.position.inside = c(0.5,0.9),
         #legend.key=element_blank(),
@@ -178,27 +203,27 @@ p1
 
 In economics, **static equilibrium** refers to a place of rest where key endogenous variables remain constant over time unless disturbed. In an Econ101 supply and demand framework, for example, the market-clearing price and quantity represent a static equilibrium: there are no inherent forces pushing price or quantity away from that point, and the system remains at rest until an external shock intervenes.
 
-By contrast, a **dynamic (deterministic) equilibrium** describes a situation where variables change over time but in a balanced and predictable manner, such that crucial ratios remain constant despite growth or decline in absolute terms. The classic example here is the Solow growth model, where the economy moves towards a steady state in which output, capital, and tech-endowed labour all grow at the same constant rate. Despite these ongoing changes, the capital-effective labour ratio, the marginal product of capital and the growth rate of living standards remain stable, reflecting an underlying balance within a system of perpetual movement.
+By contrast, a **dynamic (deterministic) equilibrium** describes a situation in which variables change over time but in a balanced and predictable manner, so that crucial ratios remain constant despite growth or decline in absolute terms. The classic example is the Solow growth model, in which the economy moves towards a steady state where output, capital and technology-augmented labour all grow at the same constant rate. Despite these ongoing changes, the capital-to-effective-labour ratio, the marginal product of capital and the growth rate of living standards remain stable, reflecting an underlying balance within a system of perpetual movement.
 
 A key insight of Markov models is that the real world can exhibit a so-called **stochastic equilibrium**, arising in models incorporating random shocks, such as Real Business Cycle (RBC) and New Keynesian Dynamic Stochastic General Equilibrium (DSGE) models. In these frameworks, the economy is constantly buffeted by unpredictable disturbances – for example, productivity or policy shocks – but nonetheless exhibits an underlying tendency for key ratios and variables to revert towards their long-run equilibrium paths. Here, equilibrium is defined not as a fixed point or a deterministic growth path, but as a probabilistic distribution around which the economy fluctuates.
 
-Of course, in reality, there is no guarantee that a unique equilibrium exists. That is why societies value collective action and adaptibility in the face of randomness.
+Of course, in reality, there is no guarantee that a unique equilibrium exists. That is why societies value collective action and adaptability in the face of randomness.
 
-*If we want things to stay as they are, things will have to change* Guiseppe Tomasi di Lampedusa, Il Gattopardo (The Leopard)
+*If we want things to stay as they are, things will have to change.* Giuseppe Tomasi di Lampedusa, *Il Gattopardo* (*The Leopard*)
 
-*No man ever steps in the same river twice, for it's not the same river and he's not the same man* Heraclitus
+*No man ever steps in the same river twice, for it is not the same river and he is not the same man.* Heraclitus
 
 # Do Markov models have limitations?
 
-The core assumption of a basic Markov model is that the future depends only on the present. While this is a powerful simplification, it might not always hold true in the real world. This brings us to a crucial concept in economics: **path dependence**
+The core assumption of a basic Markov model is that the future depends only on the present. Although this is a powerful simplification, it might not always hold in the real world. This brings us to a crucial concept in economics: **path dependence**.
 
 Path dependence suggests that "history matters" in a deeper way. It argues that the entire sequence of events that led to the current state is important, not just the state itself. Think of a "lock-in" effect, where an early choice or event makes it very difficult to switch to an alternative later on.
 
-Macro examples of path dependence include,
+Macroeconomic examples of path dependence include:
 
--   **Hysteresis (Scarring)** A deep and prolonged recession (a "bad path") might cause long-lasting damage to the workforce, eroding skills and permanently increasing the unemployment rate, making a return to the pre-recession "Normal" state much harder than a simple Markov transition would suggest.
--   **Perma Shocks** The choice to abolish slavery, the collapse of communism, or the impact of a global pandemic like COVID-19 are not just temporary state changes. These events set economies on fundamentally new and often irreversible trajectories.
--   **Industrial/Tech Revolutions** The advent of a major General Purpose Technology (GPT) like steam, electricity, the internet or AI can create self-reinforcing dynamics, where early adoption by some countries or firms creates advantages that are very difficult for others to overcome.
+-   **Hysteresis (scarring).** A deep and prolonged recession (a "bad path") might cause long-lasting damage to the workforce, eroding skills and permanently increasing the unemployment rate. A return to the pre-recession "Normal" state may therefore be much harder than a simple Markov transition would suggest.
+-   **Permanent shocks.** The abolition of slavery, the collapse of communism and the impact of a global pandemic such as COVID-19 are not merely temporary state changes. These events set economies on fundamentally new and often irreversible trajectories.
+-   **Industrial and technological revolutions.** The advent of a major general-purpose technology (GPT), such as steam power, electricity, the internet or AI, can create self-reinforcing dynamics. Early adoption by some countries or firms may generate advantages that are very difficult for others to overcome.
 
 So, while a Markov model is a useful starting point for understanding short-term fluctuations, it is less suited to capturing these deep, historical, and often irreversible shifts.
 
@@ -206,6 +231,6 @@ So, while a Markov model is a useful starting point for understanding short-term
 
 Thinking about the labour market in simple terms, people are either employed, unemployed or absent from the labour force. They frequently move between these three states at different points in their life cycle. But what happens over the long run? Does the unemployment rate settle at a particular level, even with constant flows of people finding and losing jobs? This is where the concept of a steady state (or long-run equilibrium) using a Markov model can be useful.
 
-Imagine a large economy with millions of workers. Each period (say, a month or a quarter), some employed people might lose their jobs and become unemployed, while some unemployed people might find jobs and become employed. Some people may become discouraged, or too old/ill and exit the labour market entirely. Some may reverse their early retirment or leave school and get a job for the first time. A Markov model allows us to quantify these flows using transition probabilities.
+Imagine a large economy with millions of workers. Each period (say, a month or a quarter), some employed people might lose their jobs and become unemployed, while some unemployed people might find jobs and become employed. Some people may become discouraged or leave the labour market because of age or illness. Others may reverse an early retirement, or leave education and obtain a job for the first time. A Markov model allows us to quantify these flows using transition probabilities.
 
-The steady state represents a point where, despite these ongoing movements, the overall proportion of people who are employed and unemployed no longer changes. It's not that no one moves anymore; it's that the number of people transitioning between states is balancing out to produce the appearance of a steady state in terms of proportions. It’s like a bath where water is constantly flowing in and out, but the water level remains constant because the inflow equals the outflow. Using matrix algebra and flow data information, we can calculate what the long-run proportions would be, providing an insight into a very important macro concept called the **natural rate of unemployment.**
+The steady state represents a point where, despite these ongoing movements, the proportions of people who are employed, unemployed or outside the labour force no longer change. It is not that people have stopped moving between states; rather, the flows balance out and leave the overall proportions unchanged. It is like a bath in which water flows in and out continuously, but the water level remains constant because the inflow equals the outflow. Using matrix algebra and data on labour-market flows, we can calculate the long-run proportions, providing insight into the important macroeconomic concept of the **natural rate of unemployment**.
