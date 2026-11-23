@@ -1,0 +1,3183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+
+  <meta charset="utf-8"/>
+  <title>FML GW11: Slop Along with Stephen</title>
+  <style>
+    @page { size: A4 portrait; margin: 0; }
+    * { box-sizing: border-box; }
+    html { background:#e2ebec; color:#142835; font: 10.4pt Arial, sans-serif; }
+    body { margin:0; }
+    .page { background:white; width:210mm; min-height:297mm; margin:0 auto 12px; padding:12mm 12mm 10mm;
+            position:relative; break-after:page; page-break-after:always; }
+    .page:last-child { break-after:auto; page-break-after:auto; }
+    @media print { html,body { background:white; } .page { margin:0; min-height:296mm; } 
+                   * { print-color-adjust:exact; -webkit-print-color-adjust:exact; } }
+    @media screen and (max-width:790px) {
+      .page { width:100%; min-height:auto; padding:22px; }
+      .grid { display:block !important; } .grid > * { width:100% !important; } }
+    h1,h2,p,ul { margin-top:0; }
+    h1 { font-size:29pt; line-height:1.07; margin-bottom:7px; letter-spacing:-.035em; color:#102838; }
+    h2 { font-size:15pt; line-height:1.12; margin:0 0 7px; color:#124651; letter-spacing:-.015em; }
+    p { margin-bottom:8px; line-height:1.36; }
+    .strap,.eyebrow { color:#13766b; font-size:8.5pt; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:7px; }
+    .rust { color:#98482f; }
+    .masthead { background:#102c3c; border-left:8px solid #49dfad; color:white; border-radius:6px;
+                padding:18px 22px; margin-bottom:12px; }
+    .masthead h1 { color:white; font-size:35pt; margin-bottom:9px; }
+    .masthead .strap { color:#80eec9; }
+    .masthead p { color:#e2f0f1; margin-bottom:0; }
+    .intro { font-size:12pt; line-height:1.42; }
+    .subtitle { color:#445e68; font-size:11pt; margin-bottom:16px; }
+    .grid { display:flex; justify-content:space-between; margin-bottom:10px; align-items:flex-start; }
+    .grid > * { width:49.2%; }
+    .pick-column .picks { margin-bottom:9px; }
+    article { background:#f2f8f7; padding:10px; border:1px solid #dce9e7; border-radius:5px; break-inside:avoid; min-width:0; }
+    article p:last-child { margin-bottom:0; }
+    .fixture { margin-bottom:8px; }
+    .fixture ul { margin-bottom:7px; padding-left:16px; line-height:1.32; }
+    .fixture li { margin-bottom:4px; }
+    .fixture p { margin-bottom:7px; }
+    .fixture .eyebrow { margin-bottom:3px; }
+    table { border-collapse:collapse; width:100%; background:white; font-size:9pt; font-variant-numeric:tabular-nums; }
+    th,td { text-align:left; padding:5px 5px; border-bottom:1px solid #dce9e7; }
+    th { background:#194454; color:white; font-size:8.3pt; }
+    tbody tr:nth-child(even) { background:#f4f8fa; }
+    .picks th,.picks td { padding:5px 3px; }
+    .picks table { font-size:8.4pt; }
+    .picks td:nth-child(n+4),.picks th:nth-child(n+4) { text-align:right; white-space:nowrap; }
+    .picks td:first-child { width:28%; }
+    .picks td:nth-child(2) { width:18%; }
+    .picks.gkp { border-top:4px solid #e1aa43; } .picks.def { border-top:4px solid #42a597; }
+    .picks.mid { border-top:4px solid #6177bf; } .picks.fwd { border-top:4px solid #dd744d; }
+    .squad { padding:9px; }
+    .squad table { font-size:8.5pt; }
+    .squad td,.squad th { padding:6px 3px; }
+    .squad td:nth-child(n+5) { text-align:right; white-space:nowrap; }
+    .squad td:first-child { white-space:nowrap; }
+    .squad .captain { background:#c9f4e2; font-weight:bold; }
+    .squad .vice { background:#e3edfb; }
+    .squad .bench { background:#eaf0f2; color:#3e5a66; }
+    .metrics,.moves { font-size:9pt; color:#36565e; }
+    .moves { margin-top:8px; line-height:1.45; }
+    .small { font-size:8.8pt; color:#3f5d66; margin-top:7px; }
+    footer { display:flex; justify-content:space-between; margin-top:18px; padding-top:7px;
+             border-top:1px solid #9bbdbc; color:#3f5d66; font-size:8pt; }
+  </style>
+</head>
+<html lang="en">
+  <body>
+    <section class="page">
+      <div class="masthead">
+        <div class="strap">FML  /  GW11–16  /  20 Nov 2026</div>
+        <h1>
+          FML GW11
+          <br/>
+          Slop Along with Stephen
+        </h1>
+        <p>6 gameweeks of fixtures, player picks and squad tinkering</p>
+      </div>
+      <p class="intro">I put this together with AI assistance, starting with consensus expectations (scraped from a popular fantasy teaser website) and checking them against my own homegrown match model, available bookies odds, and what players have actually done on the pitch. This is not just slop, this is my curated slop.</p>
+      <div class="grid">
+        <article>
+          <h2>The template in one glance</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>GW</th>
+                <th>Captain</th>
+                <th>Gross</th>
+                <th>Hits</th>
+                <th>Net</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="">
+                <td>GW11</td>
+                <td>Haaland</td>
+                <td>65.15</td>
+                <td>−0</td>
+                <td>65.15</td>
+              </tr>
+              <tr class="">
+                <td>GW12</td>
+                <td>N.Jackson</td>
+                <td>58.01</td>
+                <td>−0</td>
+                <td>58.01</td>
+              </tr>
+              <tr class="">
+                <td>GW13</td>
+                <td>Haaland</td>
+                <td>61.61</td>
+                <td>−0</td>
+                <td>61.61</td>
+              </tr>
+              <tr class="">
+                <td>GW14</td>
+                <td>N.Jackson</td>
+                <td>61.48</td>
+                <td>−0</td>
+                <td>61.48</td>
+              </tr>
+              <tr class="">
+                <td>GW15</td>
+                <td>Haaland</td>
+                <td>62.31</td>
+                <td>−0</td>
+                <td>62.31</td>
+              </tr>
+              <tr class="">
+                <td>GW16</td>
+                <td>Haaland</td>
+                <td>66.88</td>
+                <td>−0</td>
+                <td>66.88</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="small">375.44 projected net points over 6 weeks. Full-horizon optimum.</p>
+        </article>
+        <article>
+          <h2>How the numbers move</h2>
+          <p>100 Scout matches approved, 0 held for review and 0 approved IDs outside the eligible player pool. For covered players, the blend gives Scout 80% weight and caps the model nudge at 1.25 points.</p>
+          <p>Homegrown estimates mix season points per appearance, 45-day form and appearance rates. The fixture model adjusts attackers for team xG and defenders and keepers for clean-sheet odds.</p>
+          <p>The latest availability flag applies to the opening GW only. A 0% flag sets that week to zero. Other reported chances cap the homegrown appearance estimate. Players outside Scout use the homegrown estimate.</p>
+          <p class="small">The blend weights are editable judgement calls. Historical forecast snapshots paired with actual points are needed to test improvement over Scout.</p>
+        </article>
+      </div>
+      <h2>Bookie disagreements to recheck</h2>
+      <div>
+        <p>
+          <strong>GW12 Brighton v Newcastle. </strong>
+          The model’s home-win estimate is 78.7% versus 60% in the odds file.
+        </p>
+        <p>12 of 19 matched prices crossed a review threshold (10 pp on a probability or 0.40 on team xG). The five largest W/D/L gaps among the flagged games are below. The CSV has every matched game.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>GW</th>
+              <th>Match</th>
+              <th>W/D/L gap</th>
+              <th>CS gap</th>
+              <th>xG gap</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="">
+              <td>GW12</td>
+              <td>Brighton v Newcastle</td>
+              <td>18.7 pp</td>
+              <td>10.7 pp</td>
+              <td>0.94</td>
+            </tr>
+            <tr class="">
+              <td>GW11</td>
+              <td>Brentford v Everton</td>
+              <td>11.8 pp</td>
+              <td>10.4 pp</td>
+              <td>0.50</td>
+            </tr>
+            <tr class="">
+              <td>GW12</td>
+              <td>Crystal Palace v Hull City</td>
+              <td>9.8 pp</td>
+              <td>6.3 pp</td>
+              <td>0.42</td>
+            </tr>
+            <tr class="">
+              <td>GW11</td>
+              <td>Bournemouth v Nott'm Forest</td>
+              <td>8.9 pp</td>
+              <td>6.8 pp</td>
+              <td>0.55</td>
+            </tr>
+            <tr class="">
+              <td>GW11</td>
+              <td>Hull City v Brighton</td>
+              <td>8.1 pp</td>
+              <td>2.9 pp</td>
+              <td>0.47</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <footer>
+        <span>FML GW11   /   At a glance</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+    <section class="page">
+      <header>
+        <div class="strap">FML  /  GW11 EDITION</div>
+        <h1>01  Key matches</h1>
+        <p class="subtitle">GW11–GW13  /  Attack strength, defensive weakness and the clean-sheet outlook</p>
+      </header>
+      <article class="fixture">
+        <h2>GW 11</h2>
+        <div class="eyebrow">Attack targets</div>
+        <ul>
+          <li>
+            <strong>MCI host FUL. </strong>
+            2.46 xG and 70% win chance. MCI attack ranks #2 in its venue. FUL ranks #12 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+          <li>
+            <strong>BHA visit HUL. </strong>
+            2.37 xG and 71% win chance. BHA attack ranks #2 in its venue. HUL ranks #5 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+        </ul>
+        <div class="eyebrow">Clean-sheet watch</div>
+        <p>
+          <strong>BHA visit HUL. </strong>
+          47% clean sheet, 0.78 expected goals conceded and the #2 defence at its venue. Worth a look for keepers and defenders.
+        </p>
+        <div class="eyebrow rust">Attack to fade</div>
+        <p>
+          <strong>HUL host BHA. </strong>
+          0.78 xG, the lowest team forecast of the week.
+        </p>
+      </article>
+      <article class="fixture">
+        <h2>GW 12</h2>
+        <div class="eyebrow">Attack targets</div>
+        <ul>
+          <li>
+            <strong>BHA host NEW. </strong>
+            2.94 xG and 79% win chance. BHA attack ranks #1 in its venue. NEW ranks #5 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+          <li>
+            <strong>AVL visit IPS. </strong>
+            2.06 xG and 51% win chance. AVL attack ranks #8 in its venue. IPS ranks #3 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+        </ul>
+        <div class="eyebrow">Clean-sheet watch</div>
+        <p>
+          <strong>LEE host COV. </strong>
+          48% clean sheet, 0.75 expected goals conceded and the #3 defence at its venue. Worth a look for keepers and defenders.
+        </p>
+        <div class="eyebrow rust">Attack to fade</div>
+        <p>
+          <strong>COV visit LEE. </strong>
+          0.75 xG, the lowest team forecast of the week.
+        </p>
+      </article>
+      <article class="fixture">
+        <h2>GW 13</h2>
+        <div class="eyebrow">Attack targets</div>
+        <ul>
+          <li>
+            <strong>CHE host CRY. </strong>
+            3.01 xG and 75% win chance. CHE attack ranks #4 in its venue. CRY ranks #1 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+          <li>
+            <strong>LIV host SUN. </strong>
+            2.18 xG and 67% win chance. LIV attack ranks #9 in its venue. SUN ranks #4 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+        </ul>
+        <div class="eyebrow">Clean-sheet watch</div>
+        <p>
+          <strong>LIV host SUN. </strong>
+          44% clean sheet, 0.85 expected goals conceded and the #4 defence at its venue. Worth a look for keepers and defenders.
+        </p>
+        <div class="eyebrow rust">Attack to fade</div>
+        <p>
+          <strong>SUN visit LIV. </strong>
+          0.85 xG, the lowest team forecast of the week.
+        </p>
+      </article>
+      <p class="small">AS and DW ranks compare the same venue across clubs. Win and clean-sheet percentages are from the proprietary match model. Official overall venue strengths are included in fixture_context.csv.</p>
+      <footer>
+        <span>FML GW11   /   Key matches</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+    <section class="page">
+      <header>
+        <div class="strap">FML  /  GW11 EDITION</div>
+        <h1>01  Key matches</h1>
+        <p class="subtitle">GW14–GW16  /  Attack strength, defensive weakness and the clean-sheet outlook</p>
+      </header>
+      <article class="fixture">
+        <h2>GW 14</h2>
+        <div class="eyebrow">Attack targets</div>
+        <ul>
+          <li>
+            <strong>MUN host COV. </strong>
+            2.49 xG and 66% win chance. MUN attack ranks #6 in its venue. COV ranks #3 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+          <li>
+            <strong>AVL host CRY. </strong>
+            2.47 xG and 64% win chance. AVL attack ranks #8 in its venue. CRY ranks #1 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+        </ul>
+        <div class="eyebrow">Clean-sheet watch</div>
+        <p>
+          <strong>BHA visit NFO. </strong>
+          46% clean sheet, 0.79 expected goals conceded and the #2 defence at its venue. Worth a look for keepers and defenders.
+        </p>
+        <div class="eyebrow rust">Attack to fade</div>
+        <p>
+          <strong>NFO host BHA. </strong>
+          0.79 xG, the lowest team forecast of the week.
+        </p>
+      </article>
+      <article class="fixture">
+        <h2>GW 15</h2>
+        <div class="eyebrow">Attack targets</div>
+        <ul>
+          <li>
+            <strong>MCI host CHE. </strong>
+            2.51 xG and 60% win chance. MCI attack ranks #2 in its venue. CHE ranks #11 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+          <li>
+            <strong>ARS host BOU. </strong>
+            2.36 xG and 69% win chance. ARS attack ranks #3 in its venue. BOU ranks #10 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+        </ul>
+        <div class="eyebrow">Clean-sheet watch</div>
+        <p>
+          <strong>BHA host EVE. </strong>
+          49% clean sheet, 0.73 expected goals conceded and the #2 defence at its venue. Worth a look for keepers and defenders.
+        </p>
+        <div class="eyebrow rust">Attack to fade</div>
+        <p>
+          <strong>EVE visit BHA. </strong>
+          0.73 xG, the lowest team forecast of the week.
+        </p>
+      </article>
+      <article class="fixture">
+        <h2>GW 16</h2>
+        <div class="eyebrow">Attack targets</div>
+        <ul>
+          <li>
+            <strong>BHA host IPS. </strong>
+            3.52 xG and 85% win chance. BHA attack ranks #1 in its venue. IPS ranks #2 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+          <li>
+            <strong>MCI host HUL. </strong>
+            2.90 xG and 78% win chance. MCI attack ranks #2 in its venue. HUL ranks #6 for defensive weakness in the opposite venue, with #1 the weakest.
+          </li>
+        </ul>
+        <div class="eyebrow">Clean-sheet watch</div>
+        <p>
+          <strong>BHA host IPS. </strong>
+          49% clean sheet, 0.74 expected goals conceded and the #2 defence at its venue. Worth a look for keepers and defenders.
+        </p>
+        <div class="eyebrow rust">Attack to fade</div>
+        <p>
+          <strong>IPS visit BHA. </strong>
+          0.74 xG, the lowest team forecast of the week.
+        </p>
+      </article>
+      <p class="small">AS and DW ranks compare the same venue across clubs. Win and clean-sheet percentages are from the proprietary match model. Official overall venue strengths are included in fixture_context.csv.</p>
+      <footer>
+        <span>FML GW11   /   Key matches</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+    <section class="page">
+      <header>
+        <div class="strap">FML  /  GW11 EDITION</div>
+        <h1>02  Top player picks  /  GW11</h1>
+        <p class="subtitle">Position-by-position watchlist ranked by our expected points</p>
+      </header>
+      <div class="grid picks-grid">
+        <div class="pick-column">
+          <article class="picks gkp">
+            <h2>Goalkeepers  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Raya · ARS</td>
+                  <td>NEW (A)</td>
+                  <td>42% CS · F45 6.00</td>
+                  <td>3.90</td>
+                  <td>4.21</td>
+                </tr>
+                <tr class="">
+                  <td>Verbruggen · BHA</td>
+                  <td>HUL (A)</td>
+                  <td>47% CS · F45 6.80</td>
+                  <td>3.70</td>
+                  <td>4.12</td>
+                </tr>
+                <tr class="">
+                  <td>Kinsky · TOT</td>
+                  <td>IPS (H)</td>
+                  <td>31% CS · F45 4.40</td>
+                  <td>3.80</td>
+                  <td>3.83</td>
+                </tr>
+                <tr class="">
+                  <td>Kelleher · BRE</td>
+                  <td>EVE (H)</td>
+                  <td>38% CS · F45 3.00</td>
+                  <td>3.80</td>
+                  <td>3.72</td>
+                </tr>
+                <tr class="">
+                  <td>Suzuki · AVL</td>
+                  <td>SUN (H)</td>
+                  <td>32% CS · F45 3.00</td>
+                  <td>3.90</td>
+                  <td>3.70</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks def">
+            <h2>Defenders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Gabriel · ARS</td>
+                  <td>NEW (A)</td>
+                  <td>42% CS · F45 8.20</td>
+                  <td>5.10</td>
+                  <td>5.43</td>
+                </tr>
+                <tr class="">
+                  <td>De Cuyper · BHA</td>
+                  <td>HUL (A)</td>
+                  <td>47% CS · F45 7.40</td>
+                  <td>5.00</td>
+                  <td>5.37</td>
+                </tr>
+                <tr class="">
+                  <td>Vuskovic · BHA</td>
+                  <td>HUL (A)</td>
+                  <td>47% CS · F45 7.60</td>
+                  <td>4.90</td>
+                  <td>5.27</td>
+                </tr>
+                <tr class="">
+                  <td>Van Hecke · TOT</td>
+                  <td>IPS (H)</td>
+                  <td>31% CS · F45 6.60</td>
+                  <td>5.00</td>
+                  <td>5.15</td>
+                </tr>
+                <tr class="">
+                  <td>Justin · LEE</td>
+                  <td>CHE (A)</td>
+                  <td>18% CS · F45 5.00</td>
+                  <td>–</td>
+                  <td>4.59</td>
+                </tr>
+                <tr class="">
+                  <td>Boscagli · BHA</td>
+                  <td>HUL (A)</td>
+                  <td>47% CS · F45 5.00</td>
+                  <td>–</td>
+                  <td>4.53</td>
+                </tr>
+                <tr class="">
+                  <td>Hill · BOU</td>
+                  <td>NFO (H)</td>
+                  <td>37% CS · F45 6.00</td>
+                  <td>4.30</td>
+                  <td>4.40</td>
+                </tr>
+                <tr class="">
+                  <td>Konsa · ARS</td>
+                  <td>NEW (A)</td>
+                  <td>42% CS · F45 9.00</td>
+                  <td>3.80</td>
+                  <td>4.36</td>
+                </tr>
+                <tr class="">
+                  <td>Silva · BOU</td>
+                  <td>NFO (H)</td>
+                  <td>37% CS · F45 5.40</td>
+                  <td>4.30</td>
+                  <td>4.33</td>
+                </tr>
+                <tr class="">
+                  <td>Calafiori · ARS</td>
+                  <td>NEW (A)</td>
+                  <td>42% CS · F45 5.60</td>
+                  <td>4.10</td>
+                  <td>4.32</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+        <div class="pick-column">
+          <article class="picks mid">
+            <h2>Midfielders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Palmer · CHE</td>
+                  <td>LEE (H)</td>
+                  <td>1.78 xG · F45 3.80</td>
+                  <td>6.20</td>
+                  <td>5.70</td>
+                </tr>
+                <tr class="">
+                  <td>Gross · BHA</td>
+                  <td>HUL (A)</td>
+                  <td>2.37 xG · F45 4.60</td>
+                  <td>5.10</td>
+                  <td>5.15</td>
+                </tr>
+                <tr class="">
+                  <td>Ayari · BHA</td>
+                  <td>HUL (A)</td>
+                  <td>2.37 xG · F45 6.20</td>
+                  <td>–</td>
+                  <td>5.03</td>
+                </tr>
+                <tr class="">
+                  <td>Gomez · BHA</td>
+                  <td>HUL (A)</td>
+                  <td>2.37 xG · F45 5.40</td>
+                  <td>–</td>
+                  <td>4.97</td>
+                </tr>
+                <tr class="">
+                  <td>Tavernier · BOU</td>
+                  <td>NFO (H)</td>
+                  <td>1.95 xG · F45 5.40</td>
+                  <td>4.90</td>
+                  <td>4.94</td>
+                </tr>
+                <tr class="">
+                  <td>Rogers · CHE</td>
+                  <td>LEE (H)</td>
+                  <td>1.78 xG · F45 4.60</td>
+                  <td>4.90</td>
+                  <td>4.76</td>
+                </tr>
+                <tr class="">
+                  <td>Cherki · MCI</td>
+                  <td>FUL (H)</td>
+                  <td>2.46 xG · F45 5.00</td>
+                  <td>4.90</td>
+                  <td>4.75</td>
+                </tr>
+                <tr class="">
+                  <td>Kudus · TOT</td>
+                  <td>IPS (H)</td>
+                  <td>1.96 xG · F45 4.20</td>
+                  <td>4.80</td>
+                  <td>4.56</td>
+                </tr>
+                <tr class="">
+                  <td>Rice · ARS</td>
+                  <td>NEW (A)</td>
+                  <td>1.98 xG · F45 6.00</td>
+                  <td>4.30</td>
+                  <td>4.50</td>
+                </tr>
+                <tr class="">
+                  <td>Manzambi · AVL</td>
+                  <td>SUN (H)</td>
+                  <td>2.21 xG · F45 5.20 · 75% avail</td>
+                  <td>4.70</td>
+                  <td>4.49</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks fwd">
+            <h2>Forwards  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Haaland · MCI</td>
+                  <td>FUL (H)</td>
+                  <td>2.46 xG · F45 6.20</td>
+                  <td>7.10</td>
+                  <td>6.84</td>
+                </tr>
+                <tr class="">
+                  <td>Isak · LIV</td>
+                  <td>MUN (H)</td>
+                  <td>1.85 xG · F45 7.00</td>
+                  <td>5.70</td>
+                  <td>5.60</td>
+                </tr>
+                <tr class="">
+                  <td>N.Jackson · AVL</td>
+                  <td>SUN (H)</td>
+                  <td>2.21 xG · F45 8.80</td>
+                  <td>5.30</td>
+                  <td>5.52</td>
+                </tr>
+                <tr class="">
+                  <td>Evanilson · BOU</td>
+                  <td>NFO (H)</td>
+                  <td>1.95 xG · F45 8.60</td>
+                  <td>4.10</td>
+                  <td>4.61</td>
+                </tr>
+                <tr class="">
+                  <td>Kostoulas · BHA</td>
+                  <td>HUL (A)</td>
+                  <td>2.37 xG · F45 3.80</td>
+                  <td>4.30</td>
+                  <td>4.24</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+      <p class="small">CS is the team’s clean-sheet probability (best single fixture in a double). xG is team expected goals. F45 is player points per appearance over 45 days. Availability is shown for opening-week doubts. A dash in Scout means this player is projected from homegrown inputs.</p>
+      <footer>
+        <span>FML GW11   /   Top player picks</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+    <section class="page">
+      <header>
+        <div class="strap">FML  /  GW11 EDITION</div>
+        <h1>02  Top player picks  /  GW12</h1>
+        <p class="subtitle">Position-by-position watchlist ranked by our expected points</p>
+      </header>
+      <div class="grid picks-grid">
+        <div class="pick-column">
+          <article class="picks gkp">
+            <h2>Goalkeepers  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Trafford · LEE</td>
+                  <td>COV (H)</td>
+                  <td>48% CS · F45 5.20</td>
+                  <td>4.30</td>
+                  <td>4.43</td>
+                </tr>
+                <tr class="">
+                  <td>Verbruggen · BHA</td>
+                  <td>NEW (H)</td>
+                  <td>46% CS · F45 6.80</td>
+                  <td>3.60</td>
+                  <td>3.99</td>
+                </tr>
+                <tr class="">
+                  <td>Tzolakis · HUL</td>
+                  <td>CRY (A)</td>
+                  <td>22% CS · F45 3.00</td>
+                  <td>–</td>
+                  <td>3.89</td>
+                </tr>
+                <tr class="">
+                  <td>Raya · ARS</td>
+                  <td>MCI (H)</td>
+                  <td>32% CS · F45 6.00</td>
+                  <td>3.50</td>
+                  <td>3.81</td>
+                </tr>
+                <tr class="">
+                  <td>Leno · FUL</td>
+                  <td>BOU (H)</td>
+                  <td>20% CS · F45 4.20</td>
+                  <td>–</td>
+                  <td>3.75</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks def">
+            <h2>Defenders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>De Cuyper · BHA</td>
+                  <td>NEW (H)</td>
+                  <td>46% CS · F45 7.40</td>
+                  <td>4.70</td>
+                  <td>5.06</td>
+                </tr>
+                <tr class="">
+                  <td>Vuskovic · BHA</td>
+                  <td>NEW (H)</td>
+                  <td>46% CS · F45 7.60</td>
+                  <td>4.70</td>
+                  <td>5.04</td>
+                </tr>
+                <tr class="">
+                  <td>Muharemovic · LEE</td>
+                  <td>COV (H)</td>
+                  <td>48% CS · F45 5.80</td>
+                  <td>4.90</td>
+                  <td>4.99</td>
+                </tr>
+                <tr class="">
+                  <td>Gabriel · ARS</td>
+                  <td>MCI (H)</td>
+                  <td>32% CS · F45 8.20</td>
+                  <td>4.50</td>
+                  <td>4.85</td>
+                </tr>
+                <tr class="">
+                  <td>Justin · LEE</td>
+                  <td>COV (H)</td>
+                  <td>48% CS · F45 5.00</td>
+                  <td>–</td>
+                  <td>4.79</td>
+                </tr>
+                <tr class="">
+                  <td>Van Hecke · TOT</td>
+                  <td>SUN (A)</td>
+                  <td>38% CS · F45 6.60</td>
+                  <td>4.20</td>
+                  <td>4.52</td>
+                </tr>
+                <tr class="">
+                  <td>Bogle · LEE</td>
+                  <td>COV (H)</td>
+                  <td>48% CS · F45 3.20</td>
+                  <td>–</td>
+                  <td>4.24</td>
+                </tr>
+                <tr class="">
+                  <td>Boscagli · BHA</td>
+                  <td>NEW (H)</td>
+                  <td>46% CS · F45 5.00</td>
+                  <td>–</td>
+                  <td>4.22</td>
+                </tr>
+                <tr class="">
+                  <td>Castagne · FUL</td>
+                  <td>BOU (H)</td>
+                  <td>20% CS · F45 6.00</td>
+                  <td>–</td>
+                  <td>4.13</td>
+                </tr>
+                <tr class="">
+                  <td>Elvedi · LEE</td>
+                  <td>COV (H)</td>
+                  <td>48% CS · F45 3.25</td>
+                  <td>4.30</td>
+                  <td>3.95</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+        <div class="pick-column">
+          <article class="picks mid">
+            <h2>Midfielders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Gross · BHA</td>
+                  <td>NEW (H)</td>
+                  <td>2.94 xG · F45 4.60</td>
+                  <td>5.00</td>
+                  <td>5.02</td>
+                </tr>
+                <tr class="">
+                  <td>B.Fernandes · MUN</td>
+                  <td>BRE (H)</td>
+                  <td>1.64 xG · F45 3.50</td>
+                  <td>5.30</td>
+                  <td>4.84</td>
+                </tr>
+                <tr class="">
+                  <td>Ayari · BHA</td>
+                  <td>NEW (H)</td>
+                  <td>2.94 xG · F45 6.20</td>
+                  <td>–</td>
+                  <td>4.80</td>
+                </tr>
+                <tr class="">
+                  <td>Gomez · BHA</td>
+                  <td>NEW (H)</td>
+                  <td>2.94 xG · F45 5.40</td>
+                  <td>–</td>
+                  <td>4.74</td>
+                </tr>
+                <tr class="">
+                  <td>Palmer · CHE</td>
+                  <td>NFO (A)</td>
+                  <td>1.60 xG · F45 3.80</td>
+                  <td>4.90</td>
+                  <td>4.73</td>
+                </tr>
+                <tr class="">
+                  <td>Mbeumo · MUN</td>
+                  <td>BRE (H)</td>
+                  <td>1.64 xG · F45 4.20</td>
+                  <td>4.80</td>
+                  <td>4.57</td>
+                </tr>
+                <tr class="">
+                  <td>Tavernier · BOU</td>
+                  <td>FUL (A)</td>
+                  <td>1.70 xG · F45 5.40</td>
+                  <td>4.20</td>
+                  <td>4.49</td>
+                </tr>
+                <tr class="">
+                  <td>Manzambi · AVL</td>
+                  <td>IPS (A)</td>
+                  <td>2.06 xG · F45 5.20</td>
+                  <td>4.50</td>
+                  <td>4.42</td>
+                </tr>
+                <tr class="">
+                  <td>Iwobi · FUL</td>
+                  <td>BOU (H)</td>
+                  <td>1.41 xG · F45 5.20</td>
+                  <td>4.40</td>
+                  <td>4.39</td>
+                </tr>
+                <tr class="">
+                  <td>E.Le Fee · SUN</td>
+                  <td>TOT (H)</td>
+                  <td>1.00 xG · F45 5.60</td>
+                  <td>4.40</td>
+                  <td>4.39</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks fwd">
+            <h2>Forwards  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>N.Jackson · AVL</td>
+                  <td>IPS (A)</td>
+                  <td>2.06 xG · F45 8.80</td>
+                  <td>5.10</td>
+                  <td>5.36</td>
+                </tr>
+                <tr class="">
+                  <td>Isak · LIV</td>
+                  <td>EVE (A)</td>
+                  <td>1.55 xG · F45 7.00</td>
+                  <td>4.90</td>
+                  <td>4.93</td>
+                </tr>
+                <tr class="">
+                  <td>Haaland · MCI</td>
+                  <td>ARS (A)</td>
+                  <td>1.19 xG · F45 6.20</td>
+                  <td>4.40</td>
+                  <td>4.61</td>
+                </tr>
+                <tr class="">
+                  <td>Calvert-Lewin · LEE</td>
+                  <td>COV (H)</td>
+                  <td>2.00 xG · F45 3.40</td>
+                  <td>4.70</td>
+                  <td>4.45</td>
+                </tr>
+                <tr class="">
+                  <td>Evanilson · BOU</td>
+                  <td>FUL (A)</td>
+                  <td>1.70 xG · F45 8.60</td>
+                  <td>3.60</td>
+                  <td>4.37</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+      <p class="small">CS is the team’s clean-sheet probability (best single fixture in a double). xG is team expected goals. F45 is player points per appearance over 45 days. Availability is shown for opening-week doubts. A dash in Scout means this player is projected from homegrown inputs.</p>
+      <footer>
+        <span>FML GW11   /   Top player picks</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+    <section class="page">
+      <header>
+        <div class="strap">FML  /  GW11 EDITION</div>
+        <h1>02  Top player picks  /  GW13</h1>
+        <p class="subtitle">Position-by-position watchlist ranked by our expected points</p>
+      </header>
+      <div class="grid picks-grid">
+        <div class="pick-column">
+          <article class="picks gkp">
+            <h2>Goalkeepers  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Raya · ARS</td>
+                  <td>BRE (A)</td>
+                  <td>33% CS · F45 6.00</td>
+                  <td>3.70</td>
+                  <td>3.98</td>
+                </tr>
+                <tr class="">
+                  <td>Leno · FUL</td>
+                  <td>TOT (A)</td>
+                  <td>27% CS · F45 4.20</td>
+                  <td>–</td>
+                  <td>3.95</td>
+                </tr>
+                <tr class="">
+                  <td>Tzolakis · HUL</td>
+                  <td>NFO (H)</td>
+                  <td>30% CS · F45 3.00</td>
+                  <td>–</td>
+                  <td>3.84</td>
+                </tr>
+                <tr class="">
+                  <td>A.Becker · LIV</td>
+                  <td>SUN (H)</td>
+                  <td>44% CS · F45 3.00</td>
+                  <td>3.90</td>
+                  <td>3.81</td>
+                </tr>
+                <tr class="">
+                  <td>Kinsky · TOT</td>
+                  <td>FUL (H)</td>
+                  <td>37% CS · F45 4.40</td>
+                  <td>3.60</td>
+                  <td>3.72</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks def">
+            <h2>Defenders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Gabriel · ARS</td>
+                  <td>BRE (A)</td>
+                  <td>33% CS · F45 8.20</td>
+                  <td>4.80</td>
+                  <td>5.09</td>
+                </tr>
+                <tr class="">
+                  <td>Van Hecke · TOT</td>
+                  <td>FUL (H)</td>
+                  <td>37% CS · F45 6.60</td>
+                  <td>4.50</td>
+                  <td>4.77</td>
+                </tr>
+                <tr class="">
+                  <td>Virgil · LIV</td>
+                  <td>SUN (H)</td>
+                  <td>44% CS · F45 3.60</td>
+                  <td>4.50</td>
+                  <td>4.37</td>
+                </tr>
+                <tr class="">
+                  <td>Justin · LEE</td>
+                  <td>MCI (A)</td>
+                  <td>13% CS · F45 5.00</td>
+                  <td>–</td>
+                  <td>4.34</td>
+                </tr>
+                <tr class="">
+                  <td>Castagne · FUL</td>
+                  <td>TOT (A)</td>
+                  <td>27% CS · F45 6.00</td>
+                  <td>–</td>
+                  <td>4.31</td>
+                </tr>
+                <tr class="">
+                  <td>Vuskovic · BHA</td>
+                  <td>BOU (A)</td>
+                  <td>32% CS · F45 7.60</td>
+                  <td>3.80</td>
+                  <td>4.26</td>
+                </tr>
+                <tr class="">
+                  <td>Araujo · LIV</td>
+                  <td>SUN (H)</td>
+                  <td>44% CS · F45 4.40</td>
+                  <td>4.10</td>
+                  <td>4.13</td>
+                </tr>
+                <tr class="">
+                  <td>Jacquet · LIV</td>
+                  <td>SUN (H)</td>
+                  <td>44% CS · F45 4.00</td>
+                  <td>4.10</td>
+                  <td>4.09</td>
+                </tr>
+                <tr class="">
+                  <td>Munoz · NFO</td>
+                  <td>HUL (A)</td>
+                  <td>29% CS · F45 2.40</td>
+                  <td>4.50</td>
+                  <td>4.03</td>
+                </tr>
+                <tr class="">
+                  <td>De Cuyper · BHA</td>
+                  <td>BOU (A)</td>
+                  <td>32% CS · F45 7.40</td>
+                  <td>3.40</td>
+                  <td>3.96</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+        <div class="pick-column">
+          <article class="picks mid">
+            <h2>Midfielders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Palmer · CHE</td>
+                  <td>CRY (H)</td>
+                  <td>3.01 xG · F45 3.80</td>
+                  <td>6.60</td>
+                  <td>6.16</td>
+                </tr>
+                <tr class="">
+                  <td>Rogers · CHE</td>
+                  <td>CRY (H)</td>
+                  <td>3.01 xG · F45 4.60</td>
+                  <td>5.30</td>
+                  <td>5.25</td>
+                </tr>
+                <tr class="">
+                  <td>Gibbs-White · NFO</td>
+                  <td>HUL (A)</td>
+                  <td>1.24 xG · F45 2.75</td>
+                  <td>5.20</td>
+                  <td>4.73</td>
+                </tr>
+                <tr class="">
+                  <td>B.Fernandes · MUN</td>
+                  <td>NEW (A)</td>
+                  <td>1.62 xG · F45 3.50</td>
+                  <td>5.00</td>
+                  <td>4.68</td>
+                </tr>
+                <tr class="">
+                  <td>Wirtz · LIV</td>
+                  <td>SUN (H)</td>
+                  <td>2.18 xG · F45 5.60</td>
+                  <td>4.50</td>
+                  <td>4.61</td>
+                </tr>
+                <tr class="">
+                  <td>Ayari · BHA</td>
+                  <td>BOU (A)</td>
+                  <td>1.97 xG · F45 6.20</td>
+                  <td>–</td>
+                  <td>4.58</td>
+                </tr>
+                <tr class="">
+                  <td>Gomez · BHA</td>
+                  <td>BOU (A)</td>
+                  <td>1.97 xG · F45 5.40</td>
+                  <td>–</td>
+                  <td>4.53</td>
+                </tr>
+                <tr class="">
+                  <td>Mbeumo · MUN</td>
+                  <td>NEW (A)</td>
+                  <td>1.62 xG · F45 4.20</td>
+                  <td>4.60</td>
+                  <td>4.52</td>
+                </tr>
+                <tr class="">
+                  <td>Neto · CHE</td>
+                  <td>CRY (H)</td>
+                  <td>3.01 xG · F45 5.40</td>
+                  <td>4.30</td>
+                  <td>4.44</td>
+                </tr>
+                <tr class="">
+                  <td>Manzambi · AVL</td>
+                  <td>EVE (H)</td>
+                  <td>1.56 xG · F45 5.20</td>
+                  <td>4.50</td>
+                  <td>4.32</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks fwd">
+            <h2>Forwards  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Haaland · MCI</td>
+                  <td>LEE (H)</td>
+                  <td>2.15 xG · F45 6.20</td>
+                  <td>6.70</td>
+                  <td>6.47</td>
+                </tr>
+                <tr class="">
+                  <td>Isak · LIV</td>
+                  <td>SUN (H)</td>
+                  <td>2.18 xG · F45 7.00</td>
+                  <td>5.90</td>
+                  <td>5.84</td>
+                </tr>
+                <tr class="">
+                  <td>Joao Pedro · CHE</td>
+                  <td>CRY (H)</td>
+                  <td>3.01 xG · F45 7.00</td>
+                  <td>5.90</td>
+                  <td>5.41</td>
+                </tr>
+                <tr class="">
+                  <td>N.Jackson · AVL</td>
+                  <td>EVE (H)</td>
+                  <td>1.56 xG · F45 8.80</td>
+                  <td>5.00</td>
+                  <td>5.12</td>
+                </tr>
+                <tr class="">
+                  <td>Barry · EVE</td>
+                  <td>AVL (A)</td>
+                  <td>1.36 xG · F45 7.00</td>
+                  <td>3.80</td>
+                  <td>4.28</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+      <p class="small">CS is the team’s clean-sheet probability (best single fixture in a double). xG is team expected goals. F45 is player points per appearance over 45 days. Availability is shown for opening-week doubts. A dash in Scout means this player is projected from homegrown inputs.</p>
+      <footer>
+        <span>FML GW11   /   Top player picks</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+    <section class="page">
+      <header>
+        <div class="strap">FML  /  GW11 EDITION</div>
+        <h1>02  Top player picks  /  GW14</h1>
+        <p class="subtitle">Position-by-position watchlist ranked by our expected points</p>
+      </header>
+      <div class="grid picks-grid">
+        <div class="pick-column">
+          <article class="picks gkp">
+            <h2>Goalkeepers  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Trafford · LEE</td>
+                  <td>IPS (H)</td>
+                  <td>38% CS · F45 5.20</td>
+                  <td>4.20</td>
+                  <td>4.27</td>
+                </tr>
+                <tr class="">
+                  <td>Raya · ARS</td>
+                  <td>TOT (A)</td>
+                  <td>45% CS · F45 6.00</td>
+                  <td>3.70</td>
+                  <td>4.08</td>
+                </tr>
+                <tr class="">
+                  <td>Leno · FUL</td>
+                  <td>EVE (A)</td>
+                  <td>23% CS · F45 4.20</td>
+                  <td>–</td>
+                  <td>3.82</td>
+                </tr>
+                <tr class="">
+                  <td>Verbruggen · BHA</td>
+                  <td>NFO (A)</td>
+                  <td>46% CS · F45 6.80</td>
+                  <td>3.30</td>
+                  <td>3.80</td>
+                </tr>
+                <tr class="">
+                  <td>Petrovic · BOU</td>
+                  <td>HUL (H)</td>
+                  <td>42% CS · F45 4.20</td>
+                  <td>3.80</td>
+                  <td>3.78</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks def">
+            <h2>Defenders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Gabriel · ARS</td>
+                  <td>TOT (A)</td>
+                  <td>45% CS · F45 8.20</td>
+                  <td>4.80</td>
+                  <td>5.20</td>
+                </tr>
+                <tr class="">
+                  <td>Silva · BOU</td>
+                  <td>HUL (H)</td>
+                  <td>42% CS · F45 5.40</td>
+                  <td>4.90</td>
+                  <td>4.85</td>
+                </tr>
+                <tr class="">
+                  <td>Hill · BOU</td>
+                  <td>HUL (H)</td>
+                  <td>42% CS · F45 6.00</td>
+                  <td>4.80</td>
+                  <td>4.84</td>
+                </tr>
+                <tr class="">
+                  <td>Muharemovic · LEE</td>
+                  <td>IPS (H)</td>
+                  <td>38% CS · F45 5.80</td>
+                  <td>4.80</td>
+                  <td>4.83</td>
+                </tr>
+                <tr class="">
+                  <td>Truffert · BOU</td>
+                  <td>HUL (H)</td>
+                  <td>42% CS · F45 4.60</td>
+                  <td>4.80</td>
+                  <td>4.65</td>
+                </tr>
+                <tr class="">
+                  <td>Vuskovic · BHA</td>
+                  <td>NFO (A)</td>
+                  <td>46% CS · F45 7.60</td>
+                  <td>4.00</td>
+                  <td>4.53</td>
+                </tr>
+                <tr class="">
+                  <td>Boscagli · BHA</td>
+                  <td>NFO (A)</td>
+                  <td>46% CS · F45 5.00</td>
+                  <td>–</td>
+                  <td>4.47</td>
+                </tr>
+                <tr class="">
+                  <td>Justin · LEE</td>
+                  <td>IPS (H)</td>
+                  <td>38% CS · F45 5.00</td>
+                  <td>–</td>
+                  <td>4.40</td>
+                </tr>
+                <tr class="">
+                  <td>Tarkowski · EVE</td>
+                  <td>FUL (H)</td>
+                  <td>39% CS · F45 2.60</td>
+                  <td>4.30</td>
+                  <td>4.25</td>
+                </tr>
+                <tr class="">
+                  <td>De Cuyper · BHA</td>
+                  <td>NFO (A)</td>
+                  <td>46% CS · F45 7.40</td>
+                  <td>3.60</td>
+                  <td>4.23</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+        <div class="pick-column">
+          <article class="picks mid">
+            <h2>Midfielders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>B.Fernandes · MUN</td>
+                  <td>COV (H)</td>
+                  <td>2.49 xG · F45 3.50</td>
+                  <td>6.50</td>
+                  <td>5.91</td>
+                </tr>
+                <tr class="">
+                  <td>Tavernier · BOU</td>
+                  <td>HUL (H)</td>
+                  <td>2.03 xG · F45 5.40</td>
+                  <td>5.60</td>
+                  <td>5.53</td>
+                </tr>
+                <tr class="">
+                  <td>Mbeumo · MUN</td>
+                  <td>COV (H)</td>
+                  <td>2.49 xG · F45 4.20</td>
+                  <td>5.80</td>
+                  <td>5.51</td>
+                </tr>
+                <tr class="">
+                  <td>Manzambi · AVL</td>
+                  <td>CRY (H)</td>
+                  <td>2.47 xG · F45 5.20</td>
+                  <td>5.10</td>
+                  <td>4.93</td>
+                </tr>
+                <tr class="">
+                  <td>Palmer · CHE</td>
+                  <td>LIV (H)</td>
+                  <td>1.56 xG · F45 3.80</td>
+                  <td>5.20</td>
+                  <td>4.86</td>
+                </tr>
+                <tr class="">
+                  <td>Dewsbury-Hall · EVE</td>
+                  <td>FUL (H)</td>
+                  <td>1.51 xG · F45 6.00</td>
+                  <td>4.70</td>
+                  <td>4.82</td>
+                </tr>
+                <tr class="">
+                  <td>Ayari · BHA</td>
+                  <td>NFO (A)</td>
+                  <td>2.09 xG · F45 6.20</td>
+                  <td>–</td>
+                  <td>4.81</td>
+                </tr>
+                <tr class="">
+                  <td>Gomez · BHA</td>
+                  <td>NFO (A)</td>
+                  <td>2.09 xG · F45 5.40</td>
+                  <td>–</td>
+                  <td>4.76</td>
+                </tr>
+                <tr class="">
+                  <td>Cunha · MUN</td>
+                  <td>COV (H)</td>
+                  <td>2.49 xG · F45 3.80</td>
+                  <td>4.80</td>
+                  <td>4.66</td>
+                </tr>
+                <tr class="">
+                  <td>E.Le Fee · SUN</td>
+                  <td>NEW (A)</td>
+                  <td>1.17 xG · F45 5.60</td>
+                  <td>4.20</td>
+                  <td>4.33</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks fwd">
+            <h2>Forwards  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>N.Jackson · AVL</td>
+                  <td>CRY (H)</td>
+                  <td>2.47 xG · F45 8.80</td>
+                  <td>5.80</td>
+                  <td>5.99</td>
+                </tr>
+                <tr class="">
+                  <td>Haaland · MCI</td>
+                  <td>BRE (A)</td>
+                  <td>1.70 xG · F45 6.20</td>
+                  <td>5.80</td>
+                  <td>5.89</td>
+                </tr>
+                <tr class="">
+                  <td>Evanilson · BOU</td>
+                  <td>HUL (H)</td>
+                  <td>2.03 xG · F45 8.60</td>
+                  <td>4.60</td>
+                  <td>5.04</td>
+                </tr>
+                <tr class="">
+                  <td>Barry · EVE</td>
+                  <td>FUL (H)</td>
+                  <td>1.51 xG · F45 7.00</td>
+                  <td>4.50</td>
+                  <td>4.79</td>
+                </tr>
+                <tr class="">
+                  <td>Isak · LIV</td>
+                  <td>CHE (A)</td>
+                  <td>1.66 xG · F45 7.00</td>
+                  <td>4.60</td>
+                  <td>4.72</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+      <p class="small">CS is the team’s clean-sheet probability (best single fixture in a double). xG is team expected goals. F45 is player points per appearance over 45 days. Availability is shown for opening-week doubts. A dash in Scout means this player is projected from homegrown inputs.</p>
+      <footer>
+        <span>FML GW11   /   Top player picks</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+    <section class="page">
+      <header>
+        <div class="strap">FML  /  GW11 EDITION</div>
+        <h1>02  Top player picks  /  GW15</h1>
+        <p class="subtitle">Position-by-position watchlist ranked by our expected points</p>
+      </header>
+      <div class="grid picks-grid">
+        <div class="pick-column">
+          <article class="picks gkp">
+            <h2>Goalkeepers  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Raya · ARS</td>
+                  <td>BOU (H)</td>
+                  <td>42% CS · F45 6.00</td>
+                  <td>4.00</td>
+                  <td>4.29</td>
+                </tr>
+                <tr class="">
+                  <td>Verbruggen · BHA</td>
+                  <td>EVE (H)</td>
+                  <td>49% CS · F45 6.80</td>
+                  <td>3.70</td>
+                  <td>4.10</td>
+                </tr>
+                <tr class="">
+                  <td>Tzolakis · HUL</td>
+                  <td>TOT (H)</td>
+                  <td>31% CS · F45 3.00</td>
+                  <td>–</td>
+                  <td>3.85</td>
+                </tr>
+                <tr class="">
+                  <td>Leno · FUL</td>
+                  <td>BRE (H)</td>
+                  <td>20% CS · F45 4.20</td>
+                  <td>–</td>
+                  <td>3.74</td>
+                </tr>
+                <tr class="">
+                  <td>A.Becker · LIV</td>
+                  <td>LEE (H)</td>
+                  <td>42% CS · F45 3.00</td>
+                  <td>3.80</td>
+                  <td>3.71</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks def">
+            <h2>Defenders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Gabriel · ARS</td>
+                  <td>BOU (H)</td>
+                  <td>42% CS · F45 8.20</td>
+                  <td>5.30</td>
+                  <td>5.58</td>
+                </tr>
+                <tr class="">
+                  <td>Vuskovic · BHA</td>
+                  <td>EVE (H)</td>
+                  <td>49% CS · F45 7.60</td>
+                  <td>4.80</td>
+                  <td>5.13</td>
+                </tr>
+                <tr class="">
+                  <td>De Cuyper · BHA</td>
+                  <td>EVE (H)</td>
+                  <td>49% CS · F45 7.40</td>
+                  <td>4.50</td>
+                  <td>4.92</td>
+                </tr>
+                <tr class="">
+                  <td>Van Hecke · TOT</td>
+                  <td>HUL (A)</td>
+                  <td>35% CS · F45 6.60</td>
+                  <td>4.60</td>
+                  <td>4.82</td>
+                </tr>
+                <tr class="">
+                  <td>Justin · LEE</td>
+                  <td>LIV (A)</td>
+                  <td>25% CS · F45 5.00</td>
+                  <td>–</td>
+                  <td>4.78</td>
+                </tr>
+                <tr class="">
+                  <td>Calafiori · ARS</td>
+                  <td>BOU (H)</td>
+                  <td>42% CS · F45 5.60</td>
+                  <td>4.10</td>
+                  <td>4.32</td>
+                </tr>
+                <tr class="">
+                  <td>Boscagli · BHA</td>
+                  <td>EVE (H)</td>
+                  <td>49% CS · F45 5.00</td>
+                  <td>–</td>
+                  <td>4.28</td>
+                </tr>
+                <tr class="">
+                  <td>Bogle · LEE</td>
+                  <td>LIV (A)</td>
+                  <td>25% CS · F45 3.20</td>
+                  <td>–</td>
+                  <td>4.24</td>
+                </tr>
+                <tr class="">
+                  <td>Konsa · ARS</td>
+                  <td>BOU (H)</td>
+                  <td>42% CS · F45 9.00</td>
+                  <td>3.60</td>
+                  <td>4.19</td>
+                </tr>
+                <tr class="">
+                  <td>Virgil · LIV</td>
+                  <td>LEE (H)</td>
+                  <td>42% CS · F45 3.60</td>
+                  <td>4.30</td>
+                  <td>4.16</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+        <div class="pick-column">
+          <article class="picks mid">
+            <h2>Midfielders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>B.Fernandes · MUN</td>
+                  <td>CRY (A)</td>
+                  <td>2.19 xG · F45 3.50</td>
+                  <td>5.40</td>
+                  <td>5.08</td>
+                </tr>
+                <tr class="">
+                  <td>Mbeumo · MUN</td>
+                  <td>CRY (A)</td>
+                  <td>2.19 xG · F45 4.20</td>
+                  <td>4.80</td>
+                  <td>4.78</td>
+                </tr>
+                <tr class="">
+                  <td>Gross · BHA</td>
+                  <td>EVE (H)</td>
+                  <td>2.30 xG · F45 4.60</td>
+                  <td>4.70</td>
+                  <td>4.71</td>
+                </tr>
+                <tr class="">
+                  <td>Rice · ARS</td>
+                  <td>BOU (H)</td>
+                  <td>2.36 xG · F45 6.00</td>
+                  <td>4.40</td>
+                  <td>4.54</td>
+                </tr>
+                <tr class="">
+                  <td>Manzambi · AVL</td>
+                  <td>COV (A)</td>
+                  <td>2.17 xG · F45 5.20</td>
+                  <td>4.60</td>
+                  <td>4.52</td>
+                </tr>
+                <tr class="">
+                  <td>E.Le Fee · SUN</td>
+                  <td>NFO (H)</td>
+                  <td>1.18 xG · F45 5.60</td>
+                  <td>4.50</td>
+                  <td>4.51</td>
+                </tr>
+                <tr class="">
+                  <td>Ayari · BHA</td>
+                  <td>EVE (H)</td>
+                  <td>2.30 xG · F45 6.20</td>
+                  <td>–</td>
+                  <td>4.45</td>
+                </tr>
+                <tr class="">
+                  <td>Gomez · BHA</td>
+                  <td>EVE (H)</td>
+                  <td>2.30 xG · F45 5.40</td>
+                  <td>–</td>
+                  <td>4.41</td>
+                </tr>
+                <tr class="">
+                  <td>Odegaard · ARS</td>
+                  <td>BOU (H)</td>
+                  <td>2.36 xG · F45 4.20</td>
+                  <td>4.40</td>
+                  <td>4.37</td>
+                </tr>
+                <tr class="">
+                  <td>Iwobi · FUL</td>
+                  <td>BRE (H)</td>
+                  <td>1.19 xG · F45 5.20</td>
+                  <td>4.40</td>
+                  <td>4.34</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks fwd">
+            <h2>Forwards  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Haaland · MCI</td>
+                  <td>CHE (H)</td>
+                  <td>2.51 xG · F45 6.20</td>
+                  <td>6.50</td>
+                  <td>6.37</td>
+                </tr>
+                <tr class="">
+                  <td>Isak · LIV</td>
+                  <td>LEE (H)</td>
+                  <td>1.44 xG · F45 7.00</td>
+                  <td>5.60</td>
+                  <td>5.43</td>
+                </tr>
+                <tr class="">
+                  <td>N.Jackson · AVL</td>
+                  <td>COV (A)</td>
+                  <td>2.17 xG · F45 8.80</td>
+                  <td>5.10</td>
+                  <td>5.39</td>
+                </tr>
+                <tr class="">
+                  <td>McBurnie · HUL</td>
+                  <td>TOT (H)</td>
+                  <td>1.10 xG · F45 5.00</td>
+                  <td>3.80</td>
+                  <td>3.86</td>
+                </tr>
+                <tr class="">
+                  <td>Barry · EVE</td>
+                  <td>BHA (A)</td>
+                  <td>0.73 xG · F45 7.00</td>
+                  <td>3.50</td>
+                  <td>3.79</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+      <p class="small">CS is the team’s clean-sheet probability (best single fixture in a double). xG is team expected goals. F45 is player points per appearance over 45 days. Availability is shown for opening-week doubts. A dash in Scout means this player is projected from homegrown inputs.</p>
+      <footer>
+        <span>FML GW11   /   Top player picks</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+    <section class="page">
+      <header>
+        <div class="strap">FML  /  GW11 EDITION</div>
+        <h1>02  Top player picks  /  GW16</h1>
+        <p class="subtitle">Position-by-position watchlist ranked by our expected points</p>
+      </header>
+      <div class="grid picks-grid">
+        <div class="pick-column">
+          <article class="picks gkp">
+            <h2>Goalkeepers  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Raya · ARS</td>
+                  <td>MUN (H)</td>
+                  <td>45% CS · F45 6.00</td>
+                  <td>4.00</td>
+                  <td>4.32</td>
+                </tr>
+                <tr class="">
+                  <td>Verbruggen · BHA</td>
+                  <td>IPS (H)</td>
+                  <td>49% CS · F45 6.80</td>
+                  <td>3.90</td>
+                  <td>4.25</td>
+                </tr>
+                <tr class="">
+                  <td>Trafford · LEE</td>
+                  <td>FUL (H)</td>
+                  <td>44% CS · F45 5.20</td>
+                  <td>3.90</td>
+                  <td>4.08</td>
+                </tr>
+                <tr class="">
+                  <td>Leno · FUL</td>
+                  <td>LEE (A)</td>
+                  <td>25% CS · F45 4.20</td>
+                  <td>–</td>
+                  <td>3.90</td>
+                </tr>
+                <tr class="">
+                  <td>Donnarumma · MCI</td>
+                  <td>HUL (H)</td>
+                  <td>44% CS · F45 2.80</td>
+                  <td>4.00</td>
+                  <td>3.83</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks def">
+            <h2>Defenders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Gabriel · ARS</td>
+                  <td>MUN (H)</td>
+                  <td>45% CS · F45 8.20</td>
+                  <td>5.20</td>
+                  <td>5.53</td>
+                </tr>
+                <tr class="">
+                  <td>Vuskovic · BHA</td>
+                  <td>IPS (H)</td>
+                  <td>49% CS · F45 7.60</td>
+                  <td>5.10</td>
+                  <td>5.40</td>
+                </tr>
+                <tr class="">
+                  <td>De Cuyper · BHA</td>
+                  <td>IPS (H)</td>
+                  <td>49% CS · F45 7.40</td>
+                  <td>5.00</td>
+                  <td>5.34</td>
+                </tr>
+                <tr class="">
+                  <td>Silva · BOU</td>
+                  <td>COV (H)</td>
+                  <td>42% CS · F45 5.40</td>
+                  <td>4.80</td>
+                  <td>4.79</td>
+                </tr>
+                <tr class="">
+                  <td>Hill · BOU</td>
+                  <td>COV (H)</td>
+                  <td>42% CS · F45 6.00</td>
+                  <td>4.70</td>
+                  <td>4.78</td>
+                </tr>
+                <tr class="">
+                  <td>Truffert · BOU</td>
+                  <td>COV (H)</td>
+                  <td>42% CS · F45 4.60</td>
+                  <td>4.70</td>
+                  <td>4.58</td>
+                </tr>
+                <tr class="">
+                  <td>Muharemovic · LEE</td>
+                  <td>FUL (H)</td>
+                  <td>44% CS · F45 5.80</td>
+                  <td>4.40</td>
+                  <td>4.54</td>
+                </tr>
+                <tr class="">
+                  <td>Justin · LEE</td>
+                  <td>FUL (H)</td>
+                  <td>44% CS · F45 5.00</td>
+                  <td>–</td>
+                  <td>4.52</td>
+                </tr>
+                <tr class="">
+                  <td>Boscagli · BHA</td>
+                  <td>IPS (H)</td>
+                  <td>49% CS · F45 5.00</td>
+                  <td>–</td>
+                  <td>4.40</td>
+                </tr>
+                <tr class="">
+                  <td>Gvardiol · MCI</td>
+                  <td>HUL (H)</td>
+                  <td>44% CS · F45 1.40</td>
+                  <td>4.70</td>
+                  <td>4.36</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+        <div class="pick-column">
+          <article class="picks mid">
+            <h2>Midfielders  /  Top 10</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Tavernier · BOU</td>
+                  <td>COV (H)</td>
+                  <td>2.43 xG · F45 5.40</td>
+                  <td>5.40</td>
+                  <td>5.44</td>
+                </tr>
+                <tr class="">
+                  <td>Gross · BHA</td>
+                  <td>IPS (H)</td>
+                  <td>3.52 xG · F45 4.60</td>
+                  <td>5.40</td>
+                  <td>5.43</td>
+                </tr>
+                <tr class="">
+                  <td>Palmer · CHE</td>
+                  <td>AVL (H)</td>
+                  <td>2.34 xG · F45 3.80</td>
+                  <td>5.80</td>
+                  <td>5.42</td>
+                </tr>
+                <tr class="">
+                  <td>Ayari · BHA</td>
+                  <td>IPS (H)</td>
+                  <td>3.52 xG · F45 6.20</td>
+                  <td>–</td>
+                  <td>5.18</td>
+                </tr>
+                <tr class="">
+                  <td>Gomez · BHA</td>
+                  <td>IPS (H)</td>
+                  <td>3.52 xG · F45 5.40</td>
+                  <td>–</td>
+                  <td>5.10</td>
+                </tr>
+                <tr class="">
+                  <td>E.Le Fee · SUN</td>
+                  <td>CRY (H)</td>
+                  <td>1.55 xG · F45 5.60</td>
+                  <td>5.10</td>
+                  <td>5.09</td>
+                </tr>
+                <tr class="">
+                  <td>Cherki · MCI</td>
+                  <td>HUL (H)</td>
+                  <td>2.90 xG · F45 5.00</td>
+                  <td>5.20</td>
+                  <td>5.05</td>
+                </tr>
+                <tr class="">
+                  <td>Rogers · CHE</td>
+                  <td>AVL (H)</td>
+                  <td>2.34 xG · F45 4.60</td>
+                  <td>4.70</td>
+                  <td>4.66</td>
+                </tr>
+                <tr class="">
+                  <td>Rice · ARS</td>
+                  <td>MUN (H)</td>
+                  <td>2.44 xG · F45 6.00</td>
+                  <td>4.40</td>
+                  <td>4.56</td>
+                </tr>
+                <tr class="">
+                  <td>Doku · MCI</td>
+                  <td>HUL (H)</td>
+                  <td>2.90 xG · F45 4.80</td>
+                  <td>4.80</td>
+                  <td>4.50</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="picks fwd">
+            <h2>Forwards  /  Top 5</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Fixture</th>
+                  <th>Signal</th>
+                  <th>Scout</th>
+                  <th>Our xPts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>Haaland · MCI</td>
+                  <td>HUL (H)</td>
+                  <td>2.90 xG · F45 6.20</td>
+                  <td>8.20</td>
+                  <td>7.80</td>
+                </tr>
+                <tr class="">
+                  <td>Isak · LIV</td>
+                  <td>TOT (H)</td>
+                  <td>1.57 xG · F45 7.00</td>
+                  <td>5.50</td>
+                  <td>5.38</td>
+                </tr>
+                <tr class="">
+                  <td>Evanilson · BOU</td>
+                  <td>COV (H)</td>
+                  <td>2.43 xG · F45 8.60</td>
+                  <td>4.50</td>
+                  <td>5.08</td>
+                </tr>
+                <tr class="">
+                  <td>Joao Pedro · CHE</td>
+                  <td>AVL (H)</td>
+                  <td>2.34 xG · F45 7.00</td>
+                  <td>5.30</td>
+                  <td>4.86</td>
+                </tr>
+                <tr class="">
+                  <td>N.Jackson · AVL</td>
+                  <td>CHE (A)</td>
+                  <td>1.55 xG · F45 8.80</td>
+                  <td>4.10</td>
+                  <td>4.43</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+      <p class="small">CS is the team’s clean-sheet probability (best single fixture in a double). xG is team expected goals. F45 is player points per appearance over 45 days. Availability is shown for opening-week doubts. A dash in Scout means this player is projected from homegrown inputs.</p>
+      <footer>
+        <span>FML GW11   /   Top player picks</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+    <section class="page">
+      <header>
+        <div class="strap">FML  /  GW11 EDITION</div>
+        <h1>03  Template teams</h1>
+        <p class="subtitle">GW11–GW12  /  Full-horizon optimum</p>
+      </header>
+      <div class="grid squads-grid">
+        <article class="squad">
+          <h2>GW11  /  65.15 net xPts</h2>
+          <p class="metrics">65.15 XI  ·  0 hit pts  ·  £99.9m squad  ·  4.85 bench</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Player</th>
+                <th>Club</th>
+                <th>Pos</th>
+                <th>£m</th>
+                <th>xPts</th>
+                <th>XI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="captain">
+                <td>Captain</td>
+                <td>Haaland</td>
+                <td>MCI</td>
+                <td>FWD</td>
+                <td>15.8</td>
+                <td>6.84</td>
+                <td>13.68</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Raya</td>
+                <td>ARS</td>
+                <td>GKP</td>
+                <td>6.2</td>
+                <td>4.21</td>
+                <td>4.21</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Gabriel</td>
+                <td>ARS</td>
+                <td>DEF</td>
+                <td>8.1</td>
+                <td>5.43</td>
+                <td>5.43</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Vuskovic</td>
+                <td>BHA</td>
+                <td>DEF</td>
+                <td>5.3</td>
+                <td>5.27</td>
+                <td>5.27</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Van Hecke</td>
+                <td>TOT</td>
+                <td>DEF</td>
+                <td>5.1</td>
+                <td>5.15</td>
+                <td>5.15</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Justin</td>
+                <td>LEE</td>
+                <td>DEF</td>
+                <td>4.5</td>
+                <td>4.59</td>
+                <td>4.59</td>
+              </tr>
+              <tr class="vice">
+                <td>Vice</td>
+                <td>Palmer</td>
+                <td>CHE</td>
+                <td>MID</td>
+                <td>9.8</td>
+                <td>5.70</td>
+                <td>5.70</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Ayari</td>
+                <td>BHA</td>
+                <td>MID</td>
+                <td>5.5</td>
+                <td>5.03</td>
+                <td>5.03</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Gomez</td>
+                <td>BHA</td>
+                <td>MID</td>
+                <td>5.1</td>
+                <td>4.97</td>
+                <td>4.97</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Isak</td>
+                <td>LIV</td>
+                <td>FWD</td>
+                <td>9.3</td>
+                <td>5.60</td>
+                <td>5.60</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>N.Jackson</td>
+                <td>AVL</td>
+                <td>FWD</td>
+                <td>7.1</td>
+                <td>5.52</td>
+                <td>5.52</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 1</td>
+                <td>Muharemovic</td>
+                <td>LEE</td>
+                <td>DEF</td>
+                <td>5.1</td>
+                <td>3.59</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 2</td>
+                <td>Hughes</td>
+                <td>CRY</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.57</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 3</td>
+                <td>McAteer</td>
+                <td>IPS</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.26</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Reserve GK</td>
+                <td>Scherpen</td>
+                <td>IPS</td>
+                <td>GKP</td>
+                <td>4.4</td>
+                <td>0.43</td>
+                <td>–</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="moves">
+            <div>Opening squad assembled from scratch.</div>
+          </div>
+        </article>
+        <article class="squad">
+          <h2>GW12  /  58.01 net xPts</h2>
+          <p class="metrics">58.01 XI  ·  0 hit pts  ·  £99.9m squad  ·  5.74 bench</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Player</th>
+                <th>Club</th>
+                <th>Pos</th>
+                <th>£m</th>
+                <th>xPts</th>
+                <th>XI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="captain">
+                <td>Captain</td>
+                <td>N.Jackson</td>
+                <td>AVL</td>
+                <td>FWD</td>
+                <td>7.1</td>
+                <td>5.36</td>
+                <td>10.72</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Raya</td>
+                <td>ARS</td>
+                <td>GKP</td>
+                <td>6.2</td>
+                <td>3.81</td>
+                <td>3.81</td>
+              </tr>
+              <tr class="vice">
+                <td>Vice</td>
+                <td>Vuskovic</td>
+                <td>BHA</td>
+                <td>DEF</td>
+                <td>5.3</td>
+                <td>5.04</td>
+                <td>5.04</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Muharemovic</td>
+                <td>LEE</td>
+                <td>DEF</td>
+                <td>5.1</td>
+                <td>4.99</td>
+                <td>4.99</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Gabriel</td>
+                <td>ARS</td>
+                <td>DEF</td>
+                <td>8.1</td>
+                <td>4.85</td>
+                <td>4.85</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Justin</td>
+                <td>LEE</td>
+                <td>DEF</td>
+                <td>4.5</td>
+                <td>4.79</td>
+                <td>4.79</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Ayari</td>
+                <td>BHA</td>
+                <td>MID</td>
+                <td>5.5</td>
+                <td>4.80</td>
+                <td>4.80</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Gomez</td>
+                <td>BHA</td>
+                <td>MID</td>
+                <td>5.1</td>
+                <td>4.74</td>
+                <td>4.74</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Palmer</td>
+                <td>CHE</td>
+                <td>MID</td>
+                <td>9.8</td>
+                <td>4.73</td>
+                <td>4.73</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Isak</td>
+                <td>LIV</td>
+                <td>FWD</td>
+                <td>9.3</td>
+                <td>4.93</td>
+                <td>4.93</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Haaland</td>
+                <td>MCI</td>
+                <td>FWD</td>
+                <td>15.8</td>
+                <td>4.61</td>
+                <td>4.61</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 1</td>
+                <td>Van Hecke</td>
+                <td>TOT</td>
+                <td>DEF</td>
+                <td>5.1</td>
+                <td>4.52</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 2</td>
+                <td>Hughes</td>
+                <td>CRY</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.58</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 3</td>
+                <td>McAteer</td>
+                <td>IPS</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.25</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Reserve GK</td>
+                <td>Scherpen</td>
+                <td>IPS</td>
+                <td>GKP</td>
+                <td>4.4</td>
+                <td>0.39</td>
+                <td>–</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="moves">
+            <div>1 free transfers available  ·  0 transfers made</div>
+            <div>
+              <strong>Bench → XI  </strong>
+              Muharemovic
+            </div>
+            <div>
+              <strong>XI → Bench  </strong>
+              Van Hecke
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="small">Captain points are doubled in the XI column. Vice-captain and bench order use projected points. The squad is priced at listed costs and has a £100m budget. No chips, sale prices or price changes are modelled. Bench points, autosubs and vice-captain fallback contribute zero to the objective.</p>
+      <footer>
+        <span>FML GW11   /   Template teams</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+    <section class="page">
+      <header>
+        <div class="strap">FML  /  GW11 EDITION</div>
+        <h1>03  Template teams</h1>
+        <p class="subtitle">GW13–GW14  /  Full-horizon optimum</p>
+      </header>
+      <div class="grid squads-grid">
+        <article class="squad">
+          <h2>GW13  /  61.61 net xPts</h2>
+          <p class="metrics">61.61 XI  ·  0 hit pts  ·  £99.9m squad  ·  4.55 bench</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Player</th>
+                <th>Club</th>
+                <th>Pos</th>
+                <th>£m</th>
+                <th>xPts</th>
+                <th>XI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="captain">
+                <td>Captain</td>
+                <td>Haaland</td>
+                <td>MCI</td>
+                <td>FWD</td>
+                <td>15.8</td>
+                <td>6.47</td>
+                <td>12.94</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Raya</td>
+                <td>ARS</td>
+                <td>GKP</td>
+                <td>6.2</td>
+                <td>3.98</td>
+                <td>3.98</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Gabriel</td>
+                <td>ARS</td>
+                <td>DEF</td>
+                <td>8.1</td>
+                <td>5.09</td>
+                <td>5.09</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Van Hecke</td>
+                <td>TOT</td>
+                <td>DEF</td>
+                <td>5.1</td>
+                <td>4.77</td>
+                <td>4.77</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Justin</td>
+                <td>LEE</td>
+                <td>DEF</td>
+                <td>4.5</td>
+                <td>4.34</td>
+                <td>4.34</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Vuskovic</td>
+                <td>BHA</td>
+                <td>DEF</td>
+                <td>5.3</td>
+                <td>4.26</td>
+                <td>4.26</td>
+              </tr>
+              <tr class="vice">
+                <td>Vice</td>
+                <td>Palmer</td>
+                <td>CHE</td>
+                <td>MID</td>
+                <td>9.8</td>
+                <td>6.16</td>
+                <td>6.16</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Ayari</td>
+                <td>BHA</td>
+                <td>MID</td>
+                <td>5.5</td>
+                <td>4.58</td>
+                <td>4.58</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Gomez</td>
+                <td>BHA</td>
+                <td>MID</td>
+                <td>5.1</td>
+                <td>4.53</td>
+                <td>4.53</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Isak</td>
+                <td>LIV</td>
+                <td>FWD</td>
+                <td>9.3</td>
+                <td>5.84</td>
+                <td>5.84</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>N.Jackson</td>
+                <td>AVL</td>
+                <td>FWD</td>
+                <td>7.1</td>
+                <td>5.12</td>
+                <td>5.12</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 1</td>
+                <td>Muharemovic</td>
+                <td>LEE</td>
+                <td>DEF</td>
+                <td>5.1</td>
+                <td>3.30</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 2</td>
+                <td>Hughes</td>
+                <td>CRY</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.52</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 3</td>
+                <td>McAteer</td>
+                <td>IPS</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.27</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Reserve GK</td>
+                <td>Scherpen</td>
+                <td>IPS</td>
+                <td>GKP</td>
+                <td>4.4</td>
+                <td>0.46</td>
+                <td>–</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="moves">
+            <div>2 free transfers available  ·  0 transfers made</div>
+            <div>
+              <strong>Bench → XI  </strong>
+              Van Hecke
+            </div>
+            <div>
+              <strong>XI → Bench  </strong>
+              Muharemovic
+            </div>
+          </div>
+        </article>
+        <article class="squad">
+          <h2>GW14  /  61.48 net xPts</h2>
+          <p class="metrics">61.48 XI  ·  0 hit pts  ·  £99.6m squad  ·  4.93 bench</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Player</th>
+                <th>Club</th>
+                <th>Pos</th>
+                <th>£m</th>
+                <th>xPts</th>
+                <th>XI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="captain">
+                <td>Captain</td>
+                <td>N.Jackson</td>
+                <td>AVL</td>
+                <td>FWD</td>
+                <td>7.1</td>
+                <td>5.99</td>
+                <td>11.98</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Raya</td>
+                <td>ARS</td>
+                <td>GKP</td>
+                <td>6.2</td>
+                <td>4.08</td>
+                <td>4.08</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Gabriel</td>
+                <td>ARS</td>
+                <td>DEF</td>
+                <td>8.1</td>
+                <td>5.20</td>
+                <td>5.20</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Muharemovic</td>
+                <td>LEE</td>
+                <td>DEF</td>
+                <td>5.1</td>
+                <td>4.83</td>
+                <td>4.83</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Vuskovic</td>
+                <td>BHA</td>
+                <td>DEF</td>
+                <td>5.3</td>
+                <td>4.53</td>
+                <td>4.53</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Justin</td>
+                <td>LEE</td>
+                <td>DEF</td>
+                <td>4.5</td>
+                <td>4.40</td>
+                <td>4.40</td>
+              </tr>
+              <tr class="">
+                <td>Start +</td>
+                <td>Tavernier</td>
+                <td>BOU</td>
+                <td>MID</td>
+                <td>6.7</td>
+                <td>5.53</td>
+                <td>5.53</td>
+              </tr>
+              <tr class="">
+                <td>Start +</td>
+                <td>Mbeumo</td>
+                <td>MUN</td>
+                <td>MID</td>
+                <td>7.9</td>
+                <td>5.51</td>
+                <td>5.51</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Ayari</td>
+                <td>BHA</td>
+                <td>MID</td>
+                <td>5.5</td>
+                <td>4.81</td>
+                <td>4.81</td>
+              </tr>
+              <tr class="vice">
+                <td>Vice</td>
+                <td>Haaland</td>
+                <td>MCI</td>
+                <td>FWD</td>
+                <td>15.8</td>
+                <td>5.89</td>
+                <td>5.89</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Isak</td>
+                <td>LIV</td>
+                <td>FWD</td>
+                <td>9.3</td>
+                <td>4.72</td>
+                <td>4.72</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 1</td>
+                <td>Van Hecke</td>
+                <td>TOT</td>
+                <td>DEF</td>
+                <td>5.1</td>
+                <td>3.72</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 2</td>
+                <td>Hughes</td>
+                <td>CRY</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.53</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 3</td>
+                <td>McAteer</td>
+                <td>IPS</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.26</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Reserve GK</td>
+                <td>Scherpen</td>
+                <td>IPS</td>
+                <td>GKP</td>
+                <td>4.4</td>
+                <td>0.42</td>
+                <td>–</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="moves">
+            <div>3 free transfers available  ·  2 transfers made</div>
+            <div>
+              <strong>In +  </strong>
+              Mbeumo, Tavernier
+            </div>
+            <div>
+              <strong>Out  </strong>
+              Gomez, Palmer
+            </div>
+            <div>
+              <strong>Bench → XI  </strong>
+              Muharemovic
+            </div>
+            <div>
+              <strong>XI → Bench  </strong>
+              Van Hecke
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="small">Captain points are doubled in the XI column. Vice-captain and bench order use projected points. The squad is priced at listed costs and has a £100m budget. No chips, sale prices or price changes are modelled. Bench points, autosubs and vice-captain fallback contribute zero to the objective.</p>
+      <footer>
+        <span>FML GW11   /   Template teams</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+    <section class="page">
+      <header>
+        <div class="strap">FML  /  GW11 EDITION</div>
+        <h1>03  Template teams</h1>
+        <p class="subtitle">GW15–GW16  /  Full-horizon optimum</p>
+      </header>
+      <div class="grid squads-grid">
+        <article class="squad">
+          <h2>GW15  /  62.31 net xPts</h2>
+          <p class="metrics">62.31 XI  ·  0 hit pts  ·  £100.0m squad  ·  4.65 bench</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Player</th>
+                <th>Club</th>
+                <th>Pos</th>
+                <th>£m</th>
+                <th>xPts</th>
+                <th>XI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="captain">
+                <td>Captain</td>
+                <td>Haaland</td>
+                <td>MCI</td>
+                <td>FWD</td>
+                <td>15.8</td>
+                <td>6.37</td>
+                <td>12.74</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Raya</td>
+                <td>ARS</td>
+                <td>GKP</td>
+                <td>6.2</td>
+                <td>4.29</td>
+                <td>4.29</td>
+              </tr>
+              <tr class="vice">
+                <td>Vice</td>
+                <td>Gabriel</td>
+                <td>ARS</td>
+                <td>DEF</td>
+                <td>8.1</td>
+                <td>5.58</td>
+                <td>5.58</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Vuskovic</td>
+                <td>BHA</td>
+                <td>DEF</td>
+                <td>5.3</td>
+                <td>5.13</td>
+                <td>5.13</td>
+              </tr>
+              <tr class="">
+                <td>Start +</td>
+                <td>De Cuyper</td>
+                <td>BHA</td>
+                <td>DEF</td>
+                <td>5.5</td>
+                <td>4.92</td>
+                <td>4.92</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Van Hecke</td>
+                <td>TOT</td>
+                <td>DEF</td>
+                <td>5.1</td>
+                <td>4.82</td>
+                <td>4.82</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Justin</td>
+                <td>LEE</td>
+                <td>DEF</td>
+                <td>4.5</td>
+                <td>4.78</td>
+                <td>4.78</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Mbeumo</td>
+                <td>MUN</td>
+                <td>MID</td>
+                <td>7.9</td>
+                <td>4.78</td>
+                <td>4.78</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Ayari</td>
+                <td>BHA</td>
+                <td>MID</td>
+                <td>5.5</td>
+                <td>4.45</td>
+                <td>4.45</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Isak</td>
+                <td>LIV</td>
+                <td>FWD</td>
+                <td>9.3</td>
+                <td>5.43</td>
+                <td>5.43</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>N.Jackson</td>
+                <td>AVL</td>
+                <td>FWD</td>
+                <td>7.1</td>
+                <td>5.39</td>
+                <td>5.39</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 1</td>
+                <td>Tavernier</td>
+                <td>BOU</td>
+                <td>MID</td>
+                <td>6.7</td>
+                <td>3.44</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 2</td>
+                <td>Hughes</td>
+                <td>CRY</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.52</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 3</td>
+                <td>McAteer</td>
+                <td>IPS</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.26</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Reserve GK</td>
+                <td>Scherpen</td>
+                <td>IPS</td>
+                <td>GKP</td>
+                <td>4.4</td>
+                <td>0.43</td>
+                <td>–</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="moves">
+            <div>2 free transfers available  ·  1 transfer made</div>
+            <div>
+              <strong>In +  </strong>
+              De Cuyper
+            </div>
+            <div>
+              <strong>Out  </strong>
+              Muharemovic
+            </div>
+            <div>
+              <strong>Bench → XI  </strong>
+              Van Hecke
+            </div>
+            <div>
+              <strong>XI → Bench  </strong>
+              Tavernier
+            </div>
+          </div>
+        </article>
+        <article class="squad">
+          <h2>GW16  /  66.88 net xPts</h2>
+          <p class="metrics">66.88 XI  ·  0 hit pts  ·  £97.2m squad  ·  4.73 bench</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Player</th>
+                <th>Club</th>
+                <th>Pos</th>
+                <th>£m</th>
+                <th>xPts</th>
+                <th>XI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="captain">
+                <td>Captain</td>
+                <td>Haaland</td>
+                <td>MCI</td>
+                <td>FWD</td>
+                <td>15.8</td>
+                <td>7.80</td>
+                <td>15.60</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Raya</td>
+                <td>ARS</td>
+                <td>GKP</td>
+                <td>6.2</td>
+                <td>4.32</td>
+                <td>4.32</td>
+              </tr>
+              <tr class="vice">
+                <td>Vice</td>
+                <td>Gabriel</td>
+                <td>ARS</td>
+                <td>DEF</td>
+                <td>8.1</td>
+                <td>5.53</td>
+                <td>5.53</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Vuskovic</td>
+                <td>BHA</td>
+                <td>DEF</td>
+                <td>5.3</td>
+                <td>5.40</td>
+                <td>5.40</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>De Cuyper</td>
+                <td>BHA</td>
+                <td>DEF</td>
+                <td>5.5</td>
+                <td>5.34</td>
+                <td>5.34</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Justin</td>
+                <td>LEE</td>
+                <td>DEF</td>
+                <td>4.5</td>
+                <td>4.52</td>
+                <td>4.52</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Tavernier</td>
+                <td>BOU</td>
+                <td>MID</td>
+                <td>6.7</td>
+                <td>5.44</td>
+                <td>5.44</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Ayari</td>
+                <td>BHA</td>
+                <td>MID</td>
+                <td>5.5</td>
+                <td>5.18</td>
+                <td>5.18</td>
+              </tr>
+              <tr class="">
+                <td>Start +</td>
+                <td>E.Le Fee</td>
+                <td>SUN</td>
+                <td>MID</td>
+                <td>5.7</td>
+                <td>5.09</td>
+                <td>5.09</td>
+              </tr>
+              <tr class="">
+                <td>Start</td>
+                <td>Isak</td>
+                <td>LIV</td>
+                <td>FWD</td>
+                <td>9.3</td>
+                <td>5.38</td>
+                <td>5.38</td>
+              </tr>
+              <tr class="">
+                <td>Start +</td>
+                <td>Evanilson</td>
+                <td>BOU</td>
+                <td>FWD</td>
+                <td>6.5</td>
+                <td>5.08</td>
+                <td>5.08</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 1</td>
+                <td>Van Hecke</td>
+                <td>TOT</td>
+                <td>DEF</td>
+                <td>5.1</td>
+                <td>3.58</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 2</td>
+                <td>Hughes</td>
+                <td>CRY</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.58</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Bench 3</td>
+                <td>McAteer</td>
+                <td>IPS</td>
+                <td>MID</td>
+                <td>4.3</td>
+                <td>0.24</td>
+                <td>–</td>
+              </tr>
+              <tr class="bench">
+                <td>Reserve GK</td>
+                <td>Scherpen</td>
+                <td>IPS</td>
+                <td>GKP</td>
+                <td>4.4</td>
+                <td>0.33</td>
+                <td>–</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="moves">
+            <div>2 free transfers available  ·  2 transfers made</div>
+            <div>
+              <strong>In +  </strong>
+              E.Le Fee, Evanilson
+            </div>
+            <div>
+              <strong>Out  </strong>
+              Mbeumo, N.Jackson
+            </div>
+            <div>
+              <strong>Bench → XI  </strong>
+              Tavernier
+            </div>
+            <div>
+              <strong>XI → Bench  </strong>
+              Van Hecke
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="small">Captain points are doubled in the XI column. Vice-captain and bench order use projected points. The squad is priced at listed costs and has a £100m budget. No chips, sale prices or price changes are modelled. Bench points, autosubs and vice-captain fallback contribute zero to the objective.</p>
+      <footer>
+        <span>FML GW11   /   Template teams</span>
+        <span>20 Nov 2026</span>
+      </footer>
+    </section>
+  </body>
+</html>
+</html>
